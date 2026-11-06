@@ -16,9 +16,19 @@
 - Las respuestas de los estudiantes no se reciben en nuestros servidores. Las actividades que lo permiten exportan un TXT para entregar por el AVA/LMS de cada profesor.
 - Un TXT **no acredita criptográficamente autoría ni integridad**. Las validaciones y firmas confiables requieren un backend en una fase futura.
 
+## Estructura de navegación
+
+- `/`: landing pública de presentación, orientación y búsqueda simple.
+- `/explore/`: página de exploración, resultados y filtros (temática, asignatura, texto). La búsqueda de la portada utiliza `GET /explore/?q=...`.
+- `/explore/?q=eventos&topic=acciones-y-hechos&course=DSY1107`: ejemplo de URL compartible con los filtros aplicados.
+- `/activities/<slug>/`: enlaces directos y estables a cada laboratorio, independientes de cursos.
+
+Cloudflare Pages sirve la página `/explore/` desde `explore/index.html`. La portada no duplica el catálogo ni crea otra experiencia de búsqueda.
+
 ## Estructura
 
-- `index.html`: portada pública y catálogo.
+- `index.html`: landing pública con buscador que redirige a `/explore/`.
+- `explore/index.html`: explorador independiente del landing, con resultados y filtros.
 - `assets/styles.css` y `assets/app.js`: estilos y comportamiento de la portada (sin framework).
 - `catalog.json`: temáticas académicas reutilizables (`topics`), asignaturas (`courses`) y actividades (`activities`). La relación es muchos-a-muchos.
 - `activities/<slug>/index.html`: carpeta de cada práctica. 
@@ -48,7 +58,7 @@ python -m http.server 8000
 
 Abre `http://localhost:8000`. Es preferible a abrir el HTML mediante `file://`, porque el catálogo se carga con `fetch('./catalog.json')`.
 
-Revisa portada, filtro, búsqueda, acceso al ejercicio y descarga del TXT. En caso de usar un `iframe` en un LMS, la institución puede restringir scripts o descargas según su política de sandbox.
+Revisa la portada, envía una búsqueda (por ejemplo `eventos`) y comprueba que navega a `/explore/?q=eventos` con resultados. Valida filtros por tema y asignatura, URL compartible, resultados vacíos, acceso al ejercicio y descarga del TXT. En caso de usar un `iframe` en un LMS, la institución puede restringir scripts o descargas según su política de sandbox.
 
 ## Desplegar con Cloudflare Pages (una sola vez)
 

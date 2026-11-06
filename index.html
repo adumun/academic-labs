@@ -7,10 +7,9 @@
   <meta name="description" content="Academic Labs de ADÜMÜN: actividades prácticas abiertas y gratuitas para aprender haciendo.">
   <title>Academic Labs · Aprender haciendo — ADÜMÜN</title>
   <link rel="stylesheet" href="./assets/styles.css">
-  <script src="./assets/app.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#catalogo">Saltar al catálogo de actividades</a>
+  <a class="skip-link" href="#busqueda">Saltar al buscador de actividades</a>
   <header class="site-header">
     <div class="container header-inner">
       <a href="/" class="brand" aria-label="Academic Labs, inicio">
@@ -18,11 +17,11 @@
         <span class="brand-copy"><strong>academic<span>labs</span></strong><small>Una iniciativa ADÜMÜN</small></span>
       </a>
       <nav class="main-nav" aria-label="Navegación principal">
-        <a href="#catalogo">Actividades</a>
+        <a href="/explore/">Explorar actividades</a>
         <a href="#como-funciona">Cómo funciona</a>
         <a href="#docentes">Para docentes</a>
       </nav>
-      <a class="header-link" href="#catalogo">Explorar <span aria-hidden="true">↗</span></a>
+      <a class="header-link" href="/explore/">Explorar <span aria-hidden="true">↗</span></a>
     </div>
   </header>
   <main>
@@ -33,7 +32,7 @@
           <h1>Aprender haciendo.<br><em>Compartir sin barreras.</em></h1>
           <p>Actividades prácticas e interactivas que puedes resolver desde tu navegador. Sin registros, sin instalaciones y con evidencias descargables para entregar a tu docente.</p>
           <div class="hero-actions">
-            <a class="button primary" href="#catalogo">Explorar actividades <span aria-hidden="true">↗</span></a>
+            <a class="button primary" href="/explore/">Explorar actividades <span aria-hidden="true">↗</span></a>
             <a class="button ghost" href="#como-funciona">Conocer el método <span aria-hidden="true">↓</span></a>
           </div>
           <div class="hero-notes"><span><span aria-hidden="true">✓</span> Acceso gratuito</span><span><span aria-hidden="true">✓</span> HTML, CSS y JavaScript</span><span><span aria-hidden="true">✓</span> Para cualquier docente</span></div>
@@ -52,17 +51,21 @@
         </div>
       </div>
     </section>
-    <section class="catalog-section" id="catalogo" aria-labelledby="catalog-title">
-      <div class="container">
-        <div class="section-intro"><div><span class="section-kicker">01 / ACTIVIDADES</span><h2 id="catalog-title">Elige qué quieres aprender</h2><p>Explora por temática o contenido académico. Una misma actividad puede aportar a diversas asignaturas.</p></div><span class="activity-total" id="activity-total" aria-live="polite">Explorando...</span></div>
-        <div class="filters" role="search" aria-label="Buscar actividades">
-          <label class="search-field"><span aria-hidden="true">⌕</span><span class="visually-hidden">Buscar actividades</span><input id="search-input" type="search" placeholder="Busca por tema, palabra clave o código..." autocomplete="off"></label>
-          <label class="select-field"><span class="visually-hidden">Filtrar por temática</span><select id="topic-filter"><option value="">Todas las temáticas</option></select></label>
-          <label class="select-field"><span class="visually-hidden">Filtrar por asignatura</span><select id="course-filter"><option value="">Todas las asignaturas</option></select></label>
+    <section class="landing-search-section" id="busqueda" aria-labelledby="search-title">
+      <div class="container landing-search-layout">
+        <div class="landing-search-copy">
+          <span class="section-kicker">01 / COMIENZA POR AQUÍ</span>
+          <h2 id="search-title">¿Qué te gustaría practicar?</h2>
+          <p>Busca por tema, concepto o asignatura. Te mostraremos las actividades y filtros disponibles en nuestro explorador.</p>
         </div>
-        <div class="activity-grid" id="activity-grid" aria-live="polite"><p class="loading">Cargando catálogo de actividades...</p></div>
-        <div class="no-results" id="no-results" hidden>No encontramos actividades con esos filtros. Prueba con otra búsqueda.</div>
-        <p class="catalog-note">Las actividades se publican como recursos educativos públicos. El progreso se guarda localmente solo cuando cada actividad lo indica; no recopilamos tus respuestas en el portal.</p>
+        <form class="landing-search-form" role="search" action="/explore/" method="get">
+          <label for="landing-query">Buscar una actividad</label>
+          <div class="landing-search-controls">
+            <input id="landing-query" name="q" type="search" maxlength="120" placeholder="Ej.: eventos, Kafka, acciones y hechos" autocomplete="off">
+            <button class="button primary" type="submit">Buscar <span aria-hidden="true">↗</span></button>
+          </div>
+          <a class="all-activities-link" href="/explore/">Ver todas las actividades <span aria-hidden="true">→</span></a>
+        </form>
       </div>
     </section>
     <section class="how-section" id="como-funciona" aria-labelledby="how-title">
@@ -71,8 +74,8 @@
         <div class="steps"><article class="step"><span class="step-number">01</span><span class="step-icon" aria-hidden="true">🧭</span><h3>Explora</h3><p>Encuentra una actividad por asignatura o tema. Tu docente también puede compartirte el enlace directo.</p></article><article class="step"><span class="step-number">02</span><span class="step-icon" aria-hidden="true">🧩</span><h3>Practica</h3><p>Lee los casos, experimenta, responde y aprovecha las pistas disponibles en cada laboratorio.</p></article><article class="step"><span class="step-number">03</span><span class="step-icon" aria-hidden="true">📦</span><h3>Comparte tu evidencia</h3><p>Si la actividad ofrece exportación, descarga el archivo y entrégalo por el medio que indique tu docente.</p></article></div>
       </div>
     </section>
-    <section class="teachers-section" id="docentes" aria-labelledby="teachers-title"><div class="container teachers-grid"><div><span class="section-kicker light">03 / PARA DOCENTES</span><h2 id="teachers-title">Tu clase. Tus criterios.<br><em>Más experiencias para enseñar.</em></h2><p>Puedes incorporar un enlace directo a cualquiera de nuestras actividades en el AVA, Blackboard, Moodle, Classroom o el recurso que utilices. Los estudiantes trabajan aquí y entregan la evidencia en tu propio sistema. No necesitas una cuenta en Academic Labs.</p><a class="button light-button" href="#catalogo">Ver actividades <span aria-hidden="true">↗</span></a></div><div class="teacher-quote"><span aria-hidden="true">“</span><p>Queremos que aprender sea algo que se hace, no solamente algo que se escucha.</p><small>— Filosofía de ADÜMÜN</small></div></div></section>
+    <section class="teachers-section" id="docentes" aria-labelledby="teachers-title"><div class="container teachers-grid"><div><span class="section-kicker light">03 / PARA DOCENTES</span><h2 id="teachers-title">Tu clase. Tus criterios.<br><em>Más experiencias para enseñar.</em></h2><p>Puedes incorporar un enlace directo a cualquiera de nuestras actividades en el AVA, Blackboard, Moodle, Classroom o el recurso que utilices. Los estudiantes trabajan aquí y entregan la evidencia en tu propio sistema. No necesitas una cuenta en Academic Labs.</p><a class="button light-button" href="/explore/">Ver actividades <span aria-hidden="true">↗</span></a></div><div class="teacher-quote"><span aria-hidden="true">“</span><p>Queremos que aprender sea algo que se hace, no solamente algo que se escucha.</p><small>— Filosofía de ADÜMÜN</small></div></div></section>
   </main>
-  <footer class="site-footer"><div class="container footer-grid"><div><strong>academic<span>labs</span></strong><p>Conocimiento compartido, práctica accesible y curiosidad en movimiento.</p></div><div class="footer-links"><a href="https://github.com/adumun/academic-labs" target="_blank" rel="noopener noreferrer">Repositorio GitHub</a><a href="#catalogo">Actividades</a><a href="#docentes">Para docentes</a></div></div><div class="container footer-bottom"><span>© ADÜMÜN · Proyecto educativo abierto al uso público</span><span>Acceso gratuito para practicar y compartir enlaces. La reutilización del código y los materiales requiere revisar sus condiciones de licencia.</span></div></footer>
+  <footer class="site-footer"><div class="container footer-grid"><div><strong>academic<span>labs</span></strong><p>Conocimiento compartido, práctica accesible y curiosidad en movimiento.</p></div><div class="footer-links"><a href="https://github.com/adumun/academic-labs" target="_blank" rel="noopener noreferrer">Repositorio GitHub</a><a href="/explore/">Actividades</a><a href="#docentes">Para docentes</a></div></div><div class="container footer-bottom"><span>© ADÜMÜN · Proyecto educativo abierto al uso público</span><span>Acceso gratuito para practicar y compartir enlaces. La reutilización del código y los materiales requiere revisar sus condiciones de licencia.</span></div></footer>
 </body>
 </html>
