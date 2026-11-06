@@ -54,9 +54,10 @@
     </section>
     <section class="catalog-section" id="catalogo" aria-labelledby="catalog-title">
       <div class="container">
-        <div class="section-intro"><div><span class="section-kicker">01 / ACTIVIDADES</span><h2 id="catalog-title">Elige qué quieres aprender</h2><p>Cada laboratorio es independiente. Ábrelo, aprende y descarga tus respuestas si la actividad lo permite.</p></div><span class="activity-total" id="activity-total" aria-live="polite">Explorando...</span></div>
+        <div class="section-intro"><div><span class="section-kicker">01 / ACTIVIDADES</span><h2 id="catalog-title">Elige qué quieres aprender</h2><p>Explora por temática o contenido académico. Una misma actividad puede aportar a diversas asignaturas.</p></div><span class="activity-total" id="activity-total" aria-live="polite">Explorando...</span></div>
         <div class="filters" role="search" aria-label="Buscar actividades">
           <label class="search-field"><span aria-hidden="true">⌕</span><span class="visually-hidden">Buscar actividades</span><input id="search-input" type="search" placeholder="Busca por tema, palabra clave o código..." autocomplete="off"></label>
+          <label class="select-field"><span class="visually-hidden">Filtrar por temática</span><select id="topic-filter"><option value="">Todas las temáticas</option></select></label>
           <label class="select-field"><span class="visually-hidden">Filtrar por asignatura</span><select id="course-filter"><option value="">Todas las asignaturas</option></select></label>
         </div>
         <div class="activity-grid" id="activity-grid" aria-live="polite"><p class="loading">Cargando catálogo de actividades...</p></div>
