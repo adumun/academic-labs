@@ -52,7 +52,7 @@ Revisa portada, filtro, búsqueda, acceso al ejercicio y descarga del TXT. En ca
 2. Selecciona GitHub y autoriza el acceso al repositorio \`adumun/academic-labs\`.
 3. Framework preset: **None**. Production branch: **master**.
 4. Build command: **vacío** (no hay compilación), o \`exit 0\` si la interfaz lo exige.
-5. Build output directory: **.\` (la raíz, donde está \`index.html\`); root directory: raíz del repositorio.
+5. Build output directory: `.` (la raíz, donde está `index.html`); root directory: raíz del repositorio.
 6. Completa el despliegue y verifica la URL temporal \`*.pages.dev\`.
 7. Opcionalmente configura un dominio personalizado (por ejemplo \`labs.academy.adumun.cl\`) desde Cloudflare Pages y comprueba DNS/HTTPS.
 8. Los nuevos PRs podrán generar previews, y los merges a \`master\` actualizarán producción. No necesitamos GitHub Actions.
