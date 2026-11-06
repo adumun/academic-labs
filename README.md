@@ -18,18 +18,22 @@
 
 ## Estructura
 
-- \`index.html\`: portada pública y catálogo.
-- \`assets/styles.css\` y \`assets/app.js\`: estilos y comportamiento de la portada (sin framework).
-- \`catalog.json\`: entradas publicadas (una por actividad).
-- \`activities/<asignatura>/<slug>/index.html\`: carpeta de cada práctica. 
-- \`activities/dsy1107/detectives-de-eventos/index.html\`: primer laboratorio, recuperado desde la actividad original.
+- `index.html`: portada pública y catálogo.
+- `assets/styles.css` y `assets/app.js`: estilos y comportamiento de la portada (sin framework).
+- `catalog.json`: temáticas académicas reutilizables (`topics`), asignaturas (`courses`) y actividades (`activities`). La relación es muchos-a-muchos.
+- `activities/<slug>/index.html`: carpeta de cada práctica. 
+- `activities/detectives-de-eventos/index.html`: primer laboratorio, recuperado desde la actividad original.
+
+## Modelo académico mínimo
+
+Una actividad pertenece primordialmente a **temáticas/contenidos académicos**. Las asignaturas son contextos de uso, no contenedores exclusivos. `topics` tiene identificadores estables; cada actividad declara uno o varios `topicIds`, objetivos (`learningObjectives`) y referencias opcionales a asignaturas (`courseCodes`). Ejemplo: «Detectives de eventos» trabaja la distinción transversal entre **acciones y hechos** y la aplicación técnica en **mensajería asíncrona**. Puede aprovecharse en Lenguaje y Comunicación, aunque su enunciado actual conserva referencias a desarrollo de sistemas. No dupliques la misma actividad para cada asignatura: reutiliza su ID y enlace público.
 
 ## Crear una actividad
 
-1. Prepara localmente una carpeta en \`activities/<asignatura>/<slug>/\` con su \`index.html\`, y CSS/JS opcionales. Procura que las rutas de assets sean relativas. No incluyas claves ni material reservado.
+1. Prepara localmente una carpeta en `activities/<slug>/` con su `index.html`, y CSS/JS opcionales. Procura que las rutas de assets sean relativas. No incluyas claves ni material reservado.
 2. Comprueba que funciona sin servicios externos ni credenciales.
-3. Agrega una entrada a \`catalog.json\`. Usa un \`id\` único, una ruta local absoluta del tipo \`/activities/<asignatura>/<slug>/\` y \`status: "published"\`.
-4. Crea una rama, realiza los commits y abre un Pull Request hacia \`master\`, referenciando el ticket Jira/GitHub relacionado. Revisa los enlaces, la legibilidad móvil y la exportación (si existe).
+3. Agrega una entrada en `catalog.json`: `id` único, ruta `/activities/<slug>/`, `status: "published"`, uno o más `topicIds` válidos y cero o más `courseCodes`. Registra cada tema una sola vez en `topics` y cada asignatura una sola vez en `courses`.
+4. Crea una rama, realiza los commits y abre un Pull Request hacia `master`, referenciando el ticket Jira/GitHub relacionado. Revisa los enlaces, la legibilidad móvil y la exportación (si existe).
 5. Fusiona tras la revisión. Cloudflare Pages desplegará el contenido automáticamente una vez conectado a GitHub.
 
 > La presencia de una carpeta sin entrada en catálogo **no la oculta de Internet**: la ruta sigue siendo pública. Nunca subas respuestas correctas reservadas, datos privados o secretos al repositorio.
@@ -38,24 +42,24 @@
 
 Con Python instalado, desde la raíz del repositorio:
 
-\`\`\`bash
+```bash
 python -m http.server 8000
-\`\`\`
+```
 
-Abre \`http://localhost:8000\`. Es preferible a abrir el HTML mediante \`file://\`, porque el catálogo se carga con \`fetch('./catalog.json')\`.
+Abre `http://localhost:8000`. Es preferible a abrir el HTML mediante `file://`, porque el catálogo se carga con `fetch('./catalog.json')`.
 
-Revisa portada, filtro, búsqueda, acceso al ejercicio y descarga del TXT. En caso de usar un \`iframe\` en un LMS, la institución puede restringir scripts o descargas según su política de sandbox.
+Revisa portada, filtro, búsqueda, acceso al ejercicio y descarga del TXT. En caso de usar un `iframe` en un LMS, la institución puede restringir scripts o descargas según su política de sandbox.
 
 ## Desplegar con Cloudflare Pages (una sola vez)
 
 1. En Cloudflare: **Workers & Pages → Create application → Pages → Connect to Git**.
-2. Selecciona GitHub y autoriza el acceso al repositorio \`adumun/academic-labs\`.
+2. Selecciona GitHub y autoriza el acceso al repositorio `adumun/academic-labs`.
 3. Framework preset: **None**. Production branch: **master**.
-4. Build command: **vacío** (no hay compilación), o \`exit 0\` si la interfaz lo exige.
+4. Build command: **vacío** (no hay compilación), o `exit 0` si la interfaz lo exige.
 5. Build output directory: `.` (la raíz, donde está `index.html`); root directory: raíz del repositorio.
-6. Completa el despliegue y verifica la URL temporal \`*.pages.dev\`.
-7. Opcionalmente configura un dominio personalizado (por ejemplo \`labs.academy.adumun.cl\`) desde Cloudflare Pages y comprueba DNS/HTTPS.
-8. Los nuevos PRs podrán generar previews, y los merges a \`master\` actualizarán producción. No necesitamos GitHub Actions.
+6. Completa el despliegue y verifica la URL temporal `*.pages.dev`.
+7. Opcionalmente configura un dominio personalizado (por ejemplo `labs.academy.adumun.cl`) desde Cloudflare Pages y comprueba DNS/HTTPS.
+8. Los nuevos PRs podrán generar previews, y los merges a `master` actualizarán producción. No necesitamos GitHub Actions.
 
 Documentación oficial: https://developers.cloudflare.com/pages/configuration/git-integration/
 
@@ -76,5 +80,5 @@ Editor visual, cuentas, notas, backend, firmas de entrega, detector de plagio/Ge
 ## Riesgos reconocidos
 
 - La información y código publicados son accesibles públicamente; no se pueden proteger respuestas secretas solo con JS cliente.
-- En computadores compartidos, \`localStorage\` puede exponer respuestas a otros usuarios del mismo navegador. Cada actividad debe advertirlo y facilitar la exportación/limpieza.
+- En computadores compartidos, `localStorage` puede exponer respuestas a otros usuarios del mismo navegador. Cada actividad debe advertirlo y facilitar la exportación/limpieza.
 - Una aplicación de clase futura que necesite autenticación no debe ejecutar JavaScript arbitrario de prácticas bajo el mismo origen que sesiones de identidad o APIs privadas.
