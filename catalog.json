@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "activities": [
+    {
+      "id": "dsy1107-detectives-de-eventos",
+      "title": "Detectives de eventos",
+      "description": "Investiga cinco escenarios reales e identifica tareas, eventos y flujos de mensajes. Incluye ejemplos, pistas, autoevaluación y evidencia descargable.",
+      "course": {
+        "code": "DSY1107",
+        "name": "Desarrollo Cloud Native I"
+      },
+      "topic": "Mensajería asíncrona y streaming",
+      "icon": "🕵️",
+      "durationMinutes": 50,
+      "tags": [
+        "Kafka",
+        "RabbitMQ",
+        "eventos",
+        "tareas",
+        "arquitectura",
+        "asincronía",
+        "streaming"
+      ],
+      "path": "/activities/dsy1107/detectives-de-eventos/",
+      "evidence": "txt",
+      "version": "1.0.0",
+      "status": "published"
+    }
+  ]
+}
