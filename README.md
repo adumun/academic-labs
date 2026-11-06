@@ -1,7 +1,94 @@
-# Academic Labs
+# Academic Labs · ADÜMÜN
 
-Plataforma pública de actividades prácticas e interactivas para aprender haciendo, impulsada por ADÜMÜN.
+**Actividades prácticas abiertas para aprender haciendo.** El proyecto publica ejercicios interactivos creados con HTML, CSS y JavaScript estándar. Un docente puede compartir un enlace público en su AVA/LMS sin cuentas en Academic Labs; el estudiante resuelve la actividad y entrega el archivo de evidencia al propio docente.
 
-Este repositorio se está inicializando bajo [ADU-119](https://adumun.atlassian.net/browse/ADU-119). Los cambios del MVP se incorporarán mediante Pull Request.
+**Repositorio canónico:** https://github.com/adumun/academic-labs
+**Ticket rector:** https://adumun.atlassian.net/browse/ADU-119
+**Implementación GitHub:** https://github.com/adumun/academic-labs/issues/1
 
-**Nota:** el contenido es público para consulta. Las condiciones de reutilización se documentarán expresamente; no hay licencia de reutilización concedida por omisión.
+## Principios del MVP
+
+- Los ejercicios se **crean y mantienen fuera del portal** (localmente o con asistencia de IA), nunca mediante una pantalla de administración.
+- GitHub es la fuente de verdad; Cloudflare Pages publica los archivos del repositorio.
+- Público, sin login, sin backend, sin tracking central de estudiantes y sin depender de una institución.
+- Cada actividad es autónoma. Puede ser un único HTML autocontenido o una carpeta con HTML/CSS/JS y recursos relativos.
+- El catálogo se mantiene editando un archivo JSON versionado en Git.
+- Las respuestas de los estudiantes no se reciben en nuestros servidores. Las actividades que lo permiten exportan un TXT para entregar por el AVA/LMS de cada profesor.
+- Un TXT **no acredita criptográficamente autoría ni integridad**. Las validaciones y firmas confiables requieren un backend en una fase futura.
+
+## Estructura de navegación
+
+- `/`: landing pública de presentación, orientación y búsqueda simple.
+- `/explore/`: página de exploración, resultados y filtros (temática, asignatura, texto). La búsqueda de la portada utiliza `GET /explore/?q=...`.
+- `/explore/?q=eventos&topic=acciones-y-hechos&course=DSY1107`: ejemplo de URL compartible con los filtros aplicados.
+- `/activities/<slug>/`: enlaces directos y estables a cada laboratorio, independientes de cursos.
+
+Cloudflare Pages sirve la página `/explore/` desde `explore/index.html`. La portada no duplica el catálogo ni crea otra experiencia de búsqueda.
+
+## Estructura
+
+- `index.html`: landing pública con buscador que redirige a `/explore/`.
+- `explore/index.html`: explorador independiente del landing, con resultados y filtros.
+- `assets/styles.css` y `assets/app.js`: estilos y comportamiento de la portada (sin framework).
+- `catalog.json`: temáticas académicas reutilizables (`topics`), asignaturas (`courses`) y actividades (`activities`). La relación es muchos-a-muchos.
+- `activities/<slug>/index.html`: carpeta de cada práctica. 
+- `activities/detectives-de-eventos/index.html`: primer laboratorio, recuperado desde la actividad original.
+
+## Modelo académico mínimo
+
+Una actividad pertenece primordialmente a **temáticas/contenidos académicos**. Las asignaturas son contextos de uso, no contenedores exclusivos. `topics` tiene identificadores estables; cada actividad declara uno o varios `topicIds`, objetivos (`learningObjectives`) y referencias opcionales a asignaturas (`courseCodes`). Ejemplo: «Detectives de eventos» trabaja la distinción transversal entre **acciones y hechos** y la aplicación técnica en **mensajería asíncrona**. Puede aprovecharse en Lenguaje y Comunicación, aunque su enunciado actual conserva referencias a desarrollo de sistemas. No dupliques la misma actividad para cada asignatura: reutiliza su ID y enlace público.
+
+## Crear una actividad
+
+1. Prepara localmente una carpeta en `activities/<slug>/` con su `index.html`, y CSS/JS opcionales. Procura que las rutas de assets sean relativas. No incluyas claves ni material reservado.
+2. Comprueba que funciona sin servicios externos ni credenciales.
+3. Agrega una entrada en `catalog.json`: `id` único, ruta `/activities/<slug>/`, `status: "published"`, uno o más `topicIds` válidos y cero o más `courseCodes`. Registra cada tema una sola vez en `topics` y cada asignatura una sola vez en `courses`.
+4. Crea una rama, realiza los commits y abre un Pull Request hacia `master`, referenciando el ticket Jira/GitHub relacionado. Revisa los enlaces, la legibilidad móvil y la exportación (si existe).
+5. Fusiona tras la revisión. Cloudflare Pages desplegará el contenido automáticamente una vez conectado a GitHub.
+
+> La presencia de una carpeta sin entrada en catálogo **no la oculta de Internet**: la ruta sigue siendo pública. Nunca subas respuestas correctas reservadas, datos privados o secretos al repositorio.
+
+## Comprobar localmente
+
+Con Python instalado, desde la raíz del repositorio:
+
+```bash
+python -m http.server 8000
+```
+
+Abre `http://localhost:8000`. Es preferible a abrir el HTML mediante `file://`, porque el catálogo se carga con `fetch('./catalog.json')`.
+
+Revisa la portada, envía una búsqueda (por ejemplo `eventos`) y comprueba que navega a `/explore/?q=eventos` con resultados. Valida filtros por tema y asignatura, URL compartible, resultados vacíos, acceso al ejercicio y descarga del TXT. En caso de usar un `iframe` en un LMS, la institución puede restringir scripts o descargas según su política de sandbox.
+
+## Desplegar con Cloudflare Pages (una sola vez)
+
+1. En Cloudflare: **Workers & Pages → Create application → Pages → Connect to Git**.
+2. Selecciona GitHub y autoriza el acceso al repositorio `adumun/academic-labs`.
+3. Framework preset: **None**. Production branch: **master**.
+4. Build command: **vacío** (no hay compilación), o `exit 0` si la interfaz lo exige.
+5. Build output directory: `.` (la raíz, donde está `index.html`); root directory: raíz del repositorio.
+6. Completa el despliegue y verifica la URL temporal `*.pages.dev`.
+7. Opcionalmente configura un dominio personalizado (por ejemplo `labs.academy.adumun.cl`) desde Cloudflare Pages y comprueba DNS/HTTPS.
+8. Los nuevos PRs podrán generar previews, y los merges a `master` actualizarán producción. No necesitamos GitHub Actions.
+
+Documentación oficial: https://developers.cloudflare.com/pages/configuration/git-integration/
+
+## Contrato pedagógico para evidencias (recomendado)
+
+Para una actividad que permita exportación, incluir al menos: identificador y versión de la actividad, enunciados/preguntas y respuestas, y fecha local de exportación. No añadir rut, correo u otros datos personales sin una razón pedagógica justificada. La evidencia se guarda en el equipo del estudiante y se entrega mediante los mecanismos definidos por cada docente.
+
+La actividad «Detectives de eventos» conserva su formato TXT actual; este contrato será una guía para nuevas prácticas, sin cambiar retroactivamente su exportación.
+
+## Acceso público, atribución y licencias
+
+Las actividades son gratuitas para **acceder y utilizar en línea**, y sus enlaces se pueden compartir con fines educativos. La publicación pública **no equivale a una licencia de reproducción, modificación o redistribución de código y contenidos**: esa licencia debe definirse explícitamente antes de autorizar esas operaciones. Los materiales se atribuyen a ADÜMÜN y a sus autores cuando corresponda.
+
+## Fuera del MVP
+
+Editor visual, cuentas, notas, backend, firmas de entrega, detector de plagio/GenAI, panel docente, integración LTI/Blackboard y GradeOps AI.
+
+## Riesgos reconocidos
+
+- La información y código publicados son accesibles públicamente; no se pueden proteger respuestas secretas solo con JS cliente.
+- En computadores compartidos, `localStorage` puede exponer respuestas a otros usuarios del mismo navegador. Cada actividad debe advertirlo y facilitar la exportación/limpieza.
+- Una aplicación de clase futura que necesite autenticación no debe ejecutar JavaScript arbitrario de prácticas bajo el mismo origen que sesiones de identidad o APIs privadas.

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 2,
+  "topics": [
+    {
+      "id": "acciones-y-hechos",
+      "name": "Acciones y hechos",
+      "area": "Competencias transversales",
+      "description": "Distinguir acciones por realizar de hechos que ya ocurrieron, tanto en textos como en procesos."
+    },
+    {
+      "id": "mensajeria-asincrona",
+      "name": "Mensajería asíncrona y streaming",
+      "area": "Ingeniería de software",
+      "description": "Analizar eventos de negocio y la comunicación entre sistemas distribuidos."
+    }
+  ],
+  "courses": [
+    {
+      "code": "DSY1107",
+      "name": "Desarrollo Cloud Native I"
+    }
+  ],
+  "activities": [
+    {
+      "id": "detectives-de-eventos",
+      "title": "Detectives de eventos",
+      "description": "Investiga cinco escenarios e identifica acciones y hechos. Explora sus aplicaciones en sistemas basados en eventos.",
+      "topicIds": [
+        "acciones-y-hechos",
+        "mensajeria-asincrona"
+      ],
+      "courseCodes": [
+        "DSY1107"
+      ],
+      "learningObjectives": [
+        "Distinguir acciones pendientes de hechos ocurridos",
+        "Reconocer tareas y eventos en escenarios reales",
+        "Relacionar tareas y eventos con mensajería asíncrona"
+      ],
+      "icon": "🕵️",
+      "durationMinutes": 50,
+      "tags": [
+        "lenguaje",
+        "comunicación",
+        "acciones",
+        "hechos",
+        "eventos",
+        "tareas",
+        "Kafka",
+        "RabbitMQ",
+        "arquitectura",
+        "asincronía",
+        "streaming"
+      ],
+      "path": "/activities/detectives-de-eventos/",
+      "evidence": "txt",
+      "version": "1.0.0",
+      "status": "published"
+    }
+  ]
+}
