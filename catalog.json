@@ -12,12 +12,22 @@
       "name": "Mensajería asíncrona y streaming",
       "area": "Ingeniería de software",
       "description": "Analizar eventos de negocio y la comunicación entre sistemas distribuidos."
+    },
+    {
+      "id": "formatos-de-datos-json",
+      "name": "JSON y datos estructurados",
+      "area": "Fundamentos de programación",
+      "description": "Leer y distinguir objetos, arreglos, sintaxis, integridad de datos y formatos de intercambio como JSON."
     }
   ],
   "courses": [
     {
       "code": "DSY1107",
       "name": "Desarrollo Cloud Native I"
+    },
+    {
+      "code": "DSY1102",
+      "name": "Desarrollo Orientado a Objetos"
     }
   ],
   "activities": [
@@ -53,6 +63,40 @@
         "streaming"
       ],
       "path": "/activities/detectives-de-eventos/",
+      "evidence": "txt",
+      "version": "1.0.0",
+      "status": "published"
+    },
+    {
+      "id": "detective-json",
+      "title": "Detective JSON",
+      "description": "Investiga seis casos de JSON: arreglos, sintaxis, estructura esperada, claves duplicadas y datos inválidos. Experimenta y exporta tu evidencia TXT.",
+      "topicIds": [
+        "formatos-de-datos-json"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Reconocer valores, objetos y arreglos como datos estructurados",
+        "Distinguir JSON malformado de reglas de dominio inválidas",
+        "Explicar por qué las claves duplicadas pueden ser ambiguas",
+        "Experimentar y documentar diagnósticos mediante evidencia TXT"
+      ],
+      "icon": "🧩",
+      "durationMinutes": 25,
+      "tags": [
+        "json",
+        "datos",
+        "programación",
+        "colecciones",
+        "objetos",
+        "validación",
+        "serialización",
+        "estructuras",
+        "fundamentos"
+      ],
+      "path": "/activities/detective-json/",
       "evidence": "txt",
       "version": "1.0.0",
       "status": "published"
