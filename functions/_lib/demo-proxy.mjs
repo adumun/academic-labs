@@ -65,17 +65,19 @@ function findDemo(catalog, slug) {
   ) || null;
 }
 
-function rewriteLocation(location, origin, requestUrl, slug) {
+function rewriteLocation(location, upstreamUrl, requestUrl, slug) {
   if (!location) return location;
 
   let target;
   try {
-    target = new URL(location, origin);
+    // Resolve relative Location values against the actual upstream request URL,
+    // as required by HTTP redirect semantics (not against the origin root).
+    target = new URL(location, upstreamUrl);
   } catch {
     return location;
   }
 
-  if (target.origin !== origin.origin) return location;
+  if (target.origin !== upstreamUrl.origin) return location;
 
   const rewritten = new URL(requestUrl);
   rewritten.pathname = `${DEMO_PREFIX}${slug}${target.pathname === "/" ? "/" : target.pathname}`;
@@ -141,9 +143,15 @@ export async function proxyDemoRequest({
   }
 
   const upstreamUrl = new URL(origin.origin);
-  upstreamUrl.pathname = assetSegments.length
+  const upstreamPath = assetSegments.length
     ? `/${assetSegments.map(encodeURIComponent).join("/")}`
     : "/";
+  // Pages catch-all params omit the trailing empty segment after normalization.
+  // Preserve the public request's slash so directory URLs resolve to index.html
+  // instead of bouncing between the slash and non-slash canonical URLs.
+  upstreamUrl.pathname = assetSegments.length && requestUrl.pathname.endsWith("/")
+    ? `${upstreamPath}/`
+    : upstreamPath;
   upstreamUrl.search = requestUrl.search;
 
   const headers = new Headers();
@@ -175,7 +183,7 @@ export async function proxyDemoRequest({
   if (location) {
     responseHeaders.set(
       "Location",
-      rewriteLocation(location, origin, request.url, slug),
+      rewriteLocation(location, upstreamUrl, request.url, slug),
     );
   }
 
