@@ -1,5 +1,12 @@
 {
   "version": 1,
-  "include": ["/", "/games/demos", "/games/demos/*"],
-  "exclude": []
+  "include": [
+    "/",
+    "/games/demos",
+    "/games/demos/*"
+  ],
+  "exclude": [
+    "/games/demos",
+    "/games/demos/"
+  ]
 }
