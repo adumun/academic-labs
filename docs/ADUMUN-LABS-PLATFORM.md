@@ -82,6 +82,7 @@ El proxy no acepta destinos enviados por el visitante. Resuelve el slug exclusiv
 - Rechaza segmentos de path vacíos, traversal, separadores codificados y barras invertidas.
 - Preserva query strings.
 - Reescribe redirects que apunten al mismo origen Pages para mantener la URL estable de ADÜMÜN Labs.
+- Resuelve los redirects relativos contra la URL upstream solicitada y conserva el slash final de rutas de directorio al reconstruir el path del origen. Esto evita loops de canonicalización entre `/directorio` y `/directorio/`.
 - Slugs no registrados devuelven 404; demos pendientes devuelven 503; orígenes inválidos no se consultan.
 - No es un proxy genérico ni permite introducir una URL arbitraria.
 
@@ -187,17 +188,20 @@ node --check functions/_lib/demo-proxy.mjs
 - [x] Router Pages Functions con allowlist preparado.
 - [x] Compatibilidad de hostname para preservar la landing educativa preparada.
 - [x] Pruebas unitarias del proxy: 9/9 PASS en Node 22 (ejecución previa).
+- [x] Regresión de proxy: 12/12 PASS en Node 22; incluye preservación de slash final, cadena de redirect de índice de directorio y resolución de redirects relativos.
 - [x] 4/4 verificaciones de configuración/ruta del índice y fallback ejecutadas en un harness Node 22 aislado; sintaxis de proxy, fallback y handler validada.
 - [x] Índice `/games/demos/` excluido de Functions para resolver el defecto `Demo not found` reportado en preview.
 - [x] GitHub App Cloudflare limitada a repositorios seleccionados; autorizados `academic-labs` y los tres repositorios de videojuegos.
 - [x] Proyectos Pages `labs-starborne-voyager` y `labs-web-game-prototypes` creados y desplegados; URLs de origen verificadas.
 - [x] Sintaxis de los handlers Pages Functions y módulo proxy validada.
-- [x] Check de Cloudflare Pages para el preview del PR #6: PASS (último commit de código `9dd73fb`; check run `129970668944`).
+- [x] Check de Cloudflare Pages para el preview del PR #6: PASS (commit `d2bd923`; check run `129993730886`).
+- [x] Chrome: catálogo `/games/demos/` PASS; Starborne Voyager PASS; portal académico y `/explore/` PASS.
+- [ ] Chrome: resolver y volver a validar previews de Light Thief, Neon Tetris y Ajedrez Real, que presentaron `ERR_TOO_MANY_REDIRECTS`.
 - [ ] Revisar y fusionar [PR #6](https://github.com/adumun/academic-labs/pull/6) de plataforma.
 - [x] Autorizar Cloudflare Workers & Pages con acceso selectivo a los repositorios requeridos.
 - [x] Crear y desplegar los proyectos Cloudflare Pages de Starborne Voyager y Web Game Prototypes.
 - [ ] Integrar Neon Pursuit PR #1 y crear su proyecto Cloudflare Pages.
 - [ ] Asociar `labs.adumun.cl` al proyecto Pages existente.
 - [ ] Integrar Neon Pursuit PR #1.
-- [ ] Inspeccionar con Chrome el catálogo `/games/demos/` y probar Starborne Voyager y Web Game Prototypes bajo sus subpaths en el preview; después validar producción al completar dominio y merge.
+- [ ] Repetir con Chrome los tres previews de Web Game Prototypes tras desplegar la corrección de redirects; confirmar que las demos funcionan bajo sus subpaths.
 - [ ] Crear Neon Pursuit Pages tras integrar PR #1 y habilitarlo solo después de sus smoke tests.
