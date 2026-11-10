@@ -25,7 +25,7 @@ No se crea una base de datos, panel de administración, autenticación ni un Wor
 | --- | --- |
 | `labs/index.html` | Portal general ADÜMÜN Labs |
 | `labs-catalog.json` | Categorías, estado y registro de aplicaciones |
-| `games/demos/index.html` | Catálogo de demos |
+| `games/demos/index.html` | Catálogo de demos (asset estático) |
 | `education/index.html` | Entrada al vertical educativo |
 | `functions/index.js` | Selección de landing según hostname |
 | `functions/games/demos/[[slug]].js` | Carga catálogo y ejecuta proxy |
@@ -86,7 +86,7 @@ Los juegos deben ser aplicaciones estáticas cliente. No se garantiza compatibil
 
 ### Coste de Functions
 
-`_routes.json` incluye únicamente la raíz y `/games/demos/*`. Por ello las páginas y assets estáticos del portal/vertical educativo no invocan Pages Functions. Cada request de una demo (HTML, JS, CSS, imágenes, audio) atraviesa el proxy y cuenta como una invocación de Function; revisar métricas de uso si aumenta el tráfico.
+`_routes.json` incluye la raíz y `/games/demos/*`, pero excluye explícitamente `/games/demos` y `/games/demos/`. El catálogo de demos (`games/demos/index.html`) se sirve como asset estático, sin invocar Functions. Las páginas y assets estáticos del portal/vertical educativo tampoco invocan Pages Functions. Cada request a una demo registrada (HTML, JS, CSS, imágenes, audio) atraviesa el proxy y cuenta como una invocación de Function; revisar métricas de uso si aumenta el tráfico.
 
 ## 5. Compatibilidad del vertical educativo
 
@@ -185,6 +185,7 @@ node --check functions/_lib/demo-proxy.mjs
 - [x] Router Pages Functions con allowlist preparado.
 - [x] Compatibilidad de hostname para preservar la landing educativa preparada.
 - [x] Pruebas unitarias de proxy ejecutadas: 9/9 PASS en Node 22.
+- [x] Índice `/games/demos/` excluido de Functions para resolver el defecto `Demo not found` reportado en preview.
 - [x] Sintaxis de los handlers Pages Functions y módulo proxy validada.
 - [x] Check de Cloudflare Pages para el preview del PR #6: PASS.
 - [ ] Revisar y fusionar [PR #6](https://github.com/adumun/academic-labs/pull/6) de plataforma.
