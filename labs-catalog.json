@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "categories": [
+    {
+      "id": "games",
+      "title": "Videojuegos",
+      "description": "Demos jugables, prototipos y experiencias interactivas.",
+      "status": "active",
+      "href": "/games/demos/"
+    },
+    {
+      "id": "education",
+      "title": "Educación",
+      "description": "Actividades prácticas, simuladores y recursos para aprender haciendo.",
+      "status": "active",
+      "href": "/education/"
+    },
+    {
+      "id": "ai",
+      "title": "Inteligencia artificial",
+      "description": "Experimentos, prototipos y demostraciones con IA.",
+      "status": "planned"
+    },
+    {
+      "id": "technology",
+      "title": "Tecnología",
+      "description": "Pruebas de concepto, integraciones y exploraciones técnicas.",
+      "status": "planned"
+    }
+  ],
+  "applications": [
+    {
+      "slug": "starborne-voyager",
+      "title": "Starborne Voyager",
+      "categoryId": "games",
+      "kind": "demo",
+      "description": "Experiencia de videojuego en preparación para publicación.",
+      "status": "pending",
+      "origin": "https://labs-starborne-voyager.pages.dev"
+    },
+    {
+      "slug": "web-game-prototypes",
+      "title": "Web Game Prototypes",
+      "categoryId": "games",
+      "kind": "demo",
+      "description": "Colección de prototipos jugables en preparación para publicación.",
+      "status": "pending",
+      "origin": "https://labs-web-game-prototypes.pages.dev"
+    },
+    {
+      "slug": "neon-pursuit",
+      "title": "Neon Pursuit",
+      "categoryId": "games",
+      "kind": "demo",
+      "description": "Experiencia arcade en preparación para publicación.",
+      "status": "pending",
+      "origin": "https://labs-neon-pursuit.pages.dev"
+    }
+  ]
+}
