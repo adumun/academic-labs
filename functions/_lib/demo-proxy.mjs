@@ -96,10 +96,13 @@ export async function proxyDemoRequest({
 }) {
   const requestUrl = new URL(request.url);
   const routeSegments = Array.isArray(params?.slug)
-    ? params.slug
+    ? [...params.slug]
     : typeof params?.slug === "string"
       ? params.slug.split("/")
       : [];
+
+  // Pages may include a trailing empty catch-all segment for slash-terminated URLs.
+  while (routeSegments.at(-1) === "") routeSegments.pop();
 
   const [slug, ...assetSegments] = routeSegments;
 
