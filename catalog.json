@@ -18,6 +18,18 @@
       "name": "JSON y datos estructurados",
       "area": "Fundamentos de programación",
       "description": "Leer y distinguir objetos, arreglos, sintaxis, integridad de datos y formatos de intercambio como JSON."
+    },
+    {
+      "id": "interfaces-graficas-javafx",
+      "name": "Interfaces gráficas con JavaFX",
+      "area": "Fundamentos de programación",
+      "description": "Construir aplicaciones de escritorio con Maven, FXML, controladores, eventos, CSS, tablas y navegación."
+    },
+    {
+      "id": "arquitectura-mvc-persistencia",
+      "name": "Arquitectura MVC y persistencia",
+      "area": "Ingeniería de software",
+      "description": "Separar modelo, vistas, controladores, servicios y DAO; persistir objetos en JSON y verificar su recuperación."
     }
   ],
   "courses": [
@@ -97,6 +109,58 @@
         "fundamentos"
       ],
       "path": "/activities/detective-json/",
+      "evidence": "txt",
+      "version": "1.0.0",
+      "status": "published"
+    },
+    {
+      "id": "dsy1102-javafx-10-capsulas",
+      "title": "JavaFX: 10 cápsulas de práctica guiada",
+      "description": "Prepara una aplicación de escritorio para administrar talleres presenciales y virtuales de un centro cultural. Practica con proyecto Maven y modelo entregado: FXML, controles, eventos, TableView, validaciones, MVC, DAO/Repository y persistencia JSON con Gson. Diez cápsulas con pistas para una sesión de 120 minutos.",
+      "topicIds": [
+        "interfaces-graficas-javafx",
+        "arquitectura-mvc-persistencia",
+        "formatos-de-datos-json"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Reconocer un proyecto Maven base y aprovechar un modelo ya implementado",
+        "Construir una única ventana JavaFX con FXML y controles asociados a un Controller",
+        "Habilitar campos según la modalidad y mostrar actividades en una TableView",
+        "Registrar y eliminar objetos del modelo mediante eventos y una ObservableList",
+        "Validar formularios y comunicar errores sin perder los datos ingresados",
+        "Separar responsabilidades mediante MVC y DAO/Repository",
+        "Persistir y recuperar información en archivos JSON utilizando Gson",
+        "Verificar carga inicial, guardado automático y comportamiento después de reiniciar"
+      ],
+      "icon": "🎭",
+      "durationMinutes": 120,
+      "tags": [
+        "java",
+        "javafx",
+        "maven",
+        "fxml",
+        "scene-builder",
+        "controller",
+        "eventos",
+        "formularios",
+        "combobox",
+        "tableview",
+        "observablelist",
+        "validacion",
+        "mvc",
+        "dao",
+        "repository",
+        "gson",
+        "json",
+        "persistencia",
+        "evaluacion-practica",
+        "programacion-orientada-a-objetos",
+        "dsy1102"
+      ],
+      "path": "/activities/dsy1102-javafx-10-capsulas/",
       "evidence": "txt",
       "version": "1.0.0",
       "status": "published"
