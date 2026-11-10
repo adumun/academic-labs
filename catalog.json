@@ -116,7 +116,7 @@
     {
       "id": "dsy1102-javafx-10-capsulas",
       "title": "JavaFX: 10 cápsulas de práctica guiada",
-      "description": "Prepara una aplicación de escritorio para administrar talleres presenciales y virtuales de un centro cultural. Practica con proyecto Maven y modelo entregado: FXML, controles, eventos, TableView, validaciones, MVC, DAO/Repository y persistencia JSON con Gson. Diez cápsulas con pistas para una sesión de 120 minutos.",
+      "description": "Prepara una aplicación de escritorio para administrar talleres presenciales y virtuales de un centro cultural. Practica con proyecto Maven y modelo entregado: FXML, controles, eventos, TableView, validaciones, MVC, DAO/Repository y persistencia JSON con Jackson. Diez cápsulas con pistas para una sesión de 120 minutos.",
       "topicIds": [
         "interfaces-graficas-javafx",
         "arquitectura-mvc-persistencia",
@@ -132,7 +132,7 @@
         "Registrar y eliminar objetos del modelo mediante eventos y una ObservableList",
         "Validar formularios y comunicar errores sin perder los datos ingresados",
         "Separar responsabilidades mediante MVC y DAO/Repository",
-        "Persistir y recuperar información en archivos JSON utilizando Gson",
+        "Persistir y recuperar información en archivos JSON utilizando Jackson",
         "Verificar carga inicial, guardado automático y comportamiento después de reiniciar"
       ],
       "icon": "🎭",
@@ -153,7 +153,7 @@
         "mvc",
         "dao",
         "repository",
-        "gson",
+        "jackson",
         "json",
         "persistencia",
         "evaluacion-practica",
