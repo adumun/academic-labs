@@ -59,7 +59,7 @@ Configuración común:
 
 Los repositorios Starborne Voyager y Web Game Prototypes ya declaran `base: "./"` en Vite. Neon Pursuit requiere integrar [PR #1](https://github.com/adumun/neon-pursuit/pull/1), que cambia su base de `/neon-pursuit/` a `./`. Esa corrección permite que los assets relativos funcionen bajo el subpath del portal.
 
-**Estado verificado al 10-11-2026:** Cloudflare Workers & Pages está configurado con `Only select repositories`, manteniendo `academic-labs` y agregando únicamente `starborne-voyager`, `web-game-prototypes` y `neon-pursuit`. Los proyectos `labs-starborne-voyager` y `labs-web-game-prototypes` ya están creados y desplegados desde `master`; sus orígenes `pages.dev` fueron verificados. `labs-neon-pursuit` queda pendiente de creación hasta integrar PR #1. Las tres entradas del catálogo permanecen `pending` hasta completar pruebas end-to-end bajo el subpath del portal.
+**Estado verificado al 10-11-2026:** Cloudflare Workers & Pages está configurado con `Only select repositories`, manteniendo `academic-labs` y agregando únicamente `starborne-voyager`, `web-game-prototypes` y `neon-pursuit`. Los proyectos `labs-starborne-voyager` y `labs-web-game-prototypes` ya están creados y desplegados desde `master`; sus orígenes `pages.dev` fueron verificados. `labs-neon-pursuit` queda pendiente de creación hasta integrar PR #1. Las dos demos con origen verificado están marcadas `published` únicamente en la rama de preview para probar el proxy bajo el subpath; el cambio no afecta producción mientras PR #6 siga abierto. Neon Pursuit permanece `pending`.
 
 Si un nombre de proyecto Pages no está disponible en la cuenta, elegir otro nombre y actualizar el `origin` correspondiente en `labs-catalog.json` antes de habilitar la demo.
 
@@ -199,4 +199,5 @@ node --check functions/_lib/demo-proxy.mjs
 - [ ] Integrar Neon Pursuit PR #1 y crear su proyecto Cloudflare Pages.
 - [ ] Asociar `labs.adumun.cl` al proyecto Pages existente.
 - [ ] Integrar Neon Pursuit PR #1.
-- [ ] Ejecutar smoke tests en producción y habilitar demos en catálogo.
+- [ ] Ejecutar smoke tests en preview para Starborne Voyager y Web Game Prototypes; después validar producción al completar dominio y merge.
+- [ ] Crear Neon Pursuit Pages tras integrar PR #1 y habilitarlo solo después de sus smoke tests.
