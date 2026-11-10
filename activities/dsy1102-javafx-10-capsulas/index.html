@@ -130,7 +130,7 @@
       <span>20:30–22:30 · 120 minutos</span>
       <span>JavaFX + FXML + Maven</span>
       <span>MVC + DAO/Repository</span>
-      <span>Gson + JSON</span>
+      <span>Jackson + JSON</span>
     </div>
   </header>
 
@@ -171,7 +171,7 @@
       <div class="route-item"><b>06</b><span>Validar<small>14 min</small></span></div>
       <div class="route-item"><b>07</b><span>Eliminar<small>10 min</small></span></div>
       <div class="route-item"><b>08</b><span>MVC + DAO<small>12 min</small></span></div>
-      <div class="route-item"><b>09</b><span>Gson + JSON<small>16 min</small></span></div>
+      <div class="route-item"><b>09</b><span>Jackson + JSON<small>16 min</small></span></div>
       <div class="route-item"><b>10</b><span>Prueba integrada<small>12 min</small></span></div>
     </div>
   </nav>
@@ -356,23 +356,23 @@
           <li>Evita trasladar o duplicar las reglas de cálculo que ya resuelve el modelo.</li>
         </ul></section>
         <section class="expected"><h3>Respuesta esperada</h3><p>Las responsabilidades quedan reconocibles: la vista presenta controles, el Controller coordina eventos, el modelo representa las actividades y el DAO/Repository concentra el acceso a los archivos. La aplicación sigue registrando y eliminando elementos en memoria.</p></section>
-        <details class="hint"><summary>Necesito una pista para avanzar</summary><p>Piensa qué debería cambiar si mañana decides guardar los datos en otro formato. Si el Controller conoce los detalles de Gson o los nombres de los archivos, ese cambio lo obligaría a modificarse. Un contrato DAO permite que el resto de la aplicación solicite operaciones sin depender de cómo se realizan. Mantén el modelo enfocado en representar y calcular; evita mover lógica de presentación o de archivos hacia esas clases.</p></details>
+        <details class="hint"><summary>Necesito una pista para avanzar</summary><p>Piensa qué debería cambiar si mañana decides guardar los datos en otro formato. Si el Controller conoce ObjectMapper o los nombres de los archivos, ese cambio lo obligaría a modificarse. Un contrato DAO permite que el resto de la aplicación solicite operaciones sin depender de cómo se realizan. Mantén el modelo enfocado en representar y calcular; evita mover lógica de presentación o de archivos hacia esas clases.</p></details>
         <section class="evidence"><div class="evidence-head"><h3>Checkpoint de la cápsula</h3><label><input class="done-check" type="checkbox" value="08"> Lo conseguí</label></div><textarea aria-label="Evidencia o reflexión de la cápsula 8" placeholder="Anota qué responsabilidad tiene cada parte y qué operaciones definiste en el DAO..."></textarea></section>
       </div>
     </article>
 
     <article class="capsule" id="capsula-09">
       <header class="capsule-top">
-        <div class="cap-id"><span class="cap-num">09</span><div><h2>Guarda y recupera los talleres con Gson</h2><p>Maven, JSON y persistencia por modalidad</p></div></div>
+        <div class="cap-id"><span class="cap-num">09</span><div><h2>Guarda y recupera los talleres con Jackson</h2><p>Maven, JSON y persistencia por modalidad</p></div></div>
         <span class="duration">16 min</span>
       </header>
       <div class="capsule-body">
         <div class="triplet">
           <section class="info context"><h3>Contexto</h3><p>La programación no puede desaparecer cuando se cierra la aplicación. El centro cultural necesita conservar por separado los talleres presenciales y virtuales.</p></section>
-          <section class="info objective"><h3>Objetivo</h3><p>Implementar la persistencia JSON mediante Gson y conectar la carga inicial y el guardado automático con las operaciones de la aplicación.</p></section>
+          <section class="info objective"><h3>Objetivo</h3><p>Implementar la persistencia JSON mediante Jackson y conectar la carga inicial y el guardado automático con las operaciones de la aplicación.</p></section>
         </div>
         <section class="task"><h3>Qué debes hacer</h3><ul>
-          <li>Agrega a Maven la dependencia Gson disponible en el laboratorio y recarga el proyecto.</li>
+          <li>Agrega a Maven la dependencia Jackson disponible en el laboratorio y recarga el proyecto.</li>
           <li>Implementa la lectura y escritura JSON dentro del DAO/Repository.</li>
           <li>Utiliza archivos separados: <code>talleres_presenciales.json</code> y <code>talleres_virtuales.json</code>.</li>
           <li>Al iniciar, carga ambos archivos y reúne los objetos en la colección que observa la tabla.</li>
@@ -380,7 +380,7 @@
           <li>Si un archivo todavía no existe, inicia esa colección vacía.</li>
         </ul></section>
         <section class="expected"><h3>Respuesta esperada</h3><p>Los talleres de cada modalidad quedan guardados en su archivo JSON. Al iniciar, la tabla muestra los registros recuperados. Si los archivos no existen, la aplicación abre normalmente con la colección vacía. Registrar o eliminar actualiza la persistencia automáticamente.</p></section>
-        <details class="hint"><summary>Necesito una pista para avanzar</summary><p>Primero confirma que Maven descargó Gson y que el proyecto puede importar sus clases. Luego separa la responsabilidad de cada archivo según el tipo concreto de actividad: la escritura debe conservar la modalidad y la lectura debe reconstruir objetos que el modelo pueda utilizar. Para evitar que la interfaz conozca detalles de persistencia, invoca las operaciones desde la capa que coordina el caso de uso y deja la conversión JSON dentro del DAO. Distingue un archivo inexistente de un error real de lectura.</p></details>
+        <details class="hint"><summary>Necesito una pista para avanzar</summary><p>Primero confirma que Maven descargó la dependencia jackson-databind y que el proyecto puede utilizar ObjectMapper. Identifica el tipo concreto de objeto que corresponde a cada archivo: al leer una colección desde JSON, Jackson necesita información sobre el tipo de sus elementos. Luego separa la responsabilidad de cada archivo por modalidad, de modo que la escritura y la lectura conserven y reconstruyan las clases correctas. Para evitar que la interfaz conozca detalles de persistencia, invoca las operaciones desde la capa que coordina el caso de uso y deja la conversión JSON dentro del DAO. Distingue un archivo inexistente de un error real de lectura.</p></details>
         <section class="evidence"><div class="evidence-head"><h3>Checkpoint de la cápsula</h3><label><input class="done-check" type="checkbox" value="09"> Lo conseguí</label></div><textarea aria-label="Evidencia o reflexión de la cápsula 9" placeholder="Indica qué archivos se generan y qué ocurre cuando la aplicación vuelve a iniciarse..."></textarea></section>
       </div>
     </article>
