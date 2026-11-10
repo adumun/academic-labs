@@ -49,6 +49,8 @@
     .mission strong{color:#126c57}
     .prep ul{margin:10px 0 0;padding-left:20px;color:#475671}
     .prep li+li{margin-top:5px}
+    .starter-download{display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:#172747;color:#fff;padding:11px 14px;border-radius:11px;font-weight:850;font-size:.88rem}.starter-download:hover{background:#263d68}
+    .starter-caption{font-size:.8rem;color:#69778e!important;margin-top:8px!important}
     .resource-links{font-size:.8rem!important;margin-top:10px!important;color:#65738c!important}
     .resource-links a{font-weight:800;color:#5549bb}
     .notice{margin:0 0 22px;padding:14px 17px;border-radius:14px;background:#fff8e9;border:1px solid #f0dfb9;color:#66502c;font-size:.9rem}
@@ -143,17 +145,19 @@
     <article class="panel mission">
       <h2>El caso de práctica: Centro Cultural Estación Sur</h2>
       <p>El centro cultural organiza dos modalidades de talleres: <strong>presenciales</strong> y <strong>virtuales</strong>. Necesita una aplicación para registrar sus actividades, consultar la programación en una tabla y conservar los datos entre ejecuciones.</p>
-      <p>El proyecto base de esta práctica debe incluir el modelo ya implementado y probado: una clase general para la actividad y sus dos especializaciones. Tu tarea es construir la interfaz y el almacenamiento sin reescribir las reglas del modelo.</p>
+      <p>El proyecto base descargable incluye el modelo ya implementado y probado: una clase general para la actividad y sus dos especializaciones. Tu tarea es construir la interfaz y el almacenamiento sin reescribir las reglas del modelo.</p>
     </article>
     <article class="panel prep">
       <h2>Antes de comenzar</h2>
       <ul>
-        <li>Abre el proyecto Maven de práctica entregado por tu docente.</li>
+        <li>Descarga y descomprime el proyecto base Maven de esta misma página; ábrelo en IntelliJ IDEA.</li>
         <li>Comprueba que JavaFX y la clase de arranque ya estén configurados.</li>
         <li>Explora el modelo y localiza sus constructores, atributos y método de cálculo del arancel.</li>
         <li>Usa Scene Builder si está disponible en tu entorno y trabaja con una sola ventana.</li>
       </ul>
-      <p style="margin-top:10px"><strong>Importante:</strong> si no tienes el proyecto base, solicítalo antes de empezar. No reemplaces el modelo por una implementación inventada.</p>
+      <p style="margin-top:10px"><strong>Importante:</strong> el ZIP incluye el modelo de dominio y las pruebas, pero no las soluciones de interfaz ni DAO. Respeta las clases entregadas y desarrolla esas capas durante las cápsulas.</p>
+      <p><a class="starter-download" href="resources/proyecto-base-estacion-sur.zip" download="DSY1102_JavaFX_Proyecto_Base_Centro_Cultural_Estacion_Sur.zip">↓ Descargar proyecto base JavaFX (.zip)</a></p>
+      <p class="starter-caption">JDK 21 · Maven · JavaFX · Modelo + JUnit · El DAO con Jackson lo desarrollas tú.</p>
       <p class="resource-links">Material de apoyo: <a href="https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2">Repositorio DSY1102</a></p>
     </article>
   </section>
@@ -430,13 +434,13 @@
     </div>
     <p class="privacy">La evidencia se genera localmente en tu navegador. No se envían respuestas, código ni datos personales a Academic Labs. Esta actividad es una práctica guiada; durante una evaluación debes respetar las instrucciones y condiciones que indique tu docente.</p>
   </section>
-  <footer><a href="/explore/">Volver al catálogo de Academic Labs</a> · DSY1102 · JavaFX: 10 cápsulas de práctica guiada · Versión 2.0.0</footer>
+  <footer><a href="/explore/">Volver al catálogo de Academic Labs</a> · DSY1102 · JavaFX: 10 cápsulas de práctica guiada · Versión 2.1.0</footer>
 </div>
 <script>
 (() => {
   "use strict";
   const ACTIVITY_ID = "dsy1102-javafx-10-capsulas";
-  const VERSION = "2.0.0";
+  const VERSION = "2.1.0";
   const cards = Array.from(document.querySelectorAll(".capsule"));
   const checks = Array.from(document.querySelectorAll(".done-check"));
   const progressLabel = document.getElementById("progress-label");
