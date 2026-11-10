@@ -116,7 +116,7 @@
     {
       "id": "dsy1102-javafx-10-capsulas",
       "title": "JavaFX: 10 cápsulas de práctica guiada",
-      "description": "Prepara una aplicación de escritorio para administrar talleres presenciales y virtuales de un centro cultural. Practica con proyecto Maven y modelo entregado: FXML, controles, eventos, TableView, validaciones, MVC, DAO/Repository y persistencia JSON con Jackson. Diez cápsulas con pistas para una sesión de 120 minutos.",
+      "description": "Practica una evaluación de JavaFX con proyecto Maven base descargable, modelo implementado y diez cápsulas guiadas. Construye una sola ventana con FXML, TableView, validaciones, MVC, DAO y persistencia JSON con Jackson en 120 minutos.",
       "topicIds": [
         "interfaces-graficas-javafx",
         "arquitectura-mvc-persistencia",
@@ -162,7 +162,7 @@
       ],
       "path": "/activities/dsy1102-javafx-10-capsulas/",
       "evidence": "txt",
-      "version": "1.0.0",
+      "version": "2.1.0",
       "status": "published"
     }
   ]
