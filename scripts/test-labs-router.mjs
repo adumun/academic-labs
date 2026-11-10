@@ -57,6 +57,22 @@ test("pending demos return 503 without exposing their origin", async () => {
   assert.doesNotMatch(await response.text(), /pages\.dev/);
 });
 
+test("trailing empty catch-all segments are ignored", async () => {
+  let called = false;
+  const response = await proxyDemoRequest({
+    request: makeRequest("/games/demos/starborne-voyager/"),
+    params: { slug: ["starborne-voyager", ""] },
+    catalog: publishedCatalog,
+    fetchImpl: async (url) => {
+      called = true;
+      assert.equal(String(url), "https://labs-starborne-voyager.pages.dev/");
+      return new Response("ok", { status: 200 });
+    },
+  });
+  assert.equal(response.status, 200);
+  assert.equal(called, true);
+});
+
 test("published demos proxy root, path and query to their registered Pages origin", async () => {
   let observed;
   const response = await proxyDemoRequest({
