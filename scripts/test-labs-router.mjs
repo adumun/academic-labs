@@ -72,6 +72,13 @@ const publishedCatalog = {
       origin: "https://labs-starborne-voyager.pages.dev",
     },
     {
+      slug: "web-game-prototypes",
+      categoryId: "games",
+      kind: "demo",
+      status: "published",
+      origin: "https://labs-web-game-prototypes.pages.dev",
+    },
+    {
       slug: "neon-pursuit",
       categoryId: "games",
       kind: "demo",
@@ -201,6 +208,81 @@ test("upstream redirects back through the stable public path", async () => {
     }),
   });
   assert.equal(response.headers.get("location"), "https://labs.adumun.cl/games/demos/starborne-voyager/login/");
+});
+
+test("preserves trailing slash when proxying prototype directory routes", async () => {
+  const response = await proxyDemoRequest({
+    request: makeRequest("/games/demos/web-game-prototypes/prototypes/light-thief/"),
+    params: { slug: ["web-game-prototypes", "prototypes", "light-thief", ""] },
+    catalog: publishedCatalog,
+    fetchImpl: async (url) => {
+      assert.equal(
+        String(url),
+        "https://labs-web-game-prototypes.pages.dev/prototypes/light-thief/",
+      );
+      return new Response("<h1>Light Thief</h1>", { status: 200 });
+    },
+  });
+
+  assert.equal(response.status, 200);
+  assert.equal(await response.text(), "<h1>Light Thief</h1>");
+});
+
+test("directory canonical redirect completes instead of looping", async () => {
+  const firstResponse = await proxyDemoRequest({
+    request: makeRequest("/games/demos/web-game-prototypes/prototypes/light-thief/index.html"),
+    params: { slug: ["web-game-prototypes", "prototypes", "light-thief", "index.html"] },
+    catalog: publishedCatalog,
+    fetchImpl: async (url) => {
+      assert.equal(
+        String(url),
+        "https://labs-web-game-prototypes.pages.dev/prototypes/light-thief/index.html",
+      );
+      return new Response(null, {
+        status: 301,
+        headers: { Location: "/prototypes/light-thief/" },
+      });
+    },
+  });
+
+  const redirectUrl = firstResponse.headers.get("location");
+  assert.equal(
+    redirectUrl,
+    "https://labs.adumun.cl/games/demos/web-game-prototypes/prototypes/light-thief/",
+  );
+
+  const secondResponse = await proxyDemoRequest({
+    request: new Request(redirectUrl),
+    params: { slug: ["web-game-prototypes", "prototypes", "light-thief", ""] },
+    catalog: publishedCatalog,
+    fetchImpl: async (url) => {
+      assert.equal(
+        String(url),
+        "https://labs-web-game-prototypes.pages.dev/prototypes/light-thief/",
+      );
+      return new Response("<h1>Light Thief</h1>", { status: 200 });
+    },
+  });
+
+  assert.equal(secondResponse.status, 200);
+  assert.equal(await secondResponse.text(), "<h1>Light Thief</h1>");
+});
+
+test("relative upstream redirects resolve against the current asset URL", async () => {
+  const response = await proxyDemoRequest({
+    request: makeRequest("/games/demos/web-game-prototypes/prototypes/neon-tetris/index.html"),
+    params: { slug: ["web-game-prototypes", "prototypes", "neon-tetris", "index.html"] },
+    catalog: publishedCatalog,
+    fetchImpl: async () => new Response(null, {
+      status: 302,
+      headers: { Location: "./" },
+    }),
+  });
+
+  assert.equal(
+    response.headers.get("location"),
+    "https://labs.adumun.cl/games/demos/web-game-prototypes/prototypes/neon-tetris/",
+  );
 });
 
 test("unsafe origins are rejected", async () => {
