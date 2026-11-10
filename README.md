@@ -135,10 +135,10 @@ La evolución transversal se documenta en [docs/ADUMUN-LABS-PLATFORM.md](docs/AD
 
 - `labs.adumun.cl/`: portal general de descubrimiento.
 - `labs.adumun.cl/games/demos/`: catálogo de demos de videojuegos.
-- `labs.adumun.cl/games/demos/<slug>/`: ruta estable de cada demo, servida por Pages Functions desde un origen Pages independiente.
+- `labs.adumun.cl/games/demos/<slug>/`: ruta estable de cada demo, servida por Pages Functions desde un origen Pages independiente. El índice `/games/demos/` es un asset estático y no invoca Functions.
 - `labs.adumun.cl/education/`: entrada al módulo educativo.
 - `academic-labs.adumun.cl/`: conserva la landing educativa anterior y todos sus enlaces compartidos.
 
-El registro declarativo de categorías y aplicaciones está en `labs-catalog.json`. El router solo acepta slugs registrados y orígenes HTTPS `*.pages.dev`; no es un proxy abierto. Una demo permanece `pending` hasta que su proyecto Cloudflare Pages se cree y se valide. No se debe cambiar su estado a `published` solo porque exista un workflow de CI.
+El registro declarativo de categorías y aplicaciones está en `labs-catalog.json`. El índice del catálogo se sirve estáticamente; solo las rutas de demos invocan Pages Functions. El proxy solo acepta slugs registrados y orígenes HTTPS `*.pages.dev`; no es un proxy abierto. Una demo permanece `pending` hasta que su proyecto Cloudflare Pages se cree y se valide. No se debe cambiar su estado a `published` solo porque exista un workflow de CI.
 
 La integración del nuevo dominio y los tres proyectos de demos requiere una intervención en Cloudflare Dashboard descrita en la guía operativa. No modificar DNS ni dominios existentes fuera de ese procedimiento.
