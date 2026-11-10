@@ -1,6 +1,17 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 import { proxyDemoRequest } from "../functions/_lib/demo-proxy.mjs";
+
+const routes = JSON.parse(
+  readFileSync(new URL("../_routes.json", import.meta.url), "utf8"),
+);
+
+test("demos catalog index bypasses Functions and is served as a static asset", () => {
+  assert.ok(routes.include.includes("/games/demos/*"));
+  assert.ok(routes.exclude.includes("/games/demos"));
+  assert.ok(routes.exclude.includes("/games/demos/"));
+});
 
 const publishedCatalog = {
   applications: [
