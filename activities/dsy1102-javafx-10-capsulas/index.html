@@ -26,6 +26,8 @@
     .skip{position:absolute;left:-9999px;top:auto;background:#fff;padding:10px;z-index:10}
     .skip:focus{left:12px;top:12px}
     .shell{max-width:1120px;margin:0 auto;padding:24px 22px 56px}
+    .back-nav{margin:0 0 12px;font-size:.84rem;font-weight:800;color:#52617c}.back-nav a{text-decoration:none}.back-nav a:hover{text-decoration:underline}
+    .resource-links{font-size:.8rem!important;margin-top:10px!important;color:#65738c!important}.resource-links a{font-weight:800;color:#5549bb}
     .hero{position:relative;overflow:hidden;color:#fff;background:linear-gradient(125deg,var(--navy),var(--navy2));border-radius:28px;padding:32px 36px 28px;box-shadow:var(--shadow)}
     .hero:after{content:"";position:absolute;width:380px;height:380px;border-radius:50%;right:-130px;top:-210px;background:radial-gradient(circle,rgba(166,240,215,.2),transparent 68%);pointer-events:none}
     .eyebrow{font-size:.73rem;letter-spacing:.15em;text-transform:uppercase;font-weight:900;color:var(--mint)}
@@ -116,6 +118,7 @@
 <body>
 <a class="skip" href="#capsulas">Saltar directamente a las cápsulas</a>
 <div class="shell">
+  <nav class="back-nav" aria-label="Navegación"><a href="/explore/">← Volver a explorar actividades</a></nav>
   <header class="hero">
     <div class="eyebrow">DSY1102 · Desarrollo Orientado a Objetos · Unidad 2</div>
     <h1>JavaFX en 10 cápsulas:<br>de una ventana a una app que recuerda</h1>
@@ -124,7 +127,7 @@
       <span>120 minutos · 20:30–22:30</span>
       <span>Java 21 + Maven + JavaFX</span>
       <span>10 checkpoints</span>
-      <span>Trabajo práctico</span>
+      <span>Hasta JSON · sin JDBC/SQL</span>
     </div>
   </header>
 
@@ -148,6 +151,7 @@
         <li>Ten a mano las guías y ejemplos de las semanas 09, 10 y 11.</li>
       </ul>
       <p style="margin-top:10px"><strong>Regla de avance:</strong> intenta resolver, abre la pista si te atascas y comprueba el resultado antes de marcar el checkpoint.</p>
+      <p class="resource-links">Para repasar: <a href="https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/tree/master/semanas/semana-09">Semana 09</a> · <a href="https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/tree/master/semanas/semana-10">Semana 10</a> · <a href="https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/tree/master/semanas/semana-11">Semana 11</a> · <a href="https://cmartinezs.github.io/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/pages/classes/capsula-tiempo-fx/">Cápsula del Tiempo FX</a></p>
     </article>
   </section>
 
@@ -176,14 +180,14 @@
       <div class="capsule-body">
         <div class="triplet">
           <section class="info context"><h3>Contexto</h3><p>La colección necesita una aplicación de escritorio. Antes de diseñar pantallas o registrar juegos, debes tener una base que compile y abra una ventana JavaFX.</p></section>
-          <section class="info objective"><h3>Objetivo</h3><p>Crear y ejecutar un proyecto Maven con Java 21 y JavaFX, identificando dónde comienza la aplicación y cómo aparece la ventana.</p></section>
+          <section class="info objective"><h3>Objetivo</h3><p>Crear y ejecutar un proyecto Maven con Java 21 y JavaFX, identificando dónde comienza la aplicación, cómo se relacionan Stage y Scene y cómo aparece la ventana.</p></section>
         </div>
         <section class="task"><h3>Qué debes hacer</h3><ul>
           <li>Crea un proyecto nuevo llamado <code>ColeccionVideojuegosFX</code> usando Java 21 y Maven.</li>
           <li>Comprueba que las dependencias y la configuración de JavaFX sean compatibles con el JDK.</li>
           <li>Ejecuta la aplicación y cambia el título de la ventana por «Mi colección de videojuegos».</li>
         </ul></section>
-        <section class="expected"><h3>Respuesta esperada</h3><p>Una ventana JavaFX se abre sin errores de compilación ni de arranque. Puedes señalar qué clase inicia la aplicación y distinguir el trabajo de Maven del ciclo de vida JavaFX.</p></section>
+        <section class="expected"><h3>Respuesta esperada</h3><p>Una ventana JavaFX se abre sin errores de compilación ni de arranque. Puedes señalar qué clase inicia la aplicación, explicar el papel de Stage y Scene y distinguir el trabajo de Maven del ciclo de vida JavaFX.</p></section>
         <details class="hint"><summary>Necesito una pista para avanzar</summary><p>Si la ventana no aparece, no cambies varias cosas a la vez. Revisa primero la versión del JDK, el nivel de compilación configurado en Maven y las dependencias JavaFX; después fuerza la recarga del proyecto Maven y vuelve a ejecutar. Ubica también el método de entrada de la aplicación y el punto donde se prepara la ventana: separar configuración, arranque y presentación te ayudará a diagnosticar sin adivinar.</p></details>
         <section class="evidence"><div class="evidence-head"><h3>Checkpoint de la cápsula</h3><label><input class="done-check" type="checkbox" value="01"> Lo conseguí</label></div><textarea aria-label="Evidencia o reflexión de la cápsula 1" placeholder="Anota qué ejecutaste y cómo comprobaste que la ventana abrió..."></textarea></section>
       </div>
@@ -311,7 +315,7 @@
         </div>
         <section class="task"><h3>Qué debes hacer</h3><ul>
           <li>Identifica qué pertenece al modelo, qué corresponde a la vista y qué coordina el Controller.</li>
-          <li>Crea un Service que reciba los datos del videojuego y aplique las reglas de registro.</li>
+          <li>Crea un Service o repositorio de aplicación que reciba los datos del videojuego y aplique las reglas de registro.</li>
           <li>Rechaza código o título vacío, año inválido y código repetido.</li>
           <li>Haz que el Controller invoque al Service y presente el resultado o el error al usuario.</li>
         </ul></section>
@@ -338,7 +342,7 @@
           <li>Registra dos videojuegos y revisa el contenido generado en el archivo.</li>
         </ul></section>
         <section class="expected"><h3>Respuesta esperada</h3><p>El archivo contiene una representación JSON legible de los videojuegos. La lectura reconstruye objetos Java equivalentes y el Controller no importa Jackson ni conoce la ruta del archivo.</p></section>
-        <details class="hint"><summary>Necesito una pista para avanzar</summary><p>Serializar significa transformar objetos en una representación que pueda almacenarse; deserializar realiza el recorrido inverso. El DAO concentra el acceso al archivo y la biblioteca de mapeo, mientras que el Service decide cuándo corresponde leer o guardar. Comprueba el resultado en ambos sentidos: no basta con que el archivo se cree; también debes poder recuperar una colección equivalente a partir de él.</p></details>
+        <details class="hint"><summary>Necesito una pista para avanzar</summary><p>Serializar significa transformar objetos en una representación que pueda almacenarse; deserializar realiza el recorrido inverso. Jackson realiza el mapeo —por ejemplo, mediante ObjectMapper— y el DAO concentra el acceso al archivo, mientras que el Service decide cuándo corresponde leer o guardar. Comprueba el resultado en ambos sentidos: no basta con que el archivo se cree; también debes poder recuperar una colección equivalente a partir de él.</p></details>
         <section class="evidence"><div class="evidence-head"><h3>Checkpoint de la cápsula</h3><label><input class="done-check" type="checkbox" value="08"> Lo conseguí</label></div><textarea aria-label="Evidencia o reflexión de la cápsula 8" placeholder="Anota qué datos quedaron en el JSON y cómo comprobaste la lectura..."></textarea></section>
       </div>
     </article>
@@ -380,7 +384,7 @@
           <li>Verifica que la lectura estricta rechace el contenido ambiguo o inválido.</li>
           <li>Comprueba que el archivo original no se sobrescriba silenciosamente y que se conserve una copia diagnóstica cuando corresponda.</li>
           <li>Revisa la función del respaldo <code>.bak</code>: conserva una versión previa, pero no presupongas que la aplicación la restaura automáticamente.</li>
-          <li>Ejecuta las pruebas disponibles y registra qué comportamiento comprueba cada una.</li>
+          <li>Ejecuta las pruebas JUnit disponibles y registra qué comportamiento comprueba cada una.</li>
         </ul></section>
         <section class="expected"><h3>Respuesta esperada</h3><p>El contenido mal formado o con claves duplicadas se rechaza; la aplicación informa el problema, conserva el archivo para diagnóstico y evita guardar encima de datos que no pudo validar. Puedes explicar qué protege el archivo <code>.bak</code>, qué hace la copia <code>.corrupt</code> y qué demuestran las pruebas ejecutadas.</p></section>
         <details class="hint"><summary>Necesito una pista para avanzar</summary><p>No todos los errores JSON son iguales: una coma incorrecta rompe la sintaxis, mientras que una clave duplicada puede ser aceptada por algunos lectores y producir ambigüedad. Por eso conviene configurar una lectura estricta y probar ambos casos. Antes de guardar, piensa qué versión del archivo estás reemplazando y qué evidencia deberías conservar si la lectura falla. Un respaldo no equivale a una restauración automática: documenta y verifica exactamente lo que tu implementación hace, sin atribuirle capacidades que no tiene.</p></details>
@@ -408,7 +412,7 @@
     </div>
     <p class="privacy">La evidencia se genera localmente en tu navegador. No se envían respuestas, código ni datos personales a Academic Labs. Entrega el TXT solo si tu docente lo solicita y por el canal que indique.</p>
   </section>
-  <footer>Academic Labs · DSY1102 · Actividad javafx-10-capsulas · Versión 1.0.0</footer>
+  <footer><a href="/explore/">Volver al catálogo de Academic Labs</a> · DSY1102 · Actividad javafx-10-capsulas · Versión 1.0.0</footer>
 </div>
 <script>
 (() => {
