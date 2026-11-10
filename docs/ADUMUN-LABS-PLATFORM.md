@@ -58,6 +58,8 @@ Configuración común:
 
 Los repositorios Starborne Voyager y Web Game Prototypes ya declaran `base: "./"` en Vite. Neon Pursuit requiere integrar [PR #1](https://github.com/adumun/neon-pursuit/pull/1), que cambia su base de `/neon-pursuit/` a `./`. Esa corrección permite que los assets relativos funcionen bajo el subpath del portal.
 
+**Estado verificado al 10-11-2026:** Cloudflare Workers & Pages está configurado con `Only select repositories`, manteniendo `academic-labs` y agregando únicamente `starborne-voyager`, `web-game-prototypes` y `neon-pursuit`. Los proyectos `labs-starborne-voyager` y `labs-web-game-prototypes` ya están creados y desplegados desde `master`; sus orígenes `pages.dev` fueron verificados. `labs-neon-pursuit` queda pendiente de creación hasta integrar PR #1. Las tres entradas del catálogo permanecen `pending` hasta completar pruebas end-to-end bajo el subpath del portal.
+
 Si un nombre de proyecto Pages no está disponible en la cuenta, elegir otro nombre y actualizar el `origin` correspondiente en `labs-catalog.json` antes de habilitar la demo.
 
 ### Habilitar una demo
@@ -185,11 +187,14 @@ node --check functions/_lib/demo-proxy.mjs
 - [x] Compatibilidad de hostname para preservar la landing educativa preparada.
 - [x] Pruebas unitarias de proxy ejecutadas: 9/9 PASS en Node 22.
 - [x] Índice `/games/demos/` excluido de Functions para resolver el defecto `Demo not found` reportado en preview.
+- [x] GitHub App Cloudflare limitada a repositorios seleccionados; autorizados `academic-labs` y los tres repositorios de videojuegos.
+- [x] Proyectos Pages `labs-starborne-voyager` y `labs-web-game-prototypes` creados y desplegados; URLs de origen verificadas.
 - [x] Sintaxis de los handlers Pages Functions y módulo proxy validada.
 - [x] Check de Cloudflare Pages para el preview del PR #6: PASS.
 - [ ] Revisar y fusionar [PR #6](https://github.com/adumun/academic-labs/pull/6) de plataforma.
-- [ ] Autorizar Cloudflare Workers & Pages para los tres repositorios privados.
-- [ ] Crear los tres proyectos Cloudflare Pages.
+- [x] Autorizar Cloudflare Workers & Pages con acceso selectivo a los repositorios requeridos.
+- [x] Crear y desplegar los proyectos Cloudflare Pages de Starborne Voyager y Web Game Prototypes.
+- [ ] Integrar Neon Pursuit PR #1 y crear su proyecto Cloudflare Pages.
 - [ ] Asociar `labs.adumun.cl` al proyecto Pages existente.
 - [ ] Integrar Neon Pursuit PR #1.
 - [ ] Ejecutar smoke tests en producción y habilitar demos en catálogo.
