@@ -9,7 +9,7 @@ export async function onRequest({ request, env }) {
   const url = new URL(request.url);
 
   if (url.hostname === "labs.adumun.cl" && url.pathname === "/") {
-    return env.ASSETS.fetch(new URL("/labs/", url));
+    return env.ASSETS.fetch(new Request(new URL("/labs/", url), request));
   }
 
   return env.ASSETS.fetch(request);
