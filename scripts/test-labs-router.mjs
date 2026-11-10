@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 import { proxyDemoRequest } from "../functions/_lib/demo-proxy.mjs";
+import { serveDemosIndexIfNoSlug } from "../functions/_lib/demos-index-fallback.mjs";
 
 const routes = JSON.parse(
   readFileSync(new URL("../_routes.json", import.meta.url), "utf8"),
@@ -15,6 +16,50 @@ test("demos catalog index bypasses Functions and is served as a static asset", (
     existsSync(new URL("../functions/games/demos/index.js", import.meta.url)),
     false,
   );
+});
+
+test("empty catch-all route serves the static demos catalog", async () => {
+  let observed;
+  const response = await serveDemosIndexIfNoSlug({
+    request: makeRequest("/games/demos/"),
+    params: { slug: [""] },
+    env: {
+      ASSETS: {
+        fetch: async (request) => {
+          observed = request;
+          return new Response("<h1>Videojuegos</h1>", {
+            status: 200,
+            headers: { "Content-Type": "text/html; charset=utf-8" },
+          });
+        },
+      },
+    },
+  });
+
+  assert.equal(response.status, 200);
+  assert.equal(observed.url, "https://labs.adumun.cl/games/demos/");
+  assert.equal(await response.text(), "<h1>Videojuegos</h1>");
+});
+
+test("bare demos path redirects to trailing slash", async () => {
+  const response = await serveDemosIndexIfNoSlug({
+    request: makeRequest("/games/demos"),
+    params: {},
+    env: { ASSETS: { fetch: async () => { throw new Error("must not fetch"); } } },
+  });
+
+  assert.equal(response.status, 308);
+  assert.equal(response.headers.get("location"), "https://labs.adumun.cl/games/demos/");
+});
+
+test("demo routes bypass the empty-slug fallback", async () => {
+  const response = await serveDemosIndexIfNoSlug({
+    request: makeRequest("/games/demos/starborne-voyager/"),
+    params: { slug: ["starborne-voyager"] },
+    env: { ASSETS: { fetch: async () => { throw new Error("must not fetch"); } } },
+  });
+
+  assert.equal(response, null);
 });
 
 const publishedCatalog = {
