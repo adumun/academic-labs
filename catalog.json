@@ -115,8 +115,8 @@
     },
     {
       "id": "dsy1102-javafx-10-capsulas",
-      "title": "JavaFX en 10 cápsulas: de una ventana a una app que recuerda",
-      "description": "Construye por incrementos una colección de videojuegos con Maven, JavaFX, FXML, eventos, CSS, TableView, navegación, MVC, DAO y persistencia JSON. Diez cápsulas guiadas para una sesión de 120 minutos.",
+      "title": "JavaFX: 10 cápsulas de práctica guiada",
+      "description": "Prepara una aplicación de escritorio para administrar talleres presenciales y virtuales de un centro cultural. Practica con proyecto Maven y modelo entregado: FXML, controles, eventos, TableView, validaciones, MVC, DAO/Repository y persistencia JSON con Gson. Diez cápsulas con pistas para una sesión de 120 minutos.",
       "topicIds": [
         "interfaces-graficas-javafx",
         "arquitectura-mvc-persistencia",
@@ -126,14 +126,16 @@
         "DSY1102"
       ],
       "learningObjectives": [
-        "Configurar y ejecutar una aplicación JavaFX con Maven y Java 21",
-        "Diseñar vistas FXML y vincular controles, eventos y estilos CSS",
-        "Representar objetos mediante TableView y ObservableList y navegar entre vistas",
-        "Separar responsabilidades entre modelo, Controller, Service y DAO",
-        "Serializar y recuperar objetos Java mediante JSON y Jackson",
-        "Verificar persistencia, manejo de archivos inválidos y pruebas"
+        "Reconocer un proyecto Maven base y aprovechar un modelo ya implementado",
+        "Construir una única ventana JavaFX con FXML y controles asociados a un Controller",
+        "Habilitar campos según la modalidad y mostrar actividades en una TableView",
+        "Registrar y eliminar objetos del modelo mediante eventos y una ObservableList",
+        "Validar formularios y comunicar errores sin perder los datos ingresados",
+        "Separar responsabilidades mediante MVC y DAO/Repository",
+        "Persistir y recuperar información en archivos JSON utilizando Gson",
+        "Verificar carga inicial, guardado automático y comportamiento después de reiniciar"
       ],
-      "icon": "🎮",
+      "icon": "🎭",
       "durationMinutes": 120,
       "tags": [
         "java",
@@ -143,19 +145,20 @@
         "scene-builder",
         "controller",
         "eventos",
-        "css",
-        "mvc",
+        "formularios",
+        "combobox",
         "tableview",
         "observablelist",
-        "navegacion",
-        "service",
+        "validacion",
+        "mvc",
         "dao",
         "repository",
-        "jackson",
+        "gson",
         "json",
         "persistencia",
-        "junit",
-        "videojuegos"
+        "evaluacion-practica",
+        "programacion-orientada-a-objetos",
+        "dsy1102"
       ],
       "path": "/activities/dsy1102-javafx-10-capsulas/",
       "evidence": "txt",
