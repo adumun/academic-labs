@@ -18,6 +18,18 @@
       "name": "JSON y datos estructurados",
       "area": "Fundamentos de programación",
       "description": "Leer y distinguir objetos, arreglos, sintaxis, integridad de datos y formatos de intercambio como JSON."
+    },
+    {
+      "id": "interfaces-graficas-javafx",
+      "name": "Interfaces gráficas con JavaFX",
+      "area": "Fundamentos de programación",
+      "description": "Construir aplicaciones de escritorio con Maven, FXML, controladores, eventos, CSS, tablas y navegación."
+    },
+    {
+      "id": "arquitectura-mvc-persistencia",
+      "name": "Arquitectura MVC y persistencia",
+      "area": "Ingeniería de software",
+      "description": "Separar modelo, vistas, controladores, servicios y DAO; persistir objetos en JSON y verificar su recuperación."
     }
   ],
   "courses": [
@@ -97,6 +109,55 @@
         "fundamentos"
       ],
       "path": "/activities/detective-json/",
+      "evidence": "txt",
+      "version": "1.0.0",
+      "status": "published"
+    },
+    {
+      "id": "dsy1102-javafx-10-capsulas",
+      "title": "JavaFX en 10 cápsulas: de una ventana a una app que recuerda",
+      "description": "Construye por incrementos una colección de videojuegos con Maven, JavaFX, FXML, eventos, CSS, TableView, navegación, MVC, DAO y persistencia JSON. Diez cápsulas guiadas para una sesión de 120 minutos.",
+      "topicIds": [
+        "interfaces-graficas-javafx",
+        "arquitectura-mvc-persistencia",
+        "formatos-de-datos-json"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Configurar y ejecutar una aplicación JavaFX con Maven y Java 21",
+        "Diseñar vistas FXML y vincular controles, eventos y estilos CSS",
+        "Representar objetos mediante TableView y ObservableList y navegar entre vistas",
+        "Separar responsabilidades entre modelo, Controller, Service y DAO",
+        "Serializar y recuperar objetos Java mediante JSON y Jackson",
+        "Verificar persistencia, manejo de archivos inválidos y pruebas"
+      ],
+      "icon": "🎮",
+      "durationMinutes": 120,
+      "tags": [
+        "java",
+        "javafx",
+        "maven",
+        "fxml",
+        "scene-builder",
+        "controller",
+        "eventos",
+        "css",
+        "mvc",
+        "tableview",
+        "observablelist",
+        "navegacion",
+        "service",
+        "dao",
+        "repository",
+        "jackson",
+        "json",
+        "persistencia",
+        "junit",
+        "videojuegos"
+      ],
+      "path": "/activities/dsy1102-javafx-10-capsulas/",
       "evidence": "txt",
       "version": "1.0.0",
       "status": "published"
