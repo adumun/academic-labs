@@ -28,9 +28,9 @@ No se crea una base de datos, panel de administración, autenticación ni un Wor
 | `games/demos/index.html` | Catálogo de demos (asset estático) |
 | `education/index.html` | Entrada al vertical educativo |
 | `functions/index.js` | Selección de landing según hostname |
-| `functions/games/demos/[[slug]].js` | Carga catálogo y ejecuta proxy |
+| `functions/games/demos/[[slug]].js` | Carga catálogo y ejecuta proxy para demos |
 | `functions/_lib/demo-proxy.mjs` | Allowlist, validación y proxy HTTP |
-| `_routes.json` | Limita Pages Functions a `/` y `/games/demos/*` |
+| `_routes.json` | Incluye raíz y demos; excluye el índice estático `/games/demos/` |
 
 Cloudflare Pages Functions usa rutas basadas en archivos y permite parámetros multipath mediante `[[param]].js`. La función obtiene assets estáticos mediante `env.ASSETS.fetch()`. Referencias:
 - https://developers.cloudflare.com/pages/functions/routing/
@@ -165,7 +165,6 @@ node --test scripts/test-labs-router.mjs
 Validación de sintaxis:
 ```bash
 node --check functions/index.js
-node --check functions/games/demos/index.js
 node --check 'functions/games/demos/[[slug]].js'
 node --check functions/_lib/demo-proxy.mjs
 ```
