@@ -187,7 +187,7 @@ node --check functions/_lib/demo-proxy.mjs
 - [x] Router Pages Functions con allowlist preparado.
 - [x] Compatibilidad de hostname para preservar la landing educativa preparada.
 - [x] Pruebas unitarias del proxy: 9/9 PASS en Node 22 (ejecución previa).
-- [x] Pruebas de regresión del índice estático y fallback: 4/4 PASS en Node 22.
+- [x] 4/4 verificaciones de configuración/ruta del índice y fallback ejecutadas en un harness Node 22 aislado; sintaxis de proxy, fallback y handler validada.
 - [x] Índice `/games/demos/` excluido de Functions para resolver el defecto `Demo not found` reportado en preview.
 - [x] GitHub App Cloudflare limitada a repositorios seleccionados; autorizados `academic-labs` y los tres repositorios de videojuegos.
 - [x] Proyectos Pages `labs-starborne-voyager` y `labs-web-game-prototypes` creados y desplegados; URLs de origen verificadas.
