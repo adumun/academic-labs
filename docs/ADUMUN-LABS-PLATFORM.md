@@ -192,12 +192,12 @@ node --check functions/_lib/demo-proxy.mjs
 - [x] GitHub App Cloudflare limitada a repositorios seleccionados; autorizados `academic-labs` y los tres repositorios de videojuegos.
 - [x] Proyectos Pages `labs-starborne-voyager` y `labs-web-game-prototypes` creados y desplegados; URLs de origen verificadas.
 - [x] Sintaxis de los handlers Pages Functions y módulo proxy validada.
-- [x] Check de Cloudflare Pages para el preview del PR #6: PASS.
+- [x] Check de Cloudflare Pages para el preview del PR #6: PASS (último commit de código `9dd73fb`; check run `129970668944`).
 - [ ] Revisar y fusionar [PR #6](https://github.com/adumun/academic-labs/pull/6) de plataforma.
 - [x] Autorizar Cloudflare Workers & Pages con acceso selectivo a los repositorios requeridos.
 - [x] Crear y desplegar los proyectos Cloudflare Pages de Starborne Voyager y Web Game Prototypes.
 - [ ] Integrar Neon Pursuit PR #1 y crear su proyecto Cloudflare Pages.
 - [ ] Asociar `labs.adumun.cl` al proyecto Pages existente.
 - [ ] Integrar Neon Pursuit PR #1.
-- [ ] Ejecutar smoke tests en preview para Starborne Voyager y Web Game Prototypes; después validar producción al completar dominio y merge.
+- [ ] Inspeccionar con Chrome el catálogo `/games/demos/` y probar Starborne Voyager y Web Game Prototypes bajo sus subpaths en el preview; después validar producción al completar dominio y merge.
 - [ ] Crear Neon Pursuit Pages tras integrar PR #1 y habilitarlo solo después de sus smoke tests.
