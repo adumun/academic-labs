@@ -57,7 +57,7 @@ Configuración común:
 - Mantener previews de ramas/PR habilitadas.
 - No habilitar Cloudflare Access en los sitios de producción: las demos deben ser públicas.
 
-Los repositorios Starborne Voyager y Web Game Prototypes ya declaran `base: "./"` en Vite. Neon Pursuit requiere integrar [PR #1](https://github.com/adumun/neon-pursuit/pull/1), que cambia su base de `/neon-pursuit/` a `./`. Esa corrección permite que los assets relativos funcionen bajo el subpath del portal.
+Los repositorios Starborne Voyager y Web Game Prototypes ya declaran `base: "./"` en Vite. Web Game Prototypes también tiene abierto [PR #2](https://github.com/adumun/web-game-prototypes/pull/2) para compilar localmente Tailwind de los HTML standalone y retirar el runtime CDN antes de producción. Neon Pursuit requiere integrar [PR #1](https://github.com/adumun/neon-pursuit/pull/1), que cambia su base de `/neon-pursuit/` a `./`. Estas correcciones permiten servir assets relativos bajo el subpath del portal.
 
 **Estado verificado al 10-11-2026:** Cloudflare Workers & Pages está configurado con `Only select repositories`, manteniendo `academic-labs` y agregando únicamente `starborne-voyager`, `web-game-prototypes` y `neon-pursuit`. Los proyectos `labs-starborne-voyager` y `labs-web-game-prototypes` ya están creados y desplegados desde `master`; sus orígenes `pages.dev` fueron verificados. `labs-neon-pursuit` queda pendiente de creación hasta integrar PR #1. Las dos demos con origen verificado están marcadas `published` únicamente en la rama de preview para probar el proxy bajo el subpath; el cambio no afecta producción mientras PR #6 siga abierto. Neon Pursuit permanece `pending`.
 
@@ -194,12 +194,14 @@ node --check functions/_lib/demo-proxy.mjs
 - [x] GitHub App Cloudflare limitada a repositorios seleccionados; autorizados `academic-labs` y los tres repositorios de videojuegos.
 - [x] Proyectos Pages `labs-starborne-voyager` y `labs-web-game-prototypes` creados y desplegados; URLs de origen verificadas.
 - [x] Sintaxis de los handlers Pages Functions y módulo proxy validada.
-- [x] Check de Cloudflare Pages para el preview del PR #6: PASS (commit `d2bd923`; check run `129993730886`).
+- [x] Check de Cloudflare Pages para el preview del PR #6: PASS (commit `9c2b888`; check run `129994855567`).
+- [x] PR #2 de Web Game Prototypes preparado para sustituir Tailwind CDN por CSS compilado localmente; preview de Cloudflare en construcción.
 - [x] Chrome: catálogo `/games/demos/` PASS; Starborne Voyager PASS; portal académico y `/explore/` PASS.
 - [ ] Chrome: resolver y volver a validar previews de Light Thief, Neon Tetris y Ajedrez Real, que presentaron `ERR_TOO_MANY_REDIRECTS`.
 - [ ] Revisar y fusionar [PR #6](https://github.com/adumun/academic-labs/pull/6) de plataforma.
 - [x] Autorizar Cloudflare Workers & Pages con acceso selectivo a los repositorios requeridos.
 - [x] Crear y desplegar los proyectos Cloudflare Pages de Starborne Voyager y Web Game Prototypes.
+- [ ] Revisar y fusionar [Web Game Prototypes PR #2](https://github.com/adumun/web-game-prototypes/pull/2) después de validar su preview y CSS generado.
 - [ ] Integrar Neon Pursuit PR #1 y crear su proyecto Cloudflare Pages.
 - [ ] Asociar `labs.adumun.cl` al proyecto Pages existente.
 - [ ] Integrar Neon Pursuit PR #1.
