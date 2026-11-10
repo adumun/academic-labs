@@ -1,0 +1,184 @@
+const DEMO_PREFIX = "/games/demos/";
+const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const ALLOWED_METHODS = new Set(["GET", "HEAD"]);
+const FORWARDED_REQUEST_HEADERS = [
+  "accept",
+  "accept-language",
+  "if-none-match",
+  "if-modified-since",
+  "range",
+];
+
+function textResponse(message, status, extraHeaders = {}) {
+  return new Response(message, {
+    status,
+    headers: {
+      "Cache-Control": "no-store",
+      "Content-Type": "text/plain; charset=utf-8",
+      "X-Content-Type-Options": "nosniff",
+      ...extraHeaders,
+    },
+  });
+}
+
+function safePathSegment(segment) {
+  return typeof segment === "string" &&
+    segment.length > 0 &&
+    segment !== "." &&
+    segment !== ".." &&
+    !/[\\/\u0000-\u001f]/.test(segment) &&
+    !/%(?:2f|5c|2e)/i.test(segment);
+}
+
+function getPagesOrigin(value) {
+  let origin;
+  try {
+    origin = new URL(value);
+  } catch {
+    return null;
+  }
+
+  if (
+    origin.protocol !== "https:" ||
+    !origin.hostname.endsWith(".pages.dev") ||
+    origin.username ||
+    origin.password ||
+    origin.port ||
+    origin.pathname !== "/" ||
+    origin.search ||
+    origin.hash
+  ) {
+    return null;
+  }
+
+  return origin;
+}
+
+function findDemo(catalog, slug) {
+  if (!catalog || !Array.isArray(catalog.applications)) return null;
+
+  return catalog.applications.find((app) =>
+    app &&
+    app.slug === slug &&
+    app.categoryId === "games" &&
+    app.kind === "demo"
+  ) || null;
+}
+
+function rewriteLocation(location, origin, requestUrl, slug) {
+  if (!location) return location;
+
+  let target;
+  try {
+    target = new URL(location, origin);
+  } catch {
+    return location;
+  }
+
+  if (target.origin !== origin.origin) return location;
+
+  const rewritten = new URL(requestUrl);
+  rewritten.pathname = `${DEMO_PREFIX}${slug}${target.pathname === "/" ? "/" : target.pathname}`;
+  rewritten.search = target.search;
+  rewritten.hash = target.hash;
+  return rewritten.toString();
+}
+
+/**
+ * Proxies a published game demo through the stable ADÜMÜN Labs route.
+ * Only registered slugs and HTTPS *.pages.dev origins are accepted.
+ */
+export async function proxyDemoRequest({
+  request,
+  params,
+  catalog,
+  fetchImpl = globalThis.fetch,
+}) {
+  const requestUrl = new URL(request.url);
+  const routeSegments = Array.isArray(params?.slug)
+    ? params.slug
+    : typeof params?.slug === "string"
+      ? params.slug.split("/")
+      : [];
+
+  const [slug, ...assetSegments] = routeSegments;
+
+  if (!slug || !SLUG_PATTERN.test(slug)) {
+    return textResponse("Demo not found.", 404);
+  }
+
+  const demo = findDemo(catalog, slug);
+  if (!demo) return textResponse("Demo not found.", 404);
+
+  if (demo.status !== "published") {
+    return textResponse("This demo is not published yet.", 503, {
+      "Retry-After": "300",
+    });
+  }
+
+  const origin = getPagesOrigin(demo.origin);
+  if (!origin) {
+    return textResponse("Demo origin is not configured safely.", 503);
+  }
+
+  if (!assetSegments.every(safePathSegment)) {
+    return textResponse("Invalid demo asset path.", 400);
+  }
+
+  if (!requestUrl.pathname.endsWith("/") && assetSegments.length === 0) {
+    const canonical = new URL(request.url);
+    canonical.pathname = `${DEMO_PREFIX}${slug}/`;
+    return Response.redirect(canonical.toString(), 308);
+  }
+
+  if (!ALLOWED_METHODS.has(request.method)) {
+    return textResponse("Only GET and HEAD are supported for static demos.", 405, {
+      Allow: "GET, HEAD",
+    });
+  }
+
+  const upstreamUrl = new URL(origin.origin);
+  upstreamUrl.pathname = assetSegments.length
+    ? `/${assetSegments.map(encodeURIComponent).join("/")}`
+    : "/";
+  upstreamUrl.search = requestUrl.search;
+
+  const headers = new Headers();
+  for (const name of FORWARDED_REQUEST_HEADERS) {
+    const value = request.headers.get(name);
+    if (value) headers.set(name, value);
+  }
+
+  let upstreamResponse;
+  try {
+    upstreamResponse = await fetchImpl(upstreamUrl.toString(), {
+      method: request.method,
+      headers,
+      redirect: "manual",
+    });
+  } catch {
+    return textResponse("Demo origin is temporarily unavailable.", 502, {
+      "Retry-After": "60",
+    });
+  }
+
+  const responseHeaders = new Headers(upstreamResponse.headers);
+  responseHeaders.delete("set-cookie");
+  responseHeaders.delete("set-cookie2");
+  responseHeaders.set("X-Content-Type-Options", "nosniff");
+  responseHeaders.set("Referrer-Policy", "strict-origin-when-cross-origin");
+
+  const location = responseHeaders.get("location");
+  if (location) {
+    responseHeaders.set(
+      "Location",
+      rewriteLocation(location, origin, request.url, slug),
+    );
+  }
+
+  return new Response(request.method === "HEAD" ? null : upstreamResponse.body, {
+    status: upstreamResponse.status,
+    statusText: upstreamResponse.statusText,
+    headers: responseHeaders,
+  });
+}
