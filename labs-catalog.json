@@ -35,7 +35,7 @@
       "categoryId": "games",
       "kind": "demo",
       "description": "Experiencia de videojuego en preparación para publicación.",
-      "status": "pending",
+      "status": "published",
       "origin": "https://labs-starborne-voyager.pages.dev"
     },
     {
@@ -44,7 +44,7 @@
       "categoryId": "games",
       "kind": "demo",
       "description": "Colección de prototipos jugables en preparación para publicación.",
-      "status": "pending",
+      "status": "published",
       "origin": "https://labs-web-game-prototypes.pages.dev"
     },
     {
