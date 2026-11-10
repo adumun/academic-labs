@@ -184,8 +184,10 @@ node --check functions/_lib/demo-proxy.mjs
 - [x] Portal transversal y catálogo inicial preparados.
 - [x] Router Pages Functions con allowlist preparado.
 - [x] Compatibilidad de hostname para preservar la landing educativa preparada.
-- [x] Pruebas unitarias de proxy preparadas.
-- [ ] Revisar y fusionar PR de plataforma.
+- [x] Pruebas unitarias de proxy ejecutadas: 9/9 PASS en Node 22.
+- [x] Sintaxis de los handlers Pages Functions y módulo proxy validada.
+- [x] Check de Cloudflare Pages para el preview del PR #6: PASS.
+- [ ] Revisar y fusionar [PR #6](https://github.com/adumun/academic-labs/pull/6) de plataforma.
 - [ ] Autorizar Cloudflare Workers & Pages para los tres repositorios privados.
 - [ ] Crear los tres proyectos Cloudflare Pages.
 - [ ] Asociar `labs.adumun.cl` al proyecto Pages existente.
