@@ -301,6 +301,23 @@ test("external redirects are returned unchanged and are never fetched by the pro
   assert.equal(response.headers.get("location"), "https://accounts.example.org/login/");
 });
 
+test("credential-bearing redirect targets are rejected", async () => {
+  const response = await proxyDemoRequest({
+    request: makeRequest("/games/demos/starborne-voyager/"),
+    params: { slug: ["starborne-voyager"] },
+    catalog: publishedCatalog,
+    fetchImpl: async () => new Response(null, {
+      status: 302,
+      headers: {
+        Location: "https://user:secret@labs-starborne-voyager.pages.dev/private/",
+      },
+    }),
+  });
+
+  assert.equal(response.status, 502);
+  assert.match(await response.text(), /unsafe redirect target/i);
+});
+
 test("same-origin redirect cycles are stopped with a gateway error", async () => {
   let calls = 0;
   const response = await proxyDemoRequest({
