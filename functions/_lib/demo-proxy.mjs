@@ -314,7 +314,11 @@ export async function proxyDemoRequest({
 
     // Only follow redirects within the registered Pages origin. External redirects
     // remain visible to the client and are never fetched by this proxy.
-    if (target.origin !== origin.origin) break;
+    if (
+      target.origin !== origin.origin ||
+      target.username ||
+      target.password
+    ) break;
 
     if (redirectHops >= 8) {
       try {
