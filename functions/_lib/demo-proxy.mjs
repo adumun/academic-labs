@@ -314,11 +314,16 @@ export async function proxyDemoRequest({
 
     // Only follow redirects within the registered Pages origin. External redirects
     // remain visible to the client and are never fetched by this proxy.
-    if (
-      target.origin !== origin.origin ||
-      target.username ||
-      target.password
-    ) break;
+    if (target.username || target.password) {
+      try {
+        await upstreamResponse.body?.cancel();
+      } catch {
+        // Ignore body cancellation failures for an unsafe redirect target.
+      }
+      return textResponse("Demo origin returned an unsafe redirect target.", 502);
+    }
+
+    if (target.origin !== origin.origin) break;
 
     if (redirectHops >= 8) {
       try {
