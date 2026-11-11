@@ -185,6 +185,25 @@
       .hero-cta,.hero-secondary{flex:1 1 100%}
     }
 
+  
+    /* Contexto de trabajo y entrega externa en AVA. */
+    .ava-section{margin:22px 0;padding:20px 21px;background:#fff;border:1px solid #dce5f0;border-radius:20px;box-shadow:var(--shadow)}
+    .ava-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:13px}
+    .ava-card{padding:16px 17px;border:1px solid #e6ebf3;border-radius:15px;background:#f8faff}
+    .ava-card h3{margin:0 0 7px;color:#293855;font-size:.94rem}
+    .ava-card p{margin:0;color:#53617a;font-size:.87rem}
+    .ava-card p+p{margin-top:8px}
+    .ava-deliverables{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+    .ava-file{padding:13px;border:1px solid #dce5ef;border-radius:12px;background:#fff}
+    .ava-file strong{display:block;color:#293855;font-size:.86rem}
+    .ava-file p{margin:5px 0 0;color:#53617a;font-size:.82rem}
+    .ava-file .file-kind{display:inline-block;margin-bottom:6px;color:#5b52c5;font-size:.67rem;font-weight:950;letter-spacing:.1em;text-transform:uppercase}
+    .ava-rule{margin-top:12px;padding:11px 13px;border:1px solid #f0dfb9;border-radius:11px;background:#fff8e9;color:#66502c;font-size:.83rem}
+    .ava-rule strong{color:#755015}
+    .ava-final{margin-top:13px;padding:12px 14px;border-radius:12px;background:#eef8f5;border:1px solid #d5eee4;color:#365c53;font-size:.85rem}
+    .ava-final strong{color:#126c57}
+    @media(max-width:760px){.ava-section{padding:17px 14px}.ava-grid,.ava-deliverables{grid-template-columns:1fr}}
+
   </style>
 </head>
 <body>
@@ -324,6 +343,39 @@
         </ul>
       </details>
     </div>
+  </section>
+
+  <section id="entrega-ava" class="ava-section" aria-labelledby="ava-title">
+    <div class="section-heading">
+      <span class="section-kicker">CÓMO SE TRABAJA Y SE ENTREGA</span>
+      <h2 id="ava-title">Academic Labs te guía; tu proyecto se desarrolla en IntelliJ</h2>
+      <p>Esta práctica complementa el trabajo de la asignatura. Recorre las cápsulas en Academic Labs, implementa y prueba la solución en tu computador y, al finalizar, entrega las evidencias en AVA.</p>
+    </div>
+    <div class="ava-grid">
+      <article class="ava-card">
+        <h3>¿Dónde se realiza el trabajo?</h3>
+        <p>Academic Labs presenta las instrucciones, los checkpoints y las pistas. La programación se realiza localmente en IntelliJ IDEA, utilizando el proyecto Maven base o la alternativa Gradle que preparaste.</p>
+        <p>El portal no almacena tu código ni envía archivos a AVA. Conserva el proyecto en tu equipo y realiza la entrega directamente en la actividad habilitada en el aula virtual.</p>
+      </article>
+      <article class="ava-card">
+        <h3>¿Qué debes entregar?</h3>
+        <p><strong>Son dos archivos obligatorios:</strong> la evidencia de tu recorrido y el proyecto con el código que desarrollaste.</p>
+        <div class="ava-deliverables">
+          <div class="ava-file">
+            <span class="file-kind">Archivo 1 · Evidencia</span>
+            <strong>TXT de Academic Labs</strong>
+            <p>Descárgalo al finalizar. Incluye el estado de los diez checkpoints, tus observaciones y la reflexión final. Completa esos campos antes de exportar.</p>
+          </div>
+          <div class="ava-file">
+            <span class="file-kind">Archivo 2 · Desarrollo</span>
+            <strong>Proyecto completo en ZIP</strong>
+            <p>Comprime el proyecto que trabajaste en IntelliJ: código fuente, FXML, recursos y configuración Maven o Gradle necesaria para abrirlo y ejecutarlo.</p>
+          </div>
+        </div>
+        <div class="ava-rule"><strong>Nombre del ZIP:</strong> utiliza tu nombre completo, sin espacios ni tildes. Ejemplo: <code>Juan_Perez_Lopez.zip</code>. No entregues únicamente el TXT ni solo un ejecutable.</div>
+      </article>
+    </div>
+    <div class="ava-final"><strong>Entrega final:</strong> sube ambos archivos —TXT y ZIP— a la actividad correspondiente en AVA, dentro del plazo indicado por el docente. Comprueba antes que tu proyecto compila y se ejecuta correctamente.</div>
   </section>
 
   <section class="work-method" aria-label="Indicaciones de trabajo">
@@ -593,7 +645,7 @@
 
   <section class="closing">
     <h2>Cierre de la práctica</h2>
-    <p>Antes de terminar, verifica que puedes explicar el flujo de una operación sin depender de memorizar una solución.</p>
+    <p>Antes de terminar, verifica que puedes explicar el flujo de una operación sin depender de memorizar una solución. Luego descarga tu evidencia TXT y prepara el ZIP con el proyecto completo para subir ambos archivos a AVA.</p>
     <ul>
       <li>La vista contiene los controles y el Controller coordina sus eventos.</li>
       <li>El selector determina qué datos específicos se utilizan y qué clase del modelo se instancia.</li>
@@ -611,13 +663,13 @@
     </div>
     <p class="privacy">La evidencia se genera localmente en tu navegador. No se envían respuestas, código ni datos personales a Academic Labs. Esta actividad es una práctica guiada; durante una evaluación debes respetar las instrucciones y condiciones que indique tu docente.</p>
   </section>
-  <footer><a href="/explore/">Volver al catálogo de Academic Labs</a> · DSY1102 · JavaFX: 10 cápsulas de práctica guiada · Versión 2.4.0</footer>
+  <footer><a href="/explore/">Volver al catálogo de Academic Labs</a> · DSY1102 · JavaFX: 10 cápsulas de práctica guiada · Versión 2.5.0</footer>
 </div>
 <script>
 (() => {
   "use strict";
   const ACTIVITY_ID = "dsy1102-javafx-10-capsulas";
-  const VERSION = "2.4.0";
+  const VERSION = "2.5.0";
   const cards = Array.from(document.querySelectorAll(".capsule"));
   const checks = Array.from(document.querySelectorAll(".done-check"));
   const progressLabel = document.getElementById("progress-label");
@@ -660,7 +712,7 @@
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "dsy1102-javafx-10-capsulas-evidencia-v2.txt";
+    link.download = "dsy1102-javafx-10-capsulas-evidencia-v2.5.0.txt";
     document.body.appendChild(link);
     link.click();
     link.remove();
