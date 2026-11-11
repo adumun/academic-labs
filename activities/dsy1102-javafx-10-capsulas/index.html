@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <meta name="description" content="Diez cápsulas de práctica guiada para preparar DSY1102: JavaFX, FXML, formularios, tablas, MVC, DAO y persistencia JSON.">
+  <meta name="description" content="Diez cápsulas de práctica guiada para DSY1102: JavaFX, FXML, formularios, tablas, MVC, DAO, Jackson y ejecución correcta desde IntelliJ con Maven.">
   <title>JavaFX: 10 cápsulas de práctica guiada · DSY1102 | Academic Labs</title>
   <style>
     :root {
@@ -55,6 +55,7 @@
     .resource-links a{font-weight:800;color:#5549bb}
     .notice{margin:0 0 22px;padding:14px 17px;border-radius:14px;background:#fff8e9;border:1px solid #f0dfb9;color:#66502c;font-size:.9rem}
     .notice strong{color:#755015}
+    .execution-guide ol{margin:8px 0 8px 20px;padding:0}.execution-guide li{margin:5px 0}.execution-guide p{margin:8px 0}
     .route{margin:0 0 22px}
     .route h2{font-size:1.2rem;margin:0 0 12px}
     .route-list{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}
@@ -151,16 +152,29 @@
       <h2>Antes de comenzar</h2>
       <ul>
         <li>Descarga y descomprime el proyecto base Maven de esta misma página; ábrelo en IntelliJ IDEA.</li>
-        <li>Comprueba que JavaFX y la clase de arranque ya estén configurados.</li>
+        <li>Espera a que IntelliJ importe las dependencias Maven. No ejecutes <code>App.java</code> directamente: inicia JavaFX mediante Maven.</li>
         <li>Explora el modelo y localiza sus constructores, atributos y método de cálculo del arancel.</li>
         <li>Usa Scene Builder si está disponible en tu entorno y trabaja con una sola ventana.</li>
       </ul>
       <p style="margin-top:10px"><strong>Importante:</strong> el ZIP incluye el modelo de dominio y las pruebas, pero no las soluciones de interfaz ni DAO. Respeta las clases entregadas y desarrolla esas capas durante las cápsulas.</p>
       <p><a class="starter-download" href="resources/proyecto-base-estacion-sur.zip" download="DSY1102_JavaFX_Proyecto_Base_Centro_Cultural_Estacion_Sur.zip">↓ Descargar proyecto base JavaFX (.zip)</a></p>
-      <p class="starter-caption">JDK 21 · Maven · JavaFX · Modelo + JUnit · El DAO con Jackson lo desarrollas tú.</p>
+      <p class="starter-caption">JDK 21 · Maven · JavaFX · Modelo + JUnit · Configuración compartida de IntelliJ incluida · El DAO con Jackson lo desarrollas tú.</p>
       <p class="resource-links">Material de apoyo: <a href="https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2">Repositorio DSY1102</a></p>
     </article>
   </section>
+
+  <div class="notice execution-guide">
+    <strong>Importante: cómo ejecutar JavaFX desde IntelliJ IDEA</strong>
+    <p>JavaFX no viene incluido en el JDK desde Java 11. Por eso, aunque el proyecto use JDK 21 y compile correctamente, ejecutar <code>App.java</code> con una configuración de tipo <code>Application</code> puede mostrar el error <code>JavaFX runtime components are missing</code>.</p>
+    <p><strong>La forma correcta de iniciar este proyecto es mediante Maven:</strong></p>
+    <ol>
+      <li>Abre el panel <strong>Maven</strong> y pulsa <strong>Reload All Maven Projects</strong> si las dependencias aún no aparecen.</li>
+      <li>Usa la configuración compartida <strong>JavaFX - Ejecutar aplicación</strong> que viene en el ZIP y pulsa el botón verde. Si no aparece, expande <strong>Plugins → javafx → javafx:run</strong> en el panel Maven.</li>
+      <li>También puedes abrir la terminal en la raíz del proyecto y ejecutar <code>mvn javafx:run</code>.</li>
+    </ol>
+    <p>Para comprobar las pruebas del modelo usa <code>mvn test</code>; para limpiar y volver a probar, <code>mvn clean test</code>. En IntelliJ, configura <strong>Project SDK</strong> y el <strong>Maven Runner JRE</strong> con Java 21.</p>
+    <p><strong>Si trabajas en WSL2:</strong> guarda el proyecto en el filesystem Linux (por ejemplo, <code>~/projects</code>), instala JDK 21 y Maven dentro de WSL, y asegúrate de que IntelliJ ejecute Maven con ese JDK de Linux. La ventana gráfica requiere WSLg. No mezcles el JDK/Maven de Windows con el entorno Linux.</p>
+  </div>
 
   <div class="notice"><strong>Cómo trabajar:</strong> intenta resolver primero con lo que recuerdas. Si te atascas, despliega la pista. La pista orienta el razonamiento, pero no entrega código terminado. Marca cada cápsula cuando hayas comprobado el resultado en tu aplicación.</div>
 
@@ -434,13 +448,13 @@
     </div>
     <p class="privacy">La evidencia se genera localmente en tu navegador. No se envían respuestas, código ni datos personales a Academic Labs. Esta actividad es una práctica guiada; durante una evaluación debes respetar las instrucciones y condiciones que indique tu docente.</p>
   </section>
-  <footer><a href="/explore/">Volver al catálogo de Academic Labs</a> · DSY1102 · JavaFX: 10 cápsulas de práctica guiada · Versión 2.1.0</footer>
+  <footer><a href="/explore/">Volver al catálogo de Academic Labs</a> · DSY1102 · JavaFX: 10 cápsulas de práctica guiada · Versión 2.2.0</footer>
 </div>
 <script>
 (() => {
   "use strict";
   const ACTIVITY_ID = "dsy1102-javafx-10-capsulas";
-  const VERSION = "2.1.0";
+  const VERSION = "2.2.0";
   const cards = Array.from(document.querySelectorAll(".capsule"));
   const checks = Array.from(document.querySelectorAll(".done-check"));
   const progressLabel = document.getElementById("progress-label");

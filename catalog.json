@@ -116,7 +116,7 @@
     {
       "id": "dsy1102-javafx-10-capsulas",
       "title": "JavaFX: 10 cápsulas de práctica guiada",
-      "description": "Practica una evaluación de JavaFX con proyecto Maven base descargable, modelo implementado y diez cápsulas guiadas. Construye una sola ventana con FXML, TableView, validaciones, MVC, DAO y persistencia JSON con Jackson en 120 minutos.",
+      "description": "Practica una evaluación de JavaFX con proyecto Maven base descargable, configuración compartida de ejecución en IntelliJ y diez cápsulas guiadas. Construye una sola ventana con FXML, TableView, validaciones, MVC, DAO y persistencia JSON con Jackson en 120 minutos.",
       "topicIds": [
         "interfaces-graficas-javafx",
         "arquitectura-mvc-persistencia",
@@ -127,6 +127,7 @@
       ],
       "learningObjectives": [
         "Reconocer un proyecto Maven base y aprovechar un modelo ya implementado",
+        "Ejecutar la aplicación JavaFX desde IntelliJ mediante el plugin Maven y distinguir JavaFX del JDK",
         "Construir una única ventana JavaFX con FXML y controles asociados a un Controller",
         "Habilitar campos según la modalidad y mostrar actividades en una TableView",
         "Registrar y eliminar objetos del modelo mediante eventos y una ObservableList",
@@ -158,11 +159,13 @@
         "persistencia",
         "evaluacion-practica",
         "programacion-orientada-a-objetos",
-        "dsy1102"
+        "dsy1102",
+        "intellij",
+        "javafx-maven-plugin"
       ],
       "path": "/activities/dsy1102-javafx-10-capsulas/",
       "evidence": "txt",
-      "version": "2.1.0",
+      "version": "2.2.0",
       "status": "published"
     }
   ]
