@@ -120,7 +120,74 @@
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
     @media print{body{background:#fff}.shell{max-width:none;padding:0}.hero,.panel,.capsule,.closing{box-shadow:none}.hint{background:#fff}.actions{display:none}.capsule{break-inside:avoid}.evidence textarea{min-height:35px}}
   
-    /* Landing d<body>
+    /* Landing de preparación: lectura obligatoria y ayudas opcionales. */
+    .hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:11px;margin-top:22px}
+    .hero-cta,.hero-secondary{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 15px;border-radius:11px;font-size:.87rem;font-weight:850;text-decoration:none}
+    .hero-cta{background:var(--mint);color:#123d37}.hero-cta:hover{background:#c0f5e3}
+    .hero-secondary{border:1px solid rgba(255,255,255,.28);color:#fff;background:rgba(255,255,255,.07)}
+    .mandatory-section,.setup-section,.optional-section{margin:24px 0}
+    .section-heading{margin-bottom:13px}
+    .section-kicker{display:inline-block;margin-bottom:5px;color:#5b52c5;font-size:.7rem;font-weight:950;letter-spacing:.13em;text-transform:uppercase}
+    .section-heading h2{margin:0;font-size:clamp(1.35rem,2.7vw,1.75rem);line-height:1.2;letter-spacing:-.035em}
+    .section-heading p{margin:6px 0 0;color:var(--muted);font-size:.92rem;max-width:780px}
+    .mandatory-shell{padding:23px 24px;background:#fff;border:1px solid #dce5f0;border-radius:22px;box-shadow:var(--shadow)}
+    .reading-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+    .reading-card{padding:16px 18px;border:1px solid #e5ebf4;border-radius:15px;background:#f8faff}
+    .reading-card.context{background:#f3f7ff}.reading-card.deliverable{background:#effaf5;border-color:#d4eee2}
+    .reading-card h3,.reading-checklist h3{margin:0 0 7px;font-size:.92rem;color:#253554}
+    .reading-card p,.reading-checklist p{margin:0;color:#4c5a73;font-size:.9rem}
+    .reading-card p+p,.reading-checklist p+p{margin-top:8px}
+    .reading-checklist{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px;padding-top:15px;border-top:1px solid #edf0f5}
+    .reading-checklist ul{margin:6px 0 0;padding-left:19px;color:#4c5a73;font-size:.88rem}
+    .reading-checklist li+li{margin-top:5px}
+    .reading-note{margin-top:14px;padding:12px 14px;border-radius:12px;background:#fff8e9;border:1px solid #f0dfb9;color:#66502c;font-size:.86rem}
+    .reading-note strong{color:#755015}
+    .setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+    .setup-option{min-width:0;background:#fff;border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow);overflow:hidden}
+    .setup-option[open]{border-color:#c9c5f2}
+    .setup-option summary{display:flex;align-items:center;gap:12px;padding:17px 18px;cursor:pointer;list-style:none;min-height:83px}
+    .setup-option summary::-webkit-details-marker,.help-item summary::-webkit-details-marker,.route-toggle summary::-webkit-details-marker{display:none}
+    .setup-letter{display:grid;place-items:center;flex:0 0 38px;width:38px;height:38px;border-radius:12px;background:#f0efff;color:#5c50c9;font-weight:950}
+    .setup-option-copy{display:block;min-width:0;flex:1}
+    .setup-option-copy strong{display:block;color:#263653;font-size:.95rem}
+    .setup-option-copy small{display:block;margin-top:3px;color:#74819a;font-size:.78rem;line-height:1.35}
+    .setup-toggle{flex:0 0 auto;color:#5c50c9;font-size:.75rem;font-weight:850;white-space:nowrap}
+    .setup-toggle:after{content:" ＋"}.setup-option[open] .setup-toggle:after{content:" −"}
+    .setup-content{padding:0 18px 18px;border-top:1px solid #edf0f5;color:#46546e;font-size:.87rem}
+    .setup-content ol{margin:13px 0 8px;padding-left:20px}.setup-content li+li{margin-top:7px}
+    .setup-content p{margin:10px 0 0}.setup-content .starter-download{margin-top:13px}
+    .setup-footnote{padding:10px 12px;background:#f5f7fc;border-radius:10px;font-size:.82rem}
+    .optional-section{padding:20px 21px;background:#f7f9fd;border:1px solid #e1e7f0;border-radius:20px}
+    .optional-section .section-heading{margin-bottom:11px}
+    .help-list{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .help-item{background:#fff;border:1px solid #e2e8f1;border-radius:12px;padding:0 14px}
+    .help-item summary{position:relative;cursor:pointer;list-style:none;padding:12px 23px 12px 0;color:#34435e;font-size:.85rem;font-weight:850}
+    .help-item summary:after{content:"＋";position:absolute;right:0;top:10px;color:#6258c9;font-size:1.05rem}
+    .help-item[open] summary:after{content:"−"}
+    .help-item p,.help-item ul{margin:0;padding:0 0 13px;color:#53617a;font-size:.83rem}
+    .help-item ul{padding-left:18px}.help-item li+li{margin-top:4px}.help-item a{color:#5549bb;font-weight:800}
+    .work-method{margin:21px 0}
+    .work-method-note{padding:13px 16px;background:#eef8f5;border:1px solid #d5eee4;border-radius:13px;color:#365c53;font-size:.88rem}
+    .work-method-note strong{color:#126c57}
+    .route-toggle{margin-top:11px;border:1px solid var(--line);border-radius:13px;background:#fff;padding:0 15px}
+    .route-toggle summary{cursor:pointer;list-style:none;padding:12px 0;color:#46536d;font-size:.85rem;font-weight:850}
+    .route-toggle summary:after{content:"＋";float:right;color:#5c50c9}.route-toggle[open] summary:after{content:"−"}
+    .route-toggle .route{padding:0 0 14px;margin:0}
+    .capsule-intro{margin:23px 0 11px}
+    .capsule-intro h2{margin:0;font-size:1.45rem;letter-spacing:-.03em}
+    .capsule-intro p{margin:4px 0 0;color:var(--muted);font-size:.9rem}
+    .progress-card{margin-top:0}
+    @media(max-width:760px){
+      .mandatory-shell{padding:18px 16px}
+      .reading-grid,.reading-checklist,.setup-grid,.help-list{grid-template-columns:1fr}
+      .setup-option summary{min-height:74px;padding:14px}.setup-content{padding:0 14px 15px}
+      .optional-section{padding:17px 14px}.hero-actions{align-items:stretch}
+      .hero-cta,.hero-secondary{flex:1 1 100%}
+    }
+
+  </style>
+</head>
+<body>
 <a class="skip" href="#capsulas">Saltar directamente a las cápsulas</a>
 <div class="shell">
   <nav class="back-nav" aria-label="Navegación"><a href="/explore/">← Volver a explorar actividades</a></nav>
@@ -290,59 +357,7 @@
     <div class="track" role="progressbar" aria-label="Cápsulas completadas" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" id="progress-track"><span id="progress-bar"></span></div>
   </section>
 
-o desarrollas tú.</p>
-      <p class="resource-links">Material de apoyo: <a href="https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2">Repositorio DSY1102</a></p>
-    </article>
-  </section>
-
-  <div class="notice execution-guide">
-    <strong>Importante: cómo ejecutar JavaFX desde IntelliJ IDEA</strong>
-    <p>JavaFX no viene incluido en el JDK desde Java 11. Por eso, aunque el proyecto use JDK 21 y compile correctamente, ejecutar <code>App.java</code> con una configuración de tipo <code>Application</code> puede mostrar el error <code>JavaFX runtime components are missing</code>.</p>
-    <p><strong>Para ejecutar el proyecto base descargable, utiliza Maven:</strong></p>
-    <ol>
-      <li>Abre el panel <strong>Maven</strong> y pulsa <strong>Reload All Maven Projects</strong> si las dependencias aún no aparecen.</li>
-      <li>Usa la configuración compartida <strong>JavaFX - Ejecutar aplicación</strong> que viene en el ZIP y pulsa el botón verde. Si no aparece, expande <strong>Plugins → javafx → javafx:run</strong> en el panel Maven.</li>
-      <li>También puedes abrir la terminal en la raíz del proyecto y ejecutar <code>mvn javafx:run</code>.</li>
-    </ol>
-    <p>Para comprobar las pruebas del modelo usa <code>mvn test</code>; para limpiar y volver a probar, <code>mvn clean test</code>. En IntelliJ, configura <strong>Project SDK</strong> y el <strong>Maven Runner JRE</strong> con Java 21.</p>
-    <p><strong>Si trabajas en WSL2:</strong> guarda el proyecto en el filesystem Linux (por ejemplo, <code>~/projects</code>), instala JDK 21 y Maven dentro de WSL, y asegúrate de que IntelliJ ejecute Maven con ese JDK de Linux. La ventana gráfica requiere WSLg. No mezcles el JDK/Maven de Windows con el entorno Linux.</p>
-  </div>
-
-  <div class="notice execution-guide">
-    <strong>¿Prefieres no utilizar Maven? Crea el proyecto desde cero con el asistente JavaFX de IntelliJ IDEA</strong>
-    <p>También puedes comenzar desde un proyecto nuevo. Esta alternativa utiliza <strong>Gradle</strong> en lugar de Maven: no elimina el gestor de dependencias, sino que cambia la herramienta de construcción.</p>
-    <ol>
-      <li>En <strong>Settings → Plugins</strong> (<code>Ctrl+Alt+S</code>), verifica que el plugin integrado <strong>JavaFX</strong> esté habilitado. Reinicia IntelliJ si lo solicita.</li>
-      <li>Desde la pantalla inicial selecciona <strong>New Project</strong>, o utiliza <strong>File → New → Project</strong>. En los generadores, selecciona <strong>JavaFX</strong>.</li>
-      <li>Configura <strong>Language: Java</strong>, <strong>Build system: Gradle</strong>, <strong>JDK: 21</strong> y como <strong>Group</strong> <code>cl.adumun.academiclabs.dsy1102.estacionsur</code>.</li>
-      <li>Pulsa <strong>Next</strong> y selecciona las bibliotecas <code>javafx.controls</code> y <code>javafx.fxml</code>. Luego pulsa <strong>Create</strong> y espera la sincronización de Gradle.</li>
-      <li>Abre la clase generada (normalmente <code>HelloApplication.java</code>) y ejecútala con el botón verde del editor. Comprueba que aparezca la ventana de ejemplo.</li>
-      <li>Para comenzar con el mismo modelo de Estación Sur del ZIP, copia solamente <code>Taller.java</code>, <code>TallerPresencial.java</code> y <code>TallerVirtual.java</code> al paquete <code>...estacionsur.model</code> de tu proyecto Gradle. Conserva la clase de arranque y estructura JavaFX generadas por IntelliJ.</li>
-    </ol>
-    <p>El asistente crea una aplicación de ejemplo, no resuelve el caso: las vistas FXML, controladores, TableView, DAO y persistencia siguen siendo parte de las cápsulas. <strong>No copies el <code>pom.xml</code> ni la configuración Maven <code>.run</code> del ZIP</strong> a un proyecto Gradle.</p>
-    <p>Cuando llegues a persistencia JSON, agrega Jackson Databind a <code>dependencies</code> en <code>build.gradle</code> o <code>build.gradle.kts</code> y sincroniza Gradle. Se utiliza Jackson (<code>ObjectMapper</code>), nunca Gson. La guía completa incluye ambos formatos de Gradle y los pasos para Windows/WSL2.</p>
-    <p><a href="docs/crear-proyecto-desde-intellij-sin-maven.md">Leer la guía completa: crear el proyecto JavaFX desde IntelliJ sin Maven</a> · <a href="https://www.jetbrains.com/help/idea/javafx.html" target="_blank" rel="noopener">Documentación oficial de IntelliJ IDEA</a>.</p>
-  </div>
-
-  <div class="notice"><strong>Cómo trabajar:</strong> intenta resolver primero con lo que recuerdas. Si te atascas, despliega la pista. La pista orienta el razonamiento, pero no entrega código terminado. Marca cada cápsula cuando hayas comprobado el resultado en tu aplicación.</div>
-
-  <nav class="route" aria-label="Mapa de las diez cápsulas">
-    <h2>Mapa de la sesión · 120 minutos</h2>
-    <div class="route-list">
-      <div class="route-item"><b>01</b><span>Proyecto base<small>08 min</small></span></div>
-      <div class="route-item"><b>02</b><span>Ventana FXML<small>12 min</small></span></div>
-      <div class="route-item"><b>03</b><span>Selector y campos<small>10 min</small></span></div>
-      <div class="route-item"><b>04</b><span>TableView<small>12 min</small></span></div>
-      <div class="route-item"><b>05</b><span>Registrar<small>14 min</small></span></div>
-      <div class="route-item"><b>06</b><span>Validar<small>14 min</small></span></div>
-      <div class="route-item"><b>07</b><span>Eliminar<small>10 min</small></span></div>
-      <div class="route-item"><b>08</b><span>MVC + DAO<small>12 min</small></span></div>
-      <div class="route-item"><b>09</b><span>Jackson + JSON<small>16 min</small></span></div>
-      <div class="route-item"><b>10</b><span>Prueba integrada<small>12 min</small></span></div>
-    </div>
-  </nav>
-
-  <main id="capsulas" class="capsule-list">
+<main id="capsulas" class="capsule-list">
     <article class="capsule" id="capsula-01">
       <header class="capsule-top">
         <div class="cap-id"><span class="cap-num">01</span><div><h2>Conoce el proyecto que recibiste</h2><p>Proyecto Maven, modelo existente y punto de partida</p></div></div>
