@@ -119,46 +119,178 @@
     @media(max-width:420px){.route-list{grid-template-columns:1fr 1fr}.cap-num{width:36px;height:36px;flex-basis:36px}.cap-id{gap:9px}.capsule-top{align-items:flex-start}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
     @media print{body{background:#fff}.shell{max-width:none;padding:0}.hero,.panel,.capsule,.closing{box-shadow:none}.hint{background:#fff}.actions{display:none}.capsule{break-inside:avoid}.evidence textarea{min-height:35px}}
-  </style>
-</head>
-<body>
+  
+    /* Landing d<body>
 <a class="skip" href="#capsulas">Saltar directamente a las cápsulas</a>
 <div class="shell">
   <nav class="back-nav" aria-label="Navegación"><a href="/explore/">← Volver a explorar actividades</a></nav>
+
   <header class="hero">
     <div class="eyebrow">DSY1102 · Programación Orientada a Objetos · EA2</div>
     <h1>JavaFX: 10 cápsulas de práctica guiada</h1>
-    <p>Prepara una aplicación de escritorio de principio a fin, con el mismo tipo de decisiones técnicas que tendrás que resolver en una evaluación práctica: comprender un proyecto base, construir una ventana, conectar controles, validar, registrar, eliminar y persistir información. Cada cápsula incluye una pequeña ayuda, pero las decisiones y el código son tuyos.</p>
+    <p>Construye paso a paso una aplicación de escritorio para administrar talleres. Lee primero las indicaciones esenciales, prepara tu entorno por una de las dos rutas y después avanza por las cápsulas a tu ritmo.</p>
     <div class="chips">
       <span>20:30–22:30 · 120 minutos</span>
-      <span>JavaFX + FXML + Maven</span>
-      <span>MVC + DAO/Repository</span>
-      <span>Jackson + JSON</span>
+      <span>10 cápsulas incrementales</span>
+      <span>Java 21 + JavaFX</span>
+      <span>FXML · MVC · Jackson</span>
+    </div>
+    <div class="hero-actions">
+      <a class="hero-cta" href="#lectura-obligatoria">Comenzar por la lectura obligatoria ↓</a>
+      <a class="hero-secondary" href="#capsulas">Ir directamente a las cápsulas</a>
     </div>
   </header>
 
+  <section id="lectura-obligatoria" class="mandatory-section" aria-labelledby="mandatory-title">
+    <div class="section-heading">
+      <span class="section-kicker">PRIMERO · LECTURA OBLIGATORIA · 3 MIN</span>
+      <h2 id="mandatory-title">Entiende el desafío antes de programar</h2>
+      <p>Esta es la única parte que necesitas leer completa antes de comenzar. El resto de la ayuda técnica queda disponible para cuando la necesites.</p>
+    </div>
+    <div class="mandatory-shell">
+      <div class="reading-grid">
+        <article class="reading-card context">
+          <h3>El contexto: Centro Cultural Estación Sur</h3>
+          <p>El centro cultural organiza talleres presenciales y virtuales. Necesita una aplicación de escritorio que permita registrar actividades, consultar su programación y conservar la información para próximas ejecuciones.</p>
+        </article>
+        <article class="reading-card deliverable">
+          <h3>Tu objetivo</h3>
+          <p>Construir una aplicación JavaFX de una sola ventana. Trabajarás con formularios, selección de modalidad, una tabla de talleres, validaciones y persistencia JSON, aprovechando el modelo de dominio que ya está implementado.</p>
+        </article>
+      </div>
+      <div class="reading-checklist">
+        <div>
+          <h3>Reglas que debes respetar</h3>
+          <ul>
+            <li>Utiliza las clases del modelo entregado; no reescribas sus reglas ni cálculos.</li>
+            <li>Mantén una sola ventana y separa las responsabilidades de vista, Controller y DAO/Repository.</li>
+            <li>Para persistencia JSON utiliza Jackson (<code>ObjectMapper</code>), no Gson.</li>
+            <li>El trabajo consiste en completar la interfaz y el acceso a datos; el proyecto base no contiene esas soluciones.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Cómo trabajar las cápsulas</h3>
+          <p>Avanza en orden. Cada cápsula presenta un contexto, un objetivo, tareas concretas y una respuesta esperada que te permite comprobar el resultado.</p>
+          <p>Intenta resolver antes de abrir la pista. Si te atascas, úsala como orientación: no entrega el código completo. Marca el checkpoint y registra brevemente lo que comprobaste.</p>
+        </div>
+      </div>
+      <div class="reading-note"><strong>Importante:</strong> la ruta Maven es la referencia directa de las cápsulas. También puedes crear el proyecto con Gradle desde IntelliJ; si eliges esa alternativa, conserva el modelo de dominio y utiliza las tareas equivalentes de Gradle, sin mezclar configuraciones Maven y Gradle.</div>
+    </div>
+  </section>
+
+  <section id="preparacion" class="setup-section" aria-labelledby="setup-title">
+    <div class="section-heading">
+      <span class="section-kicker">PREPARACIÓN DEL ENTORNO</span>
+      <h2 id="setup-title">Elige cómo quieres iniciar el proyecto</h2>
+      <p>Selecciona una sola ruta. Puedes abrir el proyecto ya preparado o crear uno nuevo desde IntelliJ IDEA. Las instrucciones se despliegan aquí mismo, sin salir de esta página.</p>
+    </div>
+    <div class="setup-grid">
+      <details class="setup-option" name="setup-path">
+        <summary>
+          <span class="setup-letter">A</span>
+          <span class="setup-option-copy"><strong>Proyecto base Maven</strong><small>Recomendado · abre el proyecto con el modelo listo para usar</small></span>
+          <span class="setup-toggle">Ver pasos</span>
+        </summary>
+        <div class="setup-content">
+          <a class="starter-download" href="resources/proyecto-base-estacion-sur.zip" download="DSY1102_JavaFX_Proyecto_Base_Centro_Cultural_Estacion_Sur.zip">↓ Descargar proyecto base (.zip)</a>
+          <ol>
+            <li>Descomprime el archivo y abre en IntelliJ IDEA la carpeta que contiene <code>pom.xml</code>.</li>
+            <li>Configura <strong>Project SDK: JDK 21</strong> y espera a que IntelliJ importe las dependencias. Si es necesario, pulsa <strong>Reload All Maven Projects</strong>.</li>
+            <li>Ejecuta la configuración compartida <strong>JavaFX - Ejecutar aplicación</strong>. Si no aparece, abre el panel Maven y ejecuta <strong>Plugins → javafx → javafx:run</strong>.</li>
+            <li>Para comprobar el modelo y sus pruebas, ejecuta <code>mvn test</code>.</li>
+          </ol>
+          <p class="setup-footnote">Este camino coincide directamente con el proyecto y las instrucciones utilizadas en las cápsulas. El ZIP incluye el modelo, las pruebas y la configuración de ejecución; tú desarrollas la interfaz y la persistencia.</p>
+        </div>
+      </details>
+
+      <details class="setup-option" name="setup-path">
+        <summary>
+          <span class="setup-letter">B</span>
+          <span class="setup-option-copy"><strong>Crear proyecto desde IntelliJ</strong><small>Alternativa sin Maven · asistente JavaFX + Gradle</small></span>
+          <span class="setup-toggle">Ver pasos</span>
+        </summary>
+        <div class="setup-content">
+          <ol>
+            <li>En <strong>Settings → Plugins</strong>, verifica que el plugin <strong>JavaFX</strong> esté habilitado.</li>
+            <li>Selecciona <strong>New Project → JavaFX</strong>. Configura <strong>Language: Java</strong>, <strong>Build system: Gradle</strong> y <strong>JDK: 21</strong>.</li>
+            <li>En las bibliotecas selecciona <code>javafx.controls</code> y <code>javafx.fxml</code>. Crea el proyecto, espera la sincronización de Gradle y ejecuta la clase de ejemplo <code>HelloApplication</code>.</li>
+            <li>Descarga el ZIP de la ruta A y copia solamente <code>Taller.java</code>, <code>TallerPresencial.java</code> y <code>TallerVirtual.java</code> al paquete <code>...estacionsur.model</code> de tu proyecto Gradle.</li>
+          </ol>
+          <p class="setup-footnote">No copies el <code>pom.xml</code> ni la configuración <code>.run</code> de Maven. En la cápsula 01, tu equivalente será ejecutar la aplicación generada y revisar las clases de modelo que incorporaste. Mantén Gradle durante todo el trabajo.</p>
+          <p><a href="docs/crear-proyecto-desde-intellij-sin-maven.md">Abrir la guía completa para crear el proyecto sin Maven →</a></p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="optional-section" aria-labelledby="help-title">
+    <div class="section-heading">
+      <span class="section-kicker">MATERIAL OPCIONAL</span>
+      <h2 id="help-title">Ayuda técnica y recursos</h2>
+      <p>No necesitas leer todo esto ahora. Abre únicamente el apartado que corresponda a tu entorno o al problema que estés resolviendo.</p>
+    </div>
+    <div class="help-list">
+      <details class="help-item">
+        <summary>JavaFX no arranca en IntelliJ (Maven)</summary>
+        <p>JavaFX no viene incluido en el JDK desde Java 11. Si ejecutas <code>App.java</code> directamente con una configuración <code>Application</code>, puede aparecer <code>JavaFX runtime components are missing</code>. Para este proyecto utiliza <code>javafx:run</code> desde Maven o la configuración compartida del ZIP; no necesitas agregar manualmente un SDK JavaFX al JDK.</p>
+      </details>
+      <details class="help-item">
+        <summary>Trabajo en WSL2</summary>
+        <ul>
+          <li>Guarda el proyecto en el filesystem Linux, por ejemplo <code>~/projects</code>.</li>
+          <li>Utiliza JDK 21 y Maven/Gradle instalados en el mismo entorno WSL2.</li>
+          <li>Abre el proyecto con la integración WSL de IntelliJ. Para mostrar ventanas gráficas necesitas WSLg.</li>
+          <li>No mezcles herramientas de Windows con dependencias nativas descargadas para Linux, ni al revés.</li>
+        </ul>
+      </details>
+      <details class="help-item">
+        <summary>¿Cuándo y cómo incorporar Jackson?</summary>
+        <p>Jackson se incorpora cuando desarrolles la persistencia JSON, no para construir la ventana. Si elegiste Gradle, la guía alternativa muestra cómo declarar Jackson Databind tanto en <code>build.gradle</code> como en <code>build.gradle.kts</code>. En el código trabajarás con <code>ObjectMapper</code>.</p>
+        <p><a href="docs/crear-proyecto-desde-intellij-sin-maven.md">Consultar la guía de Gradle y Jackson →</a></p>
+      </details>
+      <details class="help-item">
+        <summary>Herramientas y documentación de referencia</summary>
+        <ul>
+          <li><a href="https://www.jetbrains.com/help/idea/javafx.html" target="_blank" rel="noopener">JavaFX en IntelliJ IDEA</a></li>
+          <li><a href="https://gluonhq.com/products/scene-builder/" target="_blank" rel="noopener">Scene Builder</a></li>
+          <li><a href="https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2" target="_blank" rel="noopener">Repositorio de la asignatura DSY1102</a></li>
+        </ul>
+      </details>
+    </div>
+  </section>
+
+  <section class="work-method" aria-label="Indicaciones de trabajo">
+    <div class="work-method-note"><strong>Recuerda:</strong> no se trata de terminar rápido copiando código. Comprueba cada comportamiento en tu aplicación, usa las pistas cuando las necesites y continúa con la siguiente cápsula cuando puedas explicar el resultado.</div>
+    <details class="route-toggle">
+      <summary>Ver distribución de los 120 minutos · mapa de las 10 cápsulas</summary>
+      <nav class="route" aria-label="Mapa de las diez cápsulas">
+        <h2>Ruta sugerida · 20:30–22:30</h2>
+        <div class="route-list">
+          <div class="route-item"><b>01</b><span>Proyecto base<small>08 min</small></span></div>
+          <div class="route-item"><b>02</b><span>Ventana FXML<small>12 min</small></span></div>
+          <div class="route-item"><b>03</b><span>Selector y campos<small>10 min</small></span></div>
+          <div class="route-item"><b>04</b><span>TableView<small>12 min</small></span></div>
+          <div class="route-item"><b>05</b><span>Registrar<small>14 min</small></span></div>
+          <div class="route-item"><b>06</b><span>Validar<small>14 min</small></span></div>
+          <div class="route-item"><b>07</b><span>Eliminar<small>10 min</small></span></div>
+          <div class="route-item"><b>08</b><span>MVC + DAO<small>12 min</small></span></div>
+          <div class="route-item"><b>09</b><span>Jackson + JSON<small>16 min</small></span></div>
+          <div class="route-item"><b>10</b><span>Prueba integrada<small>12 min</small></span></div>
+        </div>
+      </nav>
+    </details>
+  </section>
+
+  <div class="capsule-intro">
+    <h2>Ahora sí: manos a la obra</h2>
+    <p>Diez pasos incrementales. Avanza en orden y comprueba cada resultado antes de continuar.</p>
+  </div>
   <section class="progress-card" aria-label="Progreso de la actividad">
     <div class="progress-head"><strong>Tu avance en la ruta</strong><span id="progress-label" aria-live="polite">0 de 10 cápsulas completadas</span></div>
     <div class="track" role="progressbar" aria-label="Cápsulas completadas" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" id="progress-track"><span id="progress-bar"></span></div>
   </section>
 
-  <section class="intro-grid">
-    <article class="panel mission">
-      <h2>El caso de práctica: Centro Cultural Estación Sur</h2>
-      <p>El centro cultural organiza dos modalidades de talleres: <strong>presenciales</strong> y <strong>virtuales</strong>. Necesita una aplicación para registrar sus actividades, consultar la programación en una tabla y conservar los datos entre ejecuciones.</p>
-      <p>El proyecto base descargable incluye el modelo ya implementado y probado: una clase general para la actividad y sus dos especializaciones. Tu tarea es construir la interfaz y el almacenamiento sin reescribir las reglas del modelo.</p>
-    </article>
-    <article class="panel prep">
-      <h2>Antes de comenzar</h2>
-      <ul>
-        <li>Descarga y descomprime el proyecto base Maven de esta misma página; ábrelo en IntelliJ IDEA.</li>
-        <li>Espera a que IntelliJ importe las dependencias Maven. No ejecutes <code>App.java</code> directamente: inicia JavaFX mediante Maven.</li>
-        <li>Explora el modelo y localiza sus constructores, atributos y método de cálculo del arancel.</li>
-        <li>Usa Scene Builder si está disponible en tu entorno y trabaja con una sola ventana.</li>
-      </ul>
-      <p style="margin-top:10px"><strong>Importante:</strong> el ZIP incluye el modelo de dominio y las pruebas, pero no las soluciones de interfaz ni DAO. Respeta las clases entregadas y desarrolla esas capas durante las cápsulas.</p>
-      <p><a class="starter-download" href="resources/proyecto-base-estacion-sur.zip" download="DSY1102_JavaFX_Proyecto_Base_Centro_Cultural_Estacion_Sur.zip">↓ Descargar proyecto base JavaFX (.zip)</a></p>
-      <p class="starter-caption">JDK 21 · Maven · JavaFX · Modelo + JUnit · Configuración compartida de IntelliJ incluida · El DAO con Jackson lo desarrollas tú.</p>
+o desarrollas tú.</p>
       <p class="resource-links">Material de apoyo: <a href="https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2">Repositorio DSY1102</a></p>
     </article>
   </section>
@@ -464,13 +596,13 @@
     </div>
     <p class="privacy">La evidencia se genera localmente en tu navegador. No se envían respuestas, código ni datos personales a Academic Labs. Esta actividad es una práctica guiada; durante una evaluación debes respetar las instrucciones y condiciones que indique tu docente.</p>
   </section>
-  <footer><a href="/explore/">Volver al catálogo de Academic Labs</a> · DSY1102 · JavaFX: 10 cápsulas de práctica guiada · Versión 2.3.0</footer>
+  <footer><a href="/explore/">Volver al catálogo de Academic Labs</a> · DSY1102 · JavaFX: 10 cápsulas de práctica guiada · Versión 2.4.0</footer>
 </div>
 <script>
 (() => {
   "use strict";
   const ACTIVITY_ID = "dsy1102-javafx-10-capsulas";
-  const VERSION = "2.3.0";
+  const VERSION = "2.4.0";
   const cards = Array.from(document.querySelectorAll(".capsule"));
   const checks = Array.from(document.querySelectorAll(".done-check"));
   const progressLabel = document.getElementById("progress-label");
