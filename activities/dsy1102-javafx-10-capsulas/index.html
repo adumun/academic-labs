@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <meta name="description" content="Diez cápsulas de práctica guiada para DSY1102: JavaFX, FXML, formularios, tablas, MVC, DAO, Jackson y ejecución correcta desde IntelliJ con Maven.">
+  <meta name="description" content="Diez cápsulas de práctica guiada para DSY1102: JavaFX, FXML, formularios, tablas, MVC, DAO, Jackson y dos alternativas para crear y ejecutar el proyecto desde IntelliJ con Maven o Gradle.">
   <title>JavaFX: 10 cápsulas de práctica guiada · DSY1102 | Academic Labs</title>
   <style>
     :root {
@@ -166,7 +166,7 @@
   <div class="notice execution-guide">
     <strong>Importante: cómo ejecutar JavaFX desde IntelliJ IDEA</strong>
     <p>JavaFX no viene incluido en el JDK desde Java 11. Por eso, aunque el proyecto use JDK 21 y compile correctamente, ejecutar <code>App.java</code> con una configuración de tipo <code>Application</code> puede mostrar el error <code>JavaFX runtime components are missing</code>.</p>
-    <p><strong>La forma correcta de iniciar este proyecto es mediante Maven:</strong></p>
+    <p><strong>Para ejecutar el proyecto base descargable, utiliza Maven:</strong></p>
     <ol>
       <li>Abre el panel <strong>Maven</strong> y pulsa <strong>Reload All Maven Projects</strong> si las dependencias aún no aparecen.</li>
       <li>Usa la configuración compartida <strong>JavaFX - Ejecutar aplicación</strong> que viene en el ZIP y pulsa el botón verde. Si no aparece, expande <strong>Plugins → javafx → javafx:run</strong> en el panel Maven.</li>
@@ -174,6 +174,22 @@
     </ol>
     <p>Para comprobar las pruebas del modelo usa <code>mvn test</code>; para limpiar y volver a probar, <code>mvn clean test</code>. En IntelliJ, configura <strong>Project SDK</strong> y el <strong>Maven Runner JRE</strong> con Java 21.</p>
     <p><strong>Si trabajas en WSL2:</strong> guarda el proyecto en el filesystem Linux (por ejemplo, <code>~/projects</code>), instala JDK 21 y Maven dentro de WSL, y asegúrate de que IntelliJ ejecute Maven con ese JDK de Linux. La ventana gráfica requiere WSLg. No mezcles el JDK/Maven de Windows con el entorno Linux.</p>
+  </div>
+
+  <div class="notice execution-guide">
+    <strong>¿Prefieres no utilizar Maven? Crea el proyecto desde cero con el asistente JavaFX de IntelliJ IDEA</strong>
+    <p>También puedes comenzar desde un proyecto nuevo. Esta alternativa utiliza <strong>Gradle</strong> en lugar de Maven: no elimina el gestor de dependencias, sino que cambia la herramienta de construcción.</p>
+    <ol>
+      <li>En <strong>Settings → Plugins</strong> (<code>Ctrl+Alt+S</code>), verifica que el plugin integrado <strong>JavaFX</strong> esté habilitado. Reinicia IntelliJ si lo solicita.</li>
+      <li>Desde la pantalla inicial selecciona <strong>New Project</strong>, o utiliza <strong>File → New → Project</strong>. En los generadores, selecciona <strong>JavaFX</strong>.</li>
+      <li>Configura <strong>Language: Java</strong>, <strong>Build system: Gradle</strong>, <strong>JDK: 21</strong> y como <strong>Group</strong> <code>cl.adumun.academiclabs.dsy1102.estacionsur</code>.</li>
+      <li>Pulsa <strong>Next</strong> y selecciona las bibliotecas <code>javafx.controls</code> y <code>javafx.fxml</code>. Luego pulsa <strong>Create</strong> y espera la sincronización de Gradle.</li>
+      <li>Abre la clase generada (normalmente <code>HelloApplication.java</code>) y ejecútala con el botón verde del editor. Comprueba que aparezca la ventana de ejemplo.</li>
+      <li>Para comenzar con el mismo modelo de Estación Sur del ZIP, copia solamente <code>Taller.java</code>, <code>TallerPresencial.java</code> y <code>TallerVirtual.java</code> al paquete <code>...estacionsur.model</code> de tu proyecto Gradle. Conserva la clase de arranque y estructura JavaFX generadas por IntelliJ.</li>
+    </ol>
+    <p>El asistente crea una aplicación de ejemplo, no resuelve el caso: las vistas FXML, controladores, TableView, DAO y persistencia siguen siendo parte de las cápsulas. <strong>No copies el <code>pom.xml</code> ni la configuración Maven <code>.run</code> del ZIP</strong> a un proyecto Gradle.</p>
+    <p>Cuando llegues a persistencia JSON, agrega Jackson Databind a <code>dependencies</code> en <code>build.gradle</code> o <code>build.gradle.kts</code> y sincroniza Gradle. Se utiliza Jackson (<code>ObjectMapper</code>), nunca Gson. La guía completa incluye ambos formatos de Gradle y los pasos para Windows/WSL2.</p>
+    <p><a href="docs/crear-proyecto-desde-intellij-sin-maven.md">Leer la guía completa: crear el proyecto JavaFX desde IntelliJ sin Maven</a> · <a href="https://www.jetbrains.com/help/idea/javafx.html" target="_blank" rel="noopener">Documentación oficial de IntelliJ IDEA</a>.</p>
   </div>
 
   <div class="notice"><strong>Cómo trabajar:</strong> intenta resolver primero con lo que recuerdas. Si te atascas, despliega la pista. La pista orienta el razonamiento, pero no entrega código terminado. Marca cada cápsula cuando hayas comprobado el resultado en tu aplicación.</div>
@@ -448,13 +464,13 @@
     </div>
     <p class="privacy">La evidencia se genera localmente en tu navegador. No se envían respuestas, código ni datos personales a Academic Labs. Esta actividad es una práctica guiada; durante una evaluación debes respetar las instrucciones y condiciones que indique tu docente.</p>
   </section>
-  <footer><a href="/explore/">Volver al catálogo de Academic Labs</a> · DSY1102 · JavaFX: 10 cápsulas de práctica guiada · Versión 2.2.0</footer>
+  <footer><a href="/explore/">Volver al catálogo de Academic Labs</a> · DSY1102 · JavaFX: 10 cápsulas de práctica guiada · Versión 2.3.0</footer>
 </div>
 <script>
 (() => {
   "use strict";
   const ACTIVITY_ID = "dsy1102-javafx-10-capsulas";
-  const VERSION = "2.2.0";
+  const VERSION = "2.3.0";
   const cards = Array.from(document.querySelectorAll(".capsule"));
   const checks = Array.from(document.querySelectorAll(".done-check"));
   const progressLabel = document.getElementById("progress-label");
