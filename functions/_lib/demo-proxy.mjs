@@ -274,17 +274,67 @@ export async function proxyDemoRequest({
     });
   }
 
+  const redirectStatuses = new Set([301, 302, 303, 307, 308]);
+  const seenRedirectUrls = new Set();
+  let currentUpstreamUrl = new URL(upstreamUrl);
   let upstreamResponse;
-  try {
-    upstreamResponse = await fetchImpl(upstreamUrl.toString(), {
-      method: request.method,
-      headers,
-      redirect: "manual",
-    });
-  } catch {
-    return textResponse("Demo origin is temporarily unavailable.", 502, {
-      "Retry-After": "60",
-    });
+  let redirectHops = 0;
+
+  while (true) {
+    const currentUrl = currentUpstreamUrl.toString();
+    if (seenRedirectUrls.has(currentUrl)) {
+      return textResponse("Demo origin redirect loop detected.", 502, {
+        "Retry-After": "60",
+      });
+    }
+    seenRedirectUrls.add(currentUrl);
+
+    try {
+      upstreamResponse = await fetchImpl(currentUrl, {
+        method: request.method,
+        headers,
+        redirect: "manual",
+      });
+    } catch {
+      return textResponse("Demo origin is temporarily unavailable.", 502, {
+        "Retry-After": "60",
+      });
+    }
+
+    const location = upstreamResponse.headers.get("location");
+    if (!location || !redirectStatuses.has(upstreamResponse.status)) break;
+
+    let target;
+    try {
+      target = new URL(location, currentUpstreamUrl);
+    } catch {
+      // Preserve malformed upstream redirects as received; do not guess a target.
+      break;
+    }
+
+    // Only follow redirects within the registered Pages origin. External redirects
+    // remain visible to the client and are never fetched by this proxy.
+    if (target.origin !== origin.origin) break;
+
+    if (redirectHops >= 8) {
+      try {
+        await upstreamResponse.body?.cancel();
+      } catch {
+        // Ignore body cancellation failures while stopping an excessive chain.
+      }
+      return textResponse("Demo origin exceeded the redirect limit.", 502, {
+        "Retry-After": "60",
+      });
+    }
+
+    try {
+      await upstreamResponse.body?.cancel();
+    } catch {
+      // Redirect bodies are not forwarded; continue with the target URL.
+    }
+
+    currentUpstreamUrl = target;
+    redirectHops++;
   }
 
   const responseHeaders = new Headers(upstreamResponse.headers);
@@ -297,7 +347,7 @@ export async function proxyDemoRequest({
   if (location) {
     responseHeaders.set(
       "Location",
-      rewriteLocation(location, upstreamUrl, request.url, slug),
+      rewriteLocation(location, currentUpstreamUrl, request.url, slug),
     );
   }
 
