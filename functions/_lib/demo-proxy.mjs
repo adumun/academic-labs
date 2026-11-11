@@ -152,7 +152,7 @@ export async function proxyDemoRequest({
   upstreamUrl.pathname = assetSegments.length && requestUrl.pathname.endsWith("/")
     ? `${upstreamPath}/`
     : upstreamPath;
-  const traceRedirects = requestUrl.searchParams.get("__trace_proxy") === "1";
+  const traceRedirects = requestUrl.searchParams.get("__trace_proxy") === "chain";
   const forwardedSearch = new URLSearchParams(requestUrl.searchParams);
   if (traceRedirects) forwardedSearch.delete("__trace_proxy");
   upstreamUrl.search = forwardedSearch.toString() ? `?${forwardedSearch.toString()}` : "";
@@ -163,55 +163,94 @@ export async function proxyDemoRequest({
     if (value) headers.set(name, value);
   }
 
-  let upstreamResponse;
-  try {
-    upstreamResponse = await fetchImpl(upstreamUrl.toString(), {
-      method: traceRedirects ? "GET" : request.method,
-      headers,
-      redirect: "manual",
-    });
-  } catch {
-    if (traceRedirects) {
-      return new Response(JSON.stringify({
-        requestUrl: request.url,
-        paramsSlug: params?.slug ?? null,
-        routeSegments,
-        slug,
-        assetSegments,
-        upstreamUrl: upstreamUrl.toString(),
-        error: "Upstream fetch failed",
-      }, null, 2), {
-        status: 200,
-        headers: {
-          "Cache-Control": "no-store",
-          "Content-Type": "application/json; charset=utf-8",
-          "X-Robots-Tag": "noindex",
-        },
-      });
-    }
-
-    return textResponse("Demo origin is temporarily unavailable.", 502, {
-      "Retry-After": "60",
-    });
-  }
-
   if (traceRedirects) {
-    const location = upstreamResponse.headers.get("location");
-    let resolvedLocation = null;
-    let rewrittenLocation = null;
-    let sameOrigin = null;
+    const hops = [];
+    const seenUpstreamUrls = new Set();
+    let currentPublicUrl = new URL(request.url);
+    let currentUpstreamUrl = new URL(upstreamUrl);
+    let terminalStatus = null;
+    let error = null;
+    let cycleDetected = false;
 
-    if (location) {
-      try {
-        const target = new URL(location, upstreamUrl);
-        resolvedLocation = target.toString();
-        sameOrigin = target.origin === upstreamUrl.origin;
-        if (sameOrigin) {
-          rewrittenLocation = rewriteLocation(location, upstreamUrl, request.url, slug);
-        }
-      } catch {
-        // Preserve invalid upstream Location values as trace data only.
+    for (let hop = 1; hop <= 8; hop++) {
+      const currentKey = currentUpstreamUrl.toString();
+      if (seenUpstreamUrls.has(currentKey)) {
+        cycleDetected = true;
+        hops.push({ hop, cycleDetected: true, upstreamUrl: currentKey });
+        break;
       }
+      seenUpstreamUrls.add(currentKey);
+
+      let response;
+      try {
+        response = await fetchImpl(currentUpstreamUrl.toString(), {
+          method: "GET",
+          headers,
+          redirect: "manual",
+        });
+      } catch {
+        error = "Upstream fetch failed";
+        hops.push({
+          hop,
+          publicUrl: currentPublicUrl.toString(),
+          upstreamUrl: currentKey,
+          error,
+        });
+        break;
+      }
+
+      const location = response.headers.get("location");
+      const entry = {
+        hop,
+        publicUrl: currentPublicUrl.toString(),
+        upstreamUrl: currentKey,
+        status: response.status,
+        statusText: response.statusText,
+        location,
+        headers: {
+          server: response.headers.get("server"),
+          cfRay: response.headers.get("cf-ray"),
+          cacheControl: response.headers.get("cache-control"),
+          contentType: response.headers.get("content-type"),
+        },
+      };
+
+      if (!location) {
+        entry.terminal = true;
+        terminalStatus = response.status;
+        hops.push(entry);
+        break;
+      }
+
+      let target;
+      try {
+        target = new URL(location, currentUpstreamUrl);
+      } catch {
+        entry.invalidLocation = true;
+        hops.push(entry);
+        break;
+      }
+
+      entry.resolvedLocation = target.toString();
+      if (target.origin !== origin.origin) {
+        entry.externalRedirect = true;
+        hops.push(entry);
+        break;
+      }
+
+      const rewrittenLocation = rewriteLocation(
+        location,
+        currentUpstreamUrl,
+        currentPublicUrl.toString(),
+        slug,
+      );
+      entry.rewrittenLocation = rewrittenLocation;
+      hops.push(entry);
+
+      currentPublicUrl = new URL(rewrittenLocation);
+      currentUpstreamUrl = target;
+
+      if (hop === 8) entry.maxHopsReached = true;
     }
 
     return new Response(JSON.stringify({
@@ -220,21 +259,11 @@ export async function proxyDemoRequest({
       routeSegments,
       slug,
       assetSegments,
-      upstreamUrl: upstreamUrl.toString(),
-      upstream: {
-        status: upstreamResponse.status,
-        statusText: upstreamResponse.statusText,
-        location,
-        resolvedLocation,
-        sameOrigin,
-        rewrittenLocation,
-        headers: {
-          server: upstreamResponse.headers.get("server"),
-          cfRay: upstreamResponse.headers.get("cf-ray"),
-          cacheControl: upstreamResponse.headers.get("cache-control"),
-          contentType: upstreamResponse.headers.get("content-type"),
-        },
-      },
+      initialUpstreamUrl: upstreamUrl.toString(),
+      terminalStatus,
+      cycleDetected,
+      error,
+      hops,
     }, null, 2), {
       status: 200,
       headers: {
@@ -242,6 +271,19 @@ export async function proxyDemoRequest({
         "Content-Type": "application/json; charset=utf-8",
         "X-Robots-Tag": "noindex",
       },
+    });
+  }
+
+  let upstreamResponse;
+  try {
+    upstreamResponse = await fetchImpl(upstreamUrl.toString(), {
+      method: request.method,
+      headers,
+      redirect: "manual",
+    });
+  } catch {
+    return textResponse("Demo origin is temporarily unavailable.", 502, {
+      "Retry-After": "60",
     });
   }
 
