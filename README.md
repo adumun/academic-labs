@@ -135,7 +135,7 @@ La evolución transversal se documenta en [docs/ADUMUN-LABS-PLATFORM.md](docs/AD
 
 - `labs.adumun.cl/`: portal general de descubrimiento.
 - `labs.adumun.cl/games/demos/`: catálogo de demos de videojuegos.
-- `labs.adumun.cl/games/demos/<slug>/`: ruta estable de cada demo, servida por Pages Functions desde un origen Pages independiente. El índice `/games/demos/` es un asset estático y no invoca Functions.
+- `labs.adumun.cl/games/demos/<slug>/`: ruta estable de cada demo, independiente de la estructura interna de su repositorio. Pages Functions puede resolverla contra la raíz o contra un `upstreamPath` registrado en `labs-catalog.json`; el índice `/games/demos/` es un asset estático y no invoca Functions.
 - `labs.adumun.cl/education/`: entrada al módulo educativo.
 - `academic-labs.adumun.cl/`: conserva la landing educativa anterior y todos sus enlaces compartidos.
 

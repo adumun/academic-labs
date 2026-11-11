@@ -13,7 +13,7 @@ Se reutiliza el proyecto Cloudflare Pages `academic-labs`; no se crea un segundo
 - `academic-labs.adumun.cl` conserva la landing educativa original.
 - `/education/` ofrece una entrada al catálogo académico actual.
 - `/games/demos/` muestra el catálogo de videojuegos.
-- `/games/demos/<slug>/` sirve cada demo desde un proyecto Pages independiente.
+- `/games/demos/<slug>/` sirve cada demo desde un proyecto Pages independiente o desde una subruta explícitamente registrada del mismo origen.
 
 Cada aplicación conserva su repositorio privado y su pipeline de despliegue. El portal y el catálogo son estáticos; Pages Functions actúa como proxy de allowlist para las rutas de demos.
 
@@ -63,6 +63,20 @@ Los repositorios Starborne Voyager y Web Game Prototypes ya declaran `base: "./"
 
 Si un nombre de proyecto Pages no está disponible en la cuenta, elegir otro nombre y actualizar el `origin` correspondiente en `labs-catalog.json` antes de habilitar la demo.
 
+### Rutas públicas e implementación interna
+
+La URL pública representa una demo, no la estructura del repositorio ni el hosting que la publica. Por ejemplo, estas rutas son canónicas:
+
+| Demo | URL pública | Origen interno | Subruta interna |
+| --- | --- | --- | --- |
+| Light Thief | `/games/demos/light-thief/` | `labs-web-game-prototypes.pages.dev` | `/prototypes/light-thief/` |
+| Neon Tetris | `/games/demos/neon-tetris/` | `labs-web-game-prototypes.pages.dev` | `/prototypes/neon-tetris/` |
+| Ajedrez Real | `/games/demos/super-chess/` | `labs-web-game-prototypes.pages.dev` | `/prototypes/super-chess/` |
+
+`upstreamPath` es opcional en el registro. Si no existe, la demo usa la raíz `/` del origen, como Starborne Voyager. Si existe, el proxy agrega esa subruta únicamente al consultar el origen y la oculta al visitante. No se deben publicar enlaces con `/prototypes/`, `index.html` ni el nombre del repositorio como parte de la ruta canónica.
+
+La entrada histórica `web-game-prototypes` puede permanecer registrada con `visible: false` para conservar enlaces antiguos, pero no se muestra como demo duplicada en el catálogo.
+
 ### Habilitar una demo
 
 Una entrada de `labs-catalog.json` permanece con `status: "pending"` mientras el proyecto Pages no esté creado y validado. Solo después de comprobar:
@@ -81,7 +95,7 @@ El proxy no acepta destinos enviados por el visitante. Resuelve el slug exclusiv
 - No reenvía cookies ni encabezados Authorization.
 - Rechaza segmentos de path vacíos, traversal, separadores codificados y barras invertidas.
 - Preserva query strings.
-- Reescribe redirects que apunten al mismo origen Pages para mantener la URL estable de ADÜMÜN Labs.
+- Reescribe redirects que apunten al mismo origen Pages para mantener la URL estable de ADÜMÜN Labs y respetar el `upstreamPath` de cada demo.
 - Sigue internamente (server-side) los redirects same-origin del origen Pages, resolviendo `Location` relativo contra la URL upstream efectiva. La respuesta 308 canónica `index.html` → `/directorio/` se consume dentro del proxy y el navegador recibe directamente el HTML final, no una segunda navegación pública. Se limita la cadena a 8 saltos y se detectan ciclos; redirects externos se devuelven sin que el proxy los consulte. Esta estrategia se implementó después de que Chrome confirmara que el origen respondía 308 → 200 sin ciclos, mientras la navegación pública seguía fallando.
 - Slugs no registrados devuelven 404; demos pendientes devuelven 503; orígenes inválidos no se consultan.
 - No es un proxy genérico ni permite introducir una URL arbitraria.

@@ -54,6 +54,37 @@ function getPagesOrigin(value) {
   return origin;
 }
 
+function getDemoBasePath(value) {
+  if (value === undefined || value === null || value === "") return "/";
+  if (
+    typeof value !== "string" ||
+    !value.startsWith("/") ||
+    value.includes("\\") ||
+    value.includes("?") ||
+    value.includes("#") ||
+    value.includes("//") ||
+    /%(?:2f|5c|2e)/i.test(value)
+  ) {
+    return null;
+  }
+
+  const normalized = value.endsWith("/") ? value : `${value}/`;
+  const segments = normalized.split("/").slice(1, -1);
+  return segments.every(safePathSegment) ? normalized : null;
+}
+
+function getRelativeDemoPath(targetPath, basePath) {
+  if (basePath === "/") return targetPath || "/";
+
+  const normalizedBase = basePath.endsWith("/") ? basePath : `${basePath}/`;
+  const baseWithoutSlash = normalizedBase.slice(0, -1);
+  if (targetPath === normalizedBase || targetPath === baseWithoutSlash) return "/";
+  if (!targetPath.startsWith(normalizedBase)) return null;
+
+  const relativePath = targetPath.slice(normalizedBase.length);
+  return `/${relativePath}`;
+}
+
 function findDemo(catalog, slug) {
   if (!catalog || !Array.isArray(catalog.applications)) return null;
 
@@ -65,7 +96,7 @@ function findDemo(catalog, slug) {
   ) || null;
 }
 
-function rewriteLocation(location, upstreamUrl, requestUrl, slug) {
+function rewriteLocation(location, upstreamUrl, requestUrl, slug, basePath) {
   if (!location) return location;
 
   let target;
@@ -79,8 +110,11 @@ function rewriteLocation(location, upstreamUrl, requestUrl, slug) {
 
   if (target.origin !== upstreamUrl.origin) return location;
 
+  const relativePath = getRelativeDemoPath(target.pathname, basePath);
+  if (relativePath === null) return null;
+
   const rewritten = new URL(requestUrl);
-  rewritten.pathname = `${DEMO_PREFIX}${slug}${target.pathname === "/" ? "/" : target.pathname}`;
+  rewritten.pathname = `${DEMO_PREFIX}${slug}${relativePath}`;
   rewritten.search = target.search;
   rewritten.hash = target.hash;
   return rewritten.toString();
@@ -126,6 +160,11 @@ export async function proxyDemoRequest({
     return textResponse("Demo origin is not configured safely.", 503);
   }
 
+  const basePath = getDemoBasePath(demo.upstreamPath);
+  if (!basePath) {
+    return textResponse("Demo upstream path is not configured safely.", 503);
+  }
+
   if (!assetSegments.every(safePathSegment)) {
     return textResponse("Invalid demo asset path.", 400);
   }
@@ -143,15 +182,14 @@ export async function proxyDemoRequest({
   }
 
   const upstreamUrl = new URL(origin.origin);
-  const upstreamPath = assetSegments.length
-    ? `/${assetSegments.map(encodeURIComponent).join("/")}`
-    : "/";
+  const upstreamRoot = basePath === "/" ? "" : basePath.slice(0, -1);
+  const assetPath = assetSegments.map(encodeURIComponent).join("/");
   // Pages catch-all params omit the trailing empty segment after normalization.
   // Preserve the public request's slash so directory URLs resolve to index.html
   // instead of bouncing between the slash and non-slash canonical URLs.
-  upstreamUrl.pathname = assetSegments.length && requestUrl.pathname.endsWith("/")
-    ? `${upstreamPath}/`
-    : upstreamPath;
+  upstreamUrl.pathname = assetSegments.length
+    ? `${upstreamRoot}/${assetPath}${requestUrl.pathname.endsWith("/") ? "/" : ""}`
+    : basePath;
   const traceRedirects = requestUrl.searchParams.get("__trace_proxy") === "chain";
   const forwardedSearch = new URLSearchParams(requestUrl.searchParams);
   if (traceRedirects) forwardedSearch.delete("__trace_proxy");
@@ -243,7 +281,13 @@ export async function proxyDemoRequest({
         currentUpstreamUrl,
         currentPublicUrl.toString(),
         slug,
+        basePath,
       );
+      if (rewrittenLocation === null) {
+        entry.invalidRedirectScope = true;
+        hops.push(entry);
+        break;
+      }
       entry.rewrittenLocation = rewrittenLocation;
       hops.push(entry);
 
@@ -325,6 +369,15 @@ export async function proxyDemoRequest({
 
     if (target.origin !== origin.origin) break;
 
+    if (getRelativeDemoPath(target.pathname, basePath) === null) {
+      try {
+        await upstreamResponse.body?.cancel();
+      } catch {
+        // Ignore body cancellation failures while rejecting an out-of-scope redirect.
+      }
+      return textResponse("Demo origin redirect leaves the configured demo path.", 502);
+    }
+
     if (redirectHops >= 8) {
       try {
         await upstreamResponse.body?.cancel();
@@ -354,9 +407,19 @@ export async function proxyDemoRequest({
 
   const location = responseHeaders.get("location");
   if (location) {
+    const rewrittenLocation = rewriteLocation(
+      location,
+      currentUpstreamUrl,
+      request.url,
+      slug,
+      basePath,
+    );
+    if (rewrittenLocation === null) {
+      return textResponse("Demo origin redirect leaves the configured demo path.", 502);
+    }
     responseHeaders.set(
       "Location",
-      rewriteLocation(location, currentUpstreamUrl, request.url, slug),
+      rewrittenLocation,
     );
   }
 

@@ -77,6 +77,31 @@ const publishedCatalog = {
       kind: "demo",
       status: "published",
       origin: "https://labs-web-game-prototypes.pages.dev",
+      visible: false,
+    },
+    {
+      slug: "light-thief",
+      categoryId: "games",
+      kind: "demo",
+      status: "published",
+      origin: "https://labs-web-game-prototypes.pages.dev",
+      upstreamPath: "/prototypes/light-thief/",
+    },
+    {
+      slug: "neon-tetris",
+      categoryId: "games",
+      kind: "demo",
+      status: "published",
+      origin: "https://labs-web-game-prototypes.pages.dev",
+      upstreamPath: "/prototypes/neon-tetris/",
+    },
+    {
+      slug: "super-chess",
+      categoryId: "games",
+      kind: "demo",
+      status: "published",
+      origin: "https://labs-web-game-prototypes.pages.dev",
+      upstreamPath: "/prototypes/super-chess/",
     },
     {
       slug: "neon-pursuit",
@@ -161,6 +186,69 @@ test("published demos proxy root, path and query to their registered Pages origi
   assert.equal(observed.options.headers.get("cookie"), null);
   assert.equal(observed.options.headers.get("authorization"), null);
   assert.equal(await response.text(), "console.log('ok')");
+});
+
+test("individual prototype demos proxy their public root to the configured upstream directory", async () => {
+  let observed;
+  const response = await proxyDemoRequest({
+    request: makeRequest("/games/demos/light-thief/"),
+    params: { slug: ["light-thief", ""] },
+    catalog: publishedCatalog,
+    fetchImpl: async (url, options) => {
+      observed = { url: String(url), options };
+      return new Response("<h1>Light Thief</h1>", {
+        status: 200,
+        headers: { "Content-Type": "text/html; charset=utf-8" },
+      });
+    },
+  });
+
+  assert.equal(response.status, 200);
+  assert.equal(observed.url, "https://labs-web-game-prototypes.pages.dev/prototypes/light-thief/");
+  assert.equal(observed.options.method, "GET");
+  assert.equal(await response.text(), "<h1>Light Thief</h1>");
+});
+
+test("individual prototype assets stay inside their configured upstream directory", async () => {
+  let observed;
+  const response = await proxyDemoRequest({
+    request: makeRequest("/games/demos/neon-tetris/assets/game.css?v=2"),
+    params: { slug: ["neon-tetris", "assets", "game.css"] },
+    catalog: publishedCatalog,
+    fetchImpl: async (url) => {
+      observed = String(url);
+      return new Response("body {}", { status: 200 });
+    },
+  });
+
+  assert.equal(response.status, 200);
+  assert.equal(
+    observed,
+    "https://labs-web-game-prototypes.pages.dev/prototypes/neon-tetris/assets/game.css?v=2",
+  );
+});
+
+test("individual prototype redirects are rewritten relative to the public demo root", async () => {
+  let calls = 0;
+  const response = await proxyDemoRequest({
+    request: makeRequest("/games/demos/super-chess/index.html"),
+    params: { slug: ["super-chess", "index.html"] },
+    catalog: publishedCatalog,
+    fetchImpl: async () => {
+      calls++;
+      if (calls === 1) {
+        return new Response(null, {
+          status: 308,
+          headers: { Location: "/prototypes/super-chess/" },
+        });
+      }
+      return new Response("<h1>Ajedrez Real</h1>", { status: 200 });
+    },
+  });
+
+  assert.equal(response.status, 200);
+  assert.equal(calls, 2);
+  assert.equal(await response.text(), "<h1>Ajedrez Real</h1>");
 });
 
 test("bare demo paths redirect to their canonical trailing-slash URL", async () => {

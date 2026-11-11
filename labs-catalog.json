@@ -39,13 +39,44 @@
       "origin": "https://labs-starborne-voyager.pages.dev"
     },
     {
+      "slug": "light-thief",
+      "title": "Light Thief",
+      "categoryId": "games",
+      "kind": "demo",
+      "description": "Puzzle táctico de luces, sigilo y deducción.",
+      "status": "published",
+      "origin": "https://labs-web-game-prototypes.pages.dev",
+      "upstreamPath": "/prototypes/light-thief/"
+    },
+    {
+      "slug": "neon-tetris",
+      "title": "Neon Tetris",
+      "categoryId": "games",
+      "kind": "demo",
+      "description": "Tetris arcade con estética neon cyberpunk.",
+      "status": "published",
+      "origin": "https://labs-web-game-prototypes.pages.dev",
+      "upstreamPath": "/prototypes/neon-tetris/"
+    },
+    {
+      "slug": "super-chess",
+      "title": "Ajedrez Real",
+      "categoryId": "games",
+      "kind": "demo",
+      "description": "Ajedrez interactivo con CPU, tutorial y partidas locales.",
+      "status": "published",
+      "origin": "https://labs-web-game-prototypes.pages.dev",
+      "upstreamPath": "/prototypes/super-chess/"
+    },
+    {
       "slug": "web-game-prototypes",
       "title": "Web Game Prototypes",
       "categoryId": "games",
       "kind": "demo",
-      "description": "Colección de prototipos jugables en preparación para publicación.",
+      "description": "Catálogo original del repositorio de prototipos web.",
       "status": "published",
-      "origin": "https://labs-web-game-prototypes.pages.dev"
+      "origin": "https://labs-web-game-prototypes.pages.dev",
+      "visible": false
     },
     {
       "slug": "neon-pursuit",

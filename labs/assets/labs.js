@@ -43,7 +43,9 @@
     if (!container) return;
     container.replaceChildren();
 
-    const visible = applications.filter((app) => app.categoryId === "games");
+    const visible = applications.filter((app) =>
+      app.categoryId === "games" && app.visible !== false
+    );
     if (!visible.length) {
       container.append(create("p", "empty-state", "Todavía no hay experiencias publicadas en esta área."));
       return;
