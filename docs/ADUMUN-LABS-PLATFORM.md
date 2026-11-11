@@ -190,17 +190,19 @@ node --check functions/_lib/demo-proxy.mjs
 - [x] Pruebas unitarias del proxy: 9/9 PASS en Node 22 (ejecución previa).
 - [x] Regresión aislada anterior: 12/12 PASS en Node 22; no bastó para aceptar la corrección porque el navegador seguía fallando.
 - [x] Instrumentación temporal confirmó para Light Thief, Neon Tetris y Ajedrez Real la misma cadena upstream 308 → 200, `cycleDetected: false`, `error: null`.
-- [ ] Nueva estrategia de proxy: seguir redirects same-origin server-side, con detección de ciclos y límite de 8 saltos; pruebas actualizadas en `scripts/test-labs-router.mjs`, ejecución local pendiente.
+- [x] Nueva estrategia de proxy implementada: seguir redirects same-origin server-side, con detección de ciclos, límite de 8 saltos y rechazo de destinos con credenciales.
+- [x] Check Cloudflare Pages del commit `82d1abd`: deploy PASS (check run `130645320136`).
+- [ ] Ejecutar localmente `node --test scripts/test-labs-router.mjs`; el entorno de despliegue de Pages no ejecuta esta suite.
 - [x] 4/4 verificaciones de configuración/ruta del índice y fallback ejecutadas en un harness Node 22 aislado; sintaxis de proxy, fallback y handler validada.
 - [x] Índice `/games/demos/` excluido de Functions para resolver el defecto `Demo not found` reportado en preview.
 - [x] GitHub App Cloudflare limitada a repositorios seleccionados; autorizados `academic-labs` y los tres repositorios de videojuegos.
 - [x] Proyectos Pages `labs-starborne-voyager` y `labs-web-game-prototypes` creados y desplegados; URLs de origen verificadas.
 - [x] Sintaxis de los handlers Pages Functions y módulo proxy validada.
-- [x] Check de Cloudflare Pages para el preview del PR #6: PASS (commit `5f5c31f`; check run `130246896576`).
+- [x] Check de Cloudflare Pages para el preview del PR #6: PASS (commit `82d1abd`; check run `130645320136`).
 - [x] PR #2 de Web Game Prototypes desplegado en preview; Neon Pursuit A/B validados en Chrome con CSS local (506 reglas, responsive y sin solicitud al CDN).
 - [x] Chrome: catálogo `/games/demos/` PASS; Starborne Voyager PASS; portal académico y `/explore/` PASS.
 - [x] Chrome: capturar las tres cadenas upstream; todas responden 308 → 200 sin ciclos ni errores.
-- [ ] Chrome: validar que el proxy actualizado devuelve directamente la respuesta final y que los tres juegos se visualizan sin `ERR_TOO_MANY_REDIRECTS`.
+- [ ] Chrome: validar que el proxy actualizado devuelve directamente la respuesta final y que los tres juegos se visualizan sin `ERR_TOO_MANY_REDIRECTS` (usar una sesión limpia o deshabilitar caché para evitar redirects 308 antiguos almacenados).
 - [ ] Retirar el diagnóstico temporal `?__trace_proxy=chain` después de la aceptación funcional y antes de producción.
 - [ ] Revisar y fusionar [PR #6](https://github.com/adumun/academic-labs/pull/6) de plataforma.
 - [x] Autorizar Cloudflare Workers & Pages con acceso selectivo a los repositorios requeridos.
