@@ -194,7 +194,7 @@ node --check functions/_lib/demo-proxy.mjs
 - [x] GitHub App Cloudflare limitada a repositorios seleccionados; autorizados `academic-labs` y los tres repositorios de videojuegos.
 - [x] Proyectos Pages `labs-starborne-voyager` y `labs-web-game-prototypes` creados y desplegados; URLs de origen verificadas.
 - [x] Sintaxis de los handlers Pages Functions y módulo proxy validada.
-- [x] Check de Cloudflare Pages para el preview del PR #6: PASS (commit `9c2b888`; check run `129994855567`).
+- [x] Check de Cloudflare Pages para el preview del PR #6: PASS (commit `5f5c31f`; check run `130246896576`).
 - [x] PR #2 de Web Game Prototypes desplegado en preview; Neon Pursuit A/B validados en Chrome con CSS local (506 reglas, responsive y sin solicitud al CDN).
 - [x] Chrome: catálogo `/games/demos/` PASS; Starborne Voyager PASS; portal académico y `/explore/` PASS.
 - [ ] Chrome: diagnosticar y resolver previews de Light Thief, Neon Tetris y Ajedrez Real; la corrección anterior no eliminó `ERR_TOO_MANY_REDIRECTS`.
