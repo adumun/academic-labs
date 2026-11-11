@@ -285,6 +285,83 @@ test("relative upstream redirects resolve against the current asset URL", async 
   );
 });
 
+test("temporary redirect trace follows real upstream hops without forwarding its query flag", async () => {
+  const observed = [];
+  const response = await proxyDemoRequest({
+    request: makeRequest(
+      "/games/demos/web-game-prototypes/prototypes/light-thief/index.html?__trace_proxy=chain",
+    ),
+    params: {
+      slug: ["web-game-prototypes", "prototypes", "light-thief", "index.html"],
+    },
+    catalog: publishedCatalog,
+    fetchImpl: async (url, options) => {
+      observed.push({ url: String(url), method: options.method });
+      if (observed.length === 1) {
+        return new Response(null, {
+          status: 307,
+          headers: { Location: "/prototypes/light-thief/" },
+        });
+      }
+      return new Response("<h1>Light Thief</h1>", { status: 200 });
+    },
+  });
+
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get("content-type"), "application/json; charset=utf-8");
+  assert.deepEqual(observed, [
+    {
+      url: "https://labs-web-game-prototypes.pages.dev/prototypes/light-thief/index.html",
+      method: "GET",
+    },
+    {
+      url: "https://labs-web-game-prototypes.pages.dev/prototypes/light-thief/",
+      method: "GET",
+    },
+  ]);
+
+  const trace = await response.json();
+  assert.equal(trace.hops.length, 2);
+  assert.equal(trace.hops[0].status, 307);
+  assert.equal(
+    trace.hops[0].rewrittenLocation,
+    "https://labs.adumun.cl/games/demos/web-game-prototypes/prototypes/light-thief/",
+  );
+  assert.equal(trace.hops[1].status, 200);
+  assert.equal(trace.terminalStatus, 200);
+  assert.equal(trace.cycleDetected, false);
+});
+
+test("temporary redirect trace detects upstream canonicalization cycles", async () => {
+  let calls = 0;
+  const response = await proxyDemoRequest({
+    request: makeRequest(
+      "/games/demos/web-game-prototypes/prototypes/light-thief/index.html?__trace_proxy=chain",
+    ),
+    params: {
+      slug: ["web-game-prototypes", "prototypes", "light-thief", "index.html"],
+    },
+    catalog: publishedCatalog,
+    fetchImpl: async () => {
+      calls++;
+      return new Response(null, {
+        status: calls % 2 === 1 ? 307 : 308,
+        headers: {
+          Location: calls % 2 === 1
+            ? "/prototypes/light-thief/"
+            : "/prototypes/light-thief/index.html",
+        },
+      });
+    },
+  });
+
+  const trace = await response.json();
+  assert.equal(response.status, 200);
+  assert.equal(trace.cycleDetected, true);
+  assert.equal(calls, 2);
+  assert.equal(trace.hops.at(-1).cycleDetected, true);
+});
+
 test("unsafe origins are rejected", async () => {
   const catalog = {
     applications: [{
