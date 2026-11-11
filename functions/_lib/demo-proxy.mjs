@@ -152,7 +152,10 @@ export async function proxyDemoRequest({
   upstreamUrl.pathname = assetSegments.length && requestUrl.pathname.endsWith("/")
     ? `${upstreamPath}/`
     : upstreamPath;
-  upstreamUrl.search = requestUrl.search;
+  const traceRedirects = requestUrl.searchParams.get("__trace_proxy") === "1";
+  const forwardedSearch = new URLSearchParams(requestUrl.searchParams);
+  if (traceRedirects) forwardedSearch.delete("__trace_proxy");
+  upstreamUrl.search = forwardedSearch.toString() ? `?${forwardedSearch.toString()}` : "";
 
   const headers = new Headers();
   for (const name of FORWARDED_REQUEST_HEADERS) {
@@ -163,13 +166,82 @@ export async function proxyDemoRequest({
   let upstreamResponse;
   try {
     upstreamResponse = await fetchImpl(upstreamUrl.toString(), {
-      method: request.method,
+      method: traceRedirects ? "GET" : request.method,
       headers,
       redirect: "manual",
     });
   } catch {
+    if (traceRedirects) {
+      return new Response(JSON.stringify({
+        requestUrl: request.url,
+        paramsSlug: params?.slug ?? null,
+        routeSegments,
+        slug,
+        assetSegments,
+        upstreamUrl: upstreamUrl.toString(),
+        error: "Upstream fetch failed",
+      }, null, 2), {
+        status: 200,
+        headers: {
+          "Cache-Control": "no-store",
+          "Content-Type": "application/json; charset=utf-8",
+          "X-Robots-Tag": "noindex",
+        },
+      });
+    }
+
     return textResponse("Demo origin is temporarily unavailable.", 502, {
       "Retry-After": "60",
+    });
+  }
+
+  if (traceRedirects) {
+    const location = upstreamResponse.headers.get("location");
+    let resolvedLocation = null;
+    let rewrittenLocation = null;
+    let sameOrigin = null;
+
+    if (location) {
+      try {
+        const target = new URL(location, upstreamUrl);
+        resolvedLocation = target.toString();
+        sameOrigin = target.origin === upstreamUrl.origin;
+        if (sameOrigin) {
+          rewrittenLocation = rewriteLocation(location, upstreamUrl, request.url, slug);
+        }
+      } catch {
+        // Preserve invalid upstream Location values as trace data only.
+      }
+    }
+
+    return new Response(JSON.stringify({
+      requestUrl: request.url,
+      paramsSlug: params?.slug ?? null,
+      routeSegments,
+      slug,
+      assetSegments,
+      upstreamUrl: upstreamUrl.toString(),
+      upstream: {
+        status: upstreamResponse.status,
+        statusText: upstreamResponse.statusText,
+        location,
+        resolvedLocation,
+        sameOrigin,
+        rewrittenLocation,
+        headers: {
+          server: upstreamResponse.headers.get("server"),
+          cfRay: upstreamResponse.headers.get("cf-ray"),
+          cacheControl: upstreamResponse.headers.get("cache-control"),
+          contentType: upstreamResponse.headers.get("content-type"),
+        },
+      },
+    }, null, 2), {
+      status: 200,
+      headers: {
+        "Cache-Control": "no-store",
+        "Content-Type": "application/json; charset=utf-8",
+        "X-Robots-Tag": "noindex",
+      },
     });
   }
 
