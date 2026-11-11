@@ -82,7 +82,7 @@ El proxy no acepta destinos enviados por el visitante. Resuelve el slug exclusiv
 - Rechaza segmentos de path vacíos, traversal, separadores codificados y barras invertidas.
 - Preserva query strings.
 - Reescribe redirects que apunten al mismo origen Pages para mantener la URL estable de ADÜMÜN Labs.
-- Resuelve los redirects relativos contra la URL upstream solicitada y conserva el slash final de rutas de directorio al reconstruir el path del origen. Esta primera corrección pasó pruebas aisladas, pero la validación real en Chrome siguió reproduciendo `ERR_TOO_MANY_REDIRECTS`; por tanto, el defecto permanece abierto y no debe considerarse resuelto.
+- Sigue internamente (server-side) los redirects same-origin del origen Pages, resolviendo `Location` relativo contra la URL upstream efectiva. La respuesta 308 canónica `index.html` → `/directorio/` se consume dentro del proxy y el navegador recibe directamente el HTML final, no una segunda navegación pública. Se limita la cadena a 8 saltos y se detectan ciclos; redirects externos se devuelven sin que el proxy los consulte. Esta estrategia se implementó después de que Chrome confirmara que el origen respondía 308 → 200 sin ciclos, mientras la navegación pública seguía fallando.
 - Slugs no registrados devuelven 404; demos pendientes devuelven 503; orígenes inválidos no se consultan.
 - No es un proxy genérico ni permite introducir una URL arbitraria.
 
@@ -188,7 +188,9 @@ node --check functions/_lib/demo-proxy.mjs
 - [x] Router Pages Functions con allowlist preparado.
 - [x] Compatibilidad de hostname para preservar la landing educativa preparada.
 - [x] Pruebas unitarias del proxy: 9/9 PASS en Node 22 (ejecución previa).
-- [x] Regresión aislada de proxy: 12/12 PASS en Node 22; incluye preservación de slash final y redirects simulados. Estas pruebas no reprodujeron la semántica real del edge de Cloudflare Pages y no bastaron para aceptar la corrección.
+- [x] Regresión aislada anterior: 12/12 PASS en Node 22; no bastó para aceptar la corrección porque el navegador seguía fallando.
+- [x] Instrumentación temporal confirmó para Light Thief, Neon Tetris y Ajedrez Real la misma cadena upstream 308 → 200, `cycleDetected: false`, `error: null`.
+- [ ] Nueva estrategia de proxy: seguir redirects same-origin server-side, con detección de ciclos y límite de 8 saltos; pruebas actualizadas en `scripts/test-labs-router.mjs`, ejecución local pendiente.
 - [x] 4/4 verificaciones de configuración/ruta del índice y fallback ejecutadas en un harness Node 22 aislado; sintaxis de proxy, fallback y handler validada.
 - [x] Índice `/games/demos/` excluido de Functions para resolver el defecto `Demo not found` reportado en preview.
 - [x] GitHub App Cloudflare limitada a repositorios seleccionados; autorizados `academic-labs` y los tres repositorios de videojuegos.
@@ -197,8 +199,9 @@ node --check functions/_lib/demo-proxy.mjs
 - [x] Check de Cloudflare Pages para el preview del PR #6: PASS (commit `5f5c31f`; check run `130246896576`).
 - [x] PR #2 de Web Game Prototypes desplegado en preview; Neon Pursuit A/B validados en Chrome con CSS local (506 reglas, responsive y sin solicitud al CDN).
 - [x] Chrome: catálogo `/games/demos/` PASS; Starborne Voyager PASS; portal académico y `/explore/` PASS.
-- [ ] Chrome: diagnosticar y resolver previews de Light Thief, Neon Tetris y Ajedrez Real; la corrección anterior no eliminó `ERR_TOO_MANY_REDIRECTS`.
-- [ ] Usar el diagnóstico temporal `?__trace_proxy=chain` en el preview del PR #6 para inspeccionar cada respuesta upstream, status y Location. Retirar este modo de diagnóstico antes de producción.
+- [x] Chrome: capturar las tres cadenas upstream; todas responden 308 → 200 sin ciclos ni errores.
+- [ ] Chrome: validar que el proxy actualizado devuelve directamente la respuesta final y que los tres juegos se visualizan sin `ERR_TOO_MANY_REDIRECTS`.
+- [ ] Retirar el diagnóstico temporal `?__trace_proxy=chain` después de la aceptación funcional y antes de producción.
 - [ ] Revisar y fusionar [PR #6](https://github.com/adumun/academic-labs/pull/6) de plataforma.
 - [x] Autorizar Cloudflare Workers & Pages con acceso selectivo a los repositorios requeridos.
 - [x] Crear y desplegar los proyectos Cloudflare Pages de Starborne Voyager y Web Game Prototypes.
@@ -206,5 +209,5 @@ node --check functions/_lib/demo-proxy.mjs
 - [ ] Integrar Neon Pursuit PR #1 y crear su proyecto Cloudflare Pages.
 - [ ] Asociar `labs.adumun.cl` al proyecto Pages existente.
 - [ ] Integrar Neon Pursuit PR #1.
-- [ ] Repetir con Chrome los tres previews de Web Game Prototypes tras corregir el redirect loop; confirmar que las demos funcionan bajo sus subpaths.
+- [ ] Repetir con Chrome los tres previews de Web Game Prototypes tras desplegar el seguimiento server-side de redirects; confirmar que las demos funcionan bajo sus subpaths.
 - [ ] Crear Neon Pursuit Pages tras integrar PR #1 y habilitarlo solo después de sus smoke tests.
