@@ -197,92 +197,132 @@ test("non-GET methods are rejected for static demos", async () => {
   assert.equal(response.headers.get("allow"), "GET, HEAD");
 });
 
-test("upstream redirects back through the stable public path", async () => {
+test("same-origin upstream redirects are followed internally instead of reaching the browser", async () => {
+  const observed = [];
   const response = await proxyDemoRequest({
     request: makeRequest("/games/demos/starborne-voyager/"),
     params: { slug: ["starborne-voyager"] },
     catalog: publishedCatalog,
-    fetchImpl: async () => new Response(null, {
-      status: 302,
-      headers: { Location: "https://labs-starborne-voyager.pages.dev/login/" },
-    }),
-  });
-  assert.equal(response.headers.get("location"), "https://labs.adumun.cl/games/demos/starborne-voyager/login/");
-});
-
-test("preserves trailing slash when proxying prototype directory routes", async () => {
-  const response = await proxyDemoRequest({
-    request: makeRequest("/games/demos/web-game-prototypes/prototypes/light-thief/"),
-    params: { slug: ["web-game-prototypes", "prototypes", "light-thief", ""] },
-    catalog: publishedCatalog,
-    fetchImpl: async (url) => {
-      assert.equal(
-        String(url),
-        "https://labs-web-game-prototypes.pages.dev/prototypes/light-thief/",
-      );
-      return new Response("<h1>Light Thief</h1>", { status: 200 });
+    fetchImpl: async (url, options) => {
+      observed.push({ url: String(url), method: options.method });
+      if (observed.length === 1) {
+        return new Response(null, {
+          status: 302,
+          headers: { Location: "https://labs-starborne-voyager.pages.dev/login/" },
+        });
+      }
+      return new Response("<h1>Login</h1>", { status: 200 });
     },
   });
 
+  assert.deepEqual(observed, [
+    { url: "https://labs-starborne-voyager.pages.dev/", method: "GET" },
+    { url: "https://labs-starborne-voyager.pages.dev/login/", method: "GET" },
+  ]);
   assert.equal(response.status, 200);
-  assert.equal(await response.text(), "<h1>Light Thief</h1>");
+  assert.equal(response.headers.get("location"), null);
+  assert.equal(await response.text(), "<h1>Login</h1>");
 });
 
-test("directory canonical redirect completes instead of looping", async () => {
-  const firstResponse = await proxyDemoRequest({
+test("directory canonical redirects are followed internally and return final HTML", async () => {
+  const observed = [];
+  const response = await proxyDemoRequest({
     request: makeRequest("/games/demos/web-game-prototypes/prototypes/light-thief/index.html"),
     params: { slug: ["web-game-prototypes", "prototypes", "light-thief", "index.html"] },
     catalog: publishedCatalog,
     fetchImpl: async (url) => {
-      assert.equal(
-        String(url),
-        "https://labs-web-game-prototypes.pages.dev/prototypes/light-thief/index.html",
-      );
-      return new Response(null, {
-        status: 301,
-        headers: { Location: "/prototypes/light-thief/" },
+      observed.push(String(url));
+      if (observed.length === 1) {
+        return new Response(null, {
+          status: 308,
+          headers: { Location: "/prototypes/light-thief/" },
+        });
+      }
+      return new Response("<h1>Light Thief</h1>", {
+        status: 200,
+        headers: { "Content-Type": "text/html; charset=utf-8" },
       });
     },
   });
 
-  const redirectUrl = firstResponse.headers.get("location");
-  assert.equal(
-    redirectUrl,
-    "https://labs.adumun.cl/games/demos/web-game-prototypes/prototypes/light-thief/",
-  );
-
-  const secondResponse = await proxyDemoRequest({
-    request: new Request(redirectUrl),
-    params: { slug: ["web-game-prototypes", "prototypes", "light-thief", ""] },
-    catalog: publishedCatalog,
-    fetchImpl: async (url) => {
-      assert.equal(
-        String(url),
-        "https://labs-web-game-prototypes.pages.dev/prototypes/light-thief/",
-      );
-      return new Response("<h1>Light Thief</h1>", { status: 200 });
-    },
-  });
-
-  assert.equal(secondResponse.status, 200);
-  assert.equal(await secondResponse.text(), "<h1>Light Thief</h1>");
+  assert.deepEqual(observed, [
+    "https://labs-web-game-prototypes.pages.dev/prototypes/light-thief/index.html",
+    "https://labs-web-game-prototypes.pages.dev/prototypes/light-thief/",
+  ]);
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get("location"), null);
+  assert.equal(await response.text(), "<h1>Light Thief</h1>");
 });
 
-test("relative upstream redirects resolve against the current asset URL", async () => {
+test("relative same-origin redirects are resolved and followed internally", async () => {
+  const observed = [];
   const response = await proxyDemoRequest({
     request: makeRequest("/games/demos/web-game-prototypes/prototypes/neon-tetris/index.html"),
     params: { slug: ["web-game-prototypes", "prototypes", "neon-tetris", "index.html"] },
     catalog: publishedCatalog,
-    fetchImpl: async () => new Response(null, {
-      status: 302,
-      headers: { Location: "./" },
-    }),
+    fetchImpl: async (url) => {
+      observed.push(String(url));
+      if (observed.length === 1) {
+        return new Response(null, {
+          status: 302,
+          headers: { Location: "./" },
+        });
+      }
+      return new Response("<h1>Neon Tetris</h1>", { status: 200 });
+    },
   });
 
-  assert.equal(
-    response.headers.get("location"),
-    "https://labs.adumun.cl/games/demos/web-game-prototypes/prototypes/neon-tetris/",
-  );
+  assert.deepEqual(observed, [
+    "https://labs-web-game-prototypes.pages.dev/prototypes/neon-tetris/index.html",
+    "https://labs-web-game-prototypes.pages.dev/prototypes/neon-tetris/",
+  ]);
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get("location"), null);
+  assert.equal(await response.text(), "<h1>Neon Tetris</h1>");
+});
+
+test("external redirects are returned unchanged and are never fetched by the proxy", async () => {
+  let calls = 0;
+  const response = await proxyDemoRequest({
+    request: makeRequest("/games/demos/starborne-voyager/"),
+    params: { slug: ["starborne-voyager"] },
+    catalog: publishedCatalog,
+    fetchImpl: async () => {
+      calls++;
+      return new Response(null, {
+        status: 302,
+        headers: { Location: "https://accounts.example.org/login/" },
+      });
+    },
+  });
+
+  assert.equal(calls, 1);
+  assert.equal(response.status, 302);
+  assert.equal(response.headers.get("location"), "https://accounts.example.org/login/");
+});
+
+test("same-origin redirect cycles are stopped with a gateway error", async () => {
+  let calls = 0;
+  const response = await proxyDemoRequest({
+    request: makeRequest("/games/demos/web-game-prototypes/prototypes/light-thief/index.html"),
+    params: { slug: ["web-game-prototypes", "prototypes", "light-thief", "index.html"] },
+    catalog: publishedCatalog,
+    fetchImpl: async () => {
+      calls++;
+      return new Response(null, {
+        status: 308,
+        headers: {
+          Location: calls === 1
+            ? "/prototypes/light-thief/"
+            : "/prototypes/light-thief/index.html",
+        },
+      });
+    },
+  });
+
+  assert.equal(calls, 2);
+  assert.equal(response.status, 502);
+  assert.match(await response.text(), /redirect loop detected/i);
 });
 
 test("temporary redirect trace follows real upstream hops without forwarding its query flag", async () => {
