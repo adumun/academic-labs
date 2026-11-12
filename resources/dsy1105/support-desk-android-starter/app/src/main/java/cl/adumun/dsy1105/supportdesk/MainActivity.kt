@@ -16,12 +16,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
-data class TicketUiModel(val id: Long, val title: String, val category: String, val priority: String, val status: String)
+data class TicketUiModel(
+    val id: Long,
+    val title: String,
+    val description: String,
+    val category: String,
+    val priority: String,
+    val status: String,
+    val requester: String
+)
 
 private val previewTickets = listOf(
-    TicketUiModel(101, "No puedo iniciar sesión", "Acceso", "ALTA", "ABIERTO"),
-    TicketUiModel(102, "La aplicación se cierra", "Aplicación", "MEDIA", "EN_PROCESO"),
-    TicketUiModel(103, "Solicito cambio de correo", "Cuenta", "BAJA", "RESUELTO")
+    TicketUiModel(101, "No puedo iniciar sesión", "El sistema rechaza mis credenciales.", "Acceso", "ALTA", "ABIERTO", "Camila Soto"),
+    TicketUiModel(102, "La aplicación se cierra", "La app se cierra al abrir el perfil.", "Aplicación", "MEDIA", "EN_PROCESO", "Diego Rojas"),
+    TicketUiModel(103, "Solicito cambio de correo", "Necesito actualizar mi correo registrado.", "Cuenta", "BAJA", "RESUELTO", "Fernanda Díaz")
 )
 
 class MainActivity : ComponentActivity() {
@@ -35,24 +43,36 @@ class MainActivity : ComponentActivity() {
 fun SupportDeskApp() {
     var tickets by remember { mutableStateOf(previewTickets) }
     var selected by remember { mutableStateOf<TicketUiModel?>(null) }
+    var formTicket by remember { mutableStateOf<TicketUiModel?>(null) }
     var showForm by remember { mutableStateOf(false) }
 
     when {
-        showForm -> TicketFormScreen(onCancel = { showForm = false }, onSavePreview = { title ->
-            // Solo demostración local de UI. Sustituye este comportamiento por POST.
-            tickets = tickets + TicketUiModel((tickets.maxOfOrNull { it.id } ?: 100) + 1, title, "General", "MEDIA", "ABIERTO")
+        showForm -> TicketFormScreen(initial = formTicket, onCancel = { showForm = false }, onSavePreview = { edited ->
+            // Demo local solamente. Reemplaza con POST o PUT en la implementación REST.
+            tickets = if (formTicket == null) tickets + edited else tickets.map { if (it.id == edited.id) edited else it }
             showForm = false
-        })
-        selected != null -> TicketDetailScreen(selected!!, onBack = { selected = null }, onChangeStatus = {
-            // TODO(REST): implementar PATCH /api/tickets/{id}/status.
-            tickets = tickets.map { if (it.id == selected!!.id) it.copy(status = "EN_PROCESO") else it }
-            selected = selected!!.copy(status = "EN_PROCESO")
-        }, onDeletePreview = {
-            // Solo demostración local de UI. Sustituye este comportamiento por DELETE.
-            tickets = tickets.filterNot { it.id == selected!!.id }
             selected = null
         })
-        else -> TicketListScreen(tickets, onCreate = { showForm = true }, onSelect = { selected = it })
+        selected != null -> TicketDetailScreen(
+            ticket = selected!!,
+            onBack = { selected = null },
+            onEdit = { formTicket = selected; showForm = true },
+            onChangeStatus = {
+                // TODO(REST): implementar PATCH /api/tickets/{id}/status.
+                tickets = tickets.map { if (it.id == selected!!.id) it.copy(status = "EN_PROCESO") else it }
+                selected = selected!!.copy(status = "EN_PROCESO")
+            },
+            onDeletePreview = {
+                // Demo local solamente. Reemplaza con DELETE.
+                tickets = tickets.filterNot { it.id != selected!!.id }
+                selected = null
+            }
+        )
+        else -> TicketListScreen(
+            tickets = tickets,
+            onCreate = { formTicket = null; showForm = true },
+            onSelect = { selected = it }
+        )
     }
 }
 
@@ -88,33 +108,56 @@ fun TicketListScreen(tickets: List<TicketUiModel>, onCreate: () -> Unit, onSelec
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TicketDetailScreen(ticket: TicketUiModel, onBack: () -> Unit, onChangeStatus: () -> Unit, onDeletePreview: () -> Unit) {
+fun TicketDetailScreen(
+    ticket: TicketUiModel,
+    onBack: () -> Unit,
+    onEdit: () -> Unit,
+    onChangeStatus: () -> Unit,
+    onDeletePreview: () -> Unit
+) {
     Scaffold(topBar = { TopAppBar(title = { Text("Detalle del ticket") }, navigationIcon = {
         TextButton(onClick = onBack) { Text("←") }
     }) }) { padding ->
         Column(Modifier.fillMaxSize().padding(padding).padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Text("#${ticket.id}", color = Color(0xFF65718A))
             Text(ticket.title, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+            Text(ticket.description)
+            Text("Solicitante: ${ticket.requester}")
             Text("Categoría: ${ticket.category}")
             Text("Prioridad: ${ticket.priority}")
             Text("Estado: ${ticket.status}")
-            Button(onClick = onChangeStatus) { Text("Marcar en proceso (demo)") }
+            Button(onClick = onEdit) { Text("Editar ticket (demo)") }
+            OutlinedButton(onClick = onChangeStatus) { Text("Marcar en proceso (demo)") }
             OutlinedButton(onClick = onDeletePreview) { Text("Eliminar (demo local)") }
-            Text("TODO(REST): GET detalle · PATCH estado · DELETE", color = Color(0xFF187D79))
+            Text("TODO(REST): GET detalle · PUT · PATCH estado · DELETE", color = Color(0xFF187D79))
         }
     }
 }
 
 @Composable
-fun TicketFormScreen(onCancel: () -> Unit, onSavePreview: (String) -> Unit) {
-    var title by remember { mutableStateOf("") }
-    Column(Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text("Nuevo ticket", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-        OutlinedTextField(value = title, onValueChange = { title = it }, label = { Text("Título") }, modifier = Modifier.fillMaxWidth())
-        Text("TODO(REST): completar formulario y enviar POST /api/tickets.")
+fun TicketFormScreen(initial: TicketUiModel?, onCancel: () -> Unit, onSavePreview: (TicketUiModel) -> Unit) {
+    var title by remember(initial?.id) { mutableStateOf(initial?.title.orEmpty()) }
+    var description by remember(initial?.id) { mutableStateOf(initial?.description.orEmpty()) }
+    var category by remember(initial?.id) { mutableStateOf(initial?.category ?: "General") }
+    var priority by remember(initial?.id) { mutableStateOf(initial?.priority ?: "MEDIA") }
+    var requester by remember(initial?.id) { mutableStateOf(initial?.requester.orEmpty()) }
+
+    Column(Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        Text(if (initial == null) "Nuevo ticket" else "Editar ticket", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+        OutlinedTextField(title, { title = it }, label = { Text("Título") }, modifier = Modifier.fillMaxWidth(), singleLine = true)
+        OutlinedTextField(description, { description = it }, label = { Text("Descripción") }, modifier = Modifier.fillMaxWidth(), minLines = 2)
+        OutlinedTextField(category, { category = it }, label = { Text("Categoría") }, modifier = Modifier.fillMaxWidth(), singleLine = true)
+        OutlinedTextField(priority, { priority = it.uppercase() }, label = { Text("Prioridad: BAJA, MEDIA, ALTA o CRITICA") }, modifier = Modifier.fillMaxWidth(), singleLine = true)
+        OutlinedTextField(requester, { requester = it }, label = { Text("Solicitante") }, modifier = Modifier.fillMaxWidth(), singleLine = true)
+        Text("TODO(REST): validar y enviar POST /api/tickets o PUT /api/tickets/{id}.")
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedButton(onClick = onCancel) { Text("Cancelar") }
-            Button(onClick = { if (title.isNotBlank()) onSavePreview(title.trim()) }, enabled = title.isNotBlank()) { Text("Guardar demo") }
+            Button(onClick = {
+                val id = initial?.id ?: ((previewTickets.maxOfOrNull { it.id } ?: 100) + 1)
+                onSavePreview(TicketUiModel(id, title.trim(), description.trim(), category.trim(), priority.trim(), initial?.status ?: "ABIERTO", requester.trim()))
+            }, enabled = title.isNotBlank() && description.isNotBlank() && category.isNotBlank() && requester.isNotBlank()) {
+                Text("Guardar demo")
+            }
         }
     }
 }
