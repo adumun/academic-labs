@@ -12,6 +12,10 @@ Esta carpeta contiene dos actividades independientes y sus proyectos descargable
 
 El backend Support Desk sí está completo: el foco de aprendizaje está en el cliente Android.
 
+## Guía docente
+
+Consulta [DOCENTE-GUIA.md](DOCENTE-GUIA.md) para preparar la sesión, distribuir los tiempos, ejecutar los proyectos y comprobar los checkpoints.
+
 ## Herramientas Android
 
 - Android Studio reciente.
