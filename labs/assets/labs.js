@@ -63,7 +63,7 @@
       if (app.status === "published") {
         card.append(create("span", "app-status live", "DISPONIBLE"));
         const link = create("a", "app-link", "Jugar ↗");
-        link.href = "/games/demos/" + encodeURIComponent(app.slug) + "/";
+        link.href = "/gamers/" + encodeURIComponent(app.slug) + "/";
         card.append(link);
       } else {
         card.append(create("span", "app-status", "EN PREPARACIÓN"));
