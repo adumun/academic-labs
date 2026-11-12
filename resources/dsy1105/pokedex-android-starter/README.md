@@ -1,17 +1,29 @@
 # Pokédex Android Starter
 
-Proyecto Android nativo con Kotlin y Jetpack Compose.
+Proyecto Android nativo con Kotlin y Jetpack Compose. Debe abrir y ejecutar la interfaz de demostración sin depender de PokéAPI.
 
 ## Requisitos
 
-- Android Studio compatible con Android Gradle Plugin 8.7.3.
+- Android Studio reciente.
 - JDK 17.
 - Android SDK 35.
 - Emulador o dispositivo Android API 26+.
 
-## Ejecutar
+## Primera ejecución
 
-Abre esta carpeta como proyecto en Android Studio, espera la sincronización de Gradle y ejecuta la app. No requiere backend ni conexión a PokéAPI para mostrar los datos locales de muestra.
+En Windows, desde esta carpeta ejecuta en PowerShell o CMD:
+
+```bat
+gradlew.bat :app:assembleDebug
+```
+
+En Linux/macOS:
+
+```bash
+./gradlew :app:assembleDebug
+```
+
+El launcher descarga el Gradle Wrapper oficial 8.9 desde el repositorio oficial de Gradle, verifica su SHA-256 publicado y luego ejecuta la distribución Gradle 8.9 fijada en `gradle/wrapper/gradle-wrapper.properties`. Requiere conexión a Internet solo la primera vez (para descargar wrapper y distribución, y resolver dependencias). Después abre esta carpeta en Android Studio y ejecuta la configuración `app`.
 
 ## Qué incluye
 
@@ -29,11 +41,11 @@ Abre esta carpeta como proyecto en Android Studio, espera la sincronización de 
 - Repositorio remoto ni solicitudes GET.
 - Paginación ni scroll infinito real.
 
-Busca `TODO(REST)` en el código. La interfaz está preparada para ser conectada a tu implementación. Documentación de API: https://pokeapi.co/docs/v2
+Busca `TODO(REST)` en el código. La interfaz está preparada para ser conectada a tu implementación. Documentación: https://pokeapi.co/docs/v2
 
-## Sugerencia de contrato para la capa de datos
+## Sugerencia de arquitectura
 
-Define por tu cuenta un repositorio que pueda:
+Define un repositorio que pueda:
 - solicitar una página del listado a partir de offset/limit;
 - obtener el detalle por id o nombre.
 
