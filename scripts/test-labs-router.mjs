@@ -4,20 +4,21 @@ import test from "node:test";
 import { proxyDemoRequest } from "../functions/_lib/demo-proxy.mjs";
 import { serveDemosIndexIfNoSlug } from "../functions/_lib/demos-index-fallback.mjs";
 import { onRequest as redirectLegacyGamesRoute } from "../functions/games/demos/[[slug]].js";
+import { onRequest as redirectLegacyGamersRoute } from "../functions/gamers/[[slug]].js";
 
 const routes = JSON.parse(
   readFileSync(new URL("../_routes.json", import.meta.url), "utf8"),
 );
 
 test("demos catalog index bypasses Functions and is served as a static asset", () => {
-  assert.ok(routes.include.includes("/gamers/*"));
+  assert.ok(routes.include.includes("/games/*"));
   assert.ok(routes.include.includes("/games/demos/*"));
-  assert.ok(routes.exclude.includes("/gamers"));
-  assert.ok(routes.exclude.includes("/gamers/"));
+  assert.ok(routes.exclude.includes("/games"));
+  assert.ok(routes.exclude.includes("/games/"));
   assert.ok(routes.exclude.includes("/games/demos"));
   assert.ok(routes.exclude.includes("/games/demos/"));
   assert.equal(
-    existsSync(new URL("../functions/gamers/index.js", import.meta.url)),
+    existsSync(new URL("../functions/games/index.js", import.meta.url)),
     false,
   );
 });
@@ -25,7 +26,7 @@ test("demos catalog index bypasses Functions and is served as a static asset", (
 test("empty catch-all route serves the static demos catalog", async () => {
   let observed;
   const response = await serveDemosIndexIfNoSlug({
-    request: makeRequest("/gamers/"),
+    request: makeRequest("/games/"),
     params: { slug: [""] },
     env: {
       ASSETS: {
@@ -41,24 +42,24 @@ test("empty catch-all route serves the static demos catalog", async () => {
   });
 
   assert.equal(response.status, 200);
-  assert.equal(observed.url, "https://labs.adumun.cl/gamers/");
+  assert.equal(observed.url, "https://labs.adumun.cl/games/");
   assert.equal(await response.text(), "<h1>Videojuegos</h1>");
 });
 
 test("bare demos path redirects to trailing slash", async () => {
   const response = await serveDemosIndexIfNoSlug({
-    request: makeRequest("/gamers"),
+    request: makeRequest("/games"),
     params: {},
     env: { ASSETS: { fetch: async () => { throw new Error("must not fetch"); } } },
   });
 
   assert.equal(response.status, 308);
-  assert.equal(response.headers.get("location"), "https://labs.adumun.cl/gamers/");
+  assert.equal(response.headers.get("location"), "https://labs.adumun.cl/games/");
 });
 
 test("demo routes bypass the empty-slug fallback", async () => {
   const response = await serveDemosIndexIfNoSlug({
-    request: makeRequest("/gamers/starborne-voyager/"),
+    request: makeRequest("/games/starborne-voyager/"),
     params: { slug: ["starborne-voyager"] },
     env: { ASSETS: { fetch: async () => { throw new Error("must not fetch"); } } },
   });
@@ -66,13 +67,22 @@ test("demo routes bypass the empty-slug fallback", async () => {
   assert.equal(response, null);
 });
 
-test("legacy game routes redirect to the gamers namespace", async () => {
+test("legacy game routes redirect to the games namespace", async () => {
   const response = redirectLegacyGamesRoute({
     request: makeRequest("/games/demos/light-thief/?v=2"),
   });
 
   assert.equal(response.status, 308);
-  assert.equal(response.headers.get("location"), "https://labs.adumun.cl/gamers/light-thief/?v=2");
+  assert.equal(response.headers.get("location"), "https://labs.adumun.cl/games/light-thief/?v=2");
+});
+
+test("accidental gamers routes redirect to the games namespace", async () => {
+  const response = redirectLegacyGamersRoute({
+    request: makeRequest("/gamers/light-thief/?v=2"),
+  });
+
+  assert.equal(response.status, 308);
+  assert.equal(response.headers.get("location"), "https://labs.adumun.cl/games/light-thief/?v=2");
 });
 
 const publishedCatalog = {
@@ -140,7 +150,7 @@ function makeRequest(path, method = "GET") {
 test("unknown demo slugs return 404 without calling upstream", async () => {
   let called = false;
   const response = await proxyDemoRequest({
-    request: makeRequest("/gamers/unknown/"),
+    request: makeRequest("/games/unknown/"),
     params: { slug: ["unknown"] },
     catalog: publishedCatalog,
     fetchImpl: async () => { called = true; },
@@ -152,7 +162,7 @@ test("unknown demo slugs return 404 without calling upstream", async () => {
 test("pending demos return 503 without exposing their origin", async () => {
   let called = false;
   const response = await proxyDemoRequest({
-    request: makeRequest("/gamers/neon-pursuit/"),
+    request: makeRequest("/games/neon-pursuit/"),
     params: { slug: ["neon-pursuit"] },
     catalog: publishedCatalog,
     fetchImpl: async () => { called = true; },
@@ -165,7 +175,7 @@ test("pending demos return 503 without exposing their origin", async () => {
 test("trailing empty catch-all segments are ignored", async () => {
   let called = false;
   const response = await proxyDemoRequest({
-    request: makeRequest("/gamers/starborne-voyager/"),
+    request: makeRequest("/games/starborne-voyager/"),
     params: { slug: ["starborne-voyager", ""] },
     catalog: publishedCatalog,
     fetchImpl: async (url) => {
@@ -181,7 +191,7 @@ test("trailing empty catch-all segments are ignored", async () => {
 test("published demos proxy root, path and query to their registered Pages origin", async () => {
   let observed;
   const response = await proxyDemoRequest({
-    request: makeRequest("/gamers/starborne-voyager/assets/game.js?v=2"),
+    request: makeRequest("/games/starborne-voyager/assets/game.js?v=2"),
     params: { slug: ["starborne-voyager", "assets", "game.js"] },
     catalog: publishedCatalog,
     fetchImpl: async (url, options) => {
@@ -204,7 +214,7 @@ test("published demos proxy root, path and query to their registered Pages origi
 test("individual prototype demos proxy their public root to the configured upstream directory", async () => {
   let observed;
   const response = await proxyDemoRequest({
-    request: makeRequest("/gamers/light-thief/"),
+    request: makeRequest("/games/light-thief/"),
     params: { slug: ["light-thief", ""] },
     catalog: publishedCatalog,
     fetchImpl: async (url, options) => {
@@ -225,7 +235,7 @@ test("individual prototype demos proxy their public root to the configured upstr
 test("individual prototype assets stay inside their configured upstream directory", async () => {
   let observed;
   const response = await proxyDemoRequest({
-    request: makeRequest("/gamers/neon-tetris/assets/game.css?v=2"),
+    request: makeRequest("/games/neon-tetris/assets/game.css?v=2"),
     params: { slug: ["neon-tetris", "assets", "game.css"] },
     catalog: publishedCatalog,
     fetchImpl: async (url) => {
@@ -244,7 +254,7 @@ test("individual prototype assets stay inside their configured upstream director
 test("individual prototype redirects are rewritten relative to the public demo root", async () => {
   let calls = 0;
   const response = await proxyDemoRequest({
-    request: makeRequest("/gamers/super-chess/index.html"),
+    request: makeRequest("/games/super-chess/index.html"),
     params: { slug: ["super-chess", "index.html"] },
     catalog: publishedCatalog,
     fetchImpl: async () => {
@@ -266,19 +276,19 @@ test("individual prototype redirects are rewritten relative to the public demo r
 
 test("bare demo paths redirect to their canonical trailing-slash URL", async () => {
   const response = await proxyDemoRequest({
-    request: makeRequest("/gamers/starborne-voyager"),
+    request: makeRequest("/games/starborne-voyager"),
     params: { slug: ["starborne-voyager"] },
     catalog: publishedCatalog,
     fetchImpl: async () => { throw new Error("must not fetch"); },
   });
   assert.equal(response.status, 308);
-  assert.equal(response.headers.get("location"), "https://labs.adumun.cl/gamers/starborne-voyager/");
+  assert.equal(response.headers.get("location"), "https://labs.adumun.cl/games/starborne-voyager/");
 });
 
 test("path traversal and encoded separators are rejected", async () => {
   for (const segment of ["..", "%2e%2e", "%2fetc", "a\\b"]) {
     const response = await proxyDemoRequest({
-      request: makeRequest("/gamers/starborne-voyager/"),
+      request: makeRequest("/games/starborne-voyager/"),
       params: { slug: ["starborne-voyager", segment] },
       catalog: publishedCatalog,
       fetchImpl: async () => { throw new Error("must not fetch"); },
@@ -289,7 +299,7 @@ test("path traversal and encoded separators are rejected", async () => {
 
 test("non-GET methods are rejected for static demos", async () => {
   const response = await proxyDemoRequest({
-    request: makeRequest("/gamers/starborne-voyager/", "POST"),
+    request: makeRequest("/games/starborne-voyager/", "POST"),
     params: { slug: ["starborne-voyager"] },
     catalog: publishedCatalog,
     fetchImpl: async () => { throw new Error("must not fetch"); },
@@ -301,7 +311,7 @@ test("non-GET methods are rejected for static demos", async () => {
 test("same-origin upstream redirects are followed internally instead of reaching the browser", async () => {
   const observed = [];
   const response = await proxyDemoRequest({
-    request: makeRequest("/gamers/starborne-voyager/"),
+    request: makeRequest("/games/starborne-voyager/"),
     params: { slug: ["starborne-voyager"] },
     catalog: publishedCatalog,
     fetchImpl: async (url, options) => {
@@ -328,7 +338,7 @@ test("same-origin upstream redirects are followed internally instead of reaching
 test("directory canonical redirects are followed internally and return final HTML", async () => {
   const observed = [];
   const response = await proxyDemoRequest({
-    request: makeRequest("/gamers/web-game-prototypes/prototypes/light-thief/index.html"),
+    request: makeRequest("/games/web-game-prototypes/prototypes/light-thief/index.html"),
     params: { slug: ["web-game-prototypes", "prototypes", "light-thief", "index.html"] },
     catalog: publishedCatalog,
     fetchImpl: async (url) => {
@@ -358,7 +368,7 @@ test("directory canonical redirects are followed internally and return final HTM
 test("relative same-origin redirects are resolved and followed internally", async () => {
   const observed = [];
   const response = await proxyDemoRequest({
-    request: makeRequest("/gamers/web-game-prototypes/prototypes/neon-tetris/index.html"),
+    request: makeRequest("/games/web-game-prototypes/prototypes/neon-tetris/index.html"),
     params: { slug: ["web-game-prototypes", "prototypes", "neon-tetris", "index.html"] },
     catalog: publishedCatalog,
     fetchImpl: async (url) => {
@@ -385,7 +395,7 @@ test("relative same-origin redirects are resolved and followed internally", asyn
 test("external redirects are returned unchanged and are never fetched by the proxy", async () => {
   let calls = 0;
   const response = await proxyDemoRequest({
-    request: makeRequest("/gamers/starborne-voyager/"),
+    request: makeRequest("/games/starborne-voyager/"),
     params: { slug: ["starborne-voyager"] },
     catalog: publishedCatalog,
     fetchImpl: async () => {
@@ -404,7 +414,7 @@ test("external redirects are returned unchanged and are never fetched by the pro
 
 test("credential-bearing redirect targets are rejected", async () => {
   const response = await proxyDemoRequest({
-    request: makeRequest("/gamers/starborne-voyager/"),
+    request: makeRequest("/games/starborne-voyager/"),
     params: { slug: ["starborne-voyager"] },
     catalog: publishedCatalog,
     fetchImpl: async () => new Response(null, {
@@ -422,7 +432,7 @@ test("credential-bearing redirect targets are rejected", async () => {
 test("same-origin redirect cycles are stopped with a gateway error", async () => {
   let calls = 0;
   const response = await proxyDemoRequest({
-    request: makeRequest("/gamers/web-game-prototypes/prototypes/light-thief/index.html"),
+    request: makeRequest("/games/web-game-prototypes/prototypes/light-thief/index.html"),
     params: { slug: ["web-game-prototypes", "prototypes", "light-thief", "index.html"] },
     catalog: publishedCatalog,
     fetchImpl: async () => {
@@ -447,7 +457,7 @@ test("temporary redirect trace follows real upstream hops without forwarding its
   const observed = [];
   const response = await proxyDemoRequest({
     request: makeRequest(
-      "/gamers/web-game-prototypes/prototypes/light-thief/index.html?__trace_proxy=chain",
+      "/games/web-game-prototypes/prototypes/light-thief/index.html?__trace_proxy=chain",
     ),
     params: {
       slug: ["web-game-prototypes", "prototypes", "light-thief", "index.html"],
@@ -483,7 +493,7 @@ test("temporary redirect trace follows real upstream hops without forwarding its
   assert.equal(trace.hops[0].status, 307);
   assert.equal(
     trace.hops[0].rewrittenLocation,
-    "https://labs.adumun.cl/gamers/web-game-prototypes/prototypes/light-thief/",
+    "https://labs.adumun.cl/games/web-game-prototypes/prototypes/light-thief/",
   );
   assert.equal(trace.hops[1].status, 200);
   assert.equal(trace.terminalStatus, 200);
@@ -494,7 +504,7 @@ test("temporary redirect trace detects upstream canonicalization cycles", async 
   let calls = 0;
   const response = await proxyDemoRequest({
     request: makeRequest(
-      "/gamers/web-game-prototypes/prototypes/light-thief/index.html?__trace_proxy=chain",
+      "/games/web-game-prototypes/prototypes/light-thief/index.html?__trace_proxy=chain",
     ),
     params: {
       slug: ["web-game-prototypes", "prototypes", "light-thief", "index.html"],
@@ -531,7 +541,7 @@ test("unsafe origins are rejected", async () => {
     }],
   };
   const response = await proxyDemoRequest({
-    request: makeRequest("/gamers/starborne-voyager/"),
+    request: makeRequest("/games/starborne-voyager/"),
     params: { slug: ["starborne-voyager"] },
     catalog,
     fetchImpl: async () => { throw new Error("must not fetch"); },

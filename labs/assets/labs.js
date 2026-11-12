@@ -63,7 +63,7 @@
       if (app.status === "published") {
         card.append(create("span", "app-status live", "DISPONIBLE"));
         const link = create("a", "app-link", "Jugar ↗");
-        link.href = "/gamers/" + encodeURIComponent(app.slug) + "/";
+        link.href = "/games/" + encodeURIComponent(app.slug) + "/";
         card.append(link);
       } else {
         card.append(create("span", "app-status", "EN PREPARACIÓN"));
@@ -89,8 +89,9 @@
       if (page === "home") renderCategories(catalog.categories);
       renderApplications(catalog.applications, "featured-list");
       renderApplications(catalog.applications, "demo-list");
+      renderApplications(catalog.applications, "game-list");
     } catch (error) {
-      for (const id of ["category-grid", "featured-list", "demo-list"]) {
+      for (const id of ["category-grid", "featured-list", "demo-list", "game-list"]) {
         const target = document.getElementById(id);
         if (target) target.replaceChildren(create("p", "error", "No pudimos cargar el catálogo. Intenta nuevamente."));
       }

@@ -12,8 +12,8 @@ Se reutiliza el proyecto Cloudflare Pages `academic-labs`; no se crea un segundo
 - `labs.adumun.cl` presenta el portal transversal ADÜMÜN Labs.
 - `academic-labs.adumun.cl` conserva la landing educativa original.
 - `/education/` ofrece una entrada al catálogo académico actual.
-- `/gamers/` muestra el catálogo de videojuegos.
-- `/gamers/<slug>/` sirve cada demo desde un proyecto Pages independiente o desde una subruta explícitamente registrada del mismo origen.
+- `/games/` muestra el catálogo de videojuegos.
+- `/games/<slug>/` sirve cada demo desde un proyecto Pages independiente o desde una subruta explícitamente registrada del mismo origen.
 
 Cada aplicación conserva su repositorio privado y su pipeline de despliegue. El portal y el catálogo son estáticos; Pages Functions actúa como proxy de allowlist para las rutas de demos.
 
@@ -25,13 +25,13 @@ No se crea una base de datos, panel de administración, autenticación ni un Wor
 | --- | --- |
 | `labs/index.html` | Portal general ADÜMÜN Labs |
 | `labs-catalog.json` | Categorías, estado y registro de aplicaciones |
-| `gamers/index.html` | Catálogo de demos (asset estático) |
+| `games/index.html` | Catálogo de demos (asset estático) |
 | `education/index.html` | Entrada al vertical educativo |
 | `functions/index.js` | Selección de landing según hostname |
-| `functions/gamers/[[slug]].js` | Carga catálogo y ejecuta proxy para demos |
+| `functions/games/[[slug]].js` | Carga catálogo y ejecuta proxy para demos |
 | `functions/_lib/demo-proxy.mjs` | Allowlist, validación y proxy HTTP |
 | `functions/_lib/demos-index-fallback.mjs` | Respaldo estático si el catch-all recibe una ruta sin slug |
-| `_routes.json` | Incluye raíz y demos; excluye el índice estático `/gamers/` |
+| `_routes.json` | Incluye raíz y demos; excluye el índice estático `/games/` |
 
 Cloudflare Pages Functions usa rutas basadas en archivos y permite parámetros multipath mediante `[[param]].js`. La función obtiene assets estáticos mediante `env.ASSETS.fetch()`. Referencias:
 - https://developers.cloudflare.com/pages/functions/routing/
@@ -69,15 +69,15 @@ La URL pública representa una demo, no la estructura del repositorio ni el host
 
 | Demo | URL pública | Origen interno | Subruta interna |
 | --- | --- | --- | --- |
-| Light Thief | `/gamers/light-thief/` | `labs-web-game-prototypes.pages.dev` | `/prototypes/light-thief/` |
-| Neon Tetris | `/gamers/neon-tetris/` | `labs-web-game-prototypes.pages.dev` | `/prototypes/neon-tetris/` |
-| Ajedrez Real | `/gamers/super-chess/` | `labs-web-game-prototypes.pages.dev` | `/prototypes/super-chess/` |
+| Light Thief | `/games/light-thief/` | `labs-web-game-prototypes.pages.dev` | `/prototypes/light-thief/` |
+| Neon Tetris | `/games/neon-tetris/` | `labs-web-game-prototypes.pages.dev` | `/prototypes/neon-tetris/` |
+| Ajedrez Real | `/games/super-chess/` | `labs-web-game-prototypes.pages.dev` | `/prototypes/super-chess/` |
 
 `upstreamPath` es opcional en el registro. Si no existe, la demo usa la raíz `/` del origen, como Starborne Voyager. Si existe, el proxy agrega esa subruta únicamente al consultar el origen y la oculta al visitante. No se deben publicar enlaces con `/prototypes/`, `index.html` ni el nombre del repositorio como parte de la ruta canónica.
 
 La entrada histórica `web-game-prototypes` puede permanecer registrada con `visible: false` para conservar enlaces antiguos, pero no se muestra como demo duplicada en el catálogo.
 
-La ruta anterior `/games/demos/` se conserva únicamente como compatibilidad: el índice redirige a `/gamers/` y las rutas antiguas de cada juego redirigen con `308` a su equivalente bajo `/gamers/`. Las nuevas publicaciones y enlaces deben usar exclusivamente el namespace `/gamers/`.
+La ruta anterior `/games/demos/` se conserva únicamente como compatibilidad: el índice redirige a `/games/` y las rutas antiguas de cada juego redirigen con `308` a su equivalente bajo `/games/`. Las nuevas publicaciones y enlaces deben usar exclusivamente el namespace `/games/`.
 
 ### Habilitar una demo
 
@@ -106,7 +106,7 @@ Los juegos deben ser aplicaciones estáticas cliente. No se garantiza compatibil
 
 ### Coste de Functions
 
-`_routes.json` incluye la raíz y `/gamers/*`, pero excluye explícitamente `/gamers` y `/gamers/`. El catálogo de demos (`gamers/index.html`) se sirve como asset estático, sin invocar Functions. Las páginas y assets estáticos del portal/vertical educativo tampoco invocan Pages Functions. Cada request a una demo registrada (HTML, JS, CSS, imágenes, audio) atraviesa el proxy y cuenta como una invocación de Function; revisar métricas de uso si aumenta el tráfico.
+`_routes.json` incluye la raíz y `/games/*`, pero excluye explícitamente `/games` y `/games/`. El catálogo de demos (`games/index.html`) se sirve como asset estático, sin invocar Functions. Las páginas y assets estáticos del portal/vertical educativo tampoco invocan Pages Functions. Cada request a una demo registrada (HTML, JS, CSS, imágenes, audio) atraviesa el proxy y cuenta como una invocación de Function; revisar métricas de uso si aumenta el tráfico.
 
 ## 5. Compatibilidad del vertical educativo
 
@@ -169,10 +169,10 @@ Tras el merge a `master`, y después de las acciones en Cloudflare:
 | `https://academic-labs.adumun.cl/` | Landing educativa original |
 | `https://academic-labs.adumun.cl/explore/` | Explorador académico original |
 | `https://labs.adumun.cl/education/` | Entrada educativa |
-| `https://labs.adumun.cl/gamers/` | Catálogo de demos |
+| `https://labs.adumun.cl/games/` | Catálogo de demos |
 | Demo pendiente | No aparece botón de juego; URL devuelve 503 |
 | Slug inexistente | 404 |
-| Demo publicada | HTML y assets sirven bajo `/gamers/<slug>/` |
+| Demo publicada | HTML y assets sirven bajo `/games/<slug>/` |
 | Asset JS/CSS | 200, sin solicitud a raíz incorrecta |
 | Query string | Llega al origen |
 | Refresh en ruta interna | No rompe la aplicación |
@@ -185,7 +185,7 @@ node --test scripts/test-labs-router.mjs
 Validación de sintaxis:
 ```bash
 node --check functions/index.js
-node --check 'functions/gamers/[[slug]].js'
+node --check 'functions/games/[[slug]].js'
 node --check functions/_lib/demo-proxy.mjs
 ```
 
@@ -210,13 +210,13 @@ node --check functions/_lib/demo-proxy.mjs
 - [x] Check Cloudflare Pages del commit `82d1abd`: deploy PASS (check run `130645320136`).
 - [ ] Ejecutar localmente `node --test scripts/test-labs-router.mjs`; el entorno de despliegue de Pages no ejecuta esta suite.
 - [x] 4/4 verificaciones de configuración/ruta del índice y fallback ejecutadas en un harness Node 22 aislado; sintaxis de proxy, fallback y handler validada.
-- [x] Índice `/gamers/` excluido de Functions para resolver el defecto `Demo not found` reportado en preview.
+- [x] Índice `/games/` excluido de Functions para resolver el defecto `Demo not found` reportado en preview.
 - [x] GitHub App Cloudflare limitada a repositorios seleccionados; autorizados `academic-labs` y los tres repositorios de videojuegos.
 - [x] Proyectos Pages `labs-starborne-voyager` y `labs-web-game-prototypes` creados y desplegados; URLs de origen verificadas.
 - [x] Sintaxis de los handlers Pages Functions y módulo proxy validada.
 - [x] Check de Cloudflare Pages para el preview del PR #6: PASS (commit `82d1abd`; check run `130645320136`).
 - [x] PR #2 de Web Game Prototypes desplegado en preview; Neon Pursuit A/B validados en Chrome con CSS local (506 reglas, responsive y sin solicitud al CDN).
-- [x] Chrome: catálogo `/gamers/` PASS; Starborne Voyager PASS; portal académico y `/explore/` PASS.
+- [x] Chrome: catálogo `/games/` PASS; Starborne Voyager PASS; portal académico y `/explore/` PASS.
 - [x] Chrome: capturar las tres cadenas upstream; todas responden 308 → 200 sin ciclos ni errores.
 - [ ] Chrome: validar que el proxy actualizado devuelve directamente la respuesta final y que los tres juegos se visualizan sin `ERR_TOO_MANY_REDIRECTS` (usar una sesión limpia o deshabilitar caché para evitar redirects 308 antiguos almacenados).
 - [ ] Retirar el diagnóstico temporal `?__trace_proxy=chain` después de la aceptación funcional y antes de producción.

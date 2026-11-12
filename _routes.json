@@ -2,12 +2,12 @@
   "version": 1,
   "include": [
     "/",
-    "/gamers/*",
+    "/games/*",
     "/games/demos/*"
   ],
   "exclude": [
-    "/gamers",
-    "/gamers/",
+    "/games",
+    "/games/",
     "/games/demos",
     "/games/demos/"
   ]
