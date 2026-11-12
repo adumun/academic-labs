@@ -5,6 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -64,7 +66,7 @@ fun SupportDeskApp() {
             },
             onDeletePreview = {
                 // Demo local solamente. Reemplaza con DELETE.
-                tickets = tickets.filterNot { it.id != selected!!.id }
+                tickets = tickets.filterNot { it.id == selected!!.id }
                 selected = null
             }
         )
@@ -142,7 +144,7 @@ fun TicketFormScreen(initial: TicketUiModel?, onCancel: () -> Unit, onSavePrevie
     var priority by remember(initial?.id) { mutableStateOf(initial?.priority ?: "MEDIA") }
     var requester by remember(initial?.id) { mutableStateOf(initial?.requester.orEmpty()) }
 
-    Column(Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
         Text(if (initial == null) "Nuevo ticket" else "Editar ticket", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
         OutlinedTextField(title, { title = it }, label = { Text("Título") }, modifier = Modifier.fillMaxWidth(), singleLine = true)
         OutlinedTextField(description, { description = it }, label = { Text("Descripción") }, modifier = Modifier.fillMaxWidth(), minLines = 2)
@@ -153,7 +155,7 @@ fun TicketFormScreen(initial: TicketUiModel?, onCancel: () -> Unit, onSavePrevie
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedButton(onClick = onCancel) { Text("Cancelar") }
             Button(onClick = {
-                val id = initial?.id ?: ((previewTickets.maxOfOrNull { it.id } ?: 100) + 1)
+                val id = initial?.id ?: 0L
                 onSavePreview(TicketUiModel(id, title.trim(), description.trim(), category.trim(), priority.trim(), initial?.status ?: "ABIERTO", requester.trim()))
             }, enabled = title.isNotBlank() && description.isNotBlank() && category.isNotBlank() && requester.isNotBlank()) {
                 Text("Guardar demo")
