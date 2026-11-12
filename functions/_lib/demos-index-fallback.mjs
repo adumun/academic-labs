@@ -15,10 +15,10 @@ export async function serveDemosIndexIfNoSlug(context) {
   if (hasDemoSlug) return null;
 
   const requestUrl = new URL(context.request.url);
-  if (requestUrl.pathname === "/games/demos") {
-    return Response.redirect(new URL("/games/demos/", requestUrl), 308);
+  if (requestUrl.pathname === "/gamers") {
+    return Response.redirect(new URL("/gamers/", requestUrl), 308);
   }
 
-  requestUrl.pathname = "/games/demos/";
+  requestUrl.pathname = "/gamers/";
   return context.env.ASSETS.fetch(new Request(requestUrl, context.request));
 }
