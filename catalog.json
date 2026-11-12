@@ -1,53 +1,260 @@
 {
   "schemaVersion": 2,
   "topics": [
-    {"id":"acciones-y-hechos","name":"Acciones y hechos","area":"Competencias transversales","description":"Distinguir acciones por realizar de hechos que ya ocurrieron, tanto en textos como en procesos."},
-    {"id":"mensajeria-asincrona","name":"Mensajería asíncrona y streaming","area":"Ingeniería de software","description":"Analizar eventos de negocio y la comunicación entre sistemas distribuidos."},
-    {"id":"formatos-de-datos-json","name":"JSON y datos estructurados","area":"Fundamentos de programación","description":"Leer y distinguir objetos, arreglos, sintaxis, integridad de datos y formatos de intercambio como JSON."},
-    {"id":"interfaces-graficas-javafx","name":"Interfaces gráficas con JavaFX","area":"Fundamentos de programación","description":"Construir aplicaciones de escritorio con Maven, FXML, controladores, eventos, CSS, tablas y navegación."},
-    {"id":"arquitectura-mvc-persistencia","name":"Arquitectura MVC y persistencia","area":"Ingeniería de software","description":"Separar modelo, vistas, controladores, servicios y DAO; persistir objetos en JSON y verificar su recuperación."},
-    {"id":"consumo-apis-rest-android","name":"Consumo de APIs REST en Android","area":"Desarrollo de aplicaciones móviles","description":"Integrar aplicaciones Android nativas con servicios REST, interpretar JSON y gestionar operaciones HTTP y estados de interfaz."}
+    {
+      "id": "acciones-y-hechos",
+      "name": "Acciones y hechos",
+      "area": "Competencias transversales",
+      "description": "Distinguir acciones por realizar de hechos que ya ocurrieron, tanto en textos como en procesos."
+    },
+    {
+      "id": "mensajeria-asincrona",
+      "name": "Mensajería asíncrona y streaming",
+      "area": "Ingeniería de software",
+      "description": "Analizar eventos de negocio y la comunicación entre sistemas distribuidos."
+    },
+    {
+      "id": "formatos-de-datos-json",
+      "name": "JSON y datos estructurados",
+      "area": "Fundamentos de programación",
+      "description": "Leer y distinguir objetos, arreglos, sintaxis, integridad de datos y formatos de intercambio como JSON."
+    },
+    {
+      "id": "interfaces-graficas-javafx",
+      "name": "Interfaces gráficas con JavaFX",
+      "area": "Fundamentos de programación",
+      "description": "Construir aplicaciones de escritorio con Maven, FXML, controladores, eventos, CSS, tablas y navegación."
+    },
+    {
+      "id": "arquitectura-mvc-persistencia",
+      "name": "Arquitectura MVC y persistencia",
+      "area": "Ingeniería de software",
+      "description": "Separar modelo, vistas, controladores, servicios y DAO; persistir objetos en JSON y verificar su recuperación."
+    },
+    {
+      "id": "consumo-apis-rest-android",
+      "name": "Consumo de APIs REST en Android",
+      "area": "Desarrollo de aplicaciones móviles",
+      "description": "Integrar aplicaciones Android nativas con servicios REST, interpretar JSON y gestionar operaciones HTTP y estados de interfaz."
+    }
   ],
   "courses": [
-    {"code":"DSY1107","name":"Desarrollo Cloud Native I"},
-    {"code":"DSY1102","name":"Desarrollo Orientado a Objetos"},
-    {"code":"DSY1105","name":"Desarrollo de Aplicaciones Móviles"}
+    {
+      "code": "DSY1107",
+      "name": "Desarrollo Cloud Native I"
+    },
+    {
+      "code": "DSY1102",
+      "name": "Desarrollo Orientado a Objetos"
+    },
+    {
+      "code": "DSY1105",
+      "name": "Desarrollo de Aplicaciones Móviles"
+    }
   ],
   "activities": [
     {
-      "id":"detectives-de-eventos","title":"Detectives de eventos","description":"Investiga cinco escenarios e identifica acciones y hechos. Explora sus aplicaciones en sistemas basados en eventos.",
-      "topicIds":["acciones-y-hechos","mensajeria-asincrona"],"courseCodes":["DSY1107"],
-      "learningObjectives":["Distinguir acciones pendientes de hechos ocurridos","Reconocer tareas y eventos en escenarios reales","Relacionar tareas y eventos con mensajería asíncrona"],
-      "icon":"🕵️","durationMinutes":50,"tags":["lenguaje","comunicación","acciones","hechos","eventos","tareas","Kafka","RabbitMQ","arquitectura","asincronía","streaming"],
-      "path":"/activities/detectives-de-eventos/","evidence":"txt","version":"1.0.0","status":"published"
+      "id": "detectives-de-eventos",
+      "title": "Detectives de eventos",
+      "description": "Investiga cinco escenarios e identifica acciones y hechos. Explora sus aplicaciones en sistemas basados en eventos.",
+      "topicIds": [
+        "acciones-y-hechos",
+        "mensajeria-asincrona"
+      ],
+      "courseCodes": [
+        "DSY1107"
+      ],
+      "learningObjectives": [
+        "Distinguir acciones pendientes de hechos ocurridos",
+        "Reconocer tareas y eventos en escenarios reales",
+        "Relacionar tareas y eventos con mensajería asíncrona"
+      ],
+      "icon": "🕵️",
+      "durationMinutes": 50,
+      "tags": [
+        "lenguaje",
+        "comunicación",
+        "acciones",
+        "hechos",
+        "eventos",
+        "tareas",
+        "Kafka",
+        "RabbitMQ",
+        "arquitectura",
+        "asincronía",
+        "streaming"
+      ],
+      "path": "/activities/detectives-de-eventos/",
+      "evidence": "txt",
+      "version": "1.0.0",
+      "status": "published"
     },
     {
-      "id":"detective-json","title":"Detective JSON","description":"Investiga seis casos de JSON: arreglos, sintaxis, estructura esperada, claves duplicadas y datos inválidos. Experimenta y exporta tu evidencia TXT.",
-      "topicIds":["formatos-de-datos-json"],"courseCodes":["DSY1102"],
-      "learningObjectives":["Reconocer valores, objetos y arreglos como datos estructurados","Distinguir JSON malformado de reglas de dominio inválidas","Explicar por qué las claves duplicadas pueden ser ambiguas","Experimentar y documentar diagnósticos mediante evidencia TXT"],
-      "icon":"🧩","durationMinutes":25,"tags":["json","datos","programación","colecciones","objetos","validación","serialización","estructuras","fundamentos"],
-      "path":"/activities/detective-json/","evidence":"txt","version":"1.0.0","status":"published"
+      "id": "detective-json",
+      "title": "Detective JSON",
+      "description": "Investiga seis casos de JSON: arreglos, sintaxis, estructura esperada, claves duplicadas y datos inválidos. Experimenta y exporta tu evidencia TXT.",
+      "topicIds": [
+        "formatos-de-datos-json"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Reconocer valores, objetos y arreglos como datos estructurados",
+        "Distinguir JSON malformado de reglas de dominio inválidas",
+        "Explicar por qué las claves duplicadas pueden ser ambiguas",
+        "Experimentar y documentar diagnósticos mediante evidencia TXT"
+      ],
+      "icon": "🧩",
+      "durationMinutes": 25,
+      "tags": [
+        "json",
+        "datos",
+        "programación",
+        "colecciones",
+        "objetos",
+        "validación",
+        "serialización",
+        "estructuras",
+        "fundamentos"
+      ],
+      "path": "/activities/detective-json/",
+      "evidence": "txt",
+      "version": "1.0.0",
+      "status": "published"
     },
     {
-      "id":"dsy1102-javafx-10-capsulas","title":"JavaFX: 10 cápsulas de práctica guiada","description":"Diez cápsulas de práctica guiada para DSY1102. Incluye lectura obligatoria breve, preparación del proyecto mediante Maven o Gradle desde IntelliJ, ayudas técnicas opcionales y orientación de entrega en AVA: evidencia TXT más proyecto completo en ZIP. Construye una aplicación JavaFX con FXML, TableView, validaciones, MVC, DAO y persistencia JSON con Jackson en 120 minutos.",
-      "topicIds":["interfaces-graficas-javafx","arquitectura-mvc-persistencia","formatos-de-datos-json"],"courseCodes":["DSY1102"],
-      "learningObjectives":["Reconocer un proyecto Maven base y aprovechar un modelo ya implementado","Ejecutar la aplicación JavaFX desde IntelliJ mediante el plugin Maven y distinguir JavaFX del JDK","Construir una única ventana JavaFX con FXML y controles asociados a un Controller","Validar formularios y comunicar errores sin perder los datos ingresados","Separar responsabilidades mediante MVC y DAO/Repository","Persistir y recuperar información en archivos JSON utilizando Jackson"],
-      "icon":"🎭","durationMinutes":120,"tags":["java","javafx","maven","fxml","controller","eventos","formularios","validacion","mvc","dao","repository","jackson","json","persistencia","dsy1102","intellij"],
-      "path":"/activities/dsy1102-javafx-10-capsulas/","evidence":"txt","version":"2.5.0","status":"published"
+      "id": "dsy1102-javafx-10-capsulas",
+      "title": "JavaFX: 10 cápsulas de práctica guiada",
+      "description": "Diez cápsulas de práctica guiada para DSY1102. Incluye lectura obligatoria breve, preparación del proyecto mediante Maven o Gradle desde IntelliJ, ayudas técnicas opcionales y orientación de entrega en AVA: evidencia TXT más proyecto completo en ZIP. Construye una aplicación JavaFX con FXML, TableView, validaciones, MVC, DAO y persistencia JSON con Jackson en 120 minutos.",
+      "topicIds": [
+        "interfaces-graficas-javafx",
+        "arquitectura-mvc-persistencia",
+        "formatos-de-datos-json"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Reconocer un proyecto Maven base y aprovechar un modelo ya implementado",
+        "Ejecutar la aplicación JavaFX desde IntelliJ mediante el plugin Maven y distinguir JavaFX del JDK",
+        "Crear un proyecto JavaFX desde el asistente de IntelliJ utilizando Gradle como alternativa a Maven",
+        "Construir una única ventana JavaFX con FXML y controles asociados a un Controller",
+        "Habilitar campos según la modalidad y mostrar actividades en una TableView",
+        "Registrar y eliminar objetos del modelo mediante eventos y una ObservableList",
+        "Validar formularios y comunicar errores sin perder los datos ingresados",
+        "Separar responsabilidades mediante MVC y DAO/Repository",
+        "Persistir y recuperar información en archivos JSON utilizando Jackson",
+        "Verificar carga inicial, guardado automático y comportamiento después de reiniciar"
+      ],
+      "icon": "🎭",
+      "durationMinutes": 120,
+      "tags": [
+        "java",
+        "javafx",
+        "maven",
+        "fxml",
+        "scene-builder",
+        "controller",
+        "eventos",
+        "formularios",
+        "combobox",
+        "tableview",
+        "observablelist",
+        "validacion",
+        "mvc",
+        "dao",
+        "repository",
+        "jackson",
+        "json",
+        "persistencia",
+        "evaluacion-practica",
+        "programacion-orientada-a-objetos",
+        "dsy1102",
+        "intellij",
+        "javafx-maven-plugin",
+        "gradle"
+      ],
+      "path": "/activities/dsy1102-javafx-10-capsulas/",
+      "evidence": "txt",
+      "version": "2.5.0",
+      "status": "published"
     },
     {
-      "id":"dsy1105-pokedex-rest","title":"Pokédex REST: listado y detalle con PokéAPI","description":"Construye el consumo de una API REST pública desde Android nativo con Kotlin y Jetpack Compose. Implementa GET, paginación, scroll infinito y detalle Pokémon sobre una interfaz Starter provista.",
-      "topicIds":["consumo-apis-rest-android"],"courseCodes":["DSY1105"],
-      "learningObjectives":["Configurar una aplicación Android para consumir servicios HTTP","Interpretar respuestas JSON de una API REST","Implementar consultas GET para listados y recursos individuales","Aplicar paginación y carga incremental en una interfaz móvil","Representar estados de carga, error y ausencia de resultados"],
-      "icon":"⚡","durationMinutes":90,"tags":["android","kotlin","jetpack-compose","rest","http","get","pokeapi","pokemon","json","paginacion","scroll-infinito","dsy1105"],
-      "path":"/activities/dsy1105-pokedex-rest/","evidence":"project","version":"0.1.0","status":"draft"
+      "id": "dsy1105-pokedex-rest",
+      "title": "Pokédex REST: listado y detalle con PokéAPI",
+      "description": "Construye el consumo de una API REST pública desde Android nativo con Kotlin y Jetpack Compose. Implementa GET, paginación, scroll infinito y detalle Pokémon sobre una interfaz Starter provista.",
+      "topicIds": [
+        "consumo-apis-rest-android"
+      ],
+      "courseCodes": [
+        "DSY1105"
+      ],
+      "learningObjectives": [
+        "Configurar una aplicación Android para consumir servicios HTTP",
+        "Interpretar respuestas JSON de una API REST",
+        "Implementar consultas GET para listados y recursos individuales",
+        "Aplicar paginación y carga incremental en una interfaz móvil",
+        "Representar estados de carga, error y ausencia de resultados"
+      ],
+      "icon": "⚡",
+      "durationMinutes": 90,
+      "tags": [
+        "android",
+        "kotlin",
+        "jetpack-compose",
+        "rest",
+        "http",
+        "get",
+        "pokeapi",
+        "pokemon",
+        "json",
+        "paginacion",
+        "scroll-infinito",
+        "dsy1105"
+      ],
+      "path": "/activities/dsy1105-pokedex-rest/",
+      "evidence": "project",
+      "version": "0.1.0",
+      "status": "draft"
     },
     {
-      "id":"dsy1105-support-desk-rest","title":"Support Desk: operaciones CRUD desde Android","description":"Integra una aplicación Android nativa con una API REST propia. Implementa GET, POST, PUT, PATCH y DELETE contra un backend Spring Boot completo con persistencia H2 y validaciones.",
-      "topicIds":["consumo-apis-rest-android"],"courseCodes":["DSY1105"],
-      "learningObjectives":["Consumir recursos REST desde una aplicación Android","Distinguir operaciones GET, POST, PUT, PATCH y DELETE","Enviar datos JSON y procesar respuestas HTTP","Interpretar códigos de estado y errores de validación","Integrar una interfaz móvil con un backend Spring Boot"],
-      "icon":"🎫","durationMinutes":120,"tags":["android","kotlin","jetpack-compose","rest","http","crud","spring-boot","java","h2","json","validacion","dsy1105"],
-      "path":"/activities/dsy1105-support-desk-rest/","evidence":"project","version":"0.1.0","status":"draft"
+      "id": "dsy1105-support-desk-rest",
+      "title": "Support Desk: operaciones CRUD desde Android",
+      "description": "Integra una aplicación Android nativa con una API REST propia. Implementa GET, POST, PUT, PATCH y DELETE contra un backend Spring Boot completo con persistencia H2 y validaciones.",
+      "topicIds": [
+        "consumo-apis-rest-android"
+      ],
+      "courseCodes": [
+        "DSY1105"
+      ],
+      "learningObjectives": [
+        "Consumir recursos REST desde una aplicación Android",
+        "Distinguir operaciones GET, POST, PUT, PATCH y DELETE",
+        "Enviar datos JSON y procesar respuestas HTTP",
+        "Interpretar códigos de estado y errores de validación",
+        "Integrar una interfaz móvil con un backend Spring Boot"
+      ],
+      "icon": "🎫",
+      "durationMinutes": 120,
+      "tags": [
+        "android",
+        "kotlin",
+        "jetpack-compose",
+        "rest",
+        "http",
+        "crud",
+        "spring-boot",
+        "java",
+        "h2",
+        "json",
+        "validacion",
+        "dsy1105"
+      ],
+      "path": "/activities/dsy1105-support-desk-rest/",
+      "evidence": "project",
+      "version": "0.1.0",
+      "status": "draft"
     }
   ]
 }
