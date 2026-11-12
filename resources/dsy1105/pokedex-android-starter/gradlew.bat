@@ -13,7 +13,7 @@ if not exist "%WRAPPER_JAR%" (
   if errorlevel 1 exit /b 1
 )
 
-for /f %%H in ('powershell -NoProfile -ExecutionPolicy Bypass -Command "(Get-FileHash -Algorithm SHA256 -LiteralPath ''%WRAPPER_JAR%'').Hash.ToLower()"') do set "ACTUAL_SHA256=%%H"
+for /f %%H in ('powershell -NoProfile -ExecutionPolicy Bypass -Command "(Get-FileHash -Algorithm SHA256 -LiteralPath '%WRAPPER_JAR%').Hash.ToLower()"') do set "ACTUAL_SHA256=%%H"
 if /I not "%ACTUAL_SHA256%"=="%EXPECTED_SHA256%" (
   del "%WRAPPER_JAR%" >nul 2>&1
   echo ERROR: checksum de Gradle Wrapper invalido.
