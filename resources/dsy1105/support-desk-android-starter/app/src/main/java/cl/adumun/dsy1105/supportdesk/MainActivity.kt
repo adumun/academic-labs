@@ -56,6 +56,7 @@ fun SupportDeskApp() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TicketListScreen(tickets: List<TicketUiModel>, onCreate: () -> Unit, onSelect: (TicketUiModel) -> Unit) {
     Scaffold(topBar = { TopAppBar(title = { Text("Support Desk") }) }, floatingActionButton = {
