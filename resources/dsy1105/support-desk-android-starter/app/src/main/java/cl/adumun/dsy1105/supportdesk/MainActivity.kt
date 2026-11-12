@@ -51,7 +51,7 @@ fun SupportDeskApp() {
     when {
         showForm -> TicketFormScreen(initial = formTicket, onCancel = { showForm = false }, onSavePreview = { edited ->
             // Demo local solamente. Reemplaza con POST o PUT en la implementación REST.
-            tickets = if (formTicket == null) tickets + edited else tickets.map { if (it.id == edited.id) edited else it }
+            tickets = if (formTicket == null) tickets + edited.copy(id = (tickets.maxOfOrNull { it.id } ?: 100) + 1) else tickets.map { if (it.id == edited.id) edited else it }
             showForm = false
             selected = null
         })
