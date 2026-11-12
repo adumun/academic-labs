@@ -4,21 +4,35 @@ Proyecto Android nativo Kotlin + Jetpack Compose. Contiene listado, detalle y fo
 
 ## Requisitos
 
-- Android Studio compatible con Android Gradle Plugin 8.7.3.
-- JDK 17, Android SDK 35 y emulador/dispositivo API 26+.
+- Android Studio reciente.
+- JDK 17 y Android SDK 35.
+- Emulador o dispositivo API 26+.
 
-## Ejecutar
+## Primera ejecución
 
-Abre esta carpeta en Android Studio, sincroniza Gradle y ejecuta. No requiere backend para mostrar la interfaz.
+Windows (PowerShell o CMD):
+
+```bat
+gradlew.bat :app:assembleDebug
+```
+
+Linux/macOS:
+
+```bash
+./gradlew :app:assembleDebug
+```
+
+El launcher descarga el Gradle Wrapper oficial 8.9 desde el repositorio oficial de Gradle, verifica su SHA-256 publicado y luego ejecuta la distribución Gradle 8.9 fijada en `gradle/wrapper/gradle-wrapper.properties`. Requiere conexión a Internet la primera vez. Después abre esta carpeta en Android Studio y ejecuta la configuración `app`.
 
 ## Alcance provisto
 
 - Pantalla de listado.
 - Pantalla de detalle.
-- Formulario inicial de creación.
+- Formulario de alta y edición.
 - Navegación y datos de muestra en memoria.
+- Acciones demo locales para observar el comportamiento de la UI.
 
-Las acciones locales marcadas como demo son únicamente demostrativas: no persisten ni representan consumo REST.
+Las acciones locales son únicamente demostrativas: no persisten ni representan consumo REST.
 
 ## Implementación del estudiante
 
