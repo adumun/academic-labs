@@ -142,3 +142,16 @@ La evolución transversal se documenta en [docs/ADUMUN-LABS-PLATFORM.md](docs/AD
 El registro declarativo de categorías y aplicaciones está en `labs-catalog.json`. El índice del catálogo se sirve estáticamente; solo las rutas de demos invocan Pages Functions. El proxy solo acepta slugs registrados y orígenes HTTPS `*.pages.dev`; no es un proxy abierto. Una demo permanece `pending` hasta que su proyecto Cloudflare Pages se cree y se valide. No se debe cambiar su estado a `published` solo porque exista un workflow de CI.
 
 La integración del nuevo dominio y los tres proyectos de demos requiere una intervención en Cloudflare Dashboard descrita en la guía operativa. No modificar DNS ni dominios existentes fuera de ese procedimiento.
+
+
+## DSY1105 — Consumo de APIs REST desde Android
+
+Se preparan dos actividades independientes con Kotlin + Jetpack Compose. Las pantallas y navegación se entregan en proyectos Starter; los estudiantes implementan la conexión y el consumo HTTP.
+
+- [Pokédex REST — listado, paginación y detalle](activities/dsy1105-pokedex-rest/)
+- [Support Desk REST — CRUD desde Android](activities/dsy1105-support-desk-rest/)
+- [Recursos y proyectos Starter](resources/dsy1105/)
+
+La API Support Desk se entrega completa en Spring Boot + H2, con validaciones y documentación. No incluye seguridad ni autenticación porque es un backend local de laboratorio, no un servicio productivo.
+
+Las actividades permanecen en estado `draft` en el catálogo hasta completar la revisión funcional y docente.
