@@ -1,14 +1,18 @@
-# Academic Labs · ADÜMÜN
+# ADÜMÜN Labs — Plataforma de laboratorios
 
-**Actividades prácticas abiertas para aprender haciendo.** El proyecto publica ejercicios interactivos creados con HTML, CSS y JavaScript estándar. Un docente puede compartir un enlace público en su AVA/LMS sin cuentas en Academic Labs; el estudiante resuelve la actividad y entrega el archivo de evidencia al propio docente.
+**Un punto de entrada para explorar videojuegos, experiencias educativas, prototipos y experimentos tecnológicos.** Los laboratorios mantienen sus repositorios y ciclos de publicación independientes; el portal ofrece catálogo y rutas públicas estables.
 
-**Portal público:** https://academic-labs.adumun.cl/
-**URL alternativa de Cloudflare:** https://academic-labs.pages.dev/
-**Repositorio canónico:** https://github.com/adumun/academic-labs
-**Ticket rector:** https://adumun.atlassian.net/browse/ADU-119
-**Implementación GitHub:** https://github.com/adumun/academic-labs/issues/1
+- **Portal transversal (en preparación):** https://labs.adumun.cl/
+- **Vertical educativo existente:** https://academic-labs.adumun.cl/
+- **Repositorio de plataforma:** https://github.com/adumun/academic-labs
+- **Ticket de evolución:** https://adumun.atlassian.net/browse/ADU-143
+- **MVP educativo original:** https://adumun.atlassian.net/browse/ADU-119
 
-## Principios del MVP
+## Vertical educativo: Academic Labs
+
+Academic Labs sigue siendo el módulo educativo de ADÜMÜN Labs. Sus rutas existentes, catálogo, actividades y exportación de evidencias se preservan. El detalle del MVP y sus reglas originales se mantiene en las secciones siguientes.
+
+## Principios del MVP educativo
 
 - Los ejercicios se **crean y mantienen fuera del portal** (localmente o con asistencia de IA), nunca mediante una pantalla de administración.
 - GitHub es la fuente de verdad; Cloudflare Pages publica los archivos del repositorio.
@@ -123,3 +127,18 @@ Editor visual, cuentas, notas, backend, firmas de entrega, detector de plagio/Ge
 - La información y código publicados son accesibles públicamente; no se pueden proteger respuestas secretas solo con JS cliente.
 - En computadores compartidos, `localStorage` puede exponer respuestas a otros usuarios del mismo navegador. Cada actividad debe advertirlo y facilitar la exportación/limpieza.
 - Una aplicación de clase futura que necesite autenticación no debe ejecutar JavaScript arbitrario de prácticas bajo el mismo origen que sesiones de identidad o APIs privadas.
+
+
+## ADÜMÜN Labs — portal multiárea
+
+La evolución transversal se documenta en [docs/ADUMUN-LABS-PLATFORM.md](docs/ADUMUN-LABS-PLATFORM.md).
+
+- `labs.adumun.cl/`: portal general de descubrimiento.
+- `labs.adumun.cl/games/demos/`: catálogo de demos de videojuegos.
+- `labs.adumun.cl/games/demos/<slug>/`: ruta estable de cada demo, independiente de la estructura interna de su repositorio. Pages Functions puede resolverla contra la raíz o contra un `upstreamPath` registrado en `labs-catalog.json`; el índice `/games/demos/` es un asset estático y no invoca Functions.
+- `labs.adumun.cl/education/`: entrada al módulo educativo.
+- `academic-labs.adumun.cl/`: conserva la landing educativa anterior y todos sus enlaces compartidos.
+
+El registro declarativo de categorías y aplicaciones está en `labs-catalog.json`. El índice del catálogo se sirve estáticamente; solo las rutas de demos invocan Pages Functions. El proxy solo acepta slugs registrados y orígenes HTTPS `*.pages.dev`; no es un proxy abierto. Una demo permanece `pending` hasta que su proyecto Cloudflare Pages se cree y se valide. No se debe cambiar su estado a `published` solo porque exista un workflow de CI.
+
+La integración del nuevo dominio y los tres proyectos de demos requiere una intervención en Cloudflare Dashboard descrita en la guía operativa. No modificar DNS ni dominios existentes fuera de ese procedimiento.
