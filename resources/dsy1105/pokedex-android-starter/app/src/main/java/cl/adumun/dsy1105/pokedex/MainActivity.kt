@@ -27,9 +27,8 @@ private val previewPokemon = listOf(
     PokemonUiModel(25, "Pikachu", "Eléctrico", "#025"),
     PokemonUiModel(39, "Jigglypuff", "Normal · Hada", "#039"),
     PokemonUiModel(52, "Meowth", "Normal", "#052"),
-    PokemonUiModel( EeveeId, "Eevee", "Normal", "#133")
+    PokemonUiModel(133, "Eevee", "Normal", "#133")
 )
-private const val EeveeId = 133
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
