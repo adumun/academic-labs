@@ -1,4 +1,4 @@
-const DEMO_PREFIX = "/gamers/";
+const DEMO_PREFIX = "/games/";
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const ALLOWED_METHODS = new Set(["GET", "HEAD"]);
 const FORWARDED_REQUEST_HEADERS = [
