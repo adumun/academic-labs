@@ -40,3 +40,8 @@ Busca `TODO(REST)` y reemplaza los datos locales por la API. No agregues llamada
 ## Depuración
 
 Usa **Debug 🐞** y **Logcat** desde Android Studio. La aplicación debe iniciar y permitir recorrer sus datos demo aunque Support Desk API esté detenida.
+
+
+## Windows + WSL2
+
+Si el repositorio está en WSL2 y Android Studio corre en Windows, abre este proyecto desde **File → Open** usando la ruta UNC `\\wsl.localhost\<DISTRIBUCION>\home\<USUARIO_LINUX>\projects\academic-labs\resources\dsy1105\support-desk-android-starter`. Android Studio utilizará el JDK y Android SDK de Windows. La primera sincronización e indexado sobre UNC puede ser más lento; si presenta problemas persistentes, utiliza una copia de trabajo NTFS sincronizada por Git. No mantengas dos copias editándose simultáneamente.
