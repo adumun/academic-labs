@@ -42,6 +42,12 @@
       "name": "Observabilidad y rendimiento",
       "area": "Ingeniería de software",
       "description": "Interpretar throughput, latencia, consumer lag y capacidad de procesamiento bajo carga en sistemas distribuidos."
+    },
+    {
+      "id": "consumo-apis-rest-android",
+      "name": "Consumo de APIs REST en Android",
+      "area": "Desarrollo de aplicaciones móviles",
+      "description": "Integrar aplicaciones Android nativas con servicios REST, interpretar JSON y gestionar operaciones HTTP y estados de interfaz."
     }
   ],
   "courses": [
@@ -52,6 +58,10 @@
     {
       "code": "DSY1102",
       "name": "Desarrollo Orientado a Objetos"
+    },
+    {
+      "code": "DSY1105",
+      "name": "Desarrollo de Aplicaciones Móviles"
     }
   ],
   "activities": [
@@ -264,6 +274,82 @@
       "path": "/activities/kafka-burst-incident/",
       "version": "1.0.0",
       "status": "published"
+    },
+    {
+      "id": "dsy1105-pokedex-rest",
+      "title": "Pokédex REST: listado y detalle con PokéAPI",
+      "description": "Construye el consumo de una API REST pública desde Android nativo con Kotlin y Jetpack Compose. Implementa GET, paginación, scroll infinito y detalle Pokémon sobre una interfaz Starter provista.",
+      "topicIds": [
+        "consumo-apis-rest-android"
+      ],
+      "courseCodes": [
+        "DSY1105"
+      ],
+      "learningObjectives": [
+        "Configurar una aplicación Android para consumir servicios HTTP",
+        "Interpretar respuestas JSON de una API REST",
+        "Implementar consultas GET para listados y recursos individuales",
+        "Aplicar paginación y carga incremental en una interfaz móvil",
+        "Representar estados de carga, error y ausencia de resultados"
+      ],
+      "icon": "⚡",
+      "durationMinutes": 90,
+      "tags": [
+        "android",
+        "kotlin",
+        "jetpack-compose",
+        "rest",
+        "http",
+        "get",
+        "pokeapi",
+        "pokemon",
+        "json",
+        "paginacion",
+        "scroll-infinito",
+        "dsy1105"
+      ],
+      "path": "/activities/dsy1105-pokedex-rest/",
+      "evidence": "project",
+      "version": "0.1.0",
+      "status": "draft"
+    },
+    {
+      "id": "dsy1105-support-desk-rest",
+      "title": "Support Desk: operaciones CRUD desde Android",
+      "description": "Integra una aplicación Android nativa con una API REST propia. Implementa GET, POST, PUT, PATCH y DELETE contra un backend Spring Boot completo con persistencia H2 y validaciones.",
+      "topicIds": [
+        "consumo-apis-rest-android"
+      ],
+      "courseCodes": [
+        "DSY1105"
+      ],
+      "learningObjectives": [
+        "Consumir recursos REST desde una aplicación Android",
+        "Distinguir operaciones GET, POST, PUT, PATCH y DELETE",
+        "Enviar datos JSON y procesar respuestas HTTP",
+        "Interpretar códigos de estado y errores de validación",
+        "Integrar una interfaz móvil con un backend Spring Boot"
+      ],
+      "icon": "🎫",
+      "durationMinutes": 120,
+      "tags": [
+        "android",
+        "kotlin",
+        "jetpack-compose",
+        "rest",
+        "http",
+        "crud",
+        "spring-boot",
+        "java",
+        "h2",
+        "json",
+        "validacion",
+        "dsy1105"
+      ],
+      "path": "/activities/dsy1105-support-desk-rest/",
+      "evidence": "project",
+      "version": "0.1.0",
+      "status": "draft"
     }
   ]
 }
