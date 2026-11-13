@@ -10,9 +10,9 @@ const routes = JSON.parse(
   readFileSync(new URL("../_routes.json", import.meta.url), "utf8"),
 );
 
-test("demos catalog index bypasses Functions and is served as a static asset", () => {
+test("legacy demo routes are covered without overlapping Pages Function rules", () => {
   assert.ok(routes.include.includes("/games/*"));
-  assert.ok(routes.include.includes("/games/demos/*"));
+  assert.equal(routes.include.includes("/games/demos/*"), false);
   assert.ok(routes.exclude.includes("/games"));
   assert.ok(routes.exclude.includes("/games/"));
   assert.ok(routes.exclude.includes("/games/demos"));
