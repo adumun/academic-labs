@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Laboratorio híbrido DSY1107 de diagnóstico de capacidad, rendimiento y consumer lag en Kafka mediante una oleada JMeter de 300 segundos.">
+  <title>Operación Avalancha · Kafka bajo presión | Academic Labs</title>
+  <link rel="stylesheet" href="/activities/kafka-labs.css">
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/"><span class="brand-mark">A</span><span class="brand-name">academic<strong>labs</strong><small>Una iniciativa ADÜMÜN</small></span></a>
+      <nav aria-label="Navegación principal"><a href="/">Inicio</a><a href="/explore/">Explorar actividades</a><a href="/education/">Educación</a></nav>
+    </div>
+  </header>
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Ruta de navegación"><a href="/">Inicio</a><span>/</span><a href="/explore/?course=DSY1107">DSY1107</a><span>/</span><span aria-current="page">Operación Avalancha</span></nav>
+    <section class="hero">
+      <span class="eyebrow">LABORATORIO HÍBRIDO · DESARROLLO CLOUD NATIVE I</span>
+      <h1>Operación Avalancha</h1>
+      <p>Cinco minutos de tráfico creciente, un sistema distribuido bajo presión y una pregunta: ¿qué componente se atrasa primero? Diagnostica con métricas, formula una hipótesis y demuestra si tu mejora realmente funciona.</p>
+      <div class="chips"><span>DSY1107</span><span>100–120 minutos</span><span>Windows + Docker Desktop</span><span>Kafka · JMeter · Consumer lag</span></div>
+      <div class="hero-actions">
+        <a class="button primary" href="https://github.com/cmartinezs/DSY1107-DESARROLLO-CLOUD-NATIVE-I-2026-2/blob/master/labs/kafka-burst-incident/GUIA-ESTUDIANTE.md" target="_blank" rel="noopener noreferrer">Abrir guía completa ↗</a>
+        <a class="button secondary" href="/explore/?course=DSY1107">Volver al catálogo</a>
+      </div>
+    </section>
+    <main id="contenido" class="main">
+      <div class="grid">
+        <section class="panel">
+          <span class="tag">Tu misión</span>
+          <h2>Encuentra el cuello de botella con evidencia</h2>
+          <p>La API sigue recibiendo compras, pero eso no significa que todos los consumidores estén al día. Debes distinguir publicación HTTP, procesamiento Kafka y evolución del backlog. No se entrega una solución prefabricada: tu equipo investiga, interviene y compara dos corridas equivalentes.</p>
+          <h3>Al terminar podrás:</h3>
+          <ul>
+            <li>Interpretar throughput, latencia y consumer lag durante una carga escalonada.</li>
+            <li>Distinguir un evento publicado de uno procesado por el consumidor.</li>
+            <li>Formular y contrastar hipótesis con evidencia de JMeter, Kafka UI y logs.</li>
+            <li>Proponer una mejora y explicar sus costos, límites y riesgos.</li>
+            <li>Comparar mediciones ANTES/DESPUÉS sin cambiar el perfil de carga.</li>
+          </ul>
+        </section>
+        <aside class="panel">
+          <span class="tag">Antes de comenzar</span>
+          <h2>Requisitos</h2>
+          <ul>
+            <li>Windows 10/11 y PowerShell.</li>
+            <li>Docker Desktop iniciado.</li>
+            <li>Docker Compose V2.</li>
+            <li>Internet para la primera descarga/compilación.</li>
+            <li>Puertos 8081, 8082, 8083, 5173 y 9092 disponibles.</li>
+          </ul>
+          <p class="muted" style="margin-top:14px">No necesitas instalar Maven, Node, Java ni JMeter localmente: el script ejecuta JMeter mediante Docker. JMeter GUI es opcional.</p>
+        </aside>
+      </div>
+      <section class="panel">
+        <span class="tag">Inicio rápido</span>
+        <h2>1. Obtener y levantar el laboratorio</h2>
+        <p>Abre Docker Desktop. Si todavía no tienes el repositorio, clónalo y entra a la carpeta del laboratorio:</p>
+        <div class="code-card"><div class="code-head"><span>POWERSHELL · CLONACIÓN INICIAL</span><span>Windows</span></div><pre><code>git clone https://github.com/cmartinezs/DSY1107-DESARROLLO-CLOUD-NATIVE-I-2026-2.git
+cd DSY1107-DESARROLLO-CLOUD-NATIVE-I-2026-2\labs\kafka-burst-incident</code></pre></div>
+        <p style="margin-top:14px">Si ya tienes una copia, actualízala desde la raíz del repositorio y luego entra a la carpeta:</p>
+        <div class="code-card"><div class="code-head"><span>POWERSHELL · ACTUALIZAR</span><span>Desde la raíz del repo</span></div><pre><code>git switch master
+git pull --ff-only origin master
+cd labs\kafka-burst-incident</code></pre></div>
+        <div class="code-card"><div class="code-head"><span>POWERSHELL · INICIAR</span><span>Desde kafka-burst-incident</span></div><pre><code>.\scripts\iniciar.ps1</code></pre></div>
+        <div class="health-links">
+          <a href="http://localhost:8081/api/compras/salud" target="_blank" rel="noopener noreferrer">API de salud ↗</a>
+          <a href="http://localhost:8083" target="_blank" rel="noopener noreferrer">Kafka UI ↗</a>
+        </div>
+        <p class="muted" style="margin-top:12px">En Kafka UI revisa los topics compras, compras-validas y compras-rechazadas, y localiza el consumer group procesador-s13. No continúes si el stack no está saludable.</p>
+      </section>
+      <section class="panel">
+        <span class="tag">Corrida ANTES</span>
+        <h2>2. Medir la oleada de 300 segundos</h2>
+        <p>Abre dos terminales PowerShell en <span class="inline-code">labs\kafka-burst-incident</span>. Inicia primero el monitor en la segunda terminal; después ejecuta la oleada en la primera.</p>
+        <div class="two-col">
+          <div class="mini">
+            <h3>Terminal 2 · Monitor</h3>
+            <p>Captura el consumer lag antes, durante y después de la oleada.</p>
+            <div class="code-card"><div class="code-head"><span>POWERSHELL</span></div><pre><code>.\scripts\monitorear-lag.ps1 -RunId antes -Snapshots 35 -EverySeconds 10</code></pre></div>
+          </div>
+          <div class="mini">
+            <h3>Terminal 1 · JMeter</h3>
+            <p>Ejecuta el perfil completo de cinco minutos.</p>
+            <div class="code-card"><div class="code-head"><span>POWERSHELL</span></div><pre><code>.\scripts\ejecutar-oleada.ps1 -RunId antes</code></pre></div>
+          </div>
+        </div>
+        <div class="code-card"><div class="code-head"><span>POWERSHELL · RESUMIR LA CORRIDA</span><span>Cuando terminen ambas terminales</span></div><pre><code>.\scripts\resumir-jmeter.ps1 -RunId antes</code></pre></div>
+        <p class="muted" style="margin-top:12px">Se guardan <span class="inline-code">results\oleada-antes.jtl</span>, <span class="inline-code">results\lag-antes.txt</span> y <span class="inline-code">results\resumen-antes.csv</span>. El monitor tarda aproximadamente 5 min 40 s para incluir la recuperación posterior a la carga.</p>
+      </section>
+      <section class="panel">
+        <span class="tag">Calibrar la intensidad</span>
+        <h2>3. Si tu equipo tiene recursos limitados</h2>
+        <p>Puedes reducir las tasas objetivo a la mitad sin cambiar la duración de 300 segundos ni el número máximo de usuarios configurados:</p>
+        <div class="code-card"><div class="code-head"><span>POWERSHELL · CARGA REDUCIDA</span></div><pre><code>.\scripts\ejecutar-oleada.ps1 -RunId antes -LoadScale 0.5</code></pre></div>
+        <p class="muted" style="margin-top:12px">Anota el factor utilizado. Para una comparación válida, usa el mismo factor en las corridas ANTES y DESPUÉS.</p>
+      </section>
+      <section class="panel">
+        <span class="tag">Corrida DESPUÉS</span>
+        <h2>4. Intervenir y comparar</h2>
+        <div class="steps">
+          <div class="step"><p><strong>Guarda primero la línea base.</strong> Conserva JTL, snapshots de lag, resumen, capturas y observaciones.</p></div>
+          <div class="step"><p><strong>Detén el stack.</strong> Ejecuta el script de apagado después de guardar la evidencia.</p></div>
+          <div class="step"><p><strong>Aplica una mejora razonada</strong> en tu copia del código o configuración. Explica qué indicador debería cambiar y qué costo introduces.</p></div>
+          <div class="step"><p><strong>Levanta nuevamente</strong> y repite exactamente el mismo perfil de carga, usando el identificador despues.</p></div>
+        </div>
+        <div class="code-card"><div class="code-head"><span>POWERSHELL · DETENER Y REINICIAR</span></div><pre><code>.\scripts\detener.ps1
+# Aplica tu cambio razonado al código o configuración.
+.\scripts\iniciar.ps1</code></pre></div>
+        <div class="two-col" style="margin-top:15px">
+          <div class="mini"><h3>Terminal 2 · Monitor</h3><div class="code-card"><div class="code-head"><span>POWERSHELL</span></div><pre><code>.\scripts\monitorear-lag.ps1 -RunId despues -Snapshots 35 -EverySeconds 10</code></pre></div></div>
+          <div class="mini"><h3>Terminal 1 · JMeter</h3><div class="code-card"><div class="code-head"><span>POWERSHELL</span></div><pre><code>.\scripts\ejecutar-oleada.ps1 -RunId despues</code></pre></div></div>
+        </div>
+        <div class="code-card"><div class="code-head"><span>POWERSHELL · RESUMIR DESPUÉS</span></div><pre><code>.\scripts\resumir-jmeter.ps1 -RunId despues</code></pre></div>
+        <p class="muted" style="margin-top:12px">Compara tasa HTTP realmente lograda, errores, latencia, lag máximo y tiempo de recuperación. No declares una mejora a partir de una única captura.</p>
+      </section>
+      <div class="grid">
+        <section class="panel">
+          <span class="tag">Entrega</span>
+          <h2>5. Construye tu diagnóstico</h2>
+          <p>Documenta en tu DevLog la hipótesis, evidencia ANTES/DESPUÉS, modificación aplicada, contrapartidas y límites. Distingue siempre valores objetivo del generador y valores observados.</p>
+          <p style="margin-top:12px">La guía completa contiene preguntas de diagnóstico, tabla comparativa y criterios de defensa técnica.</p>
+        </section>
+        <section class="panel">
+          <span class="tag">Apagado seguro</span>
+          <h2>Antes de cerrar</h2>
+          <div class="code-card"><div class="code-head"><span>POWERSHELL · DESDE LA CARPETA DEL LAB</span></div><pre><code>.\scripts\detener.ps1</code></pre></div>
+          <p class="muted" style="margin-top:12px">El broker local no tiene volumen persistente. Al detener el stack se eliminan mensajes y offsets; guarda primero toda tu evidencia.</p>
+        </section>
+      </div>
+      <section class="panel">
+        <span class="tag">Material canónico</span>
+        <h2>Guías y archivos del laboratorio</h2>
+        <p>Los pasos completos y el código se mantienen en el repositorio de DSY1107. El portal entrega orientación y acceso; la ejecución y las pruebas ocurren en tu equipo.</p>
+        <div class="resource-list">
+          <a class="resource" href="https://github.com/cmartinezs/DSY1107-DESARROLLO-CLOUD-NATIVE-I-2026-2/blob/master/labs/kafka-burst-incident/GUIA-ESTUDIANTE.md" target="_blank" rel="noopener noreferrer"><div><strong>Guía completa del estudiante</strong><small>Misión, checkpoints, diagnóstico y entrega</small></div><span>↗</span></a>
+          <a class="resource" href="https://github.com/cmartinezs/DSY1107-DESARROLLO-CLOUD-NATIVE-I-2026-2/tree/master/labs/kafka-burst-incident" target="_blank" rel="noopener noreferrer"><div><strong>Repositorio del laboratorio</strong><small>README, scripts, Compose y recursos</small></div><span>↗</span></a>
+          <a class="resource" href="https://github.com/cmartinezs/DSY1107-DESARROLLO-CLOUD-NATIVE-I-2026-2/blob/master/labs/kafka-burst-incident/load/oleada-300s.jmx" target="_blank" rel="noopener noreferrer"><div><strong>Plan de oleada JMeter · 300 s</strong><small>Ocho fases temporizadas, sin plugins</small></div><span>↗</span></a>
+        </div>
+      </section>
+      <div class="callout"><strong>Uso seguro del entorno</strong><p>Ejecuta la carga únicamente contra localhost o la red Docker local. No apuntes JMeter a servicios institucionales, públicos ni de otros estudiantes. No levantes simultáneamente otro laboratorio Kafka: comparten puertos y broker local.</p></div>
+    </main>
+  </div>
+  <footer class="footer"><div class="footer-inner"><span>Academic Labs · ADÜMÜN · Aprender haciendo.</span><a href="/explore/?course=DSY1107">Más actividades DSY1107 ↗</a></div></footer>
+</body>
+</html>
