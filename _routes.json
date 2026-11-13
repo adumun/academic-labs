@@ -2,8 +2,7 @@
   "version": 1,
   "include": [
     "/",
-    "/games/*",
-    "/games/demos/*"
+    "/games/*"
   ],
   "exclude": [
     "/games",
