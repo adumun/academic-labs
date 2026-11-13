@@ -74,3 +74,23 @@ El backend Support Desk sí está completo: el foco de aprendizaje está en el c
 - Conexión a Internet durante la primera sincronización para descargar Gradle y dependencias.
 
 No se exige Maven instalado, PowerShell, CMD ni ejecución manual de comandos.
+
+
+## Entorno Windows + WSL2 (código en Linux, Android Studio en Windows)
+
+El entorno de referencia puede mantener el repositorio canónico dentro de WSL2 y ejecutar Android Studio, Android SDK, emulador y JDK desde Windows.
+
+1. En Android Studio para Windows, selecciona **File → Open**.
+2. Desde el selector de carpetas navega a la distribución WSL mediante la ruta UNC: `\\wsl.localhost\<DISTRIBUCION>\home\<USUARIO_LINUX>\projects\academic-labs\resources\dsy1105\`.
+3. Abre individualmente una de las carpetas de proyecto indicadas arriba. No abras la carpeta contenedora como un único proyecto.
+4. Usa el JDK de Windows configurado en Android Studio y el Android SDK instalado en Windows. No configures rutas Linux (/usr/lib/jvm, /home/.../Android/Sdk) como SDK/JDK del IDE Windows.
+5. Espera Gradle Sync. El IDE ejecutará Gradle desde Windows sobre la ruta UNC. La primera sincronización descarga Gradle y dependencias.
+6. Ejecuta Android desde Windows con Run y el emulador local.
+
+**Advertencia de rendimiento:** Microsoft documenta que los procesos Windows que acceden a archivos dentro del filesystem Linux de WSL mediante `\\wsl.localhost` pueden sufrir penalización de I/O. Esta ruta es la primera opción para evitar duplicar el repositorio, pero debe validarse en el equipo. Si Gradle Sync o el indexado resultan lentos/inestables, la alternativa es mantener una copia de trabajo en NTFS (por ejemplo `C:\\projects\\academic-labs`) para Android Studio y sincronizar cambios mediante Git, sin editar simultáneamente ambas copias.
+
+No se debe asumir que Android Studio Windows está ejecutando Gradle dentro de WSL: al abrir el proyecto desde el IDE Windows, Gradle usa el runtime/JDK del entorno Windows. El proyecto continúa versionado en Git y los demás flujos Linux pueden seguir usando la copia canónica de WSL.
+
+### Backend y emulador
+
+Si Support Desk API se ejecuta desde Android Studio Windows, el backend corre en el host Windows y Android Emulator debe consumirlo mediante `http://10.0.2.2:8080`. Si el backend se ejecuta desde WSL por separado, la conectividad depende del modo de red WSL2 (NAT o mirrored) y debe verificarse; no asumir que `10.0.2.2` apunta a un servicio iniciado dentro de WSL.
