@@ -4,3 +4,5 @@
 *.trace.db
 .idea/
 *.iml
+/build/
+/.gradle/
