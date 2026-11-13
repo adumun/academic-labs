@@ -1,28 +1,27 @@
 # Support Desk API — DSY1105
 
-Backend REST didáctico completo para la actividad de consumo de APIs desde Android.
+Backend REST didáctico completo para la actividad de consumo de APIs desde Android. Está configurado como proyecto Gradle Java para abrirse, ejecutarse y probarse desde Android Studio, sin instalar Maven ni utilizar una terminal.
 
-## Requisitos
+## Abrir y ejecutar desde Android Studio
 
-- JDK 17
-- Maven 3.9+ (o Maven Wrapper si se incorpora al entorno)
-- Puerto TCP 8080 disponible
+1. Selecciona **File → Open**.
+2. Selecciona esta carpeta `support-desk-api` (la que contiene `settings.gradle.kts`).
+3. Espera Gradle Sync. En la primera apertura se descargan Gradle y dependencias.
+4. Configura **Gradle JDK 17** si Android Studio lo solicita.
+5. Abre `src/main/java/cl/adumun/dsy1105/supportdesk/SupportDeskApiApplication.java`.
+6. Pulsa el icono verde **Run ▶** junto al método `main`. También puedes abrir el panel Gradle y ejecutar `Tasks → application → bootRun`.
+7. La API queda en `http://localhost:8080`. La consola **Run** de Android Studio permite detener y revisar el proceso.
 
-## Ejecutar
+## Ejecutar pruebas desde Android Studio
 
-Desde esta carpeta:
+1. Abre `src/test/java/cl/adumun/dsy1105/supportdesk/TicketApiIntegrationTest.java`.
+2. Pulsa **Run ▶** junto a la clase o al método `supportsTicketCrudAndValidation`.
+3. Revisa la ventana **Test Results**: debe mostrar la prueba en verde.
+4. Alternativamente, abre el panel Gradle y ejecuta `Tasks → verification → test`.
 
-```bash
-mvn spring-boot:run
-```
+La prueba verifica GET de colección y detalle, POST (201), PUT, PATCH, DELETE (204), inexistencia (404) y validación (400). No se debe marcar PASS hasta ejecutar la prueba y observar el resultado.
 
-Windows PowerShell:
-
-```powershell
-mvn spring-boot:run
-```
-
-La API queda en `http://localhost:8080`.
+## Inspeccionar la API
 
 - Swagger UI: http://localhost:8080/swagger-ui/index.html
 - OpenAPI JSON: http://localhost:8080/v3/api-docs
@@ -38,7 +37,7 @@ La base H2 utiliza almacenamiento local en archivo, por lo que los tickets sobre
 - Emulador Android Studio: `http://10.0.2.2:8080`
 - Dispositivo físico: `http://IP_LAN_DEL_COMPUTADOR:8080` (ambos equipos en la misma red).
 
-Para pruebas docentes, Android puede requerir permitir tráfico HTTP cleartext en el manifiesto de desarrollo. No se configura TLS ni autenticación en esta API didáctica.
+No uses `localhost` desde el emulador: apunta al propio emulador, no al computador anfitrión. Para pruebas docentes, Android puede requerir permitir tráfico HTTP cleartext en el manifiesto de desarrollo. No se configura TLS ni autenticación en esta API didáctica.
 
 ## Endpoints
 
@@ -51,51 +50,15 @@ Para pruebas docentes, Android puede requerir permitir tráfico HTTP cleartext e
 | PATCH | /api/tickets/{id}/status | 200 + ticket actualizado |
 | DELETE | /api/tickets/{id} | 204 sin cuerpo |
 
-## Crear ticket — POST
+## Contratos JSON
 
-```http
-POST /api/tickets
-Content-Type: application/json
-```
+POST requiere `title`, `description`, `category`, `priority` y `requester`. El estado inicial es `ABIERTO`; las fechas las genera el servidor.
 
-```json
-{
-  "title": "No puedo acceder al portal",
-  "description": "Al iniciar sesión aparece un mensaje de error.",
-  "category": "Acceso",
-  "priority": "ALTA",
-  "requester": "Alex González"
-}
-```
+PUT recibe todos los campos editables. PATCH recibe un objeto con `status`, cuyos valores válidos son `ABIERTO`, `EN_PROCESO`, `RESUELTO` y `CERRADO`.
 
-El estado inicial siempre es `ABIERTO`; las fechas las genera el servidor.
+Prioridades válidas: `BAJA`, `MEDIA`, `ALTA`, `CRITICA`.
 
-## Actualizar ticket — PUT
-
-Enviar todos los campos editables:
-
-```json
-{
-  "title": "No puedo acceder al portal",
-  "description": "El error continúa después de restablecer la contraseña.",
-  "category": "Acceso",
-  "priority": "CRITICA",
-  "requester": "Alex González"
-}
-```
-
-## Cambiar estado — PATCH
-
-```json
-{ "status": "EN_PROCESO" }
-```
-
-Valores válidos de estado: `ABIERTO`, `EN_PROCESO`, `RESUELTO`, `CERRADO`.
-
-Valores válidos de prioridad: `BAJA`, `MEDIA`, `ALTA`, `CRITICA`.
-
-## Validaciones
-
+Validaciones:
 - `title`: obligatorio, máximo 100 caracteres.
 - `description`: obligatorio, máximo 1000 caracteres.
 - `category`: obligatorio, máximo 60 caracteres.
@@ -112,15 +75,3 @@ Errores:
 ## Alcance intencional
 
 No incluye autenticación, autorización, Spring Security, JWT, Docker ni microservicios. CORS está abierto para facilitar el laboratorio local. No desplegar esta API públicamente ni reutilizarla como backend productivo.
-
-## Estructura
-
-```text
-src/main/java/cl/adumun/dsy1105/supportdesk/
-  config/       DataInitializer
-  controller/   TicketController, ApiExceptionHandler
-  dto/          TicketRequest, TicketStatusRequest, TicketResponse
-  model/        Ticket, TicketStatus, TicketPriority
-  repository/   TicketRepository
-  service/      TicketService, TicketNotFoundException
-```
