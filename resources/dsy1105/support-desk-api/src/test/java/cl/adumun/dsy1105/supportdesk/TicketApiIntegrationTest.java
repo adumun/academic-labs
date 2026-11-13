@@ -36,6 +36,10 @@ class TicketApiIntegrationTest {
 
         String id = com.jayway.jsonpath.JsonPath.read(response, "$.id").toString();
 
+        mvc.perform(get("/api/tickets"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$").isArray());
+
         mvc.perform(get("/api/tickets/{id}", id))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.title").value("Prueba de integración"));
