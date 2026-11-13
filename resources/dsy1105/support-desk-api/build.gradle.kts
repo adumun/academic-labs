@@ -14,9 +14,6 @@ java {
     }
 }
 
-repositories {
-    mavenCentral()
-}
 
 val springdocVersion = "2.7.0"
 
