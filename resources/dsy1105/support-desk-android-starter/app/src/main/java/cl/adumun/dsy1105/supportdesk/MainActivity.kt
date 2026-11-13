@@ -117,6 +117,7 @@ fun TicketDetailScreen(
     onChangeStatus: () -> Unit,
     onDeletePreview: () -> Unit
 ) {
+    var confirmDelete by remember(ticket.id) { mutableStateOf(false) }
     Scaffold(topBar = { TopAppBar(title = { Text("Detalle del ticket") }, navigationIcon = {
         TextButton(onClick = onBack) { Text("←") }
     }) }) { padding ->
@@ -130,9 +131,25 @@ fun TicketDetailScreen(
             Text("Estado: ${ticket.status}")
             Button(onClick = onEdit) { Text("Editar ticket (demo)") }
             OutlinedButton(onClick = onChangeStatus) { Text("Marcar en proceso (demo)") }
-            OutlinedButton(onClick = onDeletePreview) { Text("Eliminar (demo local)") }
+            OutlinedButton(onClick = { confirmDelete = true }) { Text("Eliminar (demo local)") }
             Text("TODO(REST): GET detalle · PUT · PATCH estado · DELETE", color = Color(0xFF187D79))
         }
+    }
+    if (confirmDelete) {
+        AlertDialog(
+            onDismissRequest = { confirmDelete = false },
+            title = { Text("Eliminar ticket") },
+            text = { Text("¿Seguro que deseas eliminar este ticket?") },
+            confirmButton = {
+                TextButton(onClick = {
+                    confirmDelete = false
+                    onDeletePreview()
+                }) { Text("Eliminar") }
+            },
+            dismissButton = {
+                TextButton(onClick = { confirmDelete = false }) { Text("Cancelar") }
+            }
+        )
     }
 }
 
