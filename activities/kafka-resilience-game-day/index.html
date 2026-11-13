@@ -90,22 +90,22 @@ Pop-Location</code></pre></div>
         </div>
         <h3>Escenarios de retry y DLT</h3>
         <p>Para ejecutar estos escenarios, usa la misma terminal y la misma carpeta del laboratorio. Cada comando conserva un archivo JTL distinto.</p>
-        <div class="code-card"><div class="code-head"><span>POWERSHELL · FALLA TRANSITORIA</span><span>Desde kafka-resilience-game-day</span></div><pre><code>Push-Location ..\\kafka-compras-webapp
+        <div class="code-card"><div class="code-head"><span>POWERSHELL · FALLA TRANSITORIA</span><span>Desde kafka-resilience-game-day</span></div><pre><code>Push-Location ..\kafka-compras-webapp
 
-docker compose --env-file ..\\kafka-resilience-game-day\\.env.game-day -f compose.yaml -f ..\\kafka-resilience-game-day\\compose.game-day.yaml --profile app --profile pipeline --profile load run --build --rm jmeter-runner -t /tests/carga-compras.jmx -Jhost=compras-api -Jport=8080 -Jthreads=1 -Jloops=1 -JclientePrefix=SIM-RETRY- -l /results/retry.jtl
-
-Pop-Location</code></pre></div>
-        <div class="code-card"><div class="code-head"><span>POWERSHELL · FALLA PERMANENTE / DLT</span><span>Desde kafka-resilience-game-day</span></div><pre><code>Push-Location ..\\kafka-compras-webapp
-
-docker compose --env-file ..\\kafka-resilience-game-day\\.env.game-day -f compose.yaml -f ..\\kafka-resilience-game-day\\compose.game-day.yaml --profile app --profile pipeline --profile load run --build --rm jmeter-runner -t /tests/carga-compras.jmx -Jhost=compras-api -Jport=8080 -Jthreads=1 -Jloops=1 -JclientePrefix=SIM-DLT- -l /results/dlt.jtl
+docker compose --env-file ..\kafka-resilience-game-day\.env.game-day -f compose.yaml -f ..\kafka-resilience-game-day\compose.game-day.yaml --profile app --profile pipeline --profile load run --build --rm jmeter-runner -t /tests/carga-compras.jmx -Jhost=compras-api -Jport=8080 -Jthreads=1 -Jloops=1 -JclientePrefix=SIM-RETRY- -l /results/retry.jtl
 
 Pop-Location</code></pre></div>
-        <div class="code-card"><div class="code-head"><span>POWERSHELL · MEZCLA ALEATORIA (OPCIONAL)</span><span>Máximo inicial 10 × 20</span></div><pre><code>Push-Location ..\\kafka-compras-webapp
+        <div class="code-card"><div class="code-head"><span>POWERSHELL · FALLA PERMANENTE / DLT</span><span>Desde kafka-resilience-game-day</span></div><pre><code>Push-Location ..\kafka-compras-webapp
 
-docker compose --env-file ..\\kafka-resilience-game-day\\.env.game-day -f compose.yaml -f ..\\kafka-resilience-game-day\\compose.game-day.yaml --profile app --profile pipeline --profile load run --build --rm jmeter-runner -t /tests/carga-compras.jmx -Jhost=compras-api -Jport=8080 -Jthreads=10 -Jloops=20 -JclientePrefix=MIXTO -JpctRetry=10 -JpctDlt=5 -l /results/mixto.jtl
+docker compose --env-file ..\kafka-resilience-game-day\.env.game-day -f compose.yaml -f ..\kafka-resilience-game-day\compose.game-day.yaml --profile app --profile pipeline --profile load run --build --rm jmeter-runner -t /tests/carga-compras.jmx -Jhost=compras-api -Jport=8080 -Jthreads=1 -Jloops=1 -JclientePrefix=SIM-DLT- -l /results/dlt.jtl
 
 Pop-Location</code></pre></div>
-        <div class="code-card"><div class="code-head"><span>POWERSHELL · ERRORES DE CONTRATO</span><span>Desde kafka-resilience-game-day</span></div><pre><code> .\\scripts\\inyectar-invalidos.ps1</code></pre></div>
+        <div class="code-card"><div class="code-head"><span>POWERSHELL · MEZCLA ALEATORIA (OPCIONAL)</span><span>Máximo inicial 10 × 20</span></div><pre><code>Push-Location ..\kafka-compras-webapp
+
+docker compose --env-file ..\kafka-resilience-game-day\.env.game-day -f compose.yaml -f ..\kafka-resilience-game-day\compose.game-day.yaml --profile app --profile pipeline --profile load run --build --rm jmeter-runner -t /tests/carga-compras.jmx -Jhost=compras-api -Jport=8080 -Jthreads=10 -Jloops=20 -JclientePrefix=MIXTO -JpctRetry=10 -JpctDlt=5 -l /results/mixto.jtl
+
+Pop-Location</code></pre></div>
+        <div class="code-card"><div class="code-head"><span>POWERSHELL · ERRORES DE CONTRATO</span><span>Desde kafka-resilience-game-day</span></div><pre><code>.\scripts\inyectar-invalidos.ps1</code></pre></div>
         <p class="muted" style="margin-top:14px">En modo MIXTO, 85 % OK, 10 % retry y 5 % DLT son probabilidades, no proporciones exactas garantizadas. No superes 20 usuarios concurrentes ni 30 vueltas en el ejercicio inicial. El tablero React usa otro grupo consumidor: no lo tomes como evidencia de éxito del procesador.</p>
       </section>
       <div class="grid">
