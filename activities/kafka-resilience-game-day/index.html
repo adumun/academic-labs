@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Laboratorio híbrido DSY1107 para investigar resiliencia en Kafka: fallos transitorios, reintentos, Dead Letter Topic, offsets y consumer lag.">
+  <title>Kafka Game Day · Resiliencia y DLT | Academic Labs</title>
+  <link rel="stylesheet" href="/activities/kafka-labs.css">
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/"><span class="brand-mark">A</span><span class="brand-name">academic<strong>labs</strong><small>Una iniciativa ADÜMÜN</small></span></a>
+      <nav aria-label="Navegación principal"><a href="/">Inicio</a><a href="/explore/">Explorar actividades</a><a href="/education/">Educación</a></nav>
+    </div>
+  </header>
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Ruta de navegación"><a href="/">Inicio</a><span>/</span><a href="/explore/?course=DSY1107">DSY1107</a><span>/</span><span aria-current="page">Kafka Game Day</span></nav>
+    <section class="hero">
+      <span class="eyebrow">LABORATORIO HÍBRIDO · DESARROLLO CLOUD NATIVE I</span>
+      <h1>Kafka Game Day</h1>
+      <p>Cuando un evento falla, el sistema debe decidir si reintenta, rechaza o deriva el mensaje. Investiga el comportamiento de una arquitectura basada en Kafka y defiende una política de recuperación con evidencia real.</p>
+      <div class="chips"><span>DSY1107</span><span>100–120 minutos</span><span>Windows + Docker Desktop</span><span>Spring Boot · Kafka · JMeter</span></div>
+      <div class="hero-actions">
+        <a class="button primary" href="https://github.com/cmartinezs/DSY1107-DESARROLLO-CLOUD-NATIVE-I-2026-2/blob/master/labs/kafka-resilience-game-day/GUIA-ESTUDIANTE.md" target="_blank" rel="noopener noreferrer">Abrir guía completa ↗</a>
+        <a class="button secondary" href="/explore/?course=DSY1107">Volver al catálogo</a>
+      </div>
+    </section>
+    <main id="contenido" class="main">
+      <div class="grid">
+        <section class="panel">
+          <span class="tag">Tu misión</span>
+          <h2>Investiga los fallos, no solo el código HTTP</h2>
+          <p>Una tienda publica compras como eventos. Algunos se procesan normalmente, otros fallan temporalmente y otros contienen errores que no se resolverán reintentando. Tu equipo debe seguir el recorrido del mensaje y explicar qué ocurre con cada caso.</p>
+          <h3>Al terminar podrás:</h3>
+          <ul>
+            <li>Distinguir un fallo transitorio de un error permanente de contrato.</li>
+            <li>Observar reintentos y explicar cuándo un mensaje termina en una Dead Letter Topic (DLT).</li>
+            <li>Relacionar topic, partición, offset y consumer lag.</li>
+            <li>Explicar por qué HTTP 201 confirma la publicación, pero no el procesamiento final.</li>
+            <li>Proponer una política de recuperación y sus límites.</li>
+          </ul>
+        </section>
+        <aside class="panel">
+          <span class="tag">Antes de comenzar</span>
+          <h2>Requisitos</h2>
+          <ul>
+            <li>Windows 10/11 y PowerShell.</li>
+            <li>Docker Desktop iniciado.</li>
+            <li>Docker Compose V2.</li>
+            <li>Internet para la primera descarga/compilación.</li>
+            <li>Puertos 8081, 8082, 8083, 5173 y 9092 disponibles.</li>
+          </ul>
+          <p class="muted" style="margin-top:14px">No necesitas instalar Java, Maven, Node ni JMeter si utilizas el runner Docker. Para abrir JMeter GUI necesitas Java 17 o superior.</p>
+        </aside>
+      </div>
+      <section class="panel">
+        <span class="tag">Inicio rápido</span>
+        <h2>1. Obtener y levantar el laboratorio</h2>
+        <p>Abre Docker Desktop. Si todavía no tienes el repositorio, clónalo y entra a la carpeta del laboratorio:</p>
+        <div class="code-card"><div class="code-head"><span>POWERSHELL · CLONACIÓN INICIAL</span><span>Windows</span></div><pre><code>git clone https://github.com/cmartinezs/DSY1107-DESARROLLO-CLOUD-NATIVE-I-2026-2.git
+cd DSY1107-DESARROLLO-CLOUD-NATIVE-I-2026-2\labs\kafka-resilience-game-day</code></pre></div>
+        <p style="margin-top:14px">Si ya tienes una copia, actualízala desde la raíz del repositorio y luego entra a la carpeta del laboratorio:</p>
+        <div class="code-card"><div class="code-head"><span>POWERSHELL · ACTUALIZAR</span><span>Desde la raíz del repo</span></div><pre><code>git switch master
+git pull --ff-only origin master
+cd labs\kafka-resilience-game-day</code></pre></div>
+        <div class="code-card"><div class="code-head"><span>POWERSHELL · INICIAR Y VALIDAR</span><span>Desde kafka-resilience-game-day</span></div><pre><code>.\scripts\iniciar.ps1
+.\scripts\preflight.ps1</code></pre></div>
+        <div class="health-links">
+          <a href="http://localhost:8081/api/compras/salud" target="_blank" rel="noopener noreferrer">API de salud ↗</a>
+          <a href="http://localhost:8083" target="_blank" rel="noopener noreferrer">Kafka UI ↗</a>
+          <a href="http://localhost:5173" target="_blank" rel="noopener noreferrer">Aplicación web ↗</a>
+        </div>
+        <p class="muted" style="margin-top:12px">El preflight verifica configuración, seis servicios, API HTTP y los topics compras, compras-validas, compras-rechazadas y compras-dlt. No continúes si no muestra PREFLIGHT PASS.</p>
+      </section>
+      <section class="panel">
+        <span class="tag">Prueba de carga</span>
+        <h2>2. Ejecutar JMeter sin instalarlo en Windows</h2>
+        <p>Con el stack iniciado, ejecuta el mismo plan JMeter desde Docker. Este ejemplo genera una línea base pequeña de 5 usuarios por 5 vueltas.</p>
+        <div class="code-card"><div class="code-head"><span>POWERSHELL · DESDE kafka-resilience-game-day</span><span>Runner Docker</span></div><pre><code>Push-Location ..\kafka-compras-webapp
+
+docker compose --env-file ..\kafka-resilience-game-day\.env.game-day -f compose.yaml -f ..\kafka-resilience-game-day\compose.game-day.yaml --profile app --profile pipeline --profile load run --build --rm jmeter-runner -t /tests/carga-compras.jmx -Jhost=compras-api -Jport=8080 -Jthreads=5 -Jloops=5 -JclientePrefix=LAB-OK- -l /results/baseline.jtl
+
+Pop-Location</code></pre></div>
+        <div class="two-col" style="margin-top:16px">
+          <div class="mini"><h3>Falla transitoria</h3><p>Usa el prefijo <span class="inline-code">SIM-RETRY-</span> para observar los intentos y la recuperación del mensaje.</p></div>
+          <div class="mini"><h3>Falla persistente</h3><p>Usa <span class="inline-code">SIM-DLT-</span> para seguir el evento hasta <span class="inline-code">compras-dlt</span> y revisar sus headers.</p></div>
+        </div>
+        <p class="muted" style="margin-top:14px">Los resultados JTL quedan en la carpeta results del laboratorio. En la guía completa encontrarás los comandos de ambos escenarios, la mezcla de fallos y las pruebas de contrato inválido.</p>
+      </section>
+      <div class="grid">
+        <section class="panel">
+          <span class="tag">Evidencias</span>
+          <h2>3. Registra lo que realmente observaste</h2>
+          <p>Conserva las capturas de Kafka UI, los resultados JMeter y los logs. Completa el DevLog con los checkpoints E0–E4, las respuestas y una política de recuperación justificada.</p>
+          <p style="margin-top:12px">No inventes tasas, offsets ni resultados. Espera a que el consumidor termine de procesar antes de comparar conteos.</p>
+        </section>
+        <section class="panel">
+          <span class="tag">Apagado seguro</span>
+          <h2>4. Cierra después de guardar</h2>
+          <div class="code-card"><div class="code-head"><span>POWERSHELL · DESDE LA CARPETA DEL LAB</span></div><pre><code>.\scripts\detener.ps1</code></pre></div>
+          <p class="muted" style="margin-top:12px">El broker local no tiene volumen persistente. Al detener el stack se eliminan mensajes y offsets; guarda primero toda tu evidencia.</p>
+        </section>
+      </div>
+      <section class="panel">
+        <span class="tag">Material canónico</span>
+        <h2>Guías y archivos del laboratorio</h2>
+        <p>Los pasos detallados y el código se mantienen en el repositorio de DSY1107. Si una instrucción de esta página y la guía completa difieren, informa a tu docente y utiliza la versión vigente del repositorio.</p>
+        <div class="resource-list">
+          <a class="resource" href="https://github.com/cmartinezs/DSY1107-DESARROLLO-CLOUD-NATIVE-I-2026-2/blob/master/labs/kafka-resilience-game-day/GUIA-ESTUDIANTE.md" target="_blank" rel="noopener noreferrer"><div><strong>Guía completa del estudiante</strong><small>Contexto, checkpoints, preguntas y entrega</small></div><span>↗</span></a>
+          <a class="resource" href="https://github.com/cmartinezs/DSY1107-DESARROLLO-CLOUD-NATIVE-I-2026-2/tree/master/labs/kafka-resilience-game-day" target="_blank" rel="noopener noreferrer"><div><strong>Repositorio del laboratorio</strong><small>README, scripts, Compose y recursos</small></div><span>↗</span></a>
+          <a class="resource" href="https://github.com/cmartinezs/DSY1107-DESARROLLO-CLOUD-NATIVE-I-2026-2/blob/master/labs/kafka-resilience-game-day/load/carga-compras.jmx" target="_blank" rel="noopener noreferrer"><div><strong>Plan de carga JMeter</strong><small>Archivo JMX para GUI o ejecución Docker</small></div><span>↗</span></a>
+        </div>
+      </section>
+      <div class="callout"><strong>Uso seguro del entorno</strong><p>Este laboratorio se ejecuta únicamente en tu equipo, en localhost o en la red Docker local. No apuntes JMeter a servicios institucionales, públicos ni de otros estudiantes. No ejecutes a la vez el otro laboratorio Kafka: comparten puertos y broker local.</p></div>
+    </main>
+  </div>
+  <footer class="footer"><div class="footer-inner"><span>Academic Labs · ADÜMÜN · Aprender haciendo.</span><a href="/explore/?course=DSY1107">Más actividades DSY1107 ↗</a></div></footer>
+</body>
+</html>
