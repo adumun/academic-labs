@@ -55,6 +55,23 @@ Una actividad pertenece primordialmente a **temáticas/contenidos académicos**.
 
 > La presencia de una carpeta sin entrada en catálogo **no la oculta de Internet**: la ruta sigue siendo pública. Nunca subas respuestas correctas reservadas, datos privados o secretos al repositorio.
 
+## Modalidad híbrida: ejecución en herramientas externas
+
+Academic Labs también puede orientar prácticas que **no se ejecutan en el navegador**. Para laboratorios que requieren Docker, Kafka, IDEs u otras herramientas reales:
+
+- La página de actividad presenta propósito, objetivos, requisitos, pasos de inicio y comandos locales.
+- La ejecución, el código, los planes de prueba y la guía completa permanecen en el repositorio canónico de la asignatura.
+- El portal enlaza a esos recursos; no simula infraestructura, no recibe entregas y no evalúa resultados.
+- Publica solo material para estudiantes. Las guías docentes, claves, soluciones y calibraciones reservadas permanecen fuera del repositorio público.
+- Registra la modalidad y las dependencias con metadatos descriptivos/tags, sin añadir un motor de ejecución ni un esquema de evaluación.
+
+Primeras prácticas híbridas publicadas para DSY1107:
+
+- [Kafka Game Day: resiliencia y Dead Letter Topic](/activities/kafka-resilience-game-day/)
+- [Operación Avalancha: Kafka bajo presión](/activities/kafka-burst-incident/)
+
+Las instrucciones completas y los archivos ejecutables son mantenidos en el [repositorio DSY1107](https://github.com/cmartinezs/DSY1107-DESARROLLO-CLOUD-NATIVE-I-2026-2).
+
 ## Comprobar localmente
 
 Con Python instalado, desde la raíz del repositorio:
