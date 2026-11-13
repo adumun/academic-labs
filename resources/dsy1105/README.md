@@ -8,17 +8,20 @@ Esta carpeta contiene dos actividades Android independientes y un backend de apo
 - `support-desk-android-starter/`: cliente Android Kotlin + Jetpack Compose. El estudiante implementa la conexión y consumo de Support Desk API.
 - `support-desk-api/`: backend Java + Spring Boot + H2, construido con Gradle para importarlo y ejecutarlo desde Android Studio.
 
-## Abrir los proyectos
+## Obtener el repositorio y abrir los proyectos
 
-Cada carpeta es un proyecto independiente. En Android Studio:
+1. En la pantalla inicial de Android Studio selecciona **Get from VCS**.
+2. Pega `https://github.com/adumun/academic-labs.git` y elige una carpeta local de destino.
+3. Espera a que termine la descarga del repositorio.
+4. En Android Studio selecciona **File → Open** y elige una de estas carpetas:
+   - `resources/dsy1105/pokedex-android-starter`
+   - `resources/dsy1105/support-desk-android-starter`
+   - `resources/dsy1105/support-desk-api`
+5. Acepta **Trust Project** si aparece.
+6. Espera a que termine **Gradle Sync** y la descarga inicial de dependencias.
+7. Si solicita un JDK, selecciona JDK 17. Para Android, configura también Android SDK 35 desde SDK Manager.
 
-1. Selecciona **File → Open**.
-2. Elige la carpeta del proyecto que vas a trabajar (no selecciones la carpeta `resources/dsy1105` completa).
-3. Acepta **Trust Project** si aparece.
-4. Espera a que termine **Gradle Sync** y la descarga inicial de dependencias.
-5. Si solicita un JDK, selecciona JDK 17. Para Android, configura también Android SDK 35 desde SDK Manager.
-
-Repite el procedimiento para cada uno de los tres proyectos. Android Studio puede mantenerlos en ventanas separadas.
+Cada carpeta es un proyecto independiente. Ábrelos en ventanas separadas de Android Studio cuando necesites alternar entre app y backend; no selecciones la carpeta `resources/dsy1105` completa como si fuera un único proyecto.
 
 ## Pokédex Android
 
