@@ -264,6 +264,58 @@
       "path": "/activities/kafka-burst-incident/",
       "version": "1.0.0",
       "status": "published"
+    },
+    {
+      "id": "dsy1102-ep2-microdesafios",
+      "title": "EP2 express: seis microdesafíos JavaFX",
+      "description": "Seis retos independientes de 20 a 30 minutos para practicar FXML y controladores, validaciones, TableView, eliminación, lectura y escritura JSON con Gson. Incluye kit descargable de seis proyectos Maven iniciales con TODO.",
+      "topicIds": [
+        "interfaces-graficas-javafx",
+        "arquitectura-mvc-persistencia",
+        "formatos-de-datos-json"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Conectar controles FXML con un controlador JavaFX y gestionar eventos",
+        "Validar entradas, capturar excepciones y presentar mensajes sin borrar datos incorrectos",
+        "Registrar objetos del modelo en TableView mediante ObservableList",
+        "Eliminar un registro seleccionado sin alterar datos ante una selección vacía",
+        "Serializar y guardar una lista de objetos en JSON con Gson",
+        "Cargar datos JSON con Gson y manejar archivos ausentes o inválidos"
+      ],
+      "icon": "⏱️",
+      "durationMinutes": 30,
+      "tags": [
+        "dsy1102",
+        "ep2",
+        "java",
+        "javafx",
+        "maven",
+        "java21",
+        "fxml",
+        "controller",
+        "tableview",
+        "observablelist",
+        "validaciones",
+        "excepciones",
+        "mvc",
+        "dao",
+        "repository",
+        "gson",
+        "json",
+        "persistencia",
+        "microdesafios",
+        "practica-express",
+        "laboratorio-hibrido",
+        "ejecucion-local",
+        "intellij"
+      ],
+      "path": "/activities/dsy1102-ep2-microdesafios/",
+      "evidence": "txt",
+      "version": "1.0.0",
+      "status": "published"
     }
   ]
 }

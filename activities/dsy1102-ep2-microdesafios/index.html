@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Seis microdesafíos JavaFX de 20 a 30 minutos para practicar FXML, MVC, TableView, validaciones y JSON con Gson antes de la EP2 de DSY1102.">
+<title>EP2 express · Seis microdesafíos JavaFX · DSY1102 | Academic Labs</title>
+<style>
+:root{color-scheme:light;--ink:#1b2944;--muted:#526681;--line:#dfe6f0;--bg:#f3f6fb;--navy:#10233c;--navy2:#243c65;--mint:#a8f3db;--purple:#5146b2;--white:#fff;font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink)}a{color:#315ca3;text-underline-offset:3px}a:hover{text-decoration-thickness:2px}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid #9068ff;outline-offset:3px}.skip{position:absolute;left:-10000px;top:0;padding:10px;background:#fff;color:#000}.skip:focus{left:10px;z-index:50}
+.shell{max-width:1040px;margin:auto;padding:16px 20px 70px}.breadcrumbs{font-size:.87rem;margin:4px 0 16px;color:#465b77}.breadcrumbs a{text-decoration:none}.hero{padding:clamp(24px,4vw,42px);border-radius:25px;background:linear-gradient(125deg,var(--navy),var(--navy2));color:white;box-shadow:0 17px 35px #16294015}.eyebrow{text-transform:uppercase;letter-spacing:.16em;color:var(--mint);font-size:.78rem;font-weight:850}h1{font-size:clamp(2rem,5vw,3.25rem);line-height:1.12;letter-spacing:-.04em;margin:12px 0}.hero p{max-width:770px;color:#dbe7f8;margin:11px 0}.pills{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}.pills span{font-size:.81rem;padding:5px 11px;border-radius:99px;background:#ffffff1c;border:1px solid #ffffff26}.hero-actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:20px}.btn{border:0;border-radius:12px;padding:11px 17px;background:var(--mint);color:#112b36;font-weight:800;display:inline-flex;align-items:center;text-decoration:none;justify-content:center;min-height:44px}.btn:hover{filter:brightness(.96)}.btn.alt{background:#ffffff19;color:white;border:1px solid #ffffff46}.btn.soft{background:#e5e9f5;color:#213c66}.btn[disabled]{opacity:.7;cursor:wait}
+.notice{background:#fff7e8;border:1px solid #ebdbb5;border-radius:14px;padding:13px 16px;font-size:.92rem;margin:17px 0 0;color:#654e2c}
+.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin:20px 0}.panel{background:#fff;border-radius:18px;padding:22px 23px;border:1px solid var(--line);box-shadow:0 8px 18px #122b4c0a}.panel h2{font-size:1.15rem;margin:0 0 9px}.panel p{margin:8px 0;color:#465875}.panel ol{margin:8px 0 0;padding-left:21px}.panel li{margin:5px 0}.panel code,.files code,.trouble code{background:#ecf0f7;color:#24416b;border-radius:5px;padding:1px 5px;font-size:.9em;word-break:break-word}
+.quicknav{margin:25px 0 15px}.quicknav h2{font-size:1.3rem;margin:0 0 9px}.quicknav nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.quicknav a{display:flex;align-items:center;gap:10px;background:white;border:1px solid var(--line);padding:12px;border-radius:12px;text-decoration:none;font-size:.87rem;font-weight:700}.quicknav a span{font-weight:900;color:var(--purple);font-variant-numeric:tabular-nums}
+.challenge{scroll-margin-top:16px;background:var(--white);border:1px solid var(--line);border-radius:19px;overflow:hidden;margin:15px 0;box-shadow:0 10px 25px #172f5210}.challenge-heading{padding:17px 20px;display:flex;justify-content:space-between;align-items:center;gap:10px;background:linear-gradient(110deg,#eceefc,#f8faff);border-bottom:1px solid #e3e7f3}.challenge-heading-left{display:flex;align-items:center;gap:13px;min-width:0}.challenge-number{width:44px;height:44px;display:grid;place-items:center;flex-shrink:0;background:var(--navy);color:#fff;border-radius:12px;font-weight:900}.skill{font-size:.72rem;color:#5f558e;text-transform:uppercase;letter-spacing:.06em;font-weight:850}.challenge h2{font-size:1.24rem;margin:1px 0;line-height:1.25}.time{white-space:nowrap;border:1px solid #ded9fb;background:#fff;border-radius:40px;color:#4e448f;font-size:.82rem;font-weight:850;padding:6px 10px}.challenge-body{padding:19px 23px 23px}.context{color:#4e5d76;margin:0 0 12px}.challenge h3{font-size:.8rem;letter-spacing:.08em;color:#5146b2;text-transform:uppercase;margin:14px 0 6px}.challenge ol{padding-left:23px;margin:6px 0 16px}.challenge ol li+li{margin-top:6px}.acceptance{background:#effaf4;border:1px solid #d6ecdf;border-radius:12px;padding:12px 15px}.acceptance summary{font-weight:800;color:#14644a;cursor:pointer}.acceptance ul{margin:8px 0 0;padding-left:21px}.acceptance li+li{margin-top:5px}.files{font-size:.9rem;color:#52627b;margin:14px 0}.check{display:flex;gap:10px;align-items:center;padding-top:12px;border-top:1px solid #ecf0f6;color:#2c5160;font-weight:700;cursor:pointer}.check input{accent-color:#097f63;width:18px;height:18px;flex:0 0 18px}.closing{margin-top:25px}.status{font-weight:800;color:#125d55}.note-text{font-size:.85rem;color:var(--muted)}.trouble{background:#f9fbfe;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:18px}.trouble h2{margin:0 0 7px;font-size:1.14rem}.trouble p{margin:7px 0}.footer{padding:25px 0 0;font-size:.82rem;color:#68768b;text-align:center}
+@media(max-width:750px){.shell{padding:11px 12px 45px}.grid{grid-template-columns:1fr}.quicknav nav{grid-template-columns:repeat(2,minmax(0,1fr))}.challenge-heading{padding:14px}.challenge-body{padding:17px 15px}.time{font-size:.75rem}.challenge h2{font-size:1.08rem}.challenge-number{width:38px;height:38px}.panel{padding:18px}.hero{border-radius:18px}}
+@media(max-width:420px){.quicknav nav{grid-template-columns:1fr}.challenge-heading{align-items:flex-start}.challenge-heading-left{gap:9px}.time{padding:5px 7px;font-size:.69rem}.hero-actions .btn{width:100%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{body{background:white}.shell{max-width:100%;padding:0}.hero{color:black;background:white;border:1px solid #aaa}.hero p{color:#222}.btn,.quicknav,.check{display:none!important}.panel,.challenge{box-shadow:none}.challenge{break-inside:avoid}}
+</style></head>
+<body><a class="skip" href="#main">Saltar a los retos</a><main class="shell" id="main">
+<nav class="breadcrumbs" aria-label="Ruta de navegación"><a href="/">Academic Labs</a> / <a href="/explore/?course=DSY1102">DSY1102</a> / EP2 express</nav>
+<header class="hero"><span class="eyebrow">DSY1102 · Programación orientada a objetos</span>
+<h1>EP2 express: 6 microdesafíos JavaFX</h1>
+<p>Practica una habilidad por vez, sin construir la evaluación completa. Cada reto es independiente y cabe en una sesión de <strong>20 a 30 minutos</strong>. Trabaja en IntelliJ con Java 21, Maven, JavaFX y, cuando corresponda, Gson.</p>
+<div class="pills"><span>6 retos independientes</span><span>20–30 min cada uno</span><span>JavaFX + FXML</span><span>MVC y Repository</span><span>Gson / JSON</span></div>
+<div class="hero-actions"><button type="button" id="download-zip" class="btn">⬇ Descargar kit ZIP (6 proyectos Maven)</button><a class="btn alt" href="#reto-01">Ver los desafíos</a></div>
+<p id="download-status" aria-live="polite" role="status" style="font-size:.84rem;min-height:1.4em"></p>
+<p class="note-text" style="color:#dae9fa">Descarga alternativa para laboratorios: <a href="./resources/dsy1102-microdesafios-kit.tar.gz" download style="color:#c2f9e4">kit TAR.GZ</a> (extrae en Windows con <code>tar -xzf dsy1102-microdesafios-kit.tar.gz</code>).</p>
+</header>
+<p class="notice"><strong>Importante:</strong> esta es una práctica previa; no contiene las soluciones ni los proyectos oficiales de la EP2. Los controles visuales de esta página no compilan ni ejecutan Java. La programación y las pruebas se realizan en el IDE.</p>
+<div class="grid">
+<section class="panel" aria-labelledby="antes"><h2 id="antes">Antes de empezar</h2><ol>
+<li>Descarga el kit ZIP. Descomprímelo y abre <strong>solamente</strong> la carpeta <code>reto-01</code> (o el reto escogido) en IntelliJ como proyecto Maven.</li>
+<li>Usa Java 21. Ejecuta la clase <code>Launcher</code> de ese reto. JavaFX ya está declarado; Gson se incluye en los retos 05 y 06.</li>
+<li>Completa los <code>TODO</code> del ejercicio. No reemplaces <code>App</code>, <code>Launcher</code> ni las reglas de <code>Articulo</code>.</li>
+<li>Prueba los criterios antes de marcar el ejercicio como listo. Los mensajes deben aparecer en la ventana, no solamente en consola.</li>
+</ol></section>
+<aside class="panel" aria-labelledby="acuerdo"><h2 id="acuerdo">Cómo practicar</h2><p>Elige el reto según lo que necesites reforzar. No es obligatorio seguir un orden y <strong>cada carpeta es un proyecto independiente</strong>.</p><p>Al finalizar, conserva tu proyecto y entrega un ZIP por AVA si tu docente lo solicita. Puedes exportar aquí una bitácora TXT de los retos revisados.</p><p><strong>Rúbrica sugerida por reto:</strong> funcionamiento 60 %, tratamiento de errores 25 % y organización del código 15 %.</p></aside>
+</div>
+<section class="quicknav" aria-labelledby="menu-retos"><h2 id="menu-retos">Escoge tu reto</h2><nav aria-label="Navegación por microdesafíos">
+<a href="#reto-01"><span>01</span>Mi primera ventana funcional</a><a href="#reto-02"><span>02</span>El formulario no acepta cualquier cosa</a><a href="#reto-03"><span>03</span>Del formulario a la tabla</a><a href="#reto-04"><span>04</span>Selecciona y elimina</a><a href="#reto-05"><span>05</span>Los datos sobreviven al cierre</a><a href="#reto-06"><span>06</span>Recuperación de información</a></nav></section>
+<section aria-label="Enunciados de microdesafíos"><article class="challenge" id="reto-01" aria-labelledby="reto-01-titulo">
+<div class="challenge-heading"><div class="challenge-heading-left"><span class="challenge-number">01</span><div><span class="skill">FXML y controlador</span><h2 id="reto-01-titulo">Mi primera ventana funcional</h2></div></div><span class="time">⏱ 20 min</span></div>
+<div class="challenge-body"><p class="context">La aplicación ya muestra un TextField, un botón Saludar y una etiqueta. Falta conectar la vista con el controlador.</p><h3>Tu misión</h3><ol><li>Crea RecepcionController en el paquete controller y asígnala a main-view.fxml mediante fx:controller.</li><li>Inyecta txtNombre y lblMensaje con @FXML y conecta el botón a un método de acción.</li><li>Si el nombre está vacío o solo contiene espacios, muestra «Ingresa un nombre válido.» sin borrar el contenido.</li><li>Si es válido, muestra «Recepción registrada: NOMBRE» y limpia el campo.</li></ol>
+<details class="acceptance" open><summary>Pruebas de aceptación</summary><ul><li>Escribe Ana y pulsa Saludar: aparece «Recepción registrada: Ana».</li><li>Escribe solo espacios: aparece el error y el contenido se conserva.</li></ul></details>
+<p class="files"><strong>Archivos que debes trabajar:</strong> <code>main-view.fxml y RecepcionController.java</code>. No modifiques las clases del modelo ni los archivos de arranque salvo que el reto lo solicite.</p>
+<label class="check"><input type="checkbox" data-reto="01"> He probado este reto y cumple sus criterios</label></div></article>
+<article class="challenge" id="reto-02" aria-labelledby="reto-02-titulo">
+<div class="challenge-heading"><div class="challenge-heading-left"><span class="challenge-number">02</span><div><span class="skill">Validación y excepciones</span><h2 id="reto-02-titulo">El formulario no acepta cualquier cosa</h2></div></div><span class="time">⏱ 25 min</span></div>
+<div class="challenge-body"><p class="context">La vista, el controlador y Articulo ya existen. El modelo rechaza códigos vacíos, cantidades no positivas y precios no positivos.</p><h3>Tu misión</h3><ol><li>Completa onRegistrar en RegistroController: lee código, cantidad y precio.</li><li>Convierte cantidad a int y precio a double, y crea un Articulo utilizando su constructor.</li><li>Muestra el total calculado por el modelo cuando el registro es válido.</li><li>Captura errores de formato y reglas de negocio; conserva los campos ante fallos y límpialos solo tras éxito.</li></ol>
+<details class="acceptance" open><summary>Pruebas de aceptación</summary><ul><li>ART-001, 2 y 3500: «ART-001 registrado. Total: $7000.0».</li><li>Cantidad 0, cantidad abc o código en blanco: mensaje explicativo sin borrar campos.</li></ul></details>
+<p class="files"><strong>Archivos que debes trabajar:</strong> <code>RegistroController.java</code>. No modifiques las clases del modelo ni los archivos de arranque salvo que el reto lo solicite.</p>
+<label class="check"><input type="checkbox" data-reto="02"> He probado este reto y cumple sus criterios</label></div></article>
+<article class="challenge" id="reto-03" aria-labelledby="reto-03-titulo">
+<div class="challenge-heading"><div class="challenge-heading-left"><span class="challenge-number">03</span><div><span class="skill">TableView y ObservableList</span><h2 id="reto-03-titulo">Del formulario a la tabla</h2></div></div><span class="time">⏱ 30 min</span></div>
+<div class="challenge-body"><p class="context">El proyecto entrega un TableView con tres columnas, una ObservableList y un formulario. El controlador tiene dos métodos incompletos.</p><h3>Tu misión</h3><ol><li>Completa initialize(): configura las columnas Código, Cantidad y Total para leer los getters de Articulo.</li><li>Vincula la ObservableList con el TableView.</li><li>Completa onRegistrar(): convierte y valida los datos, crea un Articulo y lo añade a la lista.</li><li>Actualiza el mensaje de la ventana; una entrada inválida no debe cerrar la aplicación.</li></ol>
+<details class="acceptance" open><summary>Pruebas de aceptación</summary><ul><li>ART-01, 3 y 1200: se ve una fila con total 3600.</li><li>ART-02, 1 y 900: aparece una segunda fila con total 900, sin recargar la ventana.</li></ul></details>
+<p class="files"><strong>Archivos que debes trabajar:</strong> <code>TablaController.java</code>. No modifiques las clases del modelo ni los archivos de arranque salvo que el reto lo solicite.</p>
+<label class="check"><input type="checkbox" data-reto="03"> He probado este reto y cumple sus criterios</label></div></article>
+<article class="challenge" id="reto-04" aria-labelledby="reto-04-titulo">
+<div class="challenge-heading"><div class="challenge-heading-left"><span class="challenge-number">04</span><div><span class="skill">Eventos y selección</span><h2 id="reto-04-titulo">Selecciona y elimina</h2></div></div><span class="time">⏱ 20 min</span></div>
+<div class="challenge-body"><p class="context">La tabla ya inicia con ART-01, ART-02 y ART-03. Solo falta la lógica del botón Eliminar seleccionado.</p><h3>Tu misión</h3><ol><li>Completa onEliminar para recuperar la fila seleccionada en el TableView.</li><li>Si no hay selección, muestra «Debes seleccionar un artículo.» y deja los tres registros intactos.</li><li>Si hay selección, elimina ese artículo de la lista y confirma el código eliminado en la etiqueta.</li><li>No elimines por índice fijo ni utilices la consola como canal de mensajes.</li></ol>
+<details class="acceptance" open><summary>Pruebas de aceptación</summary><ul><li>Sin selección: hay tres filas y aparece el aviso.</li><li>Selecciona ART-02 y elimina: quedan ART-01 y ART-03.</li></ul></details>
+<p class="files"><strong>Archivos que debes trabajar:</strong> <code>EliminarController.java</code>. No modifiques las clases del modelo ni los archivos de arranque salvo que el reto lo solicite.</p>
+<label class="check"><input type="checkbox" data-reto="04"> He probado este reto y cumple sus criterios</label></div></article>
+<article class="challenge" id="reto-05" aria-labelledby="reto-05-titulo">
+<div class="challenge-heading"><div class="challenge-heading-left"><span class="challenge-number">05</span><div><span class="skill">Escritura Gson/JSON</span><h2 id="reto-05-titulo">Los datos sobreviven al cierre</h2></div></div><span class="time">⏱ 30 min</span></div>
+<div class="challenge-body"><p class="context">La ventana contiene dos artículos precargados y un botón Guardar inventario. El controlador ya delega al repository y muestra errores.</p><h3>Tu misión</h3><ol><li>Implementa ArticuloRepository.guardar(List&lt;Articulo&gt;) utilizando Gson.</li><li>Serializa la lista y escribe articulos.json en la raíz del proyecto, en UTF-8.</li><li>Mantén throws IOException para comunicar errores de lectura/escritura al controlador.</li><li>No cambies el modelo ni la vista. El archivo representa toda la lista, no un artículo a la vez.</li></ol>
+<details class="acceptance" open><summary>Pruebas de aceptación</summary><ul><li>Pulsa Guardar: se crea articulos.json con ART-01 y ART-02 y todos sus campos.</li><li>Abre el archivo y comprueba que contiene JSON válido.</li></ul></details>
+<p class="files"><strong>Archivos que debes trabajar:</strong> <code>ArticuloRepository.java</code>. No modifiques las clases del modelo ni los archivos de arranque salvo que el reto lo solicite.</p>
+<label class="check"><input type="checkbox" data-reto="05"> He probado este reto y cumple sus criterios</label></div></article>
+<article class="challenge" id="reto-06" aria-labelledby="reto-06-titulo">
+<div class="challenge-heading"><div class="challenge-heading-left"><span class="challenge-number">06</span><div><span class="skill">Lectura Gson/JSON</span><h2 id="reto-06-titulo">Recuperación de información</h2></div></div><span class="time">⏱ 30 min</span></div>
+<div class="challenge-body"><p class="context">El proyecto incluye articulos.json con ART-10, ART-11 y ART-12. El controlador ya llama al repository al abrir la ventana.</p><h3>Tu misión</h3><ol><li>Implementa ArticuloRepository.cargar(): convierte el JSON en List&lt;Articulo&gt; con Gson.</li><li>Devuelve una lista vacía cuando articulos.json no existe.</li><li>Si el JSON es inválido o ilegible, comunica IOException para que el controlador muestre el error sin cerrar la aplicación.</li><li>No alteres el controlador, el modelo ni el archivo de ejemplo durante la prueba principal.</li></ol>
+<details class="acceptance" open><summary>Pruebas de aceptación</summary><ul><li>Archivo de ejemplo presente: aparecen tres registros al abrir.</li><li>Archivo ausente: la tabla queda vacía sin error.</li><li>JSON inválido: aparece un mensaje de error dentro de la ventana.</li></ul></details>
+<p class="files"><strong>Archivos que debes trabajar:</strong> <code>ArticuloRepository.java</code>. No modifiques las clases del modelo ni los archivos de arranque salvo que el reto lo solicite.</p>
+<label class="check"><input type="checkbox" data-reto="06"> He probado este reto y cumple sus criterios</label></div></article></section>
+<section class="panel closing" aria-labelledby="cierre"><h2 id="cierre">Tu bitácora de práctica</h2><p id="progress" class="status" aria-live="polite">0 de 6 retos revisados.</p><p>Marca solo los retos que comprobaste en IntelliJ. El TXT es una bitácora personal, <strong>no demuestra autoría ni sustituye el ZIP del código</strong>.</p><button id="export-evidence" type="button" class="btn soft">Descargar bitácora TXT</button><p class="note-text">Tus selecciones permanecen en esta pestaña; no se envían al portal ni se almacenan en un servidor.</p></section>
+<section class="trouble" aria-labelledby="problemas"><h2 id="problemas">¿Problemas para iniciar?</h2>
+<p>Si IntelliJ no reconoce los controles FXML, revisa los nombres <code>fx:id</code> y la ruta del <code>fx:controller</code>. Si JavaFX no abre, comprueba el SDK Java 21 y la descarga de dependencias Maven.</p>
+<p>Si aparece un error al guardar o cargar JSON, verifica el directorio de ejecución y que <code>articulos.json</code> se encuentre donde el ejercicio lo espera. La escritura y lectura se hacen en los retos 05 y 06, respectivamente.</p>
+<p>¿Prefieres un recorrido más largo? <a href="/activities/dsy1102-javafx-10-capsulas/">Consulta la ruta JavaFX de diez cápsulas</a>.</p></section>
+<footer class="footer"><p>Academic Labs · ADÜMÜN · Actividad de práctica DSY1102 · versión 1.0.0 · <a href="/explore/">Volver al catálogo</a></p></footer>
+</main>
+<script>
+(()=>{"use strict";
+const id="dsy1102-ep2-microdesafios",version="1.0.0";
+const checks=Array.from(document.querySelectorAll("[data-reto]"));
+const progress=document.getElementById("progress");
+function update(){const count=checks.filter(c=>c.checked).length;progress.textContent=count+" de 6 retos revisados."}
+checks.forEach(c=>c.addEventListener("change",update));
+document.getElementById("export-evidence").addEventListener("click",()=>{
+const lines=["ACADEMIC LABS · BITÁCORA DE PRÁCTICA","Actividad: "+id,"Versión: "+version,"Fecha: "+new Date().toISOString(),"","Retos verificados en IntelliJ:"];
+checks.forEach((c,i)=>lines.push("Reto "+String(i+1).padStart(2,"0")+": "+(c.checked?"Revisado":"No revisado")));
+lines.push("","Evidencia declarativa del estudiante; no verifica la ejecución del código.");
+const blob=new Blob([lines.join("\n")+"\n"],{type:"text/plain;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+a.href=url;a.download="DSY1102_EP2_bitacora.txt";a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);
+});
+const enc=new TextEncoder(),dec=new TextDecoder();
+function crc32(bytes){let c=-1;for(const b of bytes){c^=b;for(let k=0;k<8;k++)c=(c>>>1)^((c&1)?0xEDB88320:0)}return(c^(-1))>>>0}
+function unpackTar(bytes){let p=0;const files=[];while(p+512<=bytes.length){
+const h=bytes.subarray(p,p+512);if(h.every(b=>b===0))break;
+const str=(off,len)=>dec.decode(h.subarray(off,off+len)).replace(/\0.*$/s,"");
+const name=str(0,100),prefix=str(345,155),full=prefix?prefix+"/"+name:name;
+const size=parseInt(str(124,12).trim()||"0",8),type=h[156];
+if(!Number.isSafeInteger(size)||size<0||p+512+size>bytes.length)throw new Error("Contenido TAR inválido");
+if((type===0||type===48)&&full&&!full.endsWith("/"))files.push({name:full,data:bytes.slice(p+512,p+512+size)});
+p+=512+Math.ceil(size/512)*512;
+}if(files.length<20)throw new Error("No se encontró el kit completo");return files}
+function zipFiles(files){const out=[],central=[];let offset=0,centralSize=0;const u16=(v,o,n)=>v.setUint16(o,n,true),u32=(v,o,n)=>v.setUint32(o,n>>>0,true);
+for(const f of files){const n=enc.encode(f.name),data=f.data,crc=crc32(data);if(n.length>65535)throw Error("Nombre demasiado largo");
+const h=new Uint8Array(30),v=new DataView(h.buffer);
+u32(v,0,0x04034b50);u16(v,4,20);u16(v,6,2048);u16(v,8,0);u32(v,14,crc);u32(v,18,data.length);u32(v,22,data.length);u16(v,26,n.length);
+out.push(h,n,data);
+const c=new Uint8Array(46),w=new DataView(c.buffer);
+u32(w,0,0x02014b50);u16(w,4,20);u16(w,6,20);u16(w,8,2048);u16(w,10,0);u32(w,16,crc);u32(w,20,data.length);u32(w,24,data.length);u16(w,28,n.length);u32(w,42,offset);
+central.push(c,n);offset+=h.length+n.length+data.length;centralSize+=c.length+n.length;
+}
+if(files.length>65535)throw Error("Demasiados archivos");
+const e=new Uint8Array(22),v=new DataView(e.buffer);
+u32(v,0,0x06054b50);u16(v,8,files.length);u16(v,10,files.length);u32(v,12,centralSize);u32(v,16,offset);
+return new Blob([...out,...central,e],{type:"application/zip"})}
+const btn=document.getElementById("download-zip"),status=document.getElementById("download-status");
+btn.addEventListener("click",async()=>{btn.disabled=true;status.textContent="Preparando los seis proyectos Maven…";
+try{const r=await fetch("./resources/dsy1102-microdesafios-kit.tar.gz",{cache:"no-cache"});if(!r.ok)throw new Error("No se pudo recuperar el recurso ("+r.status+")");
+let bytes=new Uint8Array(await r.arrayBuffer());
+if(bytes[0]===0x1f&&bytes[1]===0x8b){if(typeof DecompressionStream==="undefined")throw new Error("Este navegador no admite descompresión GZIP; usa el enlace TAR.GZ alternativo.");
+const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));bytes=new Uint8Array(await new Response(stream).arrayBuffer())}
+const files=unpackTar(bytes),zip=zipFiles(files),url=URL.createObjectURL(zip),a=document.createElement("a");
+a.href=url;a.download="DSY1102_Microdesafios_EP2_Kit_6_Retos.zip";a.click();setTimeout(()=>URL.revokeObjectURL(url),8000);
+status.textContent="Kit ZIP preparado: seis retos independientes con sus archivos de inicio.";
+}catch(e){status.textContent="No se pudo generar el ZIP: "+e.message+" Puedes usar la descarga TAR.GZ alternativa."}finally{btn.disabled=false}});
+})();
+</script></body></html>
