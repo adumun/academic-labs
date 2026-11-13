@@ -75,3 +75,10 @@ Errores:
 ## Alcance intencional
 
 No incluye autenticación, autorización, Spring Security, JWT, Docker ni microservicios. CORS está abierto para facilitar el laboratorio local. No desplegar esta API públicamente ni reutilizarla como backend productivo.
+
+
+## Windows + WSL2
+
+Si el repositorio está en WSL2 y Android Studio corre en Windows, abre este proyecto desde **File → Open** usando la ruta UNC `\\wsl.localhost\<DISTRIBUCION>\home\<USUARIO_LINUX>\projects\academic-labs\resources\dsy1105\support-desk-api`. Android Studio utilizará el JDK de Windows para ejecutar Gradle y Spring Boot. La primera sincronización e indexado sobre UNC puede ser más lento; si presenta problemas persistentes, utiliza una copia de trabajo NTFS sincronizada por Git. No mantengas dos copias editándose simultáneamente.
+
+Cuando el backend se ejecuta desde Android Studio Windows, Android Emulator lo alcanza mediante `http://10.0.2.2:8080`.
