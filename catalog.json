@@ -30,6 +30,18 @@
       "name": "Arquitectura MVC y persistencia",
       "area": "Ingeniería de software",
       "description": "Separar modelo, vistas, controladores, servicios y DAO; persistir objetos en JSON y verificar su recuperación."
+    },
+    {
+      "id": "resiliencia-y-tolerancia-a-fallos",
+      "name": "Resiliencia y tolerancia a fallos",
+      "area": "Ingeniería de software",
+      "description": "Analizar fallos transitorios y permanentes, reintentos, Dead Letter Topics y recuperación controlada en sistemas distribuidos."
+    },
+    {
+      "id": "observabilidad-y-rendimiento",
+      "name": "Observabilidad y rendimiento",
+      "area": "Ingeniería de software",
+      "description": "Interpretar throughput, latencia, consumer lag y capacidad de procesamiento bajo carga en sistemas distribuidos."
     }
   ],
   "courses": [
@@ -168,6 +180,89 @@
       "path": "/activities/dsy1102-javafx-10-capsulas/",
       "evidence": "txt",
       "version": "2.5.0",
+      "status": "published"
+    },
+    {
+      "id": "kafka-resilience-game-day",
+      "title": "Kafka Game Day: resiliencia y Dead Letter Topic",
+      "description": "Laboratorio híbrido local para investigar eventos, fallos transitorios y permanentes, reintentos, DLT, offsets y consumer lag con Spring Boot, Apache Kafka, Docker Compose y JMeter.",
+      "topicIds": [
+        "mensajeria-asincrona",
+        "resiliencia-y-tolerancia-a-fallos"
+      ],
+      "courseCodes": [
+        "DSY1107"
+      ],
+      "learningObjectives": [
+        "Distinguir fallos transitorios de errores permanentes de contrato",
+        "Observar reintentos y explicar cuándo un evento termina en una Dead Letter Topic",
+        "Relacionar topics, particiones, offsets y consumer lag",
+        "Diferenciar la aceptación HTTP de la finalización del procesamiento asíncrono",
+        "Proponer una política de recuperación y explicar sus límites"
+      ],
+      "icon": "🧯",
+      "durationMinutes": 120,
+      "tags": [
+        "kafka",
+        "spring-boot",
+        "docker",
+        "docker-compose",
+        "jmeter",
+        "resiliencia",
+        "retry",
+        "dead-letter-topic",
+        "dlt",
+        "consumer-lag",
+        "offsets",
+        "mensajeria-asincrona",
+        "laboratorio-hibrido",
+        "ejecucion-local",
+        "windows",
+        "powershell"
+      ],
+      "path": "/activities/kafka-resilience-game-day/",
+      "version": "1.0.0",
+      "status": "published"
+    },
+    {
+      "id": "kafka-burst-incident",
+      "title": "Operación Avalancha: Kafka bajo presión",
+      "description": "Laboratorio híbrido de 300 segundos para diagnosticar capacidad, throughput y consumer lag en una arquitectura Kafka, formular una hipótesis y comparar una mejora mediante mediciones antes/después.",
+      "topicIds": [
+        "mensajeria-asincrona",
+        "observabilidad-y-rendimiento"
+      ],
+      "courseCodes": [
+        "DSY1107"
+      ],
+      "learningObjectives": [
+        "Interpretar throughput, latencia y consumer lag durante una oleada de carga",
+        "Distinguir eventos publicados de eventos procesados por un grupo consumidor",
+        "Formular y contrastar hipótesis mediante métricas, logs y offsets",
+        "Proponer una mejora técnica y explicar sus costos y limitaciones",
+        "Comparar mediciones antes/después manteniendo constante el perfil de carga"
+      ],
+      "icon": "🌊",
+      "durationMinutes": 120,
+      "tags": [
+        "kafka",
+        "spring-boot",
+        "docker",
+        "docker-compose",
+        "jmeter",
+        "performance",
+        "throughput",
+        "consumer-lag",
+        "observabilidad",
+        "rendimiento",
+        "mensajeria-asincrona",
+        "laboratorio-hibrido",
+        "ejecucion-local",
+        "windows",
+        "powershell"
+      ],
+      "path": "/activities/kafka-burst-incident/",
+      "version": "1.0.0",
       "status": "published"
     }
   ]
