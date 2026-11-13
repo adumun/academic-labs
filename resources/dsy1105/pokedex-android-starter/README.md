@@ -2,28 +2,17 @@
 
 Proyecto Android nativo con Kotlin y Jetpack Compose. Debe abrir y ejecutar la interfaz de demostración sin depender de PokéAPI.
 
-## Requisitos
+## Abrir y ejecutar desde Android Studio
 
-- Android Studio reciente.
-- JDK 17.
-- Android SDK 35.
-- Emulador o dispositivo Android API 26+.
+1. En Android Studio selecciona **File → Open**.
+2. Selecciona esta carpeta `pokedex-android-starter`.
+3. Acepta la confianza del proyecto si Android Studio lo solicita.
+4. Espera a que finalice Gradle Sync. En la primera apertura se descargan Gradle y las dependencias.
+5. En **Tools → Device Manager**, crea o inicia un emulador API 26 o superior.
+6. Selecciona la configuración `app` en la barra superior y pulsa **Run ▶**.
+7. Para compilar sin instalar, selecciona **Build → Make Project** o abre el panel Gradle y ejecuta `Tasks → build → assembleDebug`.
 
-## Primera ejecución
-
-En Windows, desde esta carpeta ejecuta en PowerShell o CMD:
-
-```bat
-gradlew.bat :app:assembleDebug
-```
-
-En Linux/macOS:
-
-```bash
-./gradlew :app:assembleDebug
-```
-
-El launcher descarga el Gradle Wrapper oficial 8.9 desde el repositorio oficial de Gradle, verifica su SHA-256 publicado y luego ejecuta la distribución Gradle 8.9 fijada en `gradle/wrapper/gradle-wrapper.properties`. Requiere conexión a Internet solo la primera vez (para descargar wrapper y distribución, y resolver dependencias). Después abre esta carpeta en Android Studio y ejecuta la configuración `app`.
+Requisitos: Android Studio actualizado, JDK 17 y Android SDK 35. Si Android Studio solicita un JDK, selecciona 17 en Gradle JDK.
 
 ## Qué incluye
 
@@ -41,7 +30,11 @@ El launcher descarga el Gradle Wrapper oficial 8.9 desde el repositorio oficial 
 - Repositorio remoto ni solicitudes GET.
 - Paginación ni scroll infinito real.
 
-Busca `TODO(REST)` en el código. La interfaz está preparada para ser conectada a tu implementación. Documentación: https://pokeapi.co/docs/v2
+Busca `TODO(REST)` en el código. La interfaz está preparada para conectarse a tu implementación. Documentación de referencia: https://pokeapi.co/docs/v2
+
+## Ejecutar y depurar
+
+Utiliza **Run ▶** para iniciar la app en el emulador. Usa **Debug 🐞** para recorrer el código con breakpoints y **Logcat** para inspeccionar mensajes. El listado y detalle deben funcionar con los datos demo, sin backend ni conexión de red.
 
 ## Sugerencia de arquitectura
 
