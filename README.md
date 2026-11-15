@@ -1,16 +1,15 @@
-# ADÜMÜN Labs — Plataforma de laboratorios
+# Academic Labs · ADÜMÜN
 
-**Un punto de entrada para explorar videojuegos, experiencias educativas, prototipos y experimentos tecnológicos.** Los laboratorios mantienen sus repositorios y ciclos de publicación independientes; el portal ofrece catálogo y rutas públicas estables.
+**Portal educativo público para aprender haciendo.** Actividades HTML/CSS/JS, prácticas híbridas, recursos y exportación de evidencias para docentes y estudiantes.
 
-- **Portal transversal (en preparación):** https://labs.adumun.cl/
-- **Vertical educativo existente:** https://academic-labs.adumun.cl/
-- **Repositorio de plataforma:** https://github.com/adumun/academic-labs
-- **Ticket de evolución:** https://adumun.atlassian.net/browse/ADU-143
-- **MVP educativo original:** https://adumun.atlassian.net/browse/ADU-119
+- **Sitio educativo:** https://academic-labs.adumun.cl/
+- **Repositorio:** https://github.com/adumun/academic-labs
+- **MVP original:** https://adumun.atlassian.net/browse/ADU-119
+- **Evolución del catálogo educativo:** este mismo repositorio.
+- **Portal ADÜMÜN Labs (producto y deploy independientes):** https://github.com/adumun/labs-portal
+- **Gobierno de separación:** https://adumun.atlassian.net/browse/ADU-143
 
-## Vertical educativo: Academic Labs
-
-Academic Labs sigue siendo el módulo educativo de ADÜMÜN Labs. Sus rutas existentes, catálogo, actividades y exportación de evidencias se preservan. El detalle del MVP y sus reglas originales se mantiene en las secciones siguientes.
+Academic Labs y ADÜMÜN Labs comparten identidad y contenidos relevantes, pero **no comparten un único despliegue**. El portal transversal mantiene sus propios dominios, catálogo de juegos, Pages Functions y operaciones. Este repositorio conserva el portal educativo, sus enlaces ya distribuidos y el contrato académico descrito a continuación.
 
 ## Principios del MVP educativo
 
@@ -146,16 +145,14 @@ Editor visual, cuentas, notas, backend, firmas de entrega, detector de plagio/Ge
 - Una aplicación de clase futura que necesite autenticación no debe ejecutar JavaScript arbitrario de prácticas bajo el mismo origen que sesiones de identidad o APIs privadas.
 
 
-## ADÜMÜN Labs — portal multiárea
+## Relación con ADÜMÜN Labs
 
-La evolución transversal se documenta en [docs/ADUMUN-LABS-PLATFORM.md](docs/ADUMUN-LABS-PLATFORM.md).
+La plataforma transversal se desarrolla y despliega desde [adumun/labs-portal](https://github.com/adumun/labs-portal), no desde el proyecto Pages académico.
 
-- `labs.adumun.cl/`: portal general de descubrimiento.
-- `labs.adumun.cl/games/`: catálogo de demos de videojuegos.
-- `labs.adumun.cl/games/<slug>/`: ruta estable de cada demo, independiente de la estructura interna de su repositorio. Pages Functions puede resolverla contra la raíz o contra un `upstreamPath` registrado en `labs-catalog.json`; el índice `/games/` es un asset estático y no invoca Functions.
-- `labs.adumun.cl/education/`: entrada al módulo educativo.
-- `academic-labs.adumun.cl/`: conserva la landing educativa anterior y todos sus enlaces compartidos.
+- `https://labs.adumun.cl/`: portal transversal; asociación del dominio sujeta a verificación operativa de ADU-143.
+- `/games/` y `/games/<slug>/`: catálogo y rutas públicas bajo **el dominio de Labs**, no dentro de Academic Labs.
+- `https://academic-labs.adumun.cl/`: portal educativo; mantiene `/explore/`, `/activities/<slug>/` y las URLs académicas compartidas.
 
-El registro declarativo de categorías y aplicaciones está en `labs-catalog.json`. El índice del catálogo se sirve estáticamente; solo las rutas de demos invocan Pages Functions. El proxy solo acepta slugs registrados y orígenes HTTPS `*.pages.dev`; no es un proxy abierto. Una demo permanece `pending` hasta que su proyecto Cloudflare Pages se cree y se valide. No se debe cambiar su estado a `published` solo porque exista un workflow de CI.
+El repositorio académico todavía contiene código residual del experimento inicial de portal (directorios `labs/`, `games/`, `functions/games/` y `labs-catalog.json`). **No es la fuente canónica** del catálogo transversal. No modificar ni borrar ese contenido mientras no se verifique el dominio `labs.adumun.cl` y se complete un PR específico de limpieza con preflight, pruebas de compatibilidad y plan de rollback.
 
-La integración del nuevo dominio y los tres proyectos de demos requiere una intervención en Cloudflare Dashboard descrita en la guía operativa. No modificar DNS ni dominios existentes fuera de ese procedimiento.
+La arquitectura operativa vigente y los smoke tests de Labs se documentan en [labs-portal/docs/ADUMUN-LABS-PLATFORM.md](https://github.com/adumun/labs-portal/blob/master/docs/ADUMUN-LABS-PLATFORM.md). El documento local [docs/ADUMUN-LABS-PLATFORM.md](docs/ADUMUN-LABS-PLATFORM.md) se conserva exclusivamente como referencia histórica del diseño inicial.
