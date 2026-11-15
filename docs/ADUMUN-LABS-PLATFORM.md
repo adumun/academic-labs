@@ -1,3 +1,7 @@
+> **HISTÓRICO / SUPERADO — ADU-143.** Este documento describe el piloto que alojaba Labs dentro de `adumun/academic-labs`. La arquitectura vigente separa los proyectos: `adumun/labs-portal` publica el portal transversal y `adumun/academic-labs` sirve únicamente el vertical educativo. **No utilizar las instrucciones de Cloudflare de este documento para crear o modificar el dominio `labs.adumun.cl`.** Procedimiento canónico: https://github.com/adumun/labs-portal/blob/master/docs/ADUMUN-LABS-PLATFORM.md. La retirada del código residual requiere un PR específico después de validar el dominio y preservar los enlaces académicos.
+
+---
+
 # ADÜMÜN Labs — Arquitectura y operación
 
 **Ticket:** [ADU-143](https://adumun.atlassian.net/browse/ADU-143)  
