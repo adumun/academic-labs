@@ -326,7 +326,7 @@
     {
       "id": "dsy1102-jdbc-dao-guiado",
       "title": "JDBC y DAO · Rueditas de bicicleta",
-      "description": "Ocho incrementos con ayudas conceptuales, pistas, código y checkpoints para construir una aplicación JavaFX con JDBC y DAO.",
+      "description": "Ocho incrementos con carruseles de código completo en modal, rutas, instrucciones, ayudas conceptuales y checkpoints para construir una aplicación JavaFX con JDBC y DAO.",
       "topicIds": [
         "persistencia-relacional-jdbc",
         "interfaces-graficas-javafx",
@@ -357,7 +357,7 @@
       ],
       "path": "/activities/dsy1102-jdbc-dao-guiado/",
       "evidence": "txt",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "published"
     },
     {
