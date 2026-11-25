@@ -400,7 +400,7 @@
     {
       "id": "dsy1102-jdbc-microdesafios",
       "title": "Microdesafíos JDBC y JavaFX",
-      "description": "Ocho retos focalizados con código inicial, pruebas y evidencia local.",
+      "description": "Ocho retos focalizados con entrega de código o SQL, respuesta conceptual y evidencia de prueba obligatorias para completar cada reto.",
       "topicIds": [
         "persistencia-relacional-jdbc",
         "interfaces-graficas-javafx",
@@ -415,7 +415,7 @@
         "Comprobar resultados y diagnosticar errores"
       ],
       "icon": "🧩",
-      "durationMinutes": 155,
+      "durationMinutes": 150,
       "tags": [
         "dsy1102",
         "jdbc",
@@ -426,7 +426,7 @@
       ],
       "path": "/activities/dsy1102-jdbc-microdesafios/",
       "evidence": "txt",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "published"
     },
     {
