@@ -432,7 +432,7 @@
     {
       "id": "dsy1102-detective-jdbc",
       "title": "Detective JDBC",
-      "description": "Desafío contra reloj: ocho casos de un banco de 24, selección simple, múltiple y verdadero/falso, orden aleatorio, intento persistente y evidencia local.",
+      "description": "Desafío contra reloj: 24 preguntas de un banco de 72, tres por temática, selección simple, múltiple y verdadero/falso, orden aleatorio e intento persistente.",
       "topicIds": [
         "persistencia-relacional-jdbc",
         "interfaces-graficas-javafx",
@@ -447,7 +447,7 @@
         "Comprobar resultados y diagnosticar errores"
       ],
       "icon": "🔎",
-      "durationMinutes": 6,
+      "durationMinutes": 14,
       "tags": [
         "dsy1102",
         "jdbc",
@@ -458,7 +458,7 @@
       ],
       "path": "/activities/dsy1102-detective-jdbc/",
       "evidence": "txt",
-      "version": "2.0.1",
+      "version": "2.1.0",
       "status": "published"
     },
     {
