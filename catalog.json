@@ -432,7 +432,7 @@
     {
       "id": "dsy1102-detective-jdbc",
       "title": "Detective JDBC",
-      "description": "Ocho defectos aislados de JDBC, DAO y JavaFX para diagnosticar y corregir.",
+      "description": "Desafío contra reloj: ocho casos de un banco de 24, selección simple, múltiple y verdadero/falso, orden aleatorio, intento persistente y evidencia local.",
       "topicIds": [
         "persistencia-relacional-jdbc",
         "interfaces-graficas-javafx",
@@ -447,7 +447,7 @@
         "Comprobar resultados y diagnosticar errores"
       ],
       "icon": "🔎",
-      "durationMinutes": 60,
+      "durationMinutes": 6,
       "tags": [
         "dsy1102",
         "jdbc",
@@ -458,7 +458,7 @@
       ],
       "path": "/activities/dsy1102-detective-jdbc/",
       "evidence": "txt",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "status": "published"
     },
     {
