@@ -396,6 +396,102 @@
       "evidence": "txt",
       "version": "1.0.0",
       "status": "published"
+    },
+    {
+      "id": "dsy1102-jdbc-microdesafios",
+      "title": "Microdesafíos JDBC y JavaFX",
+      "description": "Ocho retos focalizados con código inicial, pruebas y evidencia local.",
+      "topicIds": [
+        "persistencia-relacional-jdbc",
+        "interfaces-graficas-javafx",
+        "arquitectura-mvc-persistencia"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Reforzar JDBC, CRUD y mapeo de objetos",
+        "Aplicar DAO y MVC con JavaFX",
+        "Comprobar resultados y diagnosticar errores"
+      ],
+      "icon": "🧩",
+      "durationMinutes": 155,
+      "tags": [
+        "dsy1102",
+        "jdbc",
+        "javafx",
+        "preparacion-evaluacion",
+        "dao",
+        "mariadb"
+      ],
+      "path": "/activities/dsy1102-jdbc-microdesafios/",
+      "evidence": "txt",
+      "version": "1.0.0",
+      "status": "published"
+    },
+    {
+      "id": "dsy1102-detective-jdbc",
+      "title": "Detective JDBC",
+      "description": "Ocho defectos aislados de JDBC, DAO y JavaFX para diagnosticar y corregir.",
+      "topicIds": [
+        "persistencia-relacional-jdbc",
+        "interfaces-graficas-javafx",
+        "arquitectura-mvc-persistencia"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Reforzar JDBC, CRUD y mapeo de objetos",
+        "Aplicar DAO y MVC con JavaFX",
+        "Comprobar resultados y diagnosticar errores"
+      ],
+      "icon": "🔎",
+      "durationMinutes": 60,
+      "tags": [
+        "dsy1102",
+        "jdbc",
+        "javafx",
+        "preparacion-evaluacion",
+        "dao",
+        "mariadb"
+      ],
+      "path": "/activities/dsy1102-detective-jdbc/",
+      "evidence": "txt",
+      "version": "1.0.0",
+      "status": "published"
+    },
+    {
+      "id": "dsy1102-jdbc-referencia",
+      "title": "Referencia rápida y checklist JDBC",
+      "description": "Consulta imprimible, autoevaluación de 12 habilidades y ruta de estudio.",
+      "topicIds": [
+        "persistencia-relacional-jdbc",
+        "interfaces-graficas-javafx",
+        "arquitectura-mvc-persistencia"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Reforzar JDBC, CRUD y mapeo de objetos",
+        "Aplicar DAO y MVC con JavaFX",
+        "Comprobar resultados y diagnosticar errores"
+      ],
+      "icon": "📘",
+      "durationMinutes": 20,
+      "tags": [
+        "dsy1102",
+        "jdbc",
+        "javafx",
+        "preparacion-evaluacion",
+        "dao",
+        "mariadb"
+      ],
+      "path": "/activities/dsy1102-jdbc-referencia/",
+      "evidence": "txt",
+      "version": "1.0.0",
+      "status": "published"
     }
   ]
 }
