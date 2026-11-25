@@ -1,0 +1,338 @@
+[
+  {
+    "id": "cuenta-simple-lab",
+    "title": "Cuenta simple — de lógica a objetos",
+    "topic": "poo-java",
+    "count": 4,
+    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-02/README.md",
+    "path": "/activities/cuenta-simple-lab/",
+    "help": "/handbook/java/methods/",
+    "context": "Crea CuentaSimpleS02 desde cero. Calcula y consulta saldo primero en main, luego con método y finalmente con Cuenta. No es una aplicación bancaria real.",
+    "steps": [
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-02/01-entorno-y-main.md",
+        "title": "Primer cálculo"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-02/02-metodos.md",
+        "title": "Método reutilizable"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-02/03-clases-objetos.md",
+        "title": "Clase Cuenta"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-02/04-verificacion.md",
+        "title": "Pruebas y explicación"
+      }
+    ]
+  },
+  {
+    "id": "drone-battery-lab",
+    "title": "Batería de un dron — encapsulamiento",
+    "topic": "poo-java",
+    "count": 4,
+    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-03/README.md",
+    "path": "/activities/drone-battery-lab/",
+    "help": "/handbook/java/classes-and-objects/",
+    "context": "Crea BateriaDronS03. Bateria mantiene porcentaje 0–100; cargar y consumir no deben salir del rango. Dos dispositivos poseen estados independientes. Sin colecciones, JavaFX ni excepciones requeridas.",
+    "steps": [
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-03/01-preparacion.md",
+        "title": "Preparación"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-03/02-modelar-bateria.md",
+        "title": "Modelo de batería"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-03/03-proteger-estado.md",
+        "title": "Proteger el porcentaje"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-03/04-pruebas-checkpoints.md",
+        "title": "Pruebas"
+      }
+    ]
+  },
+  {
+    "id": "coffee-orders-lab",
+    "title": "Pedidos de cafetería — composición",
+    "topic": "poo-java",
+    "count": 4,
+    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-04/README.md",
+    "path": "/activities/coffee-orders-lab/",
+    "help": "/handbook/java/classes-and-objects/",
+    "context": "Crea PedidosCafeteriaS04. Pedido contiene código, Cliente y total; admite aumentos y descuentos válidos, sin total negativo. No requiere herencia, colecciones, excepciones ni persistencia.",
+    "steps": [
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-04/01-cliente.md",
+        "title": "Cliente válido"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-04/02-pedido.md",
+        "title": "Colaboración"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-04/03-integracion.md",
+        "title": "Operaciones"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-04/04-pruebas.md",
+        "title": "Verificación"
+      }
+    ]
+  },
+  {
+    "id": "urban-delivery-lab",
+    "title": "Despachos urbanos — herencia y polimorfismo",
+    "topic": "poo-java",
+    "count": 4,
+    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-05/README.md",
+    "path": "/activities/urban-delivery-lab/",
+    "help": "/handbook/java/interfaces/",
+    "context": "Crea DespachosUrbanos. Envío normal = $1.000 + $500 por kilómetro; expreso añade $2.000. Clases Envio, EnvioExpress y Main; sin arrays ni interfaces requeridas.",
+    "steps": [
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-05/01-preparacion.md",
+        "title": "Entorno"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-05/02-herencia.md",
+        "title": "Clase base y subclase"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-05/03-polimorfismo.md",
+        "title": "Referencia base"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-05/04-pruebas.md",
+        "title": "Prueba final"
+      }
+    ]
+  },
+  {
+    "id": "workshop-enrollment-lab",
+    "title": "Inscripciones a talleres — arrays y listas",
+    "topic": "colecciones-java",
+    "count": 4,
+    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-06/independiente/README.md",
+    "path": "/activities/workshop-enrollment-lab/",
+    "help": "/handbook/java/collections/",
+    "context": "Crea RegistroTalleres desde cero. Comienza con Inscripcion[] y evoluciona a ArrayList; registra, busca y elimina, trata duplicados sin cerrar el programa.",
+    "steps": [
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-06/independiente/01-entorno.md",
+        "title": "Primer objeto"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-06/independiente/02-arrays.md",
+        "title": "Array"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-06/independiente/03-listas.md",
+        "title": "Lista dinámica"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-06/independiente/04-excepciones-pruebas.md",
+        "title": "Errores y pruebas"
+      }
+    ]
+  },
+  {
+    "id": "technical-support-lab",
+    "title": "Centro de soporte técnico — abstracción e interfaces",
+    "topic": "poo-java",
+    "count": 4,
+    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-07/independiente/README.md",
+    "path": "/activities/technical-support-lab/",
+    "help": "/handbook/java/interfaces/",
+    "context": "Crea SoporteTecnicoS07. Computadores e impresoras comparten Equipo, pero solo Computador permite actualización de software. No reutilices MediaHub ni PetCare.",
+    "steps": [
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-07/independiente/01-preparacion.md",
+        "title": "Tipos y capacidades"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-07/independiente/02-abstraccion.md",
+        "title": "Clase abstracta"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-07/independiente/03-interfaz.md",
+        "title": "Interfaz Actualizable"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-07/independiente/04-integracion-pruebas.md",
+        "title": "Integrar"
+      }
+    ]
+  },
+  {
+    "id": "fair-access-lab",
+    "title": "Control de acceso a feria — Set y Map",
+    "topic": "colecciones-java",
+    "count": 4,
+    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-08/independiente/README.md",
+    "path": "/activities/fair-access-lab/",
+    "help": "/handbook/java/collections/",
+    "context": "Crea ControlFeria. Acreditaciones como F001 son únicas y se recuperan por código. Contrasta List, Set y Map; no hace falta usar las tres en producción.",
+    "steps": [
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-08/independiente/01-preparacion.md",
+        "title": "Identidad"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-08/independiente/02-comparacion.md",
+        "title": "Elegir colección"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-08/independiente/03-registro.md",
+        "title": "Registro consistente"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-08/independiente/04-pruebas.md",
+        "title": "Pruebas"
+      }
+    ]
+  },
+  {
+    "id": "rent-a-car-javafx-lab",
+    "title": "Rent-a-Car — primera interfaz JavaFX",
+    "topic": "interfaces-graficas-javafx",
+    "count": 4,
+    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-09/README.md",
+    "path": "/activities/rent-a-car-javafx-lab/",
+    "help": "/handbook/java/javafx/",
+    "context": "Desde el generador JavaFX de IntelliJ, Java 21 y Maven. Registra una patente en una ventana; vacío o espacios muestran error. No agregues base de datos ni reutilices PetCare.",
+    "steps": [
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-09/01-entorno-y-arranque.md",
+        "title": "Entorno JavaFX"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-09/02-vista-fxml.md",
+        "title": "Formulario"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-09/03-controller-eventos.md",
+        "title": "Evento y modelo"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-09/04-verificacion-y-tarea.md",
+        "title": "Pruebas"
+      }
+    ]
+  },
+  {
+    "id": "sports-reservation-javafx-lab",
+    "title": "Reservas deportivas — MVC y navegación",
+    "topic": "interfaces-graficas-javafx",
+    "count": 5,
+    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/README.md",
+    "path": "/activities/sports-reservation-javafx-lab/",
+    "help": "/handbook/java/javafx/table-view/",
+    "context": "Crea ReservaRecintosFX. Cancha fútbol 1, Cancha fútbol 2 y Gimnasio, bloques de 08:00 a 21:00; responsable obligatorio, recinto-hora único. Solo memoria, dos vistas FXML.",
+    "steps": [
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/01-mvc-y-modelo.md",
+        "title": "Modelo y MVC"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/02-tableview-observablelist.md",
+        "title": "Tabla observable"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/03-navegacion.md",
+        "title": "Formulario y navegación"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/04-verificacion-y-entrega.md",
+        "title": "Verificar"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/02-actividades-y-pruebas.md",
+        "title": "Actividades y pruebas"
+      }
+    ]
+  },
+  {
+    "id": "instrument-inventory-json-lab",
+    "title": "Inventario de instrumentos — JavaFX y JSON",
+    "topic": "arquitectura-mvc-persistencia",
+    "count": 5,
+    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-11/README.md",
+    "path": "/activities/instrument-inventory-json-lab/",
+    "help": "/handbook/architecture/",
+    "context": "Crea InventarioInstrumentosFX. Código único, nombre y categoría (guitarra, bajo, batería, teclado). Dos vistas FXML, DAO Jackson, Service y data/instrumentos.json. No sobrescribir archivo inválido; escritura directa en esta versión didáctica.",
+    "steps": [
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-11/01-proyecto-y-arquitectura.md",
+        "title": "Proyecto y modelo"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-11/02-dao-json.md",
+        "title": "DAO JSON"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-11/03-servicio-y-reglas.md",
+        "title": "Servicio"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-11/04-interfaz-y-navegacion.md",
+        "title": "Interfaz MVC"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-11/05-pruebas-persistencia.md",
+        "title": "Reinicio y recuperación"
+      }
+    ]
+  },
+  {
+    "id": "persistent-capsules-jdbc-lab",
+    "title": "Cápsulas persistentes — JDBC sin GUI",
+    "topic": "persistencia-relacional-jdbc",
+    "count": 3,
+    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-13/README.md",
+    "path": "/activities/persistent-capsules-jdbc-lab/",
+    "help": "/handbook/java/jdbc/",
+    "context": "Proyecto autónomo de consola de 90 min: título, mensaje y fecha. Consulta, inserta, actualiza y elimina por ID. No requiere proyecto previo ni interfaz gráfica. Fuentes de referencia; ejecución real pendiente.",
+    "steps": [
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-13/01-conexion.md",
+        "title": "Preparación y conexión"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-13/02-lectura.md",
+        "title": "Modelo y lectura"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-13/03-crud.md",
+        "title": "CRUD y pruebas"
+      }
+    ]
+  },
+  {
+    "id": "capsules-javafx-dao-lab",
+    "title": "Cápsulas persistentes — JavaFX, MVC y DAO",
+    "topic": "persistencia-relacional-jdbc",
+    "count": 3,
+    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-14/README.md",
+    "path": "/activities/capsules-javafx-dao-lab/",
+    "help": "/handbook/java/jdbc/crud/",
+    "context": "Proyecto autónomo de 90 min con esquema capsula_fx_db. CRUD visual, validación, confirmación y persistencia; no requiere el lab de consola. Ejecución real pendiente.",
+    "steps": [
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-14/01-dao.md",
+        "title": "Preparación y contrato"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-14/02-vista.md",
+        "title": "Vista y lectura"
+      },
+      {
+        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-14/03-crud-visual.md",
+        "title": "Eventos y pruebas"
+      }
+    ]
+  }
+]
