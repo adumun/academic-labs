@@ -42,6 +42,12 @@
       "name": "Observabilidad y rendimiento",
       "area": "Ingeniería de software",
       "description": "Interpretar throughput, latencia, consumer lag y capacidad de procesamiento bajo carga en sistemas distribuidos."
+    },
+    {
+      "id": "persistencia-relacional-jdbc",
+      "name": "Persistencia relacional con JDBC",
+      "area": "Ingeniería de software",
+      "description": "Conexiones, SQL parametrizado, ResultSet, mapeo de objetos y CRUD."
     }
   ],
   "courses": [
@@ -313,6 +319,80 @@
         "intellij"
       ],
       "path": "/activities/dsy1102-ep2-microdesafios/",
+      "evidence": "txt",
+      "version": "1.0.0",
+      "status": "published"
+    },
+    {
+      "id": "dsy1102-jdbc-dao-guiado",
+      "title": "JDBC y DAO · Rueditas de bicicleta",
+      "description": "Ocho incrementos con ayudas conceptuales, pistas, código y checkpoints para construir una aplicación JavaFX con JDBC y DAO.",
+      "topicIds": [
+        "persistencia-relacional-jdbc",
+        "interfaces-graficas-javafx",
+        "arquitectura-mvc-persistencia"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Conectar Java con MariaDB mediante JDBC",
+        "Parametrizar consultas y mapear ResultSet",
+        "Separar MVC y DAO",
+        "Verificar CRUD, validaciones y persistencia"
+      ],
+      "icon": "🚲",
+      "durationMinutes": 120,
+      "tags": [
+        "dsy1102",
+        "java",
+        "javafx",
+        "jdbc",
+        "mariadb",
+        "crud",
+        "dao",
+        "mvc",
+        "laboratorio-hibrido",
+        "practica-guiada"
+      ],
+      "path": "/activities/dsy1102-jdbc-dao-guiado/",
+      "evidence": "txt",
+      "version": "1.0.0",
+      "status": "published"
+    },
+    {
+      "id": "dsy1102-jdbc-dao-ensayo",
+      "title": "JDBC y DAO · Ensayo práctico",
+      "description": "Ensayo práctico autónomo de préstamos de libros: requisitos, datos de prueba, criterios de aceptación y rúbrica formativa, sin soluciones.",
+      "topicIds": [
+        "persistencia-relacional-jdbc",
+        "interfaces-graficas-javafx",
+        "arquitectura-mvc-persistencia"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Conectar Java con MariaDB mediante JDBC",
+        "Parametrizar consultas y mapear ResultSet",
+        "Separar MVC y DAO",
+        "Verificar CRUD, validaciones y persistencia"
+      ],
+      "icon": "📝",
+      "durationMinutes": 90,
+      "tags": [
+        "dsy1102",
+        "java",
+        "javafx",
+        "jdbc",
+        "mariadb",
+        "crud",
+        "dao",
+        "mvc",
+        "laboratorio-hibrido",
+        "ensayo-practico"
+      ],
+      "path": "/activities/dsy1102-jdbc-dao-ensayo/",
       "evidence": "txt",
       "version": "1.0.0",
       "status": "published"
