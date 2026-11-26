@@ -44,6 +44,11 @@ for (const entry of [...banks, ...labs]) {
     for (const match of html.matchAll(/href="#([^"]+)"/g)) {
         assert.ok(ids.includes(match[1]), 'missing anchor in ' + entry.id);
     }
+    if (entry.autonomous) {
+        assert.ok(!/github\\.com\\/cmartinezs/i.test(html), 'personal repository dependency in ' + entry.id);
+        assert.equal(entry.source, 'https://academic-labs.adumun.cl' + entry.path);
+        assert.ok(entry.provenance?.source, 'missing editorial provenance');
+    }
     for (const step of entry.steps || []) {
         assert.ok(html.includes(step.source), 'missing source step in ' + entry.id);
     }
