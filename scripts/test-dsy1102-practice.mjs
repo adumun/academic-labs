@@ -14,6 +14,7 @@ assert.equal(catalog.schemaVersion, 2);
 assert.equal(banks.length, 13);
 assert.equal(banks.reduce((sum, bank) => sum + bank.count, 0), 47);
 assert.equal(labs.length, 12);
+assert.equal(labs.reduce((sum, lab) => sum + lab.count, 0), 48);
 assert.equal(new Set(catalog.activities.map(item => item.id)).size, catalog.activities.length);
 assert.equal(new Set(catalog.activities.map(item => item.path)).size, catalog.activities.length);
 const topics = new Set(catalog.topics.map(topic => topic.id));
@@ -44,10 +45,15 @@ for (const entry of [...banks, ...labs]) {
     for (const match of html.matchAll(/href="#([^"]+)"/g)) {
         assert.ok(ids.includes(match[1]), 'missing anchor in ' + entry.id);
     }
-    if (entry.autonomous) {
-        assert.ok(!/github\\.com\\/cmartinezs/i.test(html), 'personal repository dependency in ' + entry.id);
-        assert.equal(entry.source, 'https://academic-labs.adumun.cl' + entry.path);
-        assert.ok(entry.provenance?.source, 'missing editorial provenance');
+    assert.equal(entry.autonomous, true, 'autonomy required: ' + entry.id);
+    assert.ok(!html.toLowerCase().includes('github.com/cmartinezs'), 'personal repository dependency: ' + entry.id);
+    assert.equal(entry.source, 'https://academic-labs.adumun.cl' + entry.path);
+    assert.ok(entry.provenance?.source, 'missing editorial provenance');
+    assert.ok(html.includes('data-version="' + item.version + '"'), 'version mismatch: ' + entry.id);
+    for (const resource of entry.resources || []) {
+        assert.ok(resource.startsWith('codigo/') && !resource.includes('..'), 'invalid resource path');
+        assert.ok(existsSync(join(root, entry.path.slice(1), resource)), 'missing resource: ' + resource);
+        assert.ok(html.includes('href="' + resource + '"'), 'unlinked resource: ' + resource);
     }
     for (const step of entry.steps || []) {
         assert.ok(html.includes(step.source), 'missing source step in ' + entry.id);
@@ -56,4 +62,4 @@ for (const entry of [...banks, ...labs]) {
 for (const file of ['practice.js', 'practice.css']) {
     assert.ok(existsSync(join(root, shared, file)));
 }
-console.log('PASS: 13 banks, 47 exercises, 12 hybrid labs, 25 catalog entries and static DOM contracts.');
+console.log('PASS: 13 banks, 47 exercises, 12 hybrid labs, 25 autonomous entries, 48 lab checkpoints, local resources and static DOM contracts.');
