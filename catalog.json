@@ -1068,7 +1068,7 @@
     {
       "id": "rent-a-car-javafx-lab",
       "title": "Rent-a-Car — primera interfaz JavaFX",
-      "description": "Desde el generador JavaFX de IntelliJ, Java 21 y Maven. Registra una patente en una ventana; vacío o espacios muestran error. No agregues base de datos ni reutilices PetCare. 4 checkpoints con guías de ejecución local.",
+      "description": "Desde el generador JavaFX de IntelliJ, Java 21 y Maven. Registra una patente en una ventana; vacío o espacios muestran error. No agregues base de datos ni reutilices otro proyecto. 4 checkpoints con guías de ejecución local.",
       "topicIds": [
         "interfaces-graficas-javafx"
       ],
@@ -1091,7 +1091,7 @@
       ],
       "path": "/activities/rent-a-car-javafx-lab/",
       "evidence": "txt",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "published"
     },
     {
@@ -1121,7 +1121,7 @@
       ],
       "path": "/activities/sports-reservation-javafx-lab/",
       "evidence": "txt",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "published"
     },
     {
