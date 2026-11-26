@@ -865,7 +865,7 @@
     {
       "id": "cuenta-simple-lab",
       "title": "Cuenta simple — de lógica a objetos",
-      "description": "Crea CuentaSimpleS02 desde cero. Calcula y consulta saldo primero en main, luego con método y finalmente con Cuenta. No es una aplicación bancaria real. 4 checkpoints con guías de ejecución local.",
+      "description": "Crea CuentaSimple desde cero. Calcula y consulta saldo primero en main, luego con método y finalmente con Cuenta. No es una aplicación bancaria real. 4 checkpoints con guías de ejecución local.",
       "topicIds": [
         "poo-java"
       ],
@@ -888,7 +888,7 @@
       ],
       "path": "/activities/cuenta-simple-lab/",
       "evidence": "txt",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "published"
     },
     {
