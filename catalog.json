@@ -1180,7 +1180,7 @@
       ],
       "path": "/activities/persistent-capsules-jdbc-lab/",
       "evidence": "txt",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "published"
     },
     {
@@ -1209,7 +1209,7 @@
       ],
       "path": "/activities/capsules-javafx-dao-lab/",
       "evidence": "txt",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "published"
     }
   ]
