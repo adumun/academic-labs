@@ -1010,7 +1010,7 @@
     {
       "id": "technical-support-lab",
       "title": "Centro de soporte técnico — abstracción e interfaces",
-      "description": "Crea SoporteTecnicoS07. Computadores e impresoras comparten Equipo, pero solo Computador permite actualización de software. No reutilices MediaHub ni PetCare. 4 checkpoints con guías de ejecución local.",
+      "description": "Crea SoporteTecnico. Computadores e impresoras comparten Equipo, pero solo Computador permite actualización de software. No reutilices otros proyectos. 4 checkpoints con guías de ejecución local.",
       "topicIds": [
         "poo-java"
       ],
@@ -1033,7 +1033,7 @@
       ],
       "path": "/activities/technical-support-lab/",
       "evidence": "txt",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "published"
     },
     {
@@ -1062,7 +1062,7 @@
       ],
       "path": "/activities/fair-access-lab/",
       "evidence": "txt",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "published"
     },
     {
