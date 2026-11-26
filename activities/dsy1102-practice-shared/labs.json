@@ -270,60 +270,81 @@
     "title": "Rent-a-Car — primera interfaz JavaFX",
     "topic": "interfaces-graficas-javafx",
     "count": 4,
-    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-09/README.md",
+    "source": "https://academic-labs.adumun.cl/activities/rent-a-car-javafx-lab/",
     "path": "/activities/rent-a-car-javafx-lab/",
     "help": "/handbook/java/javafx/",
-    "context": "Desde el generador JavaFX de IntelliJ, Java 21 y Maven. Registra una patente en una ventana; vacío o espacios muestran error. No agregues base de datos ni reutilices PetCare.",
+    "context": "Desde el generador JavaFX de IntelliJ, Java 21 y Maven. Registra una patente en una ventana; vacío o espacios muestran error. No agregues base de datos ni reutilices otro proyecto.",
     "steps": [
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-09/01-entorno-y-arranque.md",
+        "source": "#paso-1",
         "title": "Entorno JavaFX"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-09/02-vista-fxml.md",
+        "source": "#paso-2",
         "title": "Formulario"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-09/03-controller-eventos.md",
+        "source": "#paso-3",
         "title": "Evento y modelo"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-09/04-verificacion-y-tarea.md",
+        "source": "#paso-4",
         "title": "Pruebas"
       }
-    ]
+    ],
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-09/README.md",
+      "steps": [
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-09/01-entorno-y-arranque.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-09/02-vista-fxml.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-09/03-controller-eventos.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-09/04-verificacion-y-tarea.md"
+      ]
+    },
+    "autonomous": true
   },
   {
     "id": "sports-reservation-javafx-lab",
     "title": "Reservas deportivas — MVC y navegación",
     "topic": "interfaces-graficas-javafx",
     "count": 5,
-    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/README.md",
+    "source": "https://academic-labs.adumun.cl/activities/sports-reservation-javafx-lab/",
     "path": "/activities/sports-reservation-javafx-lab/",
     "help": "/handbook/java/javafx/table-view/",
     "context": "Crea ReservaRecintosFX. Cancha fútbol 1, Cancha fútbol 2 y Gimnasio, bloques de 08:00 a 21:00; responsable obligatorio, recinto-hora único. Solo memoria, dos vistas FXML.",
     "steps": [
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/01-mvc-y-modelo.md",
+        "source": "#paso-1",
         "title": "Modelo y MVC"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/02-tableview-observablelist.md",
+        "source": "#paso-2",
         "title": "Tabla observable"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/03-navegacion.md",
+        "source": "#paso-3",
         "title": "Formulario y navegación"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/04-verificacion-y-entrega.md",
+        "source": "#paso-4",
         "title": "Verificar"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/02-actividades-y-pruebas.md",
+        "source": "#paso-5",
         "title": "Actividades y pruebas"
       }
-    ]
+    ],
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/README.md",
+      "steps": [
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/01-mvc-y-modelo.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/02-tableview-observablelist.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/03-navegacion.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/04-verificacion-y-entrega.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/02-actividades-y-pruebas.md"
+      ]
+    },
+    "autonomous": true
   },
   {
     "id": "instrument-inventory-json-lab",
