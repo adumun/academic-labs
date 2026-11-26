@@ -118,56 +118,76 @@
     "title": "Despachos urbanos — herencia y polimorfismo",
     "topic": "poo-java",
     "count": 4,
-    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-05/README.md",
+    "source": "https://academic-labs.adumun.cl/activities/urban-delivery-lab/",
     "path": "/activities/urban-delivery-lab/",
     "help": "/handbook/java/interfaces/",
     "context": "Crea DespachosUrbanos. Envío normal = $1.000 + $500 por kilómetro; expreso añade $2.000. Clases Envio, EnvioExpress y Main; sin arrays ni interfaces requeridas.",
     "steps": [
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-05/01-preparacion.md",
+        "source": "#paso-1",
         "title": "Entorno"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-05/02-herencia.md",
+        "source": "#paso-2",
         "title": "Clase base y subclase"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-05/03-polimorfismo.md",
+        "source": "#paso-3",
         "title": "Referencia base"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-05/04-pruebas.md",
+        "source": "#paso-4",
         "title": "Prueba final"
       }
-    ]
+    ],
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-05/README.md",
+      "steps": [
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-05/01-preparacion.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-05/02-herencia.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-05/03-polimorfismo.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-05/04-pruebas.md"
+      ]
+    },
+    "autonomous": true
   },
   {
     "id": "workshop-enrollment-lab",
     "title": "Inscripciones a talleres — arrays y listas",
     "topic": "colecciones-java",
     "count": 4,
-    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-06/independiente/README.md",
+    "source": "https://academic-labs.adumun.cl/activities/workshop-enrollment-lab/",
     "path": "/activities/workshop-enrollment-lab/",
     "help": "/handbook/java/collections/",
     "context": "Crea RegistroTalleres desde cero. Comienza con Inscripcion[] y evoluciona a ArrayList; registra, busca y elimina, trata duplicados sin cerrar el programa.",
     "steps": [
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-06/independiente/01-entorno.md",
+        "source": "#paso-1",
         "title": "Primer objeto"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-06/independiente/02-arrays.md",
+        "source": "#paso-2",
         "title": "Array"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-06/independiente/03-listas.md",
+        "source": "#paso-3",
         "title": "Lista dinámica"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-06/independiente/04-excepciones-pruebas.md",
+        "source": "#paso-4",
         "title": "Errores y pruebas"
       }
-    ]
+    ],
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-06/independiente/README.md",
+      "steps": [
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-06/independiente/01-entorno.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-06/independiente/02-arrays.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-06/independiente/03-listas.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-06/independiente/04-excepciones-pruebas.md"
+      ]
+    },
+    "autonomous": true
   },
   {
     "id": "technical-support-lab",
