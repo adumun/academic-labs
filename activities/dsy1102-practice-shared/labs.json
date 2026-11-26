@@ -194,56 +194,76 @@
     "title": "Centro de soporte técnico — abstracción e interfaces",
     "topic": "poo-java",
     "count": 4,
-    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-07/independiente/README.md",
+    "source": "https://academic-labs.adumun.cl/activities/technical-support-lab/",
     "path": "/activities/technical-support-lab/",
     "help": "/handbook/java/interfaces/",
-    "context": "Crea SoporteTecnicoS07. Computadores e impresoras comparten Equipo, pero solo Computador permite actualización de software. No reutilices MediaHub ni PetCare.",
+    "context": "Crea SoporteTecnico. Computadores e impresoras comparten Equipo, pero solo Computador permite actualización de software. No reutilices otros proyectos.",
     "steps": [
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-07/independiente/01-preparacion.md",
+        "source": "#paso-1",
         "title": "Tipos y capacidades"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-07/independiente/02-abstraccion.md",
+        "source": "#paso-2",
         "title": "Clase abstracta"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-07/independiente/03-interfaz.md",
+        "source": "#paso-3",
         "title": "Interfaz Actualizable"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-07/independiente/04-integracion-pruebas.md",
+        "source": "#paso-4",
         "title": "Integrar"
       }
-    ]
+    ],
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-07/independiente/README.md",
+      "steps": [
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-07/independiente/01-preparacion.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-07/independiente/02-abstraccion.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-07/independiente/03-interfaz.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-07/independiente/04-integracion-pruebas.md"
+      ]
+    },
+    "autonomous": true
   },
   {
     "id": "fair-access-lab",
     "title": "Control de acceso a feria — Set y Map",
     "topic": "colecciones-java",
     "count": 4,
-    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-08/independiente/README.md",
+    "source": "https://academic-labs.adumun.cl/activities/fair-access-lab/",
     "path": "/activities/fair-access-lab/",
     "help": "/handbook/java/collections/",
     "context": "Crea ControlFeria. Acreditaciones como F001 son únicas y se recuperan por código. Contrasta List, Set y Map; no hace falta usar las tres en producción.",
     "steps": [
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-08/independiente/01-preparacion.md",
+        "source": "#paso-1",
         "title": "Identidad"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-08/independiente/02-comparacion.md",
+        "source": "#paso-2",
         "title": "Elegir colección"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-08/independiente/03-registro.md",
+        "source": "#paso-3",
         "title": "Registro consistente"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-08/independiente/04-pruebas.md",
+        "source": "#paso-4",
         "title": "Pruebas"
       }
-    ]
+    ],
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-08/independiente/README.md",
+      "steps": [
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-08/independiente/01-preparacion.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-08/independiente/02-comparacion.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-08/independiente/03-registro.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-08/independiente/04-pruebas.md"
+      ]
+    },
+    "autonomous": true
   },
   {
     "id": "rent-a-car-javafx-lab",
