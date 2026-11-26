@@ -1,7 +1,303 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reservas deportivas — MVC y navegación · Academic Labs</title><link rel="stylesheet" href="../dsy1102-practice-shared/practice.css"><script defer src="../dsy1102-practice-shared/practice.js"></script></head>
-<body class="practice" data-activity="sports-reservation-javafx-lab" data-version="1.0.0" data-source="https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/README.md"><a class="skip-link" href="#main">Ir al contenido</a><header><nav><a href="../../">Academic Labs · ADÜMÜN</a><a href="../../explore/?course=DSY1102">Explorar prácticas DSY1102</a></nav></header><main id="main"><div class="eyebrow">Laboratorio híbrido · ejecución local</div><h1>Reservas deportivas — MVC y navegación</h1><p>Crea ReservaRecintosFX. Cancha fútbol 1, Cancha fútbol 2 y Gimnasio, bloques de 08:00 a 21:00; responsable obligatorio, recinto-hora único. Solo memoria, dos vistas FXML.</p><section class="panel"><h2>Preparación</h2><p>JDK 21, IntelliJ con JavaFX y Maven; revisa dependencias de JSON cuando corresponda. Crea un proyecto autónomo. No reutilices una entrega de otro lab.</p><p>Lee <a href="https://academy.adumun.cl/handbook/java/javafx/table-view/">Handbook de Academy</a> si necesitas reforzar conceptos. La ejecución se realiza en tu equipo, no en el navegador.</p><p class="source">Fuente canónica fija: <a href="https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/README.md">guía completa del laboratorio</a>. Esta experiencia acompaña los pasos originales y no altera su código ni sus requisitos. Conserva tu proyecto, capturas y resultados; no incluyas credenciales ni datos personales.</p></section><section class="panel"><strong id="count" aria-live="polite">0 de 5 comprobaciones declaradas</strong><progress max="5" value="0" aria-label="Comprobaciones declaradas"></progress><nav class="jump" aria-label="Ir a un checkpoint"><a href="#paso-1">1. Modelo y MVC</a><a href="#paso-2">2. Tabla observable</a><a href="#paso-3">3. Formulario y navegación</a><a href="#paso-4">4. Verificar</a><a href="#paso-5">5. Actividades y pruebas</a></nav><p class="muted">Abre las instrucciones del paso en la fuente y vuelve aquí para registrar evidencia. Descarga avances antes de recargar o cerrar esta página.</p></section><article data-item id="paso-1"><h2>1. Modelo y MVC</h2><p>Proyecto nuevo, Reserva y repositorio en memoria.</p><p><a href="https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/01-mvc-y-modelo.md">Abrir guía completa del paso: instrucciones, código y diagnóstico</a></p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-1-solution">Implementación y decisiones</label><textarea id="paso-1-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-1-proof">Checkpoint: resultado real</label><textarea id="paso-1-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article>
-<article data-item id="paso-2"><h2>2. Tabla observable</h2><p>Presenta reservas con TableView y ObservableList.</p><p><a href="https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/02-tableview-observablelist.md">Abrir guía completa del paso: instrucciones, código y diagnóstico</a></p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-2-solution">Implementación y decisiones</label><textarea id="paso-2-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-2-proof">Checkpoint: resultado real</label><textarea id="paso-2-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article>
-<article data-item id="paso-3"><h2>3. Formulario y navegación</h2><p>Un Stage, dos vistas y mismo repositorio; rechaza responsable vacío, selección ausente y duplicado recinto-hora.</p><p><a href="https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/03-navegacion.md">Abrir guía completa del paso: instrucciones, código y diagnóstico</a></p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-3-solution">Implementación y decisiones</label><textarea id="paso-3-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-3-proof">Checkpoint: resultado real</label><textarea id="paso-3-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article>
-<article data-item id="paso-4"><h2>4. Verificar</h2><p>Dos reservas compatibles; una repetida rechazada; cancelar no crea registro.</p><p><a href="https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/04-verificacion-y-entrega.md">Abrir guía completa del paso: instrucciones, código y diagnóstico</a></p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-4-solution">Implementación y decisiones</label><textarea id="paso-4-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-4-proof">Checkpoint: resultado real</label><textarea id="paso-4-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article>
-<article data-item id="paso-5"><h2>5. Actividades y pruebas</h2><p>Completa la matriz adicional de pruebas de la guía.</p><p><a href="https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-10/02-actividades-y-pruebas.md">Abrir guía completa del paso: instrucciones, código y diagnóstico</a></p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-5-solution">Implementación y decisiones</label><textarea id="paso-5-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-5-proof">Checkpoint: resultado real</label><textarea id="paso-5-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article><section class="panel"><h2>Conservar evidencia</h2><p>Descarga un TXT local y conserva los archivos del proyecto en tu repositorio. El hash comprueba integridad, no ejecución ni autoría. La entrega oficial se realiza según las instrucciones del docente.</p><div class="actions"><button type="button" class="primary" id="export">Descargar evidencia TXT</button><button type="button" id="clear">Limpiar registro</button></div><p id="status" aria-live="polite"></p></section></main></body></html>
+<body class="practice" data-activity="sports-reservation-javafx-lab" data-version="1.1.0" data-source="https://academic-labs.adumun.cl/activities/sports-reservation-javafx-lab/"><a class="skip-link" href="#main">Ir al contenido</a><header><nav><a href="../../">Academic Labs · ADÜMÜN</a><a href="../../explore/?topic=interfaces-graficas-javafx">Explorar prácticas por tema</a></nav></header><main id="main"><div class="eyebrow">Laboratorio híbrido · ejecución local</div><h1>Reservas deportivas — MVC y navegación</h1><p>Crea ReservaRecintosFX. Cancha fútbol 1, Cancha fútbol 2 y Gimnasio, bloques de 08:00 a 21:00; responsable obligatorio, recinto-hora único. Solo memoria, dos vistas FXML.</p><section class="panel"><h2>Preparación</h2><p>JDK 21, IntelliJ con JavaFX y Maven; revisa dependencias de JSON cuando corresponda. Crea un proyecto autónomo. No reutilices una entrega de otro lab.</p><p>Lee <a href="https://academy.adumun.cl/handbook/java/javafx/table-view/">Handbook de Academy</a> si necesitas reforzar conceptos. La ejecución se realiza en tu equipo, no en el navegador.</p><p class="source">Laboratorio autónomo de Academic Labs. Conserva tu proyecto, capturas y resultados; no incluyas credenciales ni datos personales.</p></section><section class="panel"><strong id="count" aria-live="polite">0 de 5 comprobaciones declaradas</strong><progress max="5" value="0" aria-label="Comprobaciones declaradas"></progress><nav class="jump" aria-label="Ir a un checkpoint"><a href="#paso-1">1. Modelo y MVC</a><a href="#paso-2">2. Tabla observable</a><a href="#paso-3">3. Formulario y navegación</a><a href="#paso-4">4. Verificar</a><a href="#paso-5">5. Actividades y pruebas</a></nav><p class="muted">Sigue las instrucciones de cada paso y registra tu evidencia. Descarga avances antes de recargar o cerrar esta página.</p></section><article data-item id="paso-1"><h2>1. Modelo y MVC</h2><p>Proyecto nuevo, Reserva y repositorio en memoria.</p><h3>Antes de comenzar: comprueba el generador</h3>
+<ol>
+<li>Abre <strong>File → Settings → Plugins → Installed</strong> y busca <strong>JavaFX</strong>.</li>
+<li>Si JavaFX está deshabilitado, actívalo y reinicia IntelliJ cuando lo pida.</li>
+<li>Vuelve a la pantalla de inicio y elige <strong>New Project → Generators → JavaFX</strong> (no el generador genérico «Java»).</li>
+<li>Indica <strong>Name = ReservaRecintosFX</strong>, <strong>Language = Java</strong>, <strong>Build system = Maven</strong>, <strong>JDK = 21</strong> y selecciona <strong>Controls</strong> y <strong>FXML</strong> si el asistente muestra los módulos.</li>
+<li>Pulsa Create, acepta el proyecto de confianza cuando corresponda y espera la carga Maven.</li>
+<li>En la ventana lateral <strong>Project</strong>, busca <code>HelloApplication.java</code>; pulsa el triángulo verde para ejecutar.</li>
+</ol>
+<p><strong>Checkpoint 0:</strong> se abre la ventana de muestra sin errores. Si no ocurre, revisa la ventana <strong>Run</strong>, la versión de JDK y la sincronización Maven; no avances.</p>
+<h3>Cómo trabajar con los ejemplos</h3>
+<p>Usamos como paquete de referencia <code>cl.adumun.recintos</code>. Si el IDE genera un paquete distinto, adopta este mediante <strong>Refactor → Rename</strong> o adapta todas las líneas <code>package</code>, <code>import</code>, <code>fx:controller</code> y las rutas de recursos de forma coherente. No crees otro <code>HelloApplication</code> ni edites <code>pom.xml</code> a ciegas.</p>
+<h3>1. Crear desde cero</h3>
+<ol>
+<li>Abre <strong>IntelliJ IDEA → New Project → JavaFX</strong> (habilita el plugin JavaFX si no aparece).</li>
+<li>Nombre: <strong>ReservaRecintosFX</strong>; lenguaje <strong>Java</strong>; build system <strong>Maven</strong>; <strong>JDK 21</strong>. No selecciones bibliotecas extra (FormsFX no es FXML).</li>
+<li>Crea el proyecto, espera Maven y ejecuta <strong>HelloApplication</strong> sin modificar archivos.</li>
+<li>En el explorador <strong>Project</strong>, identifica <code>src/main/java</code>, <code>src/main/resources</code>, <code>pom.xml</code> y <code>module-info.java</code> (si existe).</li>
+</ol>
+<p><strong>Checkpoint A:</strong> la ventana de ejemplo abre. No avances si falla.</p>
+<h3>2. Establecer paquetes</h3>
+<p>En esta guía se usa <code>cl.adumun.recintos</code> como package de ejemplo. El asistente puede crear otro; usa tu package <strong>real</strong> de manera consistente, sin duplicar Application. Dentro de <code>src/main/java/&lt;paquete-base&gt;</code> crea los paquetes <code>model</code>, <code>repository</code> y <code>controller</code>. Los archivos FXML quedarán junto al <code>hello-view.fxml</code> generado dentro de resources.</p>
+<h3>3. Modelo</h3>
+<p>Crea <code>model/Reserva.java</code>:</p>
+<pre><code>package cl.adumun.recintos.model;
+
+public final class Reserva {
+    private final String responsable;
+    private final String recinto;
+    private final String hora;
+
+    public Reserva(String responsable, String recinto, String hora) {
+        this.responsable = responsable;
+        this.recinto = recinto;
+        this.hora = hora;
+    }
+
+    public String getResponsable() { return responsable; }
+    public String getRecinto() { return recinto; }
+    public String getHora() { return hora; }
+}</code></pre>
+<h3>4. Repositorio en memoria</h3>
+<p>Crea <code>repository/ReservaRepository.java</code>:</p>
+<pre><code>package cl.adumun.recintos.repository;
+
+import cl.adumun.recintos.model.Reserva;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+public final class ReservaRepository {
+    private final ObservableList&lt;Reserva&gt; reservas = FXCollections.observableArrayList();
+
+    public ObservableList&lt;Reserva&gt; obtenerTodas() { return reservas; }
+
+    public boolean estaOcupado(String recinto, String hora) {
+        return reservas.stream().anyMatch(r -&gt;
+                r.getRecinto().equalsIgnoreCase(recinto.trim())
+                &amp;&amp; r.getHora().equals(hora));
+    }
+
+    public void registrar(Reserva reserva) { reservas.add(reserva); }
+}</code></pre>
+<p><strong>Checkpoint B:</strong> ambos archivos compilan. Explica: <code>Reserva</code> representa datos; <code>ReservaRepository</code> administra una colección observable; ninguno debe abrir ventanas. No instancies repositorios distintos por controlador.</p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-1-solution">Implementación y decisiones</label><textarea id="paso-1-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-1-proof">Checkpoint: resultado real</label><textarea id="paso-1-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article>
+<article data-item id="paso-2"><h2>2. Tabla observable</h2><p>Presenta reservas con TableView y ObservableList.</p><p><strong>Requisito:</strong> etapa 01 de este laboratorio, no un laboratorio anterior.</p>
+<h3>1. Archivo <code>lista-view.fxml</code></h3>
+<p>En la misma carpeta de resources donde IntelliJ creó <code>hello-view.fxml</code>, crea este archivo. Reemplaza el package en <code>fx:controller</code> si el proyecto generado usa otro:</p>
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;?import javafx.scene.control.*?&gt;
+&lt;?import javafx.scene.layout.*?&gt;
+&lt;VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="cl.adumun.recintos.controller.ListaController"
+      spacing="12" prefWidth="660" prefHeight="440"&gt;
+    &lt;children&gt;
+        &lt;Label text="Reservas de recintos deportivos"/&gt;
+        &lt;TableView fx:id="tablaReservas" VBox.vgrow="ALWAYS"&gt;
+            &lt;columns&gt;
+                &lt;TableColumn fx:id="colResponsable" text="Responsable" prefWidth="220"/&gt;
+                &lt;TableColumn fx:id="colRecinto" text="Recinto" prefWidth="240"/&gt;
+                &lt;TableColumn fx:id="colHora" text="Hora" prefWidth="150"/&gt;
+            &lt;/columns&gt;
+        &lt;/TableView&gt;
+        &lt;Button text="Nueva reserva" onAction="#abrirFormulario"/&gt;
+    &lt;/children&gt;
+&lt;/VBox&gt;</code></pre>
+<h3>2. Archivo <code>controller/ListaController.java</code></h3>
+<pre><code>package cl.adumun.recintos.controller;
+
+import cl.adumun.recintos.model.Reserva;
+import cl.adumun.recintos.repository.ReservaRepository;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
+public class ListaController {
+    @FXML private TableView&lt;Reserva&gt; tablaReservas;
+    @FXML private TableColumn&lt;Reserva, String&gt; colResponsable;
+    @FXML private TableColumn&lt;Reserva, String&gt; colRecinto;
+    @FXML private TableColumn&lt;Reserva, String&gt; colHora;
+    private Runnable abrirFormulario;
+
+    public void configurar(ReservaRepository repositorio, Runnable abrirFormulario) {
+        this.abrirFormulario = abrirFormulario;
+        colResponsable.setCellValueFactory(c -&gt;
+                new ReadOnlyStringWrapper(c.getValue().getResponsable()));
+        colRecinto.setCellValueFactory(c -&gt;
+                new ReadOnlyStringWrapper(c.getValue().getRecinto()));
+        colHora.setCellValueFactory(c -&gt;
+                new ReadOnlyStringWrapper(c.getValue().getHora()));
+        tablaReservas.setItems(repositorio.obtenerTodas());
+    }
+
+    @FXML private void abrirFormulario() { abrirFormulario.run(); }
+}</code></pre>
+<h3>3. Comprobar diseño</h3>
+<p>Compara todos los <code>fx:id</code>, los nombres de los campos Java y el método <code>#abrirFormulario</code>. No invoques <code>configurar</code> durante <code>initialize</code>: lo hará Application <strong>después</strong> de <code>FXMLLoader.load()</code>.</p>
+<p><strong>Checkpoint:</strong> FXML y controlador son coherentes y Java compila. El listado arrancará una vez conectada la navegación en etapa 03. Al agregar objetos a la lista observable aparecerán filas automáticamente; no necesitas <code>table.refresh()</code> para insertar elementos.</p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-2-solution">Implementación y decisiones</label><textarea id="paso-2-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-2-proof">Checkpoint: resultado real</label><textarea id="paso-2-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article>
+<article data-item id="paso-3"><h2>3. Formulario y navegación</h2><p>Un Stage, dos vistas y mismo repositorio; rechaza responsable vacío, selección ausente y duplicado recinto-hora.</p><h3>1. Crear <code>form-view.fxml</code></h3>
+<p>Guárdalo junto a <code>lista-view.fxml</code>, corrigiendo el paquete del controlador si es distinto:</p>
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;?import javafx.scene.control.*?&gt;
+&lt;?import javafx.scene.layout.*?&gt;
+&lt;VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="cl.adumun.recintos.controller.FormController"
+      spacing="12" prefWidth="480" prefHeight="340"&gt;
+    &lt;children&gt;
+        &lt;Label text="Nueva reserva deportiva"/&gt;
+        &lt;TextField fx:id="campoResponsable" promptText="Responsable"/&gt;
+        &lt;ComboBox fx:id="selectorRecinto" promptText="Selecciona recinto"/&gt;
+        &lt;ComboBox fx:id="selectorHora" promptText="Selecciona horario"/&gt;
+        &lt;Label fx:id="mensajeError" text=""/&gt;
+        &lt;HBox spacing="8"&gt;
+            &lt;children&gt;
+                &lt;Button text="Guardar" onAction="#guardar"/&gt;
+                &lt;Button text="Volver" onAction="#volver"/&gt;
+            &lt;/children&gt;
+        &lt;/HBox&gt;
+    &lt;/children&gt;
+&lt;/VBox&gt;</code></pre>
+<h3>2. Crear <code>controller/FormController.java</code></h3>
+<pre><code>package cl.adumun.recintos.controller;
+
+import cl.adumun.recintos.model.Reserva;
+import cl.adumun.recintos.repository.ReservaRepository;
+import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+
+public class FormController {
+    @FXML private TextField campoResponsable;
+    @FXML private ComboBox&lt;String&gt; selectorRecinto;
+    @FXML private ComboBox&lt;String&gt; selectorHora;
+    @FXML private Label mensajeError;
+    private ReservaRepository repositorio;
+    private Runnable volverAlListado;
+
+    @FXML private void initialize() {
+        selectorRecinto.getItems().addAll(
+                "Cancha fútbol 1", "Cancha fútbol 2", "Gimnasio");
+        for (int h = 8; h &lt; 22; h++) {
+            selectorHora.getItems().add(String.format("%02d:00", h));
+        }
+    }
+
+    public void configurar(ReservaRepository repositorio, Runnable volverAlListado) {
+        this.repositorio = repositorio;
+        this.volverAlListado = volverAlListado;
+    }
+
+    @FXML private void guardar() {
+        String responsable = campoResponsable.getText().trim();
+        String recinto = selectorRecinto.getValue();
+        String hora = selectorHora.getValue();
+
+        if (responsable.isBlank()) {
+            mensajeError.setText("Ingresa un responsable");
+            return;
+        }
+        if (recinto == null || hora == null) {
+            mensajeError.setText("Selecciona recinto y horario");
+            return;
+        }
+        if (repositorio.estaOcupado(recinto, hora)) {
+            mensajeError.setText("El recinto ya está reservado a esa hora");
+            return;
+        }
+        repositorio.registrar(new Reserva(responsable, recinto, hora));
+        volverAlListado.run();
+    }
+
+    @FXML private void volver() { volverAlListado.run(); }
+}</code></pre>
+<h3>3. Adaptar la clase Application generada</h3>
+<p>Reemplaza la <strong>clase HelloApplication existente</strong> por este código, no crees una segunda Application. Ajusta <code>package</code> según IntelliJ y comprueba que los FXML estén en el mismo path de resources que <code>hello-view.fxml</code>:</p>
+<pre><code>package cl.adumun.recintos;
+
+import cl.adumun.recintos.controller.FormController;
+import cl.adumun.recintos.controller.ListaController;
+import cl.adumun.recintos.repository.ReservaRepository;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import java.io.IOException;
+
+public class HelloApplication extends Application {
+    private final ReservaRepository repositorio = new ReservaRepository();
+    private Stage stage;
+
+    @Override public void start(Stage stage) throws IOException {
+        this.stage = stage;
+        stage.setTitle("Arriendo de recintos deportivos");
+        mostrarListado();
+        stage.show();
+    }
+
+    private void mostrarListado() throws IOException {
+        FXMLLoader loader = new FXMLLoader(
+                HelloApplication.class.getResource("lista-view.fxml"));
+        Parent root = loader.load();
+        ListaController controller = loader.getController();
+        controller.configurar(repositorio, this::irAFormulario);
+        stage.setScene(new Scene(root));
+    }
+
+    private void mostrarFormulario() throws IOException {
+        FXMLLoader loader = new FXMLLoader(
+                HelloApplication.class.getResource("form-view.fxml"));
+        Parent root = loader.load();
+        FormController controller = loader.getController();
+        controller.configurar(repositorio, this::irAListado);
+        stage.setScene(new Scene(root));
+    }
+
+    private void irAFormulario() {
+        try { mostrarFormulario(); }
+        catch (IOException e) { throw new IllegalStateException("Carga formulario", e); }
+    }
+
+    private void irAListado() {
+        try { mostrarListado(); }
+        catch (IOException e) { throw new IllegalStateException("Carga listado", e); }
+    }
+
+    public static void main(String[] args) { launch(args); }
+}</code></pre>
+<h3>4. Revisar módulo y rutas</h3>
+<p>En proyectos <strong>modulares</strong>, si <code>module-info.java</code> existe, conserva sus declaraciones generadas y asegúrate de incluir (ajusta el package):</p>
+<pre><code>opens cl.adumun.recintos.controller to javafx.fxml;</code></pre>
+<p>Conserva <code>requires javafx.controls;</code>, <code>requires javafx.fxml;</code> y la apertura/exportación de la clase Application según el generador. Si IntelliJ creó <code>module-info.java</code>, <strong>no crees otro</strong>. <code>getResource("lista-view.fxml")</code> es relativo al package de <code>HelloApplication</code>; cambia a ruta absoluta de classpath si el FXML está en otra carpeta.</p>
+<p><strong>Checkpoint:</strong> abre listado, entra al formulario, guarda una reserva y vuelve. El mismo repositorio conserva filas; al volver sin guardar no se crea nada.</p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-3-solution">Implementación y decisiones</label><textarea id="paso-3-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-3-proof">Checkpoint: resultado real</label><textarea id="paso-3-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article>
+<article data-item id="paso-4"><h2>4. Verificar</h2><p>Dos reservas compatibles; una repetida rechazada; cancelar no crea registro.</p><h3>Prueba guiada de principio a fin</h3>
+<ol>
+<li>Inicia <code>ReservaRecintosFX</code> desde IntelliJ.</li>
+<li>Comprueba que ves una tabla vacía con columnas Responsable, Recinto y Hora.</li>
+<li>Haz clic en <strong>Nueva reserva</strong>.</li>
+<li>Escribe <code>Ana</code>, selecciona <code>Cancha fútbol 1</code> y <code>09:00</code>; pulsa <strong>Guardar</strong>.</li>
+<li>Verifica que regresa al listado y aparece exactamente una fila.</li>
+<li>Entra otra vez al formulario y escribe <code>Pedro</code>, <code>Cancha fútbol 1</code>, <code>09:00</code>.</li>
+<li>Al pulsar <strong>Guardar</strong>, debe mostrar que el horario está ocupado, <strong>sin abandonar el formulario</strong>.</li>
+<li>Cambia el recinto a <code>Cancha fútbol 2</code> y pulsa Guardar. Ahora deben aparecer dos filas.</li>
+<li>Abre el formulario, deja responsable vacío y confirma que <strong>no</strong> registra otra reserva.</li>
+<li>Cierra y vuelve a ejecutar. <strong>La tabla volverá a estar vacía</strong>: este laboratorio trabaja solo en memoria. La persistencia JSON se aborda en otro proyecto autónomo.</li>
+</ol>
+<p><strong>Checkpoint final:</strong> dos altas válidas, duplicado rechazado, campo vacío rechazado, navegación funcional y comportamiento en memoria comprendido. Si difiere, revisa la <a href="#paso-5">matriz T01–T09</a>.</p>
+<h3>Comprobación en IntelliJ</h3>
+<ol>
+<li>Ejecuta el proyecto <strong>ReservaRecintosFX</strong> desde la configuración generada, no desde un laboratorio anterior.</li>
+<li>Si <code>Location is not set</code>, comprueba rutas FXML y <code>getResource</code>.</li>
+<li>Si aparece <code>LoadException</code>, revisa <code>fx:controller</code>, <code>fx:id</code>, métodos <code>onAction</code> y <code>module-info.java</code>.</li>
+<li>Si <code>TableView</code> permanece sin filas después del alta, comprueba que se comparte <strong>una</strong> instancia de <code>ReservaRepository</code>.</li>
+<li>Si la aplicación no compila, revisa que el package en todos los archivos coincida con el realmente creado en IntelliJ.</li>
+</ol>
+<h3>Evidencia</h3>
+<p>Ejecuta <a href="#paso-5">T01–T09</a>. Captura (a) listado con dos reservas, (b) doble reserva rechazada y (c) error por responsable vacío. Entrega el proyecto JavaFX independiente y una explicación de 5–10 líneas sobre separación de responsabilidades MVC y colecciones observables.</p>
+<h3>Trabajo autónomo</h3>
+<h3>Lista de terminado</h3>
+<ul>
+<li>[ ] Proyecto nuevo <code>ReservaRecintosFX</code> creado y ejecutado.</li>
+<li>[ ] Dos FXML navegables.</li>
+<li>[ ] Listado con <code>ObservableList</code>.</li>
+<li>[ ] Rechazo de entradas vacías y reservas duplicadas.</li>
+<li>[ ] Evidencias y decisiones explicadas.</li>
+</ul><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-4-solution">Implementación y decisiones</label><textarea id="paso-4-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-4-proof">Checkpoint: resultado real</label><textarea id="paso-4-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article>
+<article data-item id="paso-5"><h2>5. Actividades y pruebas</h2><p>Completa la matriz adicional de pruebas de la guía.</p><p><strong>Caso:</strong> proyecto independiente <code>ReservaRecintosFX</code>.</p>
+<div style="overflow-x:auto"><table><thead><tr><th>ID</th><th>Acción</th><th>Esperado</th></tr></thead><tbody>
+<tr><td>T01</td><td>Ejecutar proyecto nuevo</td><td>Lista vacía sin errores</td></tr>
+<tr><td>T02</td><td>Ir al formulario y volver</td><td>No se registra reserva</td></tr>
+<tr><td>T03</td><td>Ana · Cancha fútbol 1 · 09:00</td><td>Fila visible al volver al listado</td></tr>
+<tr><td>T04</td><td>Responsable vacío o espacios</td><td>Rechazo con mensaje claro</td></tr>
+<tr><td>T05</td><td>No seleccionar recinto</td><td>Rechazo</td></tr>
+<tr><td>T06</td><td>No seleccionar horario</td><td>Rechazo</td></tr>
+<tr><td>T07</td><td>Pedro · Cancha fútbol 1 · 09:00 después de T03</td><td>Rechazo por doble reserva</td></tr>
+<tr><td>T08</td><td>Pedro · Cancha fútbol 2 · 09:00</td><td>Alta permitida: otro recinto</td></tr>
+<tr><td>T09</td><td>Abrir y cerrar formulario varias veces</td><td>Se conservan las reservas en memoria</td></tr>
+</tbody></table></div>
+<h3>Reflexión autónoma</h3>
+<p>¿Por qué <code>Reserva</code> no debe conocer JavaFX? ¿Por qué se comparte un único repositorio? ¿Qué observa exactamente <code>ObservableList</code>? ¿En qué clase y en qué momento se valida la duplicidad? ¿Cómo cambiaría el diseño si en otro módulo se incorporara persistencia?</p>
+<p><strong>Extensión opcional:</strong> botón para eliminar la reserva seleccionada o filtrado por recinto. No son requisitos mínimos ni una nueva evaluación.</p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-5-solution">Implementación y decisiones</label><textarea id="paso-5-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-5-proof">Checkpoint: resultado real</label><textarea id="paso-5-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article><section class="panel"><h2>Conservar evidencia</h2><p>Descarga un TXT local y conserva los archivos del proyecto en tu repositorio. El hash comprueba integridad, no ejecución ni autoría. Si utilizas esta actividad en un curso, entrega la evidencia por el mecanismo indicado por tu docente.</p><div class="actions"><button type="button" class="primary" id="export">Descargar evidencia TXT</button><button type="button" id="clear">Limpiar registro</button></div><p id="status" aria-live="polite"></p></section></main></body></html>
