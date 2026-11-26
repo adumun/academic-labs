@@ -27,7 +27,9 @@ for (const entry of [...banks, ...labs]) {
     assert.ok(item.topicIds.every(topic => topics.has(topic)));
     assert.equal(item.status, 'published');
     assert.equal(item.evidence, 'txt');
-    const html = read(entry.path.slice(1) + 'index.html');
+    const raw = read(entry.path.slice(1) + 'index.html');
+    // Code examples contain escaped markup; do not treat sample FXML IDs as page IDs.
+    const html = raw.replace(/<pre><code>[\s\S]*?<\/code><\/pre>/g, '');
     assert.equal((html.match(/<article data-item /g) || []).length, entry.count);
     assert.equal((html.match(/<textarea [^>]*data-solution/g) || []).length, entry.count);
     assert.equal((html.match(/<textarea [^>]*data-proof/g) || []).length, entry.count);
@@ -46,7 +48,7 @@ for (const entry of [...banks, ...labs]) {
         assert.ok(ids.includes(match[1]), 'missing anchor in ' + entry.id);
     }
     assert.equal(entry.autonomous, true, 'autonomy required: ' + entry.id);
-    assert.ok(!html.toLowerCase().includes('github.com/cmartinezs'), 'personal repository dependency: ' + entry.id);
+    assert.ok(!raw.toLowerCase().includes('github.com/cmartinezs'), 'personal repository dependency: ' + entry.id);
     assert.equal(entry.source, 'https://academic-labs.adumun.cl' + entry.path);
     assert.ok(entry.provenance?.source, 'missing editorial provenance');
     assert.ok(html.includes('data-version="' + item.version + '"'), 'version mismatch: ' + entry.id);
