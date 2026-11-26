@@ -4,44 +4,73 @@
     "title": "JavaFX: cuatro prácticas de eventos y controles",
     "topic": "interfaces-graficas-javafx",
     "count": 4,
-    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/ejercicios/semana-09/README.md",
+    "source": "https://academic-labs.adumun.cl/activities/javafx-events-practice/",
     "path": "/activities/javafx-events-practice/",
-    "help": "/handbook/java/javafx/events/"
+    "help": "/handbook/java/javafx/events/",
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/ejercicios/semana-09/README.md",
+      "additional": [
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/ejemplos/semana-09/"
+      ]
+    },
+    "autonomous": true
   },
   {
     "id": "javafx-mvc-navigation-practice",
     "title": "JavaFX: tres prácticas de MVC, tablas y navegación",
     "topic": "interfaces-graficas-javafx",
     "count": 3,
-    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/ejercicios/semana-10/README.md",
+    "source": "https://academic-labs.adumun.cl/activities/javafx-mvc-navigation-practice/",
     "path": "/activities/javafx-mvc-navigation-practice/",
-    "help": "/handbook/java/javafx/table-view/"
+    "help": "/handbook/java/javafx/table-view/",
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/ejercicios/semana-10/README.md",
+      "additional": []
+    },
+    "autonomous": true
   },
   {
     "id": "java-json-dao-practice",
     "title": "JSON y DAO: tres prácticas de persistencia",
     "topic": "formatos-de-datos-json",
     "count": 3,
-    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/ejercicios/semana-11/README.md",
+    "source": "https://academic-labs.adumun.cl/activities/java-json-dao-practice/",
     "path": "/activities/java-json-dao-practice/",
-    "help": "/handbook/architecture/"
+    "help": "/handbook/architecture/",
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/ejercicios/semana-11/README.md",
+      "additional": [
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-11/02-dao-json.md"
+      ]
+    },
+    "autonomous": true
   },
   {
     "id": "jdbc-query-practice",
     "title": "JDBC: cuatro prácticas de consultas y mapeo",
     "topic": "persistencia-relacional-jdbc",
     "count": 4,
-    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/ejercicios/semana-13/README.md",
+    "source": "https://academic-labs.adumun.cl/activities/jdbc-query-practice/",
     "path": "/activities/jdbc-query-practice/",
-    "help": "/handbook/java/jdbc/"
+    "help": "/handbook/java/jdbc/",
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/ejercicios/semana-13/README.md",
+      "additional": []
+    },
+    "autonomous": true
   },
   {
     "id": "jdbc-dao-focused-practice",
     "title": "DAO y JavaFX: cuatro prácticas focalizadas",
     "topic": "persistencia-relacional-jdbc",
     "count": 4,
-    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/ejercicios/semana-14/README.md",
+    "source": "https://academic-labs.adumun.cl/activities/jdbc-dao-focused-practice/",
     "path": "/activities/jdbc-dao-focused-practice/",
-    "help": "/handbook/java/jdbc/crud/"
+    "help": "/handbook/java/jdbc/crud/",
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/ejercicios/semana-14/README.md",
+      "additional": []
+    },
+    "autonomous": true
   }
 ]
