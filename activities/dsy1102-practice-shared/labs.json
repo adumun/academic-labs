@@ -394,23 +394,42 @@
     "title": "Cápsulas persistentes — JDBC sin GUI",
     "topic": "persistencia-relacional-jdbc",
     "count": 3,
-    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-13/README.md",
+    "source": "https://academic-labs.adumun.cl/activities/persistent-capsules-jdbc-lab/",
     "path": "/activities/persistent-capsules-jdbc-lab/",
     "help": "/handbook/java/jdbc/",
     "context": "Proyecto autónomo de consola de 90 min: título, mensaje y fecha. Consulta, inserta, actualiza y elimina por ID. No requiere proyecto previo ni interfaz gráfica. Fuentes de referencia; ejecución real pendiente.",
     "steps": [
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-13/01-conexion.md",
+        "source": "#paso-1",
         "title": "Preparación y conexión"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-13/02-lectura.md",
+        "source": "#paso-2",
         "title": "Modelo y lectura"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-13/03-crud.md",
+        "source": "#paso-3",
         "title": "CRUD y pruebas"
       }
+    ],
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-13/README.md",
+      "steps": [
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-13/01-conexion.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-13/02-lectura.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-13/03-crud.md"
+      ],
+      "code": "labs/semana-13/codigo/"
+    },
+    "autonomous": true,
+    "resources": [
+      "codigo/esquema.sql",
+      "codigo/pom.xml",
+      "codigo/src/main/java/app/TestConnection.java",
+      "codigo/src/main/java/app/TestDao.java",
+      "codigo/src/main/java/dao/CapsulaDao.java",
+      "codigo/src/main/java/database/DatabaseConnection.java",
+      "codigo/src/main/java/model/Capsula.java"
     ]
   },
   {
@@ -418,23 +437,44 @@
     "title": "Cápsulas persistentes — JavaFX, MVC y DAO",
     "topic": "persistencia-relacional-jdbc",
     "count": 3,
-    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-14/README.md",
+    "source": "https://academic-labs.adumun.cl/activities/capsules-javafx-dao-lab/",
     "path": "/activities/capsules-javafx-dao-lab/",
     "help": "/handbook/java/jdbc/crud/",
     "context": "Proyecto autónomo de 90 min con esquema capsula_fx_db. CRUD visual, validación, confirmación y persistencia; no requiere el lab de consola. Ejecución real pendiente.",
     "steps": [
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-14/01-dao.md",
+        "source": "#paso-1",
         "title": "Preparación y contrato"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-14/02-vista.md",
+        "source": "#paso-2",
         "title": "Vista y lectura"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-14/03-crud-visual.md",
+        "source": "#paso-3",
         "title": "Eventos y pruebas"
       }
+    ],
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-14/README.md",
+      "steps": [
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-14/01-dao.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-14/02-vista.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-14/03-crud-visual.md"
+      ],
+      "code": "labs/semana-14/codigo/"
+    },
+    "autonomous": true,
+    "resources": [
+      "codigo/esquema.sql",
+      "codigo/pom.xml",
+      "codigo/src/main/java/app/Main.java",
+      "codigo/src/main/java/controller/CapsulaController.java",
+      "codigo/src/main/java/dao/CapsulaDao.java",
+      "codigo/src/main/java/dao/CapsulaDaoMySql.java",
+      "codigo/src/main/java/database/DatabaseConnection.java",
+      "codigo/src/main/java/model/Capsula.java",
+      "codigo/src/main/resources/view/capsula.fxml"
     ]
   }
 ]
