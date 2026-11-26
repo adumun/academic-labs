@@ -4,28 +4,38 @@
     "title": "Cuenta simple — de lógica a objetos",
     "topic": "poo-java",
     "count": 4,
-    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-02/README.md",
+    "source": "https://academic-labs.adumun.cl/activities/cuenta-simple-lab/",
     "path": "/activities/cuenta-simple-lab/",
     "help": "/handbook/java/methods/",
-    "context": "Crea CuentaSimpleS02 desde cero. Calcula y consulta saldo primero en main, luego con método y finalmente con Cuenta. No es una aplicación bancaria real.",
+    "context": "Crea CuentaSimple desde cero. Calcula y consulta saldo primero en main, luego con método y finalmente con Cuenta. No es una aplicación bancaria real.",
     "steps": [
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-02/01-entorno-y-main.md",
+        "source": "#paso-1",
         "title": "Primer cálculo"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-02/02-metodos.md",
+        "source": "#paso-2",
         "title": "Método reutilizable"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-02/03-clases-objetos.md",
+        "source": "#paso-3",
         "title": "Clase Cuenta"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-02/04-verificacion.md",
+        "source": "#paso-4",
         "title": "Pruebas y explicación"
       }
-    ]
+    ],
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-02/README.md",
+      "steps": [
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-02/01-entorno-y-main.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-02/02-metodos.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-02/03-clases-objetos.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-02/04-verificacion.md"
+      ]
+    },
+    "autonomous": true
   },
   {
     "id": "drone-battery-lab",
