@@ -894,7 +894,7 @@
     {
       "id": "drone-battery-lab",
       "title": "Batería de un dron — encapsulamiento",
-      "description": "Crea BateriaDronS03. Bateria mantiene porcentaje 0–100; cargar y consumir no deben salir del rango. Dos dispositivos poseen estados independientes. Sin colecciones, JavaFX ni excepciones requeridas. 4 checkpoints con guías de ejecución local.",
+      "description": "Crea BateriaDron. Bateria mantiene porcentaje 0–100; cargar y consumir no deben salir del rango. Dos dispositivos poseen estados independientes. Sin colecciones, JavaFX ni excepciones requeridas. 4 checkpoints con guías de ejecución local.",
       "topicIds": [
         "poo-java"
       ],
@@ -917,13 +917,13 @@
       ],
       "path": "/activities/drone-battery-lab/",
       "evidence": "txt",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "published"
     },
     {
       "id": "coffee-orders-lab",
       "title": "Pedidos de cafetería — composición",
-      "description": "Crea PedidosCafeteriaS04. Pedido contiene código, Cliente y total; admite aumentos y descuentos válidos, sin total negativo. No requiere herencia, colecciones, excepciones ni persistencia. 4 checkpoints con guías de ejecución local.",
+      "description": "Crea PedidosCafeteria. Pedido contiene código, Cliente y total; admite aumentos y descuentos válidos, sin total negativo. No requiere herencia, colecciones, excepciones ni persistencia. 4 checkpoints con guías de ejecución local.",
       "topicIds": [
         "poo-java"
       ],
@@ -946,7 +946,7 @@
       ],
       "path": "/activities/coffee-orders-lab/",
       "evidence": "txt",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "published"
     },
     {
