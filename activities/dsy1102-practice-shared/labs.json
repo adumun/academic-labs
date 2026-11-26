@@ -42,56 +42,76 @@
     "title": "Batería de un dron — encapsulamiento",
     "topic": "poo-java",
     "count": 4,
-    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-03/README.md",
+    "source": "https://academic-labs.adumun.cl/activities/drone-battery-lab/",
     "path": "/activities/drone-battery-lab/",
     "help": "/handbook/java/classes-and-objects/",
-    "context": "Crea BateriaDronS03. Bateria mantiene porcentaje 0–100; cargar y consumir no deben salir del rango. Dos dispositivos poseen estados independientes. Sin colecciones, JavaFX ni excepciones requeridas.",
+    "context": "Crea BateriaDron. Bateria mantiene porcentaje 0–100; cargar y consumir no deben salir del rango. Dos dispositivos poseen estados independientes. Sin colecciones, JavaFX ni excepciones requeridas.",
     "steps": [
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-03/01-preparacion.md",
+        "source": "#paso-1",
         "title": "Preparación"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-03/02-modelar-bateria.md",
+        "source": "#paso-2",
         "title": "Modelo de batería"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-03/03-proteger-estado.md",
+        "source": "#paso-3",
         "title": "Proteger el porcentaje"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-03/04-pruebas-checkpoints.md",
+        "source": "#paso-4",
         "title": "Pruebas"
       }
-    ]
+    ],
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-03/README.md",
+      "steps": [
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-03/01-preparacion.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-03/02-modelar-bateria.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-03/03-proteger-estado.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-03/04-pruebas-checkpoints.md"
+      ]
+    },
+    "autonomous": true
   },
   {
     "id": "coffee-orders-lab",
     "title": "Pedidos de cafetería — composición",
     "topic": "poo-java",
     "count": 4,
-    "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-04/README.md",
+    "source": "https://academic-labs.adumun.cl/activities/coffee-orders-lab/",
     "path": "/activities/coffee-orders-lab/",
     "help": "/handbook/java/classes-and-objects/",
-    "context": "Crea PedidosCafeteriaS04. Pedido contiene código, Cliente y total; admite aumentos y descuentos válidos, sin total negativo. No requiere herencia, colecciones, excepciones ni persistencia.",
+    "context": "Crea PedidosCafeteria. Pedido contiene código, Cliente y total; admite aumentos y descuentos válidos, sin total negativo. No requiere herencia, colecciones, excepciones ni persistencia.",
     "steps": [
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-04/01-cliente.md",
+        "source": "#paso-1",
         "title": "Cliente válido"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-04/02-pedido.md",
+        "source": "#paso-2",
         "title": "Colaboración"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-04/03-integracion.md",
+        "source": "#paso-3",
         "title": "Operaciones"
       },
       {
-        "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-04/04-pruebas.md",
+        "source": "#paso-4",
         "title": "Verificación"
       }
-    ]
+    ],
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-04/README.md",
+      "steps": [
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-04/01-cliente.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-04/02-pedido.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-04/03-integracion.md",
+        "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/labs/semana-04/04-pruebas.md"
+      ]
+    },
+    "autonomous": true
   },
   {
     "id": "urban-delivery-lab",
