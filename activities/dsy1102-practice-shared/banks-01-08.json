@@ -1,0 +1,106 @@
+[
+  {
+    "id": "java-fundamentals-practice",
+    "title": "Fundamentos de Java: cuatro prácticas",
+    "topic": "fundamentos-java",
+    "count": 4,
+    "source": "https://academic-labs.adumun.cl/activities/java-fundamentals-practice/",
+    "path": "/activities/java-fundamentals-practice/",
+    "help": "/handbook/java/expressions/",
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/ejercicios/semana-01/README.md"
+    },
+    "autonomous": true
+  },
+  {
+    "id": "java-methods-objects-practice",
+    "title": "Métodos y objetos: cuatro prácticas",
+    "topic": "poo-java",
+    "count": 4,
+    "source": "https://academic-labs.adumun.cl/activities/java-methods-objects-practice/",
+    "path": "/activities/java-methods-objects-practice/",
+    "help": "/handbook/java/methods/",
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/ejercicios/semana-02/README.md"
+    },
+    "autonomous": true
+  },
+  {
+    "id": "java-encapsulation-practice",
+    "title": "Objetos y estado válido: tres prácticas",
+    "topic": "poo-java",
+    "count": 3,
+    "source": "https://academic-labs.adumun.cl/activities/java-encapsulation-practice/",
+    "path": "/activities/java-encapsulation-practice/",
+    "help": "/handbook/java/classes-and-objects/",
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/ejercicios/semana-03/README.md"
+    },
+    "autonomous": true
+  },
+  {
+    "id": "java-constructors-composition-practice",
+    "title": "Constructores y colaboración: cuatro prácticas",
+    "topic": "poo-java",
+    "count": 4,
+    "source": "https://academic-labs.adumun.cl/activities/java-constructors-composition-practice/",
+    "path": "/activities/java-constructors-composition-practice/",
+    "help": "/handbook/java/classes-and-objects/",
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/ejercicios/semana-04/README.md"
+    },
+    "autonomous": true
+  },
+  {
+    "id": "java-inheritance-practice",
+    "title": "Herencia y polimorfismo: tres prácticas",
+    "topic": "poo-java",
+    "count": 3,
+    "source": "https://academic-labs.adumun.cl/activities/java-inheritance-practice/",
+    "path": "/activities/java-inheritance-practice/",
+    "help": "/handbook/java/interfaces/",
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/ejercicios/semana-05/README.md"
+    },
+    "autonomous": true
+  },
+  {
+    "id": "java-arrays-collections-practice",
+    "title": "Arrays, listas y excepciones: cuatro prácticas",
+    "topic": "colecciones-java",
+    "count": 4,
+    "source": "https://academic-labs.adumun.cl/activities/java-arrays-collections-practice/",
+    "path": "/activities/java-arrays-collections-practice/",
+    "help": "/handbook/java/collections/",
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/ejercicios/semana-06/README.md"
+    },
+    "autonomous": true
+  },
+  {
+    "id": "java-abstraction-practice",
+    "title": "Abstracción e interfaces: tres prácticas",
+    "topic": "poo-java",
+    "count": 3,
+    "source": "https://academic-labs.adumun.cl/activities/java-abstraction-practice/",
+    "path": "/activities/java-abstraction-practice/",
+    "help": "/handbook/java/interfaces/",
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/ejercicios/semana-07/README.md"
+    },
+    "autonomous": true
+  },
+  {
+    "id": "java-set-map-practice",
+    "title": "Set, Map e igualdad: cuatro prácticas",
+    "topic": "colecciones-java",
+    "count": 4,
+    "source": "https://academic-labs.adumun.cl/activities/java-set-map-practice/",
+    "path": "/activities/java-set-map-practice/",
+    "help": "/handbook/java/collections/",
+    "provenance": {
+      "source": "https://github.com/cmartinezs/DSY1102-DESARROLLO-ORIENTADO-OBJETOS-2026-2/blob/a28dbca877a9ef6e0105777cae48ba4fa252f10c/ejercicios/semana-08/README.md"
+    },
+    "autonomous": true
+  }
+]

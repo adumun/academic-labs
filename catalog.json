@@ -48,6 +48,24 @@
       "name": "Persistencia relacional con JDBC",
       "area": "Ingeniería de software",
       "description": "Conexiones, SQL parametrizado, ResultSet, mapeo de objetos y CRUD."
+    },
+    {
+      "id": "fundamentos-java",
+      "name": "Fundamentos de Java",
+      "area": "Fundamentos de programación",
+      "description": "Tipos, expresiones, condiciones, ciclos y métodos en Java."
+    },
+    {
+      "id": "poo-java",
+      "name": "Programación orientada a objetos",
+      "area": "Fundamentos de programación",
+      "description": "Modelado, estado, encapsulamiento, constructores, composición, herencia, abstracción y polimorfismo."
+    },
+    {
+      "id": "colecciones-java",
+      "name": "Arrays y colecciones Java",
+      "area": "Fundamentos de programación",
+      "description": "Selección de estructuras, arrays, List, Set, Map, igualdad y manejo de errores."
     }
   ],
   "courses": [
@@ -491,6 +509,707 @@
       "path": "/activities/dsy1102-jdbc-referencia/",
       "evidence": "txt",
       "version": "1.0.0",
+      "status": "published"
+    },
+    {
+      "id": "java-fundamentals-practice",
+      "title": "Fundamentos de Java: cuatro prácticas",
+      "description": "4 ejercicios focalizados del banco docente vigente. Resuelve en tu entorno local y registra solución, explicación y prueba observada.",
+      "topicIds": [
+        "fundamentos-java"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Aplicar una habilidad concreta de Fundamentos de Java por ejercicio",
+        "Contrastar el resultado con casos de prueba y restricciones",
+        "Explicar decisiones y conservar evidencia del trabajo"
+      ],
+      "icon": "🧩",
+      "tags": [
+        "java",
+        "práctica-focalizada",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/java-fundamentals-practice/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "java-methods-objects-practice",
+      "title": "Métodos y objetos: cuatro prácticas",
+      "description": "4 ejercicios focalizados del banco docente vigente. Resuelve en tu entorno local y registra solución, explicación y prueba observada.",
+      "topicIds": [
+        "poo-java"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Aplicar una habilidad concreta de Programación orientada a objetos por ejercicio",
+        "Contrastar el resultado con casos de prueba y restricciones",
+        "Explicar decisiones y conservar evidencia del trabajo"
+      ],
+      "icon": "🧩",
+      "tags": [
+        "java",
+        "práctica-focalizada",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/java-methods-objects-practice/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "java-encapsulation-practice",
+      "title": "Objetos y estado válido: tres prácticas",
+      "description": "3 ejercicios focalizados del banco docente vigente. Resuelve en tu entorno local y registra solución, explicación y prueba observada.",
+      "topicIds": [
+        "poo-java"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Aplicar una habilidad concreta de Programación orientada a objetos por ejercicio",
+        "Contrastar el resultado con casos de prueba y restricciones",
+        "Explicar decisiones y conservar evidencia del trabajo"
+      ],
+      "icon": "🧩",
+      "tags": [
+        "java",
+        "práctica-focalizada",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/java-encapsulation-practice/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "java-constructors-composition-practice",
+      "title": "Constructores y colaboración: cuatro prácticas",
+      "description": "4 ejercicios focalizados del banco docente vigente. Resuelve en tu entorno local y registra solución, explicación y prueba observada.",
+      "topicIds": [
+        "poo-java"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Aplicar una habilidad concreta de Programación orientada a objetos por ejercicio",
+        "Contrastar el resultado con casos de prueba y restricciones",
+        "Explicar decisiones y conservar evidencia del trabajo"
+      ],
+      "icon": "🧩",
+      "tags": [
+        "java",
+        "práctica-focalizada",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/java-constructors-composition-practice/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "java-inheritance-practice",
+      "title": "Herencia y polimorfismo: tres prácticas",
+      "description": "3 ejercicios focalizados del banco docente vigente. Resuelve en tu entorno local y registra solución, explicación y prueba observada.",
+      "topicIds": [
+        "poo-java"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Aplicar una habilidad concreta de Programación orientada a objetos por ejercicio",
+        "Contrastar el resultado con casos de prueba y restricciones",
+        "Explicar decisiones y conservar evidencia del trabajo"
+      ],
+      "icon": "🧩",
+      "tags": [
+        "java",
+        "práctica-focalizada",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/java-inheritance-practice/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "java-arrays-collections-practice",
+      "title": "Arrays, listas y excepciones: cuatro prácticas",
+      "description": "4 ejercicios focalizados del banco docente vigente. Resuelve en tu entorno local y registra solución, explicación y prueba observada.",
+      "topicIds": [
+        "colecciones-java"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Aplicar una habilidad concreta de Arrays y colecciones Java por ejercicio",
+        "Contrastar el resultado con casos de prueba y restricciones",
+        "Explicar decisiones y conservar evidencia del trabajo"
+      ],
+      "icon": "🧩",
+      "tags": [
+        "java",
+        "práctica-focalizada",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/java-arrays-collections-practice/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "java-abstraction-practice",
+      "title": "Abstracción e interfaces: tres prácticas",
+      "description": "3 ejercicios focalizados del banco docente vigente. Resuelve en tu entorno local y registra solución, explicación y prueba observada.",
+      "topicIds": [
+        "poo-java"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Aplicar una habilidad concreta de Programación orientada a objetos por ejercicio",
+        "Contrastar el resultado con casos de prueba y restricciones",
+        "Explicar decisiones y conservar evidencia del trabajo"
+      ],
+      "icon": "🧩",
+      "tags": [
+        "java",
+        "práctica-focalizada",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/java-abstraction-practice/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "java-set-map-practice",
+      "title": "Set, Map e igualdad: cuatro prácticas",
+      "description": "4 ejercicios focalizados del banco docente vigente. Resuelve en tu entorno local y registra solución, explicación y prueba observada.",
+      "topicIds": [
+        "colecciones-java"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Aplicar una habilidad concreta de Arrays y colecciones Java por ejercicio",
+        "Contrastar el resultado con casos de prueba y restricciones",
+        "Explicar decisiones y conservar evidencia del trabajo"
+      ],
+      "icon": "🧩",
+      "tags": [
+        "java",
+        "práctica-focalizada",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/java-set-map-practice/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "javafx-events-practice",
+      "title": "JavaFX: cuatro prácticas de eventos y controles",
+      "description": "4 ejercicios focalizados del banco docente vigente. Resuelve en tu entorno local y registra solución, explicación y prueba observada.",
+      "topicIds": [
+        "interfaces-graficas-javafx"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Aplicar una habilidad concreta de Interfaces gráficas con JavaFX por ejercicio",
+        "Contrastar el resultado con casos de prueba y restricciones",
+        "Explicar decisiones y conservar evidencia del trabajo"
+      ],
+      "icon": "🧩",
+      "tags": [
+        "java",
+        "práctica-focalizada",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/javafx-events-practice/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "javafx-mvc-navigation-practice",
+      "title": "JavaFX: tres prácticas de MVC, tablas y navegación",
+      "description": "3 ejercicios focalizados del banco docente vigente. Resuelve en tu entorno local y registra solución, explicación y prueba observada.",
+      "topicIds": [
+        "interfaces-graficas-javafx"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Aplicar una habilidad concreta de Interfaces gráficas con JavaFX por ejercicio",
+        "Contrastar el resultado con casos de prueba y restricciones",
+        "Explicar decisiones y conservar evidencia del trabajo"
+      ],
+      "icon": "🧩",
+      "tags": [
+        "java",
+        "práctica-focalizada",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/javafx-mvc-navigation-practice/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "java-json-dao-practice",
+      "title": "JSON y DAO: tres prácticas de persistencia",
+      "description": "3 ejercicios focalizados del banco docente vigente. Resuelve en tu entorno local y registra solución, explicación y prueba observada.",
+      "topicIds": [
+        "formatos-de-datos-json"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Aplicar una habilidad concreta de JSON y datos estructurados por ejercicio",
+        "Contrastar el resultado con casos de prueba y restricciones",
+        "Explicar decisiones y conservar evidencia del trabajo"
+      ],
+      "icon": "🧩",
+      "tags": [
+        "java",
+        "práctica-focalizada",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/java-json-dao-practice/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "jdbc-query-practice",
+      "title": "JDBC: cuatro prácticas de consultas y mapeo",
+      "description": "4 ejercicios focalizados del banco docente vigente. Resuelve en tu entorno local y registra solución, explicación y prueba observada.",
+      "topicIds": [
+        "persistencia-relacional-jdbc"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Aplicar una habilidad concreta de Persistencia relacional con JDBC por ejercicio",
+        "Contrastar el resultado con casos de prueba y restricciones",
+        "Explicar decisiones y conservar evidencia del trabajo"
+      ],
+      "icon": "🧩",
+      "tags": [
+        "java",
+        "práctica-focalizada",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/jdbc-query-practice/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "jdbc-dao-focused-practice",
+      "title": "DAO y JavaFX: cuatro prácticas focalizadas",
+      "description": "4 ejercicios focalizados del banco docente vigente. Resuelve en tu entorno local y registra solución, explicación y prueba observada.",
+      "topicIds": [
+        "persistencia-relacional-jdbc"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Aplicar una habilidad concreta de Persistencia relacional con JDBC por ejercicio",
+        "Contrastar el resultado con casos de prueba y restricciones",
+        "Explicar decisiones y conservar evidencia del trabajo"
+      ],
+      "icon": "🧩",
+      "tags": [
+        "java",
+        "práctica-focalizada",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/jdbc-dao-focused-practice/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "cuenta-simple-lab",
+      "title": "Cuenta simple — de lógica a objetos",
+      "description": "Crea CuentaSimple desde cero. Calcula y consulta saldo primero en main, luego con método y finalmente con Cuenta. No es una aplicación bancaria real. 4 checkpoints con guías de ejecución local.",
+      "topicIds": [
+        "poo-java"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Primer cálculo",
+        "Método reutilizable",
+        "Clase Cuenta",
+        "Pruebas y explicación",
+        "Comprobar el comportamiento y justificar decisiones mediante evidencia local"
+      ],
+      "icon": "🧪",
+      "tags": [
+        "java",
+        "laboratorio-híbrido",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/cuenta-simple-lab/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "drone-battery-lab",
+      "title": "Batería de un dron — encapsulamiento",
+      "description": "Crea BateriaDron. Bateria mantiene porcentaje 0–100; cargar y consumir no deben salir del rango. Dos dispositivos poseen estados independientes. Sin colecciones, JavaFX ni excepciones requeridas. 4 checkpoints con guías de ejecución local.",
+      "topicIds": [
+        "poo-java"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Preparación",
+        "Modelo de batería",
+        "Proteger el porcentaje",
+        "Pruebas",
+        "Comprobar el comportamiento y justificar decisiones mediante evidencia local"
+      ],
+      "icon": "🧪",
+      "tags": [
+        "java",
+        "laboratorio-híbrido",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/drone-battery-lab/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "coffee-orders-lab",
+      "title": "Pedidos de cafetería — composición",
+      "description": "Crea PedidosCafeteria. Pedido contiene código, Cliente y total; admite aumentos y descuentos válidos, sin total negativo. No requiere herencia, colecciones, excepciones ni persistencia. 4 checkpoints con guías de ejecución local.",
+      "topicIds": [
+        "poo-java"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Cliente válido",
+        "Colaboración",
+        "Operaciones",
+        "Verificación",
+        "Comprobar el comportamiento y justificar decisiones mediante evidencia local"
+      ],
+      "icon": "🧪",
+      "tags": [
+        "java",
+        "laboratorio-híbrido",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/coffee-orders-lab/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "urban-delivery-lab",
+      "title": "Despachos urbanos — herencia y polimorfismo",
+      "description": "Crea DespachosUrbanos. Envío normal = $1.000 + $500 por kilómetro; expreso añade $2.000. Clases Envio, EnvioExpress y Main; sin arrays ni interfaces requeridas. 4 checkpoints con guías de ejecución local.",
+      "topicIds": [
+        "poo-java"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Entorno",
+        "Clase base y subclase",
+        "Referencia base",
+        "Prueba final",
+        "Comprobar el comportamiento y justificar decisiones mediante evidencia local"
+      ],
+      "icon": "🧪",
+      "tags": [
+        "java",
+        "laboratorio-híbrido",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/urban-delivery-lab/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "workshop-enrollment-lab",
+      "title": "Inscripciones a talleres — arrays y listas",
+      "description": "Crea RegistroTalleres desde cero. Comienza con Inscripcion[] y evoluciona a ArrayList; registra, busca y elimina, trata duplicados sin cerrar el programa. 4 checkpoints con guías de ejecución local.",
+      "topicIds": [
+        "colecciones-java"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Primer objeto",
+        "Array",
+        "Lista dinámica",
+        "Errores y pruebas",
+        "Comprobar el comportamiento y justificar decisiones mediante evidencia local"
+      ],
+      "icon": "🧪",
+      "tags": [
+        "java",
+        "laboratorio-híbrido",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/workshop-enrollment-lab/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "technical-support-lab",
+      "title": "Centro de soporte técnico — abstracción e interfaces",
+      "description": "Crea SoporteTecnico. Computadores e impresoras comparten Equipo, pero solo Computador permite actualización de software. No reutilices otros proyectos. 4 checkpoints con guías de ejecución local.",
+      "topicIds": [
+        "poo-java"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Tipos y capacidades",
+        "Clase abstracta",
+        "Interfaz Actualizable",
+        "Integrar",
+        "Comprobar el comportamiento y justificar decisiones mediante evidencia local"
+      ],
+      "icon": "🧪",
+      "tags": [
+        "java",
+        "laboratorio-híbrido",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/technical-support-lab/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "fair-access-lab",
+      "title": "Control de acceso a feria — Set y Map",
+      "description": "Crea ControlFeria. Acreditaciones como F001 son únicas y se recuperan por código. Contrasta List, Set y Map; no hace falta usar las tres en producción. 4 checkpoints con guías de ejecución local.",
+      "topicIds": [
+        "colecciones-java"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Identidad",
+        "Elegir colección",
+        "Registro consistente",
+        "Pruebas",
+        "Comprobar el comportamiento y justificar decisiones mediante evidencia local"
+      ],
+      "icon": "🧪",
+      "tags": [
+        "java",
+        "laboratorio-híbrido",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/fair-access-lab/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "rent-a-car-javafx-lab",
+      "title": "Rent-a-Car — primera interfaz JavaFX",
+      "description": "Desde el generador JavaFX de IntelliJ, Java 21 y Maven. Registra una patente en una ventana; vacío o espacios muestran error. No agregues base de datos ni reutilices otro proyecto. 4 checkpoints con guías de ejecución local.",
+      "topicIds": [
+        "interfaces-graficas-javafx"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Entorno JavaFX",
+        "Formulario",
+        "Evento y modelo",
+        "Pruebas",
+        "Comprobar el comportamiento y justificar decisiones mediante evidencia local"
+      ],
+      "icon": "🧪",
+      "tags": [
+        "java",
+        "laboratorio-híbrido",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/rent-a-car-javafx-lab/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "sports-reservation-javafx-lab",
+      "title": "Reservas deportivas — MVC y navegación",
+      "description": "Crea ReservaRecintosFX. Cancha fútbol 1, Cancha fútbol 2 y Gimnasio, bloques de 08:00 a 21:00; responsable obligatorio, recinto-hora único. Solo memoria, dos vistas FXML. 5 checkpoints con guías de ejecución local.",
+      "topicIds": [
+        "interfaces-graficas-javafx"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Modelo y MVC",
+        "Tabla observable",
+        "Formulario y navegación",
+        "Verificar",
+        "Actividades y pruebas",
+        "Comprobar el comportamiento y justificar decisiones mediante evidencia local"
+      ],
+      "icon": "🧪",
+      "tags": [
+        "java",
+        "laboratorio-híbrido",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/sports-reservation-javafx-lab/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "instrument-inventory-json-lab",
+      "title": "Inventario de instrumentos — JavaFX y JSON",
+      "description": "Crea InventarioInstrumentosFX. Código único, nombre y categoría (guitarra, bajo, batería, teclado). Dos vistas FXML, DAO Jackson, Service y data/instrumentos.json. No sobrescribir archivo inválido; escritura directa en esta versión didáctica. 5 checkpoints con guías de ejecución local.",
+      "topicIds": [
+        "arquitectura-mvc-persistencia"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Proyecto y modelo",
+        "DAO JSON",
+        "Servicio",
+        "Interfaz MVC",
+        "Reinicio y recuperación",
+        "Comprobar el comportamiento y justificar decisiones mediante evidencia local"
+      ],
+      "icon": "🧪",
+      "tags": [
+        "java",
+        "laboratorio-híbrido",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/instrument-inventory-json-lab/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "persistent-capsules-jdbc-lab",
+      "title": "Cápsulas persistentes — JDBC sin GUI",
+      "description": "Proyecto autónomo de consola de 90 min: título, mensaje y fecha. Consulta, inserta, actualiza y elimina por ID. No requiere proyecto previo ni interfaz gráfica. Fuentes de referencia; ejecución real pendiente. 3 checkpoints con guías de ejecución local.",
+      "topicIds": [
+        "persistencia-relacional-jdbc"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Preparación y conexión",
+        "Modelo y lectura",
+        "CRUD y pruebas",
+        "Comprobar el comportamiento y justificar decisiones mediante evidencia local"
+      ],
+      "icon": "🧪",
+      "durationMinutes": 90,
+      "tags": [
+        "java",
+        "laboratorio-híbrido",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/persistent-capsules-jdbc-lab/",
+      "evidence": "txt",
+      "version": "1.1.0",
+      "status": "published"
+    },
+    {
+      "id": "capsules-javafx-dao-lab",
+      "title": "Cápsulas persistentes — JavaFX, MVC y DAO",
+      "description": "Proyecto autónomo de 90 min con esquema capsula_fx_db. CRUD visual, validación, confirmación y persistencia; no requiere el lab de consola. Ejecución real pendiente. 3 checkpoints con guías de ejecución local.",
+      "topicIds": [
+        "persistencia-relacional-jdbc"
+      ],
+      "courseCodes": [
+        "DSY1102"
+      ],
+      "learningObjectives": [
+        "Preparación y contrato",
+        "Vista y lectura",
+        "Eventos y pruebas",
+        "Comprobar el comportamiento y justificar decisiones mediante evidencia local"
+      ],
+      "icon": "🧪",
+      "durationMinutes": 90,
+      "tags": [
+        "java",
+        "laboratorio-híbrido",
+        "ejecución-local",
+        "dsy1102"
+      ],
+      "path": "/activities/capsules-javafx-dao-lab/",
+      "evidence": "txt",
+      "version": "1.1.0",
       "status": "published"
     }
   ]

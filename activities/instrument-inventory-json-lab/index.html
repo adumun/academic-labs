@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Inventario de instrumentos — JavaFX y JSON · Academic Labs</title><link rel="stylesheet" href="../dsy1102-practice-shared/practice.css"><script defer src="../dsy1102-practice-shared/practice.js"></script></head>
+<body class="practice" data-activity="instrument-inventory-json-lab" data-version="1.1.0" data-source="https://academic-labs.adumun.cl/activities/instrument-inventory-json-lab/"><a class="skip-link" href="#main">Ir al contenido</a><header><nav><a href="../../">Academic Labs · ADÜMÜN</a><a href="../../explore/?topic=arquitectura-mvc-persistencia">Explorar prácticas por tema</a></nav></header><main id="main"><div class="eyebrow">Laboratorio híbrido · ejecución local</div><h1>Inventario de instrumentos — JavaFX y JSON</h1><p>Crea InventarioInstrumentosFX. Código único, nombre y categoría (guitarra, bajo, batería, teclado). Dos vistas FXML, DAO Jackson, Service y data/instrumentos.json. No sobrescribir archivo inválido; escritura directa en esta versión didáctica.</p><section class="panel"><h2>Preparación</h2><p>JDK 21, IntelliJ con JavaFX y Maven; revisa dependencias de JSON cuando corresponda. Crea un proyecto autónomo. No reutilices una entrega de otro lab.</p><p>Lee <a href="https://academy.adumun.cl/handbook/architecture/">Handbook de Academy</a> si necesitas reforzar conceptos. La ejecución se realiza en tu equipo, no en el navegador.</p><p class="source">Laboratorio autónomo de Academic Labs. Conserva tu proyecto, capturas y resultados; no incluyas credenciales ni datos personales.</p></section><section class="panel"><strong id="count" aria-live="polite">0 de 5 comprobaciones declaradas</strong><progress max="5" value="0" aria-label="Comprobaciones declaradas"></progress><nav class="jump" aria-label="Ir a un checkpoint"><a href="#paso-1">1. Proyecto y modelo</a><a href="#paso-2">2. DAO JSON</a><a href="#paso-3">3. Servicio</a><a href="#paso-4">4. Interfaz MVC</a><a href="#paso-5">5. Reinicio y recuperación</a></nav><p class="muted">Sigue las instrucciones de cada paso y registra tu evidencia. Descarga avances antes de recargar o cerrar esta página.</p></section><article data-item id="paso-1"><h2>1. Proyecto y modelo</h2><p>JavaFX arranca y el modelo compila.</p><h3>Punto de partida</h3>
+<p><strong>No necesitas ningún laboratorio anterior.</strong> Solo IntelliJ IDEA, JDK 21, Maven y conexión a internet para que Maven descargue dependencias.</p>
+<h3>Paso 1 · Comprobar JavaFX en IntelliJ</h3>
+<ol>
+<li>Abre IntelliJ IDEA.</li>
+<li>Selecciona <strong>File → Settings → Plugins → Installed</strong>.</li>
+<li>Busca <strong>JavaFX</strong> y comprueba que está habilitado.</li>
+<li>Regresa a <strong>File → New → Project</strong> (o <strong>New Project</strong> desde la bienvenida).</li>
+<li>En <strong>Generators</strong>, selecciona <strong>JavaFX</strong>, no el generador genérico Java.</li>
+</ol>
+<p><strong>Checkpoint:</strong> a la derecha aparecen los campos Name, Location, Language, Build system y JDK.</p>
+<h3>Paso 2 · Crear el proyecto</h3>
+<p>Utiliza estos valores (si tu IDE muestra otros valores por defecto, cámbialos):</p>
+<div style="overflow-x:auto"><table><thead><tr><th>Campo</th><th>Valor</th></tr></thead><tbody>
+<tr><td>Name</td><td><code>InventarioInstrumentosFX</code></td></tr>
+<tr><td>Language</td><td>Java</td></tr>
+<tr><td>Build system</td><td>Maven</td></tr>
+<tr><td>JDK</td><td>21</td></tr>
+<tr><td>Group</td><td><code>cl.adumun</code></td></tr>
+<tr><td>Artifact</td><td><code>inventario-instrumentos-fx</code></td></tr>
+</tbody></table></div>
+<ol>
+<li>Haz clic en <strong>Next</strong> si aparece una pantalla de dependencias JavaFX. Mantén <strong>Controls</strong> y <strong>FXML</strong>.</li>
+<li>Haz clic en <strong>Create</strong>.</li>
+<li>Espera a que termine la importación de Maven y a que desaparezcan los indicadores de descarga.</li>
+<li>En el panel lateral abre <code>src/main/java</code> y localiza <code>HelloApplication.java</code>.</li>
+<li>Ejecuta <strong>Run</strong> desde el botón verde asociado a la clase.</li>
+</ol>
+<p><strong>Checkpoint:</strong> aparece la ventana Hello generada por IntelliJ. Si no aparece, <strong>no avances</strong>; revisa primero el error en Run.</p>
+<h3>Paso 3 · Reconocer los archivos existentes</h3>
+<p>Abre <strong>View → Tool Windows → Project</strong>, despliega:</p>
+<pre><code>InventarioInstrumentosFX/
+  pom.xml
+  src/main/java/         ← Java
+  src/main/resources/    ← FXML y otros recursos</code></pre>
+<p>Tu generador puede usar un paquete distinto de <code>cl.adumun.inventario</code>. Para los ejemplos siguientes <strong>usaremos</strong> <code>cl.adumun.inventario</code>. Si el proyecto generado usa otro, cambia consistentemente <code>package</code>, <code>import</code>, las rutas de recursos y <code>fx:controller</code>. Puedes renombrar el paquete inicial con <strong>Refactor → Rename</strong> para adoptar el de la guía, evitando dejar clases duplicadas.</p>
+<h3>Paso 4 · Crear las carpetas Java</h3>
+<p>En el panel Project:</p>
+<ol>
+<li>Sobre <code>src/main/java/cl/adumun/inventario</code>, clic derecho → <strong>New → Package</strong>, crea <code>cl.adumun.inventario.model</code>.</li>
+<li>Repite para <code>cl.adumun.inventario.dao</code>, <code>cl.adumun.inventario.service</code> y <code>cl.adumun.inventario.controller</code>.</li>
+<li>Mantén <code>HelloApplication.java</code> en el paquete base.</li>
+<li>Dentro de la carpeta de recursos donde ya existe <code>hello-view.fxml</code>, más adelante crearás <code>listado.fxml</code> y <code>formulario.fxml</code>.</li>
+</ol>
+<p><strong>Checkpoint:</strong> identificas claramente cuatro paquetes nuevos y no has creado una segunda clase Application.</p>
+<h3>Paso 5 · Crear el modelo</h3>
+<p>Haz clic derecho en <code>model</code> → <strong>New → Java Class</strong> → <code>Instrumento</code>. Pega el contenido completo:</p>
+<pre><code>package cl.adumun.inventario.model;
+
+public class Instrumento {
+    private String codigo;
+    private String nombre;
+    private String categoria;
+
+    public Instrumento() {
+        // Jackson necesita construir el objeto al leer JSON.
+    }
+
+    public Instrumento(String codigo, String nombre, String categoria) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.categoria = categoria;
+    }
+
+    public String getCodigo() { return codigo; }
+    public void setCodigo(String codigo) { this.codigo = codigo; }
+
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+
+    public String getCategoria() { return categoria; }
+    public void setCategoria(String categoria) { this.categoria = categoria; }
+}</code></pre>
+<p>Guarda con <code>Ctrl+S</code> y observa que IntelliJ no subraya en rojo el código.</p>
+<p><strong>¿Por qué dos constructores?</strong> El que recibe valores sirve para registrar instrumentos nuevos; el vacío permite que el lector de JSON reconstruya objetos a partir de los datos guardados.</p>
+<h3>Paso 6 · Comprender quién hace qué</h3>
+<pre><code>FXML (interfaz) → Controller → InventarioService → InstrumentoDao → archivo JSON
+                         ↘ modelo Instrumento ↗</code></pre>
+<ul>
+<li><strong>FXML:</strong> pinta botones, formularios y tabla.</li>
+<li><strong>Controller:</strong> recibe clics y muestra mensajes, no abre archivos.</li>
+<li><strong>Service:</strong> valida reglas del inventario y coordina registros.</li>
+<li><strong>DAO:</strong> define las operaciones de leer y escribir datos.</li>
+<li><strong>Modelo:</strong> representa los tres campos de cada instrumento.</li>
+</ul>
+<p><strong>Checkpoint final:</strong> responde dónde pondrías (a) validación de código duplicado, (b) lectura JSON y (c) mensaje de error. Respuestas: Service, DAO, Controller.</p>
+<p><strong>Si te aparece un error:</strong> verifica que el directorio Java aparece como Sources Root y que la primera línea <code>package</code> corresponde al árbol real. En la siguiente etapa incorporaremos Jackson sin alterar las dependencias JavaFX que creó IntelliJ.</p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-1-solution">Implementación y decisiones</label><textarea id="paso-1-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-1-proof">Checkpoint: resultado real</label><textarea id="paso-1-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article>
+<article data-item id="paso-2"><h2>2. DAO JSON</h2><p>Lee y guarda dos instrumentos con prueba aislada antes de usar la UI.</p><h3>¿Qué vamos a conseguir?</h3>
+<p>Que una clase Java pueda escribir una lista de instrumentos en <code>data/instrumentos.json</code> y volver a leerla. Todavía no programaremos los botones.</p>
+<h3>Paso 1 · Agregar Jackson sin destruir la configuración generada</h3>
+<ol>
+<li>Abre <code>pom.xml</code> desde la raíz de IntelliJ.</li>
+<li>Localiza el bloque <code>&lt;dependencies&gt;</code>. <strong>No lo elimines</strong>; contiene JavaFX.</li>
+<li>Dentro de ese bloque agrega esta dependencia (versión didáctica fijada, su descarga debe verificarse en tu instalación):</li>
+</ol>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+    &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+    &lt;version&gt;2.18.3&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+<ol>
+<li>Guarda <code>pom.xml</code>.</li>
+<li>Pulsa <strong>Load Maven Changes</strong> si IntelliJ muestra el aviso, o abre <strong>View → Tool Windows → Maven</strong> y pulsa el ícono de recarga.</li>
+<li>En <strong>External Libraries</strong>, comprueba que aparece <code>jackson-databind</code>.</li>
+</ol>
+<p><strong>Checkpoint A:</strong> los imports <code>com.fasterxml.jackson.databind.ObjectMapper</code> se resuelven. Si Maven falla, comprueba acceso a internet y que el bloque quedó dentro de <code>&lt;dependencies&gt;</code>.</p>
+<h3>Paso 2 · Revisar el módulo</h3>
+<ol>
+<li>Busca <code>module-info.java</code> dentro de <code>src/main/java</code>. Si no existe, omite este paso.</li>
+<li>Si existe, conserva las líneas JavaFX creadas por el IDE. Agrega solo lo necesario:</li>
+</ol>
+<pre><code>requires com.fasterxml.jackson.databind;
+opens cl.adumun.inventario.model to com.fasterxml.jackson.databind;
+opens cl.adumun.inventario.controller to javafx.fxml;</code></pre>
+<ol>
+<li>Revisa que <code>cl.adumun.inventario</code> coincide con <strong>tu paquete</strong>. Evita líneas <code>opens</code> duplicadas; si el paquete ya está abierto a otro módulo, integra ambos destinos en una única directiva.</li>
+</ol>
+<p><strong>Checkpoint B:</strong> no existen errores rojos en <code>module-info.java</code>. La apertura del modelo permite que Jackson reconstruya objetos usando reflexión.</p>
+<h3>Paso 3 · Definir el contrato</h3>
+<ol>
+<li>Clic derecho en <code>dao</code> → <strong>New → Java Class</strong> → <code>InstrumentoDao</code>.</li>
+<li>Cambia <code>class</code> por <code>interface</code> o crea directamente <strong>New → Java Interface</strong>.</li>
+<li>Reemplaza el contenido:</li>
+</ol>
+<pre><code>package cl.adumun.inventario.dao;
+
+import cl.adumun.inventario.model.Instrumento;
+import java.io.IOException;
+import java.util.List;
+
+public interface InstrumentoDao {
+    List&lt;Instrumento&gt; cargar() throws IOException;
+    void guardar(List&lt;Instrumento&gt; instrumentos) throws IOException;
+}</code></pre>
+<p><strong>¿Por qué <code>throws IOException</code>?</strong> Porque el disco puede fallar; quien usa el DAO debe conocer la posibilidad de error.</p>
+<h3>Paso 4 · Implementar el DAO</h3>
+<ol>
+<li>Clic derecho en <code>dao</code> → <strong>New → Java Class</strong> → <code>JsonInstrumentoDao</code>.</li>
+<li>Pega el archivo entero:</li>
+</ol>
+<pre><code>package cl.adumun.inventario.dao;
+
+import cl.adumun.inventario.model.Instrumento;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+
+public final class JsonInstrumentoDao implements InstrumentoDao {
+    private final Path archivo;
+    private final ObjectMapper mapper = new ObjectMapper();
+
+    public JsonInstrumentoDao(Path archivo) {
+        this.archivo = archivo;
+    }
+
+    @Override
+    public List&lt;Instrumento&gt; cargar() throws IOException {
+        if (Files.notExists(archivo)) {
+            return List.of();
+        }
+        return mapper.readValue(
+                archivo.toFile(),
+                new TypeReference&lt;List&lt;Instrumento&gt;&gt;() {}
+        );
+    }
+
+    @Override
+    public void guardar(List&lt;Instrumento&gt; instrumentos) throws IOException {
+        Path directorio = archivo.toAbsolutePath().getParent();
+        if (directorio != null) {
+            Files.createDirectories(directorio);
+        }
+        // Para esta práctica pequeña guardamos la lista JSON completa.
+        mapper.writerWithDefaultPrettyPrinter()
+              .writeValue(archivo.toFile(), instrumentos);
+    }
+}</code></pre>
+<p><strong>Checkpoint C:</strong> la clase implementa ambos métodos sin errores de compilación. Identifica que <code>mapper.writeValue</code> serializa y <code>mapper.readValue</code> deserializa.</p>
+<h3>Paso 5 · Probar el DAO antes de involucrar JavaFX</h3>
+<ol>
+<li>Crea en el paquete base una clase temporal <code>PruebaDao</code> con método <code>main</code>:</li>
+</ol>
+<pre><code>package cl.adumun.inventario;
+
+import cl.adumun.inventario.dao.JsonInstrumentoDao;
+import cl.adumun.inventario.model.Instrumento;
+import java.nio.file.Path;
+import java.util.List;
+
+public class PruebaDao {
+    public static void main(String[] args) throws Exception {
+        var dao = new JsonInstrumentoDao(
+                Path.of("data", "instrumentos.json"));
+        dao.guardar(List.of(
+                new Instrumento("G01", "Guitarra", "Cuerdas"),
+                new Instrumento("B01", "Bajo", "Cuerdas")));
+        System.out.println("Leídos: " + dao.cargar().size());
+    }
+}</code></pre>
+<ol>
+<li>Ejecuta <code>PruebaDao.main()</code> desde IntelliJ.</li>
+<li>En la consola debes leer <code>Leídos: 2</code>.</li>
+<li>Busca la carpeta <code>data/</code> en la <strong>raíz de ejecución</strong>; si no aparece, usa <strong>View → Tool Windows → Project</strong>, activa vista Project y sincroniza archivos.</li>
+<li>Abre <code>instrumentos.json</code>; debes reconocer un arreglo JSON con dos objetos.</li>
+<li><strong>Elimina <code>PruebaDao.java</code> y <code>data/instrumentos.json</code> antes de la etapa siguiente</strong>. Si conservas el archivo, el primer arranque de la interfaz ya mostrará dos registros.</li>
+</ol>
+<p><strong>Checkpoint D:</strong> un archivo JSON se generó, es legible y el DAO devuelve dos objetos. Si hay <code>InvalidDefinitionException</code>, revisa constructor vacío, getters y <code>opens</code> del modelo.</p>
+<p><strong>Advertencia para este laboratorio:</strong> escribir directamente sobre el archivo puede dejarlo incompleto si se interrumpe la operación. No simules fallos apagando el equipo. El ejercicio sobre errores de lectura se realizará con una copia de seguridad; mejorar la escritura atómica es una extensión posterior, no un requisito oculto.</p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-2-solution">Implementación y decisiones</label><textarea id="paso-2-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-2-proof">Checkpoint: resultado real</label><textarea id="paso-2-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article>
+<article data-item id="paso-3"><h2>3. Servicio</h2><p>Prueba registro válido y duplicado rechazado; persistencia sin controladores.</p><p><strong>Incremento observable:</strong> el modelo y DAO existentes se integran con reglas de registro; el archivo se escribe solo cuando los datos son válidos. Aún no se programa la interfaz.</p>
+<h3>Requisitos funcionales</h3>
+<ul>
+<li>Registrar un instrumento válido identificado por código.</li>
+<li>Rechazar campos incompletos o códigos ya registrados.</li>
+<li>Conservar en <code>ObservableList</code> solamente los datos confirmados por el DAO.</li>
+</ul>
+<h3>Requisitos técnicos</h3>
+<ul>
+<li><code>InventarioService</code> utiliza <code>InstrumentoDao</code>, no <code>ObjectMapper</code>.</li>
+<li>No existe escritura de archivos en controladores; aún no se crean controladores.</li>
+<li>El servicio propaga <code>IOException</code> y entrega <code>IllegalArgumentException</code> para violaciones de negocio.</li>
+</ul>
+<h3>Paso 1 · Crear el servicio</h3>
+<ol>
+<li>En Project abre <code>src/main/java/cl/adumun/inventario/service</code>.</li>
+<li>Clic derecho → <strong>New → Java Class</strong> → <code>InventarioService</code>.</li>
+<li>Pega todo este código:</li>
+</ol>
+<pre><code>package cl.adumun.inventario.service;
+
+import cl.adumun.inventario.dao.InstrumentoDao;
+import cl.adumun.inventario.model.Instrumento;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class InventarioService {
+    private final InstrumentoDao dao;
+    private final ObservableList&lt;Instrumento&gt; datos =
+            FXCollections.observableArrayList();
+
+    public InventarioService(InstrumentoDao dao) { this.dao = dao; }
+
+    public ObservableList&lt;Instrumento&gt; listar() { return datos; }
+
+    public void cargar() throws IOException {
+        var recuperados = dao.cargar();
+        datos.setAll(recuperados);
+    }
+
+    public void registrar(String codigo, String nombre, String categoria)
+            throws IOException {
+        codigo = codigo == null ? "" : codigo.trim();
+        nombre = nombre == null ? "" : nombre.trim();
+        categoria = categoria == null ? "" : categoria.trim();
+
+        if (codigo.isBlank() || nombre.isBlank() || categoria.isBlank()) {
+            throw new IllegalArgumentException("Completa los tres campos");
+        }
+        for (Instrumento actual : datos) {
+            if (actual.getCodigo().equalsIgnoreCase(codigo)) {
+                throw new IllegalArgumentException("Código repetido");
+            }
+        }
+
+        var nuevos = new ArrayList&lt;&gt;(datos);
+        nuevos.add(new Instrumento(codigo, nombre, categoria));
+        dao.guardar(nuevos);
+        datos.setAll(nuevos);
+    }
+}</code></pre>
+<p><strong>Checkpoint A:</strong> el servicio no contiene referencias a <code>Stage</code>, <code>FXMLLoader</code> ni <code>ObjectMapper</code>. Si se produce <code>IOException</code>, no agrega la nueva fila a la tabla.</p>
+<h3>Paso 2 · Probar el servicio sin pantalla</h3>
+<ol>
+<li>Crea una clase temporal <code>PruebaService.java</code> <strong>en el mismo paquete base de <code>HelloApplication</code></strong>, no dentro del paquete <code>service</code>.</li>
+<li>Inserta este ejemplo; usa un archivo de pruebas diferente de la aplicación final:</li>
+</ol>
+<pre><code>package cl.adumun.inventario;
+
+import cl.adumun.inventario.dao.JsonInstrumentoDao;
+import cl.adumun.inventario.service.InventarioService;
+import java.nio.file.Path;
+
+public class PruebaService {
+    public static void main(String[] args) throws Exception {
+        var servicio = new InventarioService(
+                new JsonInstrumentoDao(Path.of("data", "instrumentos-prueba.json")));
+        servicio.registrar("G01", "Guitarra", "Guitarra");
+        System.out.println("Registrados: " + servicio.listar().size());
+        try {
+            servicio.registrar("g01", "Otra guitarra", "Guitarra");
+            System.out.println("ERROR: debería rechazar duplicado");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Rechazo esperado: " + e.getMessage());
+        }
+        System.out.println("Total final: " + servicio.listar().size());
+    }
+}</code></pre>
+<ol>
+<li>Ejecútala desde IntelliJ en una <strong>carpeta de trabajo donde el archivo de pruebas no exista</strong>. Si ya existía <code>data/instrumentos-prueba.json</code>, haz una copia y elimina solamente ese archivo de prueba antes de ejecutar.</li>
+<li>Comprueba <code>Registrados: 1</code>, <code>Rechazo esperado: Código repetido</code>, <code>Total final: 1</code>.</li>
+<li>Elimina <code>PruebaService.java</code> y el archivo de prueba cuando termines. Conserva <code>InventarioService.java</code>.</li>
+</ol>
+<p><strong>Checkpoint B (antes de avanzar):</strong> registraste un caso válido y rechazaste uno duplicado <strong>sin interfaz gráfica</strong>. Puedes identificar qué método valida, cuál persiste y cuál actualiza <code>ObservableList</code>.</p>
+<p><strong>Cuando falla:</strong> comprueba los paquetes, la recarga Maven, el constructor de <code>Instrumento</code>, <code>module-info.java</code> y los permisos de <code>data/</code>.</p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-3-solution">Implementación y decisiones</label><textarea id="paso-3-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-3-proof">Checkpoint: resultado real</label><textarea id="paso-3-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article>
+<article data-item id="paso-4"><h2>4. Interfaz MVC</h2><p>Tabla, formulario y navegación reflejan cambios.</p><p><strong>Punto de partida:</strong> proyecto de este mismo lab con <code>Instrumento</code>, <code>InstrumentoDao</code>, <code>JsonInstrumentoDao</code> e <code>InventarioService</code> ya comprobados. Aquí conectaremos el resultado visible.</p>
+<p><strong>Requisitos funcionales:</strong> mostrar la tabla; abrir formulario; registrar instrumento; volver al listado; informar errores sin cerrar la aplicación.</p>
+<p><strong>Requisitos técnicos:</strong> dos FXML, dos controladores, un único <code>InventarioService</code> compartido y <code>FXMLLoader</code>. El controlador jamás lee/escribe JSON.</p>
+<h3>Paso 1 · Crear el archivo <code>listado.fxml</code></h3>
+<ol>
+<li>En <code>src/main/resources</code>, ubica la carpeta donde IntelliJ generó <code>hello-view.fxml</code>.</li>
+<li>Clic derecho en <strong>esa misma carpeta</strong> → <strong>New → File</strong> → <code>listado.fxml</code>.</li>
+<li>Pega el contenido completo; cambia el package <code>cl.adumun.inventario</code> si tu proyecto tiene otro:</li>
+</ol>
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;?import javafx.scene.control.*?&gt;
+&lt;?import javafx.scene.layout.*?&gt;
+&lt;VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="cl.adumun.inventario.controller.ListadoController"
+      prefWidth="640" prefHeight="420" spacing="12"&gt;
+    &lt;children&gt;
+        &lt;Label text="Inventario de instrumentos"/&gt;
+        &lt;TableView fx:id="tabla" VBox.vgrow="ALWAYS"&gt;
+            &lt;columns&gt;
+                &lt;TableColumn fx:id="colCodigo" text="Código" prefWidth="140"/&gt;
+                &lt;TableColumn fx:id="colNombre" text="Nombre" prefWidth="280"/&gt;
+                &lt;TableColumn fx:id="colCategoria" text="Categoría" prefWidth="200"/&gt;
+            &lt;/columns&gt;
+        &lt;/TableView&gt;
+        &lt;Button text="Nuevo instrumento" onAction="#irFormulario"/&gt;
+    &lt;/children&gt;
+&lt;/VBox&gt;</code></pre>
+<p><strong>Checkpoint A:</strong> hay exactamente una <code>TableView</code> con tres columnas; el atributo <code>fx:controller</code> apunta a la clase que crearás ahora.</p>
+<h3>Paso 2 · Crear el controlador del listado</h3>
+<ol>
+<li>Clic derecho en el package <code>controller</code> → <strong>New → Java Class</strong> → <code>ListadoController</code>.</li>
+<li>Pega:</li>
+</ol>
+<pre><code>package cl.adumun.inventario.controller;
+
+import cl.adumun.inventario.model.Instrumento;
+import cl.adumun.inventario.service.InventarioService;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
+public class ListadoController {
+    @FXML private TableView&lt;Instrumento&gt; tabla;
+    @FXML private TableColumn&lt;Instrumento, String&gt; colCodigo;
+    @FXML private TableColumn&lt;Instrumento, String&gt; colNombre;
+    @FXML private TableColumn&lt;Instrumento, String&gt; colCategoria;
+    private Runnable abrirFormulario;
+
+    public void configurar(InventarioService servicio, Runnable abrirFormulario) {
+        this.abrirFormulario = abrirFormulario;
+        colCodigo.setCellValueFactory(c -&gt;
+                new ReadOnlyStringWrapper(c.getValue().getCodigo()));
+        colNombre.setCellValueFactory(c -&gt;
+                new ReadOnlyStringWrapper(c.getValue().getNombre()));
+        colCategoria.setCellValueFactory(c -&gt;
+                new ReadOnlyStringWrapper(c.getValue().getCategoria()));
+        tabla.setItems(servicio.listar());
+    }
+
+    @FXML private void irFormulario() {
+        abrirFormulario.run();
+    }
+}</code></pre>
+<p><strong>Checkpoint B:</strong> compara <code>fx:id="tabla"</code> con <code>@FXML private TableView ... tabla</code> y el evento <code>onAction="#irFormulario"</code> con el método. Un carácter diferente puede impedir la carga.</p>
+<h3>Paso 3 · Crear formulario FXML</h3>
+<ol>
+<li>Regresa a la carpeta que contiene <code>listado.fxml</code>.</li>
+<li>Clic derecho → <strong>New → File</strong> → <code>formulario.fxml</code>.</li>
+<li>Pega:</li>
+</ol>
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;?import javafx.scene.control.*?&gt;
+&lt;?import javafx.scene.layout.*?&gt;
+&lt;VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="cl.adumun.inventario.controller.FormularioController"
+      prefWidth="480" prefHeight="330" spacing="12"&gt;
+    &lt;children&gt;
+        &lt;Label text="Registrar instrumento"/&gt;
+        &lt;TextField fx:id="codigo" promptText="Código (por ejemplo G01)"/&gt;
+        &lt;TextField fx:id="nombre" promptText="Nombre del instrumento"/&gt;
+        &lt;ComboBox fx:id="categoria" promptText="Selecciona categoría"/&gt;
+        &lt;Label fx:id="mensaje" text=""/&gt;
+        &lt;HBox spacing="8"&gt;
+            &lt;children&gt;
+                &lt;Button text="Guardar" onAction="#guardar"/&gt;
+                &lt;Button text="Volver" onAction="#volver"/&gt;
+            &lt;/children&gt;
+        &lt;/HBox&gt;
+    &lt;/children&gt;
+&lt;/VBox&gt;</code></pre>
+<h3>Paso 4 · Crear el controlador del formulario</h3>
+<ol>
+<li>En package <code>controller</code>, <strong>New → Java Class</strong> → <code>FormularioController</code>.</li>
+<li>Copia el archivo completo:</li>
+</ol>
+<pre><code>package cl.adumun.inventario.controller;
+
+import cl.adumun.inventario.service.InventarioService;
+import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import java.io.IOException;
+
+public class FormularioController {
+    @FXML private TextField codigo;
+    @FXML private TextField nombre;
+    @FXML private ComboBox&lt;String&gt; categoria;
+    @FXML private Label mensaje;
+    private InventarioService servicio;
+    private Runnable volverAlListado;
+
+    @FXML private void initialize() {
+        categoria.getItems().addAll("Guitarra", "Bajo", "Batería", "Teclado");
+    }
+
+    public void configurar(InventarioService servicio, Runnable volverAlListado) {
+        this.servicio = servicio;
+        this.volverAlListado = volverAlListado;
+    }
+
+    @FXML private void guardar() {
+        try {
+            servicio.registrar(codigo.getText(), nombre.getText(),
+                    categoria.getValue());
+            volverAlListado.run();
+        } catch (IllegalArgumentException e) {
+            mensaje.setText("Dato inválido: " + e.getMessage());
+        } catch (IOException e) {
+            mensaje.setText("No se pudo guardar el archivo: " + e.getMessage());
+        }
+    }
+
+    @FXML private void volver() { volverAlListado.run(); }
+}</code></pre>
+<p><strong>Checkpoint C:</strong> el controlador <strong>no tiene</strong> <code>Files.writeString</code>, <code>ObjectMapper</code> ni <code>Path.of</code>. Ante una excepción se queda en el formulario y muestra el motivo.</p>
+<h3>Paso 5 · Conectar el arranque de la aplicación</h3>
+<ol>
+<li>Abre la clase <strong>HelloApplication.java ya creada</strong> por IntelliJ. No crees otra <code>Application</code>.</li>
+<li>Reemplaza el archivo completo. El ejemplo presupone que <code>listado.fxml</code> y <code>formulario.fxml</code> están en el mismo paquete de recursos que el <code>hello-view.fxml</code> que creó el generador:</li>
+</ol>
+<pre><code>package cl.adumun.inventario;
+
+import cl.adumun.inventario.controller.FormularioController;
+import cl.adumun.inventario.controller.ListadoController;
+import cl.adumun.inventario.dao.JsonInstrumentoDao;
+import cl.adumun.inventario.service.InventarioService;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.stage.Stage;
+import java.io.IOException;
+import java.nio.file.Path;
+
+public class HelloApplication extends Application {
+    private final InventarioService servicio = new InventarioService(
+            new JsonInstrumentoDao(Path.of("data", "instrumentos.json")));
+    private Stage ventana;
+
+    @Override public void start(Stage stage) {
+        this.ventana = stage;
+        stage.setTitle("Inventario musical");
+        try {
+            servicio.cargar();
+            mostrarListado();
+            stage.show();
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR,
+                    "Error al leer datos. Se conservará el archivo: "
+                    + e.getMessage()).showAndWait();
+        }
+    }
+
+    private void mostrarListado() throws IOException {
+        FXMLLoader loader = new FXMLLoader(
+                HelloApplication.class.getResource("listado.fxml"));
+        Parent root = loader.load();
+        ListadoController controlador = loader.getController();
+        controlador.configurar(servicio, this::abrirFormulario);
+        ventana.setScene(new Scene(root));
+    }
+
+    private void mostrarFormulario() throws IOException {
+        FXMLLoader loader = new FXMLLoader(
+                HelloApplication.class.getResource("formulario.fxml"));
+        Parent root = loader.load();
+        FormularioController controlador = loader.getController();
+        controlador.configurar(servicio, this::abrirListado);
+        ventana.setScene(new Scene(root));
+    }
+
+    private void abrirFormulario() {
+        try { mostrarFormulario(); }
+        catch (IOException e) { mostrarError(e); }
+    }
+
+    private void abrirListado() {
+        try { mostrarListado(); }
+        catch (IOException e) { mostrarError(e); }
+    }
+
+    private void mostrarError(IOException e) {
+        new Alert(Alert.AlertType.ERROR,
+                "No se pudo cargar la vista: " + e.getMessage()).showAndWait();
+    }
+
+    public static void main(String[] args) { launch(args); }
+}</code></pre>
+<ol>
+<li>Si <code>HelloApplication.class.getResource("listado.fxml")</code> devuelve <code>null</code>, tu archivo está en otra ubicación. Usa una <strong>ruta absoluta de classpath</strong> con <code>/...</code> o mueve los FXML a la carpeta real del paquete de Application.</li>
+<li>Conserva las líneas JavaFX del <code>module-info.java</code>; revisa <code>opens cl.adumun.inventario.controller to javafx.fxml;</code> de la etapa 02.</li>
+</ol>
+<p><strong>Checkpoint D:</strong> Run abre la tabla vacía. Pulsa <strong>Nuevo instrumento</strong>, selecciona datos y <strong>Guardar</strong>: aparece una fila. Busca <code>data/instrumentos.json</code>, cierra la aplicación y ejecútala de nuevo; <strong>la misma fila debe reaparecer</strong>.</p>
+<h3>Si falla</h3>
+<ul>
+<li><code>Location is not set</code>: nombre/ruta FXML incorrectos.</li>
+<li><code>LoadException</code>: revisa <code>fx:controller</code>, <code>fx:id</code>, <code>onAction</code> y aperturas del módulo.</li>
+<li><code>Cannot resolve symbol</code>: revisa package/import y recarga Maven.</li>
+<li>No aparece carpeta <code>data</code>: confirma que se guardó un registro y observa el directorio de trabajo de Run.</li>
+<li>Ventana no abre al iniciar: pudo fallar la lectura JSON; revisa el mensaje. <strong>No borres el archivo sin guardar copia</strong>.</li>
+</ul><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-4-solution">Implementación y decisiones</label><textarea id="paso-4-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-4-proof">Checkpoint: resultado real</label><textarea id="paso-4-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article>
+<article data-item id="paso-5"><h2>5. Reinicio y recuperación</h2><p>Dos filas sobreviven reinicio; campos inválidos no cambian archivo; JSON corrupto informa error y no se borra.</p><h3>Paso 1 · Primera ejecución limpia</h3>
+<ol>
+<li>Cierra la aplicación si sigue abierta.</li>
+<li>Dentro de la carpeta de trabajo identifica <code>data/instrumentos.json</code>. Si contiene datos de pruebas anteriores, <strong>haz una copia</strong> y luego elimina solamente el archivo de prueba (no el código).</li>
+<li>Vuelve a ejecutar <code>HelloApplication</code> desde IntelliJ.</li>
+<li>Comprueba que la tabla inicia vacía y no aparece una excepción.</li>
+</ol>
+<p><strong>Checkpoint A:</strong> la aplicación inicia correctamente sin JSON preexistente.</p>
+<h3>Paso 2 · Registrar y comprobar archivo</h3>
+<ol>
+<li>Haz clic en <strong>Nuevo instrumento</strong>.</li>
+<li>Escribe <code>G01</code>, nombre <code>Guitarra eléctrica</code>, categoría <code>Guitarra</code>.</li>
+<li>Haz clic en <strong>Guardar</strong>; regresas a una tabla con una fila.</li>
+<li>Repite con <code>B01</code>, <code>Bajo eléctrico</code>, categoría <code>Bajo</code>.</li>
+<li>En el panel Project busca <code>data/instrumentos.json</code>. Si no aparece, usa la vista de proyecto y sincroniza el directorio; la ruta es relativa al directorio de ejecución.</li>
+<li>Abre el archivo: deben existir dos objetos con <code>codigo</code>, <code>nombre</code> y <code>categoria</code>.</li>
+</ol>
+<p><strong>Checkpoint B:</strong> tabla y archivo contienen dos instrumentos.</p>
+<h3>Paso 3 · Prueba decisiva: reiniciar</h3>
+<ol>
+<li>Cierra totalmente la ventana de JavaFX.</li>
+<li>Comprueba en IntelliJ que terminó la ejecución anterior.</li>
+<li>Ejecuta de nuevo <code>HelloApplication</code>.</li>
+<li><strong>No registres nada</strong> todavía: revisa la tabla inicial.</li>
+</ol>
+<p><strong>Checkpoint C:</strong> las mismas dos filas aparecen automáticamente. Esto demuestra deserialización desde JSON; no basta con que la tabla mostrara datos antes de cerrar.</p>
+<h3>Paso 4 · Probar errores sin perder datos</h3>
+<ol>
+<li>Abre Nuevo instrumento.</li>
+<li>Prueba código <code>g01</code> (misma identidad que <code>G01</code>) con otro nombre. Pulsa Guardar.</li>
+<li>Debe mostrar <strong>Código repetido</strong> y mantenerse en el formulario.</li>
+<li>Prueba código vacío, luego nombre vacío, luego categoría sin selección.</li>
+<li>Para comprobar JSON corrupto: cierra la aplicación, <strong>respalda el JSON válido</strong>, modifica temporalmente su copia de trabajo para que deje de ser JSON (por ejemplo <code>{archivo-incompleto</code>) y ejecuta.</li>
+<li>Debe mostrarse un error al iniciar <strong>sin reemplazar</strong> automáticamente el archivo corrupto. Restaura la copia válida para continuar.</li>
+</ol>
+<p><strong>Checkpoint D:</strong> entradas rechazadas no crean filas ni registros; el archivo inválido se conserva para poder diagnosticarlo.</p>
+<h3>Matriz de evidencia</h3>
+<div style="overflow-x:auto"><table><thead><tr><th>Prueba</th><th>Qué haces</th><th>Resultado</th></tr></thead><tbody>
+<tr><td>P01</td><td>Ejecutar sin archivo previo</td><td>Tabla vacía</td></tr>
+<tr><td>P02</td><td>Registrar G01</td><td>Una fila; JSON creado</td></tr>
+<tr><td>P03</td><td>Registrar B01</td><td>Dos filas; JSON actualizado</td></tr>
+<tr><td>P04</td><td>Reiniciar JavaFX</td><td>Reaparecen ambas filas</td></tr>
+<tr><td>P05</td><td>Intentar g01 otra vez</td><td>Duplicado rechazado</td></tr>
+<tr><td>P06</td><td>Probar campos sin completar</td><td>Error visible; sin alta</td></tr>
+<tr><td>P07</td><td>Abrir <code>instrumentos.json</code></td><td>Arreglo JSON legible</td></tr>
+<tr><td>P08</td><td>Archivo JSON corrupto (con respaldo)</td><td>Error de lectura y archivo conservado</td></tr>
+<tr><td>P09</td><td>Simular falla de escritura solo si hay entorno de pruebas</td><td>Error sin alta ficticia</td></tr>
+<tr><td>P10</td><td>Navegar entre pantallas repetidas veces</td><td>Conserva datos y no duplica filas</td></tr>
+</tbody></table></div>
+<h3>Paso 5 · Preparar evidencias</h3>
+<p>En el repositorio local de tu proyecto, incorpora:</p>
+<ul>
+<li>Captura del listado con dos instrumentos.</li>
+<li>Captura o texto del JSON legible, omitiendo rutas personales.</li>
+<li>Captura del listado <strong>después</strong> de reiniciar.</li>
+<li>Captura de un error de código repetido.</li>
+<li>Texto breve (5–10 líneas) explicando Controller, Service, DAO, serialización y deserialización.</li>
+</ul>
+<p><strong>Checklist final</strong></p>
+<ul>
+<li>[ ] El proyecto se creó desde cero y no depende de otros labs.</li>
+<li>[ ] Compila y arranca con JavaFX.</li>
+<li>[ ] El DAO lee y escribe JSON; los controladores no acceden al archivo.</li>
+<li>[ ] Tras reiniciar, se recuperan registros.</li>
+<li>[ ] Las validaciones bloquean altas incorrectas.</li>
+<li>[ ] Se respetó el respaldo del archivo durante la prueba de corrupción.</li>
+</ul><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-5-solution">Implementación y decisiones</label><textarea id="paso-5-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-5-proof">Checkpoint: resultado real</label><textarea id="paso-5-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article><section class="panel"><h2>Conservar evidencia</h2><p>Descarga un TXT local y conserva los archivos del proyecto en tu repositorio. El hash comprueba integridad, no ejecución ni autoría. Si utilizas esta actividad en un curso, entrega la evidencia por el mecanismo indicado por tu docente.</p><div class="actions"><button type="button" class="primary" id="export">Descargar evidencia TXT</button><button type="button" id="clear">Limpiar registro</button></div><p id="status" aria-live="polite"></p></section></main></body></html>

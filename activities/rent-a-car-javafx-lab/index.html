@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rent-a-Car — primera interfaz JavaFX · Academic Labs</title><link rel="stylesheet" href="../dsy1102-practice-shared/practice.css"><script defer src="../dsy1102-practice-shared/practice.js"></script></head>
+<body class="practice" data-activity="rent-a-car-javafx-lab" data-version="1.1.0" data-source="https://academic-labs.adumun.cl/activities/rent-a-car-javafx-lab/"><a class="skip-link" href="#main">Ir al contenido</a><header><nav><a href="../../">Academic Labs · ADÜMÜN</a><a href="../../explore/?topic=interfaces-graficas-javafx">Explorar prácticas por tema</a></nav></header><main id="main"><div class="eyebrow">Laboratorio híbrido · ejecución local</div><h1>Rent-a-Car — primera interfaz JavaFX</h1><p>Desde el generador JavaFX de IntelliJ, Java 21 y Maven. Registra una patente en una ventana; vacío o espacios muestran error. No agregues base de datos ni reutilices otro proyecto.</p><section class="panel"><h2>Preparación</h2><p>JDK 21, IntelliJ con JavaFX y Maven; revisa dependencias de JSON cuando corresponda. Crea un proyecto autónomo. No reutilices una entrega de otro lab.</p><p>Lee <a href="https://academy.adumun.cl/handbook/java/javafx/">Handbook de Academy</a> si necesitas reforzar conceptos. La ejecución se realiza en tu equipo, no en el navegador.</p><p class="source">Laboratorio autónomo de Academic Labs. Conserva tu proyecto, capturas y resultados; no incluyas credenciales ni datos personales.</p></section><section class="panel"><strong id="count" aria-live="polite">0 de 4 comprobaciones declaradas</strong><progress max="4" value="0" aria-label="Comprobaciones declaradas"></progress><nav class="jump" aria-label="Ir a un checkpoint"><a href="#paso-1">1. Entorno JavaFX</a><a href="#paso-2">2. Formulario</a><a href="#paso-3">3. Evento y modelo</a><a href="#paso-4">4. Pruebas</a></nav><p class="muted">Sigue las instrucciones de cada paso y registra tu evidencia. Descarga avances antes de recargar o cerrar esta página.</p></section><article data-item id="paso-1"><h2>1. Entorno JavaFX</h2><p>Ejecuta el Hello! generado antes de modificar archivos. Revisa módulo si existe.</p><h3>Punto de partida</h3>
+<p><strong>No tienes un proyecto todavía.</strong> IntelliJ IDEA está instalado. Hoy vamos a crear una aplicación JavaFX desde <strong>New Project</strong>, comprobar que funciona y recién después modificarla.</p>
+<p><strong>Por qué importa:</strong> el asistente JavaFX de IntelliJ prepara las bibliotecas y un proyecto demostrativo ejecutable. No tiene sentido construir manualmente todo eso si el IDE ya sabe hacerlo.</p>
+<h3>Paso 1 · Comprueba el complemento JavaFX</h3>
+<ol>
+<li>Abre <strong>IntelliJ IDEA</strong>.</li>
+<li>Si estás en un proyecto abierto, entra a <strong>File → Settings</strong> (en macOS, <strong>IntelliJ IDEA → Settings</strong>). También puedes usar <code>Ctrl+Alt+S</code> en Windows.</li>
+<li>En el menú izquierdo, haz clic en <strong>Plugins</strong>.</li>
+<li>Abre la pestaña <strong>Installed</strong>.</li>
+<li>Busca <strong>JavaFX</strong> y comprueba que esté <strong>Enabled</strong>.</li>
+<li>Si aparece deshabilitado, habilítalo y reinicia IntelliJ cuando te lo solicite.</li>
+</ol>
+<p><strong>¿Qué deberías comprobar?</strong> Al crear un proyecto aparece la opción <strong>JavaFX</strong> bajo <strong>Generators</strong>. Si ya la ves, el complemento está disponible.</p>
+<h3>Paso 2 · Abre el asistente correcto</h3>
+<ol>
+<li>Si estás en la pantalla de bienvenida, presiona <strong>New Project</strong>.</li>
+<li>Si tienes otro proyecto abierto, usa <strong>File → New → Project…</strong>.</li>
+<li>En la columna izquierda, <strong>NO selecciones Java</strong>.</li>
+<li>Baja a la sección <strong>Generators</strong> y haz clic en <strong>JavaFX</strong> (el elemento con su propio ícono).</li>
+</ol>
+<p><strong>Checkpoint:</strong> en el formulario de la derecha ves campos como <strong>Name</strong>, <strong>Location</strong>, <strong>Language</strong>, <strong>Build system</strong>, <strong>Group</strong>, <strong>Artifact</strong> y <strong>JDK</strong>.</p>
+<h3>Paso 3 · Completa cada campo</h3>
+<p>Usa estos valores. En algunas versiones el asistente coloca valores de ejemplo que debes reemplazar.</p>
+<div style="overflow-x:auto"><table><thead><tr><th>Campo de IntelliJ</th><th>Valor para este laboratorio</th></tr></thead><tbody>
+<tr><td><strong>Name</strong></td><td><code>RentACarJavaFX</code></td></tr>
+<tr><td><strong>Location</strong></td><td>Una carpeta de tu elección donde guardarás el proyecto (verifica la ruta final debajo del campo)</td></tr>
+<tr><td><strong>Language</strong></td><td><strong>Java</strong></td></tr>
+<tr><td><strong>Build system</strong></td><td><strong>Maven</strong></td></tr>
+<tr><td><strong>Group</strong></td><td><code>cl.adumun.rentacar</code></td></tr>
+<tr><td><strong>Artifact</strong></td><td><code>rentacar-javafx</code></td></tr>
+<tr><td><strong>JDK</strong></td><td><strong>21</strong></td></tr>
+</tbody></table></div>
+<ol>
+<li>Escribe <code>RentACarJavaFX</code> en <strong>Name</strong>.</li>
+<li>Elige la carpeta de destino en <strong>Location</strong>. Debajo de ese campo IntelliJ indica dónde quedará guardado; verifica que corresponda.</li>
+<li>Selecciona <strong>Java</strong> en <strong>Language</strong>.</li>
+<li>Selecciona <strong>Maven</strong> en <strong>Build system</strong>.</li>
+<li>Escribe el <strong>Group</strong> y <strong>Artifact</strong> de la tabla.</li>
+<li>En <strong>JDK</strong> selecciona una instalación de <strong>Java 21</strong>. Si únicamente ves 17, 27 u otra versión, abre el desplegable y utiliza <strong>Download JDK</strong> → versión <strong>21</strong>; confirma la descarga. No uses JDK 27 solo porque venga seleccionado automáticamente.</li>
+<li>Puedes activar <strong>Create Git repository</strong> si ya quieres registrar cambios; <strong>no es obligatorio</strong> para ejecutar el laboratorio.</li>
+<li>Presiona <strong>Next</strong>, no <strong>Create</strong>, cuando el asistente ofrezca un siguiente paso.</li>
+</ol>
+<p><strong>¿El botón Next no aparece?</strong> Comprueba que seleccionaste <strong>JavaFX</strong> en Generators, no Java. Algunas pantallas requieren desplazarse hasta el pie del diálogo.</p>
+<h3>Paso 4 · Pantalla «Additional libraries» (no marques ninguna)</h3>
+<p>Después de presionar <strong>Next</strong>, IntelliJ muestra la pantalla <strong>Additional libraries</strong>. Aquí verás casillas como <strong>BootstrapFX</strong>, <strong>ControlsFX</strong>, <strong>FormsFX</strong>, <strong>FXGL</strong>, <strong>Ikonli</strong>, <strong>TilesFX</strong> y <strong>ValidatorFX</strong>.</p>
+<ol>
+<li><strong>Deja todas las casillas desmarcadas</strong>, tal como aparecen inicialmente. No selecciones FormsFX aunque nuestro trabajo incluya un formulario.</li>
+<li>Comprueba que abajo se indique <strong>No dependencies added</strong>. Es lo esperado, <strong>no es un error</strong>.</li>
+<li><strong>No busques FXML en esta lista</strong>: FXML forma parte de la plantilla JavaFX que estamos creando. Estas opciones son bibliotecas adicionales, no los controles básicos ni un requisito para usar FXML.</li>
+<li>Haz clic en <strong>CREATE</strong>.</li>
+<li>Espera mientras IntelliJ crea el proyecto e importa las dependencias Maven.</li>
+</ol>
+<p><strong>Resultado esperado:</strong> se abre el proyecto <code>RentACarJavaFX</code> con su aplicación JavaFX inicial. No necesitas volver atrás para marcar una biblioteca.</p>
+<p><strong>Si marcaste alguna por error:</strong> antes de pulsar CREATE, desmárcala y comprueba que vuelva a aparecer <strong>No dependencies added</strong>.</p>
+<ol>
+<li>Si IntelliJ pregunta dónde abrirlo, elige abrirlo en una nueva ventana cuando quieras mantener separado un proyecto anterior.</li>
+<li>Espera a que termine la importación <strong>Maven</strong>. La primera apertura puede descargar dependencias y demorar un poco.</li>
+</ol>
+<p><strong>Checkpoint:</strong> a la izquierda se ve el proyecto <strong>RentACarJavaFX</strong>. Si no aparece el panel, abre <strong>View → Tool Windows → Project</strong> (en Windows suele ser <code>Alt+1</code>).</p>
+<h3>Paso 5 · Reconoce lo que creó IntelliJ</h3>
+<ol>
+<li>En el panel <strong>Project</strong>, expande <code>src/main/java</code>.</li>
+<li>Busca la clase de arranque, habitualmente <strong>HelloApplication.java</strong>.</li>
+<li>Busca <strong>HelloController.java</strong> junto a esa clase (o en su paquete).</li>
+<li>Expande <code>src/main/resources</code> y busca <strong>hello-view.fxml</strong> en el paquete de recursos.</li>
+<li>En la raíz comprueba la existencia de <code>pom.xml</code>.</li>
+<li>Puede existir <strong>module-info.java</strong> bajo <code>src/main/java</code>: <strong>no lo borres</strong>.</li>
+<li>Abre <code>HelloApplication.java</code> y mira su primera línea, por ejemplo:</li>
+</ol>
+<pre><code>package cl.adumun.rentacar;</code></pre>
+<p><strong>Guarda ese nombre de paquete:</strong> es el que usaremos en la etapa 03. Si tu asistente creó otro paquete, <strong>usa el que realmente aparece en tu archivo</strong>, no inventes otro.</p>
+<p><strong>¡Muy importante!</strong> No reemplaces <code>pom.xml</code>, no agregues otra clase <code>Application</code>, no cambies <code>module-info.java</code> y no descargues un proyecto de ejemplo externo: IntelliJ ya generó una aplicación configurada.</p>
+<p><strong>¿El asistente creó otros nombres?</strong> Usa los nombres reales que aparecen en tu proyecto y ubica las tres funciones equivalentes: clase que extiende <code>Application</code>, clase controller y archivo FXML. Si no encuentras controller o FXML, revisa la estructura del proyecto generado y solicita ayuda indicando qué archivos aparecen; <strong>no selecciones FormsFX ni otra biblioteca adicional como solución</strong>.</p>
+<h3>Paso 6 · Ejecuta el proyecto generado SIN modificarlo</h3>
+<ol>
+<li>Haz doble clic en <code>HelloApplication.java</code>.</li>
+<li>Busca el ícono de ejecución <strong>verde</strong> a la izquierda del método <code>main</code> (o junto a la clase).</li>
+<li>Haz clic en el ícono y selecciona <strong>Run 'HelloApplication.main()'</strong>.</li>
+<li>Espera la compilación y la descarga inicial de bibliotecas.</li>
+<li><strong>Resultado esperado:</strong> aparece una ventana del ejemplo JavaFX generado por IntelliJ. Generalmente muestra un botón <strong>Hello!</strong>.</li>
+<li>Haz clic en el botón y verifica que el ejemplo reacciona según el código generado.</li>
+<li>Cierra la ventana.</li>
+</ol>
+<p><strong>¡Bien!</strong> Ya tienes una aplicación JavaFX funcionando, <strong>antes de escribir nuestro formulario</strong>.</p>
+<p><strong>¿No aparece el ícono verde?</strong> Comprueba que importó Maven y que IntelliJ reconoce JDK 21. También puedes ejecutar el objetivo <strong>javafx:run</strong> en <strong>View → Tool Windows → Maven → Plugins → javafx</strong> si el proyecto generado lo ofrece.</p>
+<h3>Paso 7 · Solución de bloqueos frecuentes</h3>
+<ul>
+<li><strong>No aparece JavaFX en Generators:</strong> verifica <strong>Settings → Plugins → Installed → JavaFX</strong> y habilita el complemento.</li>
+<li><strong>Solo aparece JDK 27 en la lista:</strong> selecciona <strong>Download JDK → 21</strong> en el desplegable.</li>
+<li><strong>Maven está descargando bibliotecas:</strong> espera; no cierres IntelliJ.</li>
+<li><strong>Cannot resolve symbol javafx:</strong> espera la importación, abre el panel <strong>Maven</strong> y haz clic en <strong>Reload All Maven Projects</strong>.</li>
+<li><strong>release version 21 not supported:</strong> entra a <strong>File → Project Structure → Project</strong>, selecciona SDK 21 y confirma en Maven Runner que también se utilice JDK 21.</li>
+<li><strong>No existe HelloController o hello-view.fxml:</strong> busca en <code>src/main</code> y comprueba los nombres reales creados por la plantilla. Si no aparecen, muestra al docente la estructura del proyecto. <strong>La pantalla Additional libraries no sirve para habilitar FXML</strong>.</li>
+<li><strong>Error de JavaFX runtime:</strong> utiliza la configuración Run generada por IntelliJ o el objetivo Maven <code>javafx:run</code>; no intentes resolverlo agregando VM options sin comprender la configuración existente.</li>
+</ul>
+<h3>✅ Checkpoint obligatorio</h3>
+<ul>
+<li>[ ] Abrí <strong>Generators → JavaFX</strong> en IntelliJ.</li>
+<li>[ ] Creé un proyecto <strong>nuevo</strong> con Java, Maven y JDK 21.</li>
+<li>[ ] En <strong>Additional libraries</strong> dejé todas las casillas desmarcadas y pulsé <strong>CREATE</strong>.</li>
+<li>[ ] Encontré <code>pom.xml</code>, el archivo <code>Application</code> y la vista FXML generada.</li>
+<li>[ ] Ejecuté <strong>Run 'HelloApplication.main()'</strong>.</li>
+<li>[ ] Vi la ventana inicial del ejemplo y pude cerrarla.</li>
+</ul>
+<p><strong>No avances a la etapa 02 si no puedes ejecutar primero el ejemplo generado.</strong></p>
+<p><strong>Siguiente:</strong> <a href="#paso-2">02 · Convertir el formulario a Rent-a-Car</a>.</p>
+<p><strong>Referencia consultada:</strong> <a href="https://www.jetbrains.com/help/idea/javafx.html">Documentación oficial IntelliJ IDEA: Crear un proyecto JavaFX</a>.</p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-1-solution">Implementación y decisiones</label><textarea id="paso-1-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-1-proof">Checkpoint: resultado real</label><textarea id="paso-1-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article>
+<article data-item id="paso-2"><h2>2. Formulario</h2><p>Crea patente, botón y mensaje en FXML; conserva nombres generados.</p><h3>¿Qué vamos a lograr?</h3>
+<p>La ventana inicial de IntelliJ ya funciona. <strong>No crearemos otro proyecto ni otro FXML:</strong> vamos a modificar el archivo que el generador creó para cambiar el ejemplo «Hello!» por nuestro formulario de patente.</p>
+<h3>Paso 1 · Encuentra el FXML que ya existe</h3>
+<ol>
+<li>En IntelliJ, abre <strong>View → Tool Windows → Project</strong>.</li>
+<li>Despliega <code>src/main/resources</code>.</li>
+<li>Busca <strong>hello-view.fxml</strong>, generalmente dentro de una carpeta con el nombre del paquete.</li>
+<li>Ábrelo con doble clic y observa que contiene el botón del ejemplo.</li>
+<li>En <code>HelloApplication.java</code>, identifica dónde aparece <code>FXMLLoader</code>: carga ese archivo FXML.</li>
+</ol>
+<p><strong>Checkpoint:</strong> sabes qué archivo FXML se muestra al ejecutar. <strong>No crees <code>MainView.fxml</code> ni otro FXML paralelo.</strong></p>
+<h3>Paso 2 · Decide cómo lo editarás</h3>
+<p><strong>Ruta recomendada, sin instalaciones adicionales:</strong> editar <code>hello-view.fxml</code> como texto en IntelliJ, copiando la vista completa del paso 3.</p>
+<p><strong>Si tienes Scene Builder instalado:</strong> abre el FXML con Scene Builder mediante las opciones del IDE (si aparecen) o desde Scene Builder → <strong>File → Open</strong> y selecciona el archivo. Usa el panel de jerarquía para construir <code>VBox</code>, un título <code>Label</code>, <code>TextField</code>, <code>Button</code> y un <code>Label</code> de resultado. Luego guarda el archivo. La vista debe quedar equivalente al paso 3.</p>
+<p><strong>Para estudiantes que recién comienzan:</strong> la ruta de texto está completamente documentada y es suficiente; Scene Builder puede utilizarse después para practicar la edición visual.</p>
+<h3>Paso 3 · Escribe la vista completa sin controlador por ahora</h3>
+<ol>
+<li>Selecciona la pestaña que muestra <strong>hello-view.fxml</strong> como código.</li>
+<li>Presiona <code>Ctrl+A</code> y pega lo siguiente (reemplaza todo el contenido).</li>
+<li>Guarda con <code>Ctrl+S</code>.</li>
+</ol>
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;?import javafx.geometry.Insets?&gt;
+&lt;?import javafx.scene.control.Button?&gt;
+&lt;?import javafx.scene.control.Label?&gt;
+&lt;?import javafx.scene.control.TextField?&gt;
+&lt;?import javafx.scene.layout.VBox?&gt;
+
+&lt;VBox alignment="CENTER" spacing="12"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"&gt;
+    &lt;padding&gt;
+        &lt;Insets top="16" right="16" bottom="16" left="16"/&gt;
+    &lt;/padding&gt;
+    &lt;Label text="Registro de vehículo disponible"/&gt;
+    &lt;TextField fx:id="patenteField" promptText="Patente del vehículo"/&gt;
+    &lt;Button text="Registrar"/&gt;
+    &lt;Label fx:id="resultadoLabel" text="Completa el formulario"/&gt;
+&lt;/VBox&gt;</code></pre>
+<p><strong>¿Qué hace cada elemento?</strong> <code>VBox</code> pone los controles uno bajo el otro; el primer <code>Label</code> es el título; <code>TextField</code> permite escribir; <code>Button</code> representa el registro; el último <code>Label</code> mostrará mensajes.</p>
+<p><strong>¿Por qué aún no existe <code>fx:controller</code> ni <code>onAction</code>?</strong> En esta etapa queremos comprobar primero que <strong>se dibuja la pantalla</strong>; conectaremos la acción después de escribir nuestro Controller en la etapa 03.</p>
+<h3>Paso 4 · Ejecuta la ventana modificada</h3>
+<ol>
+<li>Guarda el archivo FXML.</li>
+<li>Abre <code>HelloApplication.java</code>.</li>
+<li>Haz clic en el ícono verde junto a <code>main</code> → <strong>Run 'HelloApplication.main()'</strong>.</li>
+<li><strong>Deberías ver:</strong> el título «Registro de vehículo disponible», una entrada con pista «Patente del vehículo», el botón <strong>Registrar</strong> y el texto «Completa el formulario».</li>
+<li>Escribe cualquier patente de prueba y haz clic. <strong>El botón no hace nada todavía; eso es normal</strong>.</li>
+</ol>
+<p><strong>Si todavía aparece «Hello!»:</strong> verifica que editaste el FXML que carga la clase Application; mira el nombre de archivo dentro de <code>getResource(...)</code> y vuelve al paso 1.</p>
+<h3>Si algo falla</h3>
+<ul>
+<li><strong><code>Location is not set</code></strong>: el nombre del archivo FXML o su ubicación ya no coincide con la ruta que carga <code>HelloApplication</code>.</li>
+<li><strong><code>LoadException</code></strong>: comprueba que copiaste el XML completo y que todavía <strong>no</strong> agregaste un <code>fx:controller</code> o <code>onAction</code> incorrecto.</li>
+<li><strong>No se actualiza la ventana:</strong> guarda, detén la ejecución anterior y vuelve a ejecutar <code>HelloApplication.main()</code>.</li>
+<li><strong>El FXML se abre en Scene Builder en vez de mostrar código:</strong> busca la pestaña <strong>Text</strong>/Editor o usa <strong>Open in → Editor</strong>, dependiendo de tu versión de IntelliJ.</li>
+</ul>
+<h3>✅ Checkpoint de la etapa 02</h3>
+<ul>
+<li>[ ] Modifiqué el <code>hello-view.fxml</code> generado, <strong>sin crear otro</strong>.</li>
+<li>[ ] El formulario muestra <code>TextField</code>, <code>Button</code> y <code>Label</code>.</li>
+<li>[ ] La ventana abre desde la clase Application <strong>original</strong>.</li>
+<li>[ ] El botón aún no registra (eso se hará en la etapa 03).</li>
+</ul>
+<p><strong>Siguiente:</strong> <a href="#paso-3">03 · Conectar controlador y modelo</a>.</p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-2-solution">Implementación y decisiones</label><textarea id="paso-2-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-2-proof">Checkpoint: resultado real</label><textarea id="paso-2-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article>
+<article data-item id="paso-3"><h2>3. Evento y modelo</h2><p>Conecta Controller al objeto Vehiculo, sin acoplar modelo a JavaFX.</p><h3>Cómo funciona lo que construirás</h3>
+<p>Al hacer clic en Registrar: <strong>vista FXML → controlador → constructor de Vehiculo → mensaje en la vista</strong>. El constructor es responsable de rechazar patentes vacías, aunque no se use JavaFX.</p>
+<h3>Paso 1 · Identifica el paquete generado</h3>
+<ol>
+<li>Abre <code>HelloController.java</code> en IntelliJ.</li>
+<li>Copia el nombre del paquete que aparece en la primera línea <code>package ...;</code>. Usaremos <strong>ese mismo paquete</strong> para <code>Vehiculo</code> y el controlador.</li>
+<li>En el ejemplo del laboratorio se muestra <code>cl.adumun.rentacar</code>. <strong>Si IntelliJ creó otro nombre, cambia la línea package de los ejemplos y el atributo fx:controller por el paquete real</strong>.</li>
+</ol>
+<p>&gt; Mantendremos el modelo en el mismo paquete del controlador para no introducir configuración modular extra. Es una simplificación didáctica de esta primera clase JavaFX.</p>
+<h3>Paso 2 · Crea la clase Vehiculo</h3>
+<ol>
+<li>En el panel <strong>Project</strong>, busca el paquete donde existe <code>HelloController.java</code>.</li>
+<li>Haz clic derecho sobre ese paquete → <strong>New → Java Class</strong>.</li>
+<li>Escribe <code>Vehiculo</code> y presiona Enter.</li>
+<li>Sustituye el contenido de <code>Vehiculo.java</code> por el siguiente código. <strong>Conserva el package real de tu proyecto</strong>:</li>
+</ol>
+<pre><code>package cl.adumun.rentacar;
+
+public final class Vehiculo {
+    private final String patente;
+
+    public Vehiculo(String patente) {
+        if (patente == null || patente.isBlank()) {
+            throw new IllegalArgumentException("La patente no puede estar vacía");
+        }
+        this.patente = patente.trim().toUpperCase();
+    }
+
+    public String getPatente() {
+        return patente;
+    }
+}</code></pre>
+<p><strong>Entiende lo que acabas de hacer:</strong> <code>private</code> protege el dato, <code>final</code> impide reasignarlo, el constructor evita nombres vacíos y <code>trim().toUpperCase()</code> quita espacios exteriores y transforma la patente a mayúsculas. <code>getPatente()</code> permite consultar el resultado.</p>
+<p><strong>Checkpoint pequeño:</strong> IntelliJ no marca <code>Vehiculo.java</code> con errores de compilación.</p>
+<h3>Paso 3 · Modifica el HelloController generado</h3>
+<ol>
+<li>Abre el <strong>HelloController.java</strong> que creó IntelliJ. <strong>No crees otro Controller en paralelo</strong>.</li>
+<li>Selecciona su contenido y reemplázalo por el siguiente. Conserva el mismo paquete real del paso 1:</li>
+</ol>
+<pre><code>package cl.adumun.rentacar;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+
+public class HelloController {
+    @FXML private TextField patenteField;
+    @FXML private Label resultadoLabel;
+
+    @FXML
+    private void registrar() {
+        try {
+            Vehiculo vehiculo = new Vehiculo(patenteField.getText());
+            resultadoLabel.setText("Vehículo disponible: " + vehiculo.getPatente());
+        } catch (IllegalArgumentException exception) {
+            resultadoLabel.setText(exception.getMessage());
+        }
+    }
+}</code></pre>
+<p><strong>¿Qué significa?</strong> <code>@FXML</code> conecta atributos y métodos del controlador con FXML; <code>getText()</code> lee la patente; <code>new Vehiculo(...)</code> valida; <code>setText()</code> muestra el resultado. Si la patente está vacía, el bloque <code>catch</code> presenta un aviso en vez de detener la aplicación.</p>
+<h3>Paso 4 · Conecta el FXML con ese Controller</h3>
+<ol>
+<li>En IntelliJ abre <strong>hello-view.fxml</strong>.</li>
+<li>Busca la etiqueta inicial <code>&lt;VBox ...&gt;</code>.</li>
+<li>Agrégale el atributo <code>fx:controller</code> <strong>con el paquete que viste en HelloController.java</strong>, por ejemplo:</li>
+</ol>
+<pre><code>fx:controller="cl.adumun.rentacar.HelloController"</code></pre>
+<ol>
+<li>Busca el botón Registrar y agrega el atributo <code>onAction="#registrar"</code>, de manera que quede:</li>
+</ol>
+<pre><code>&lt;Button text="Registrar" onAction="#registrar"/&gt;</code></pre>
+<ol>
+<li>Comprueba que el TextField tenga <code>fx:id="patenteField"</code> y el Label de resultado tenga <code>fx:id="resultadoLabel"</code>.</li>
+<li>Guarda todos los archivos.</li>
+</ol>
+<p><strong>Si usas Scene Builder:</strong> selecciona la raíz VBox y escribe la clase del controlador en <strong>Controller class</strong>; luego selecciona el botón y escribe <code>#registrar</code> en <strong>On Action</strong>. Guarda.</p>
+<p><strong>No escribas</strong> un nombre de controlador distinto al de la clase Java: ambos deben coincidir.</p>
+<h3>Paso 5 · Ejecuta y comprueba</h3>
+<ol>
+<li>Abre <code>HelloApplication.java</code>.</li>
+<li>Haz clic en el ícono verde junto a <code>main</code> → <strong>Run</strong>.</li>
+<li>Escribe <code>ABCD12</code> y pulsa <strong>Registrar</strong>.</li>
+<li><strong>Resultado esperado:</strong> <code>Vehículo disponible: ABCD12</code>.</li>
+<li>Borra el campo y pulsa <strong>Registrar</strong>.</li>
+<li><strong>Resultado esperado:</strong> <code>La patente no puede estar vacía</code>. La ventana sigue abierta.</li>
+<li>Escribe <code>  abcd12  </code> y confirma que la pantalla muestra <code>ABCD12</code>.</li>
+</ol>
+<h3>Si algo falla</h3>
+<ul>
+<li><strong><code>LoadException</code> por controlador:</strong> copia literalmente el valor de <code>package</code> de <code>HelloController.java</code> y añade <code>.HelloController</code> en <code>fx:controller</code>.</li>
+<li><strong>Error con <code>module-info.java</code> o acceso reflectivo:</strong> si el proyecto tiene <code>module-info.java</code>, revisa que el paquete del Controller figure en una directiva <code>opens ... to javafx.fxml;</code>. Si está en el mismo paquete generado, normalmente IntelliJ ya lo dejó configurado; <strong>no borres ese archivo</strong>.</li>
+<li><strong><code>NullPointerException</code> tras hacer clic:</strong> revisa que <code>patenteField</code> y <code>resultadoLabel</code> coincidan letra por letra en Java y <code>fx:id</code> de FXML.</li>
+<li><strong>Error <code>onAction='#registrar'</code>:</strong> comprueba que el método se llama <code>registrar</code> y está anotado con <code>@FXML</code>.</li>
+<li><strong>Sigue saliendo Hello!:</strong> tal vez ejecutas otro proyecto o no guardaste <code>hello-view.fxml</code>. Vuelve al checkpoint anterior.</li>
+</ul>
+<h3>✅ Checkpoint de la etapa 03</h3>
+<ul>
+<li>[ ] No creé otro proyecto ni otra clase Application.</li>
+<li>[ ] Reutilicé <code>HelloController.java</code> y <code>hello-view.fxml</code> generados.</li>
+<li>[ ] Creé la clase simple <code>Vehiculo</code>.</li>
+<li>[ ] La patente válida se registra y la vacía muestra error.</li>
+<li>[ ] El modelo no importa JavaFX.</li>
+</ul>
+<p><strong>Siguiente:</strong> <a href="#paso-4">04 · Verificar y ampliar</a>.</p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-3-solution">Implementación y decisiones</label><textarea id="paso-3-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-3-proof">Checkpoint: resultado real</label><textarea id="paso-3-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article>
+<article data-item id="paso-4"><h2>4. Pruebas</h2><p>ABCD12 → Vehículo disponible: ABCD12; vacío o espacios → La patente no puede estar vacía.</p><h3>Parte A · Cierre del ejercicio guiado</h3>
+<h3>Paso 1 · Ejecuta desde IntelliJ</h3>
+<ol>
+<li>Guarda <code>Vehiculo.java</code>, <code>HelloController.java</code> y <code>hello-view.fxml</code>.</li>
+<li>Abre la clase <code>HelloApplication.java</code> que generó IntelliJ.</li>
+<li>Haz clic en el icono verde del método <code>main</code> → <strong>Run</strong>.</li>
+<li>Comprueba que aparezca el formulario Rent-a-Car.</li>
+</ol>
+<h3>Paso 2 · Comprueba estos cinco casos, uno por uno</h3>
+<div style="overflow-x:auto"><table><thead><tr><th>Caso</th><th>Dato de entrada</th><th>Resultado esperado</th></tr></thead><tbody>
+<tr><td>1</td><td><code>ABCD12</code></td><td><code>Vehículo disponible: ABCD12</code></td></tr>
+<tr><td>2</td><td>Campo vacío</td><td><code>La patente no puede estar vacía</code></td></tr>
+<tr><td>3</td><td>Tres espacios</td><td><code>La patente no puede estar vacía</code></td></tr>
+<tr><td>4</td><td><code>  abcd12  </code></td><td><code>Vehículo disponible: ABCD12</code></td></tr>
+<tr><td>5</td><td>Tras un error, ingresa <code>JKLP34</code> <strong>sin reiniciar</strong></td><td><code>Vehículo disponible: JKLP34</code></td></tr>
+</tbody></table></div>
+<p>Si falla un caso, vuelve a la etapa 03 y revisa una causa a la vez. <strong>No elimines la validación</strong> para ocultar el error.</p>
+<h3>Paso 3 · Guarda las evidencias</h3>
+<ol>
+<li>En la carpeta del proyecto, crea <code>evidencias</code> desde el panel Project de IntelliJ (<strong>New → Directory</strong>).</li>
+<li>Guarda una captura con un registro correcto como <code>registro-valido.png</code>.</li>
+<li>Guarda otra con el campo vacío y el mensaje de error como <code>registro-invalido.png</code>.</li>
+<li>Dentro de <code>evidencias</code>, crea <code>pruebas.md</code> con los cinco casos y marca OK o pendiente, explicando cualquier diferencia.</li>
+<li>Utiliza patentes ficticias, no datos personales reales.</li>
+</ol>
+<h3>Paso 4 · Explica lo aprendido</h3>
+<p>En tus palabras, responde: ¿qué hace <code>hello-view.fxml</code>?, ¿qué hace <code>HelloController</code>? y ¿qué seguiría funcionando si quitáramos JavaFX? Una respuesta breve y razonada es suficiente.</p>
+<p><strong>Git y DevLog:</strong> si estás usando un repositorio Git para la práctica, guarda los cambios y actualiza el registro de aprendizaje. Como este lab comienza <strong>desde un proyecto nuevo</strong>, no damos por supuesto que ya tienes un repositorio remoto o commits anteriores.</p>
+<h3>Parte B · Desafío autónomo (después de completar el mínimo)</h3>
+<h3>Agrega la marca del vehículo</h3>
+<ol>
+<li>Abre <code>hello-view.fxml</code>.</li>
+<li>Bajo el <code>TextField</code> de patente, agrega un segundo <code>TextField</code> con <code>fx:id="marcaField"</code> y <code>promptText="Marca del vehículo"</code>.</li>
+<li>Guarda y ejecuta: ya deberías ver los dos campos.</li>
+<li>En <code>Vehiculo.java</code>, agrega <code>private final String marca;</code>.</li>
+<li>Cambia el constructor para recibir <code>(String patente, String marca)</code>; valida que ninguno esté vacío, guarda <code>marca.trim()</code> y crea <code>getMarca()</code>.</li>
+<li>En <code>HelloController.java</code>, agrega <code>@FXML private TextField marcaField;</code>.</li>
+<li>Cambia la creación por <code>new Vehiculo(patenteField.getText(), marcaField.getText())</code>.</li>
+<li>Ajusta <code>resultadoLabel.setText(...)</code> para mostrar patente y marca.</li>
+<li>Ejecuta el programa y verifica el caso correcto, la marca vacía y la patente vacía.</li>
+<li><strong>Checkpoint:</strong> muestra ambos datos solo cuando los dos campos son válidos.</li>
+</ol>
+<p><strong>Si IntelliJ muestra error de argumentos:</strong> es normal después de cambiar la firma del constructor. Busca <code>new Vehiculo(...)</code> y asegúrate de pasar <strong>dos</strong> argumentos.</p>
+<h3>Agrega un botón Limpiar</h3>
+<ol>
+<li>En <code>hello-view.fxml</code>, debajo del botón Registrar agrega:</li>
+</ol>
+<pre><code>&lt;Button text="Limpiar" onAction="#limpiar"/&gt;</code></pre>
+<ol>
+<li>En <code>HelloController.java</code>, agrega el método:</li>
+</ol>
+<pre><code>@FXML
+private void limpiar() {
+    patenteField.clear();
+    marcaField.clear();
+    resultadoLabel.setText("Completa el formulario");
+}</code></pre>
+<ol>
+<li>Ejecuta y prueba: escribe patente y marca, pulsa <strong>Limpiar</strong> y confirma que ambos campos quedan vacíos.</li>
+<li><strong>Importante:</strong> este fragmento supone que completaste el desafío de marca. Si todavía no añadiste <code>marcaField</code>, elimina esa línea del método.</li>
+</ol>
+<h3>Cierra tu aprendizaje</h3>
+<p>Resuelve dos <a href="../javafx-events-practice/">ejercicios de refuerzo de JavaFX</a> y registra: <strong>qué lograste, qué error resolviste, qué aprendiste y qué harías después</strong>.</p>
+<h3>✅ Definición de terminado</h3>
+<ul>
+<li>[ ] Proyecto creado desde JavaFX en IntelliJ, no copiado de otro.</li>
+<li>[ ] Ejemplo original de IntelliJ ejecutado antes de editar.</li>
+<li>[ ] Vista FXML actualizada a Rent-a-Car.</li>
+<li>[ ] Modelo <code>Vehiculo</code> con validación.</li>
+<li>[ ] Cinco pruebas mínimas verificadas.</li>
+<li>[ ] Evidencias y explicación de responsabilidades.</li>
+</ul>
+<p><strong>El desafío de marca y Limpiar es una ampliación posterior, no una condición para que la parte de clase esté terminada.</strong></p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-4-solution">Implementación y decisiones</label><textarea id="paso-4-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-4-proof">Checkpoint: resultado real</label><textarea id="paso-4-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article><section class="panel"><h2>Conservar evidencia</h2><p>Descarga un TXT local y conserva los archivos del proyecto en tu repositorio. El hash comprueba integridad, no ejecución ni autoría. Si utilizas esta actividad en un curso, entrega la evidencia por el mecanismo indicado por tu docente.</p><div class="actions"><button type="button" class="primary" id="export">Descargar evidencia TXT</button><button type="button" id="clear">Limpiar registro</button></div><p id="status" aria-live="polite"></p></section></main></body></html>

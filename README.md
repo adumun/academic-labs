@@ -59,8 +59,8 @@ Una actividad pertenece primordialmente a **temáticas/contenidos académicos**.
 Academic Labs también puede orientar prácticas que **no se ejecutan en el navegador**. Para laboratorios que requieren Docker, Kafka, IDEs u otras herramientas reales:
 
 - La página de actividad presenta propósito, objetivos, requisitos, pasos de inicio y comandos locales.
-- La ejecución, el código, los planes de prueba y la guía completa permanecen en el repositorio canónico de la asignatura.
-- El portal enlaza a esos recursos; no simula infraestructura, no recibe entregas y no evalúa resultados.
+- La ejecución se realiza con herramientas reales; la guía completa, los archivos necesarios, código, pruebas y diagnóstico se mantienen bajo propiedad editorial de ADÜMÜN, en Academic Labs o en repositorios de referencia de la organización.
+- Los repositorios personales de cursos son insumos de adaptación, no dependencias. Preserva la procedencia en metadatos editoriales opcionales y la autoría; no uses el origen como paso requerido. Las actividades deben funcionar aunque el origen sea inaccesible. No se simula infraestructura, no se reciben entregas ni se evalúan resultados.
 - Publica solo material para estudiantes. Las guías docentes, claves, soluciones y calibraciones reservadas permanecen fuera del repositorio público.
 - Registra la modalidad y las dependencias con metadatos descriptivos/tags, sin añadir un motor de ejecución ni un esquema de evaluación.
 
@@ -69,7 +69,7 @@ Primeras prácticas híbridas publicadas para DSY1107:
 - [Kafka Game Day: resiliencia y Dead Letter Topic](/activities/kafka-resilience-game-day/)
 - [Operación Avalancha: Kafka bajo presión](/activities/kafka-burst-incident/)
 
-Las instrucciones completas y los archivos ejecutables son mantenidos en el [repositorio DSY1107](https://github.com/cmartinezs/DSY1107-DESARROLLO-CLOUD-NATIVE-I-2026-2).
+Estas dos prácticas son legado del criterio anterior y todavía dependen del repositorio docente DSY1107; requieren adaptación independiente antes de declararlas autónomas. No se altera su publicación en ADU-230.
 
 ## Comprobar localmente
 

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Inscripciones a talleres — arrays y listas · Academic Labs</title><link rel="stylesheet" href="../dsy1102-practice-shared/practice.css"><script defer src="../dsy1102-practice-shared/practice.js"></script></head>
+<body class="practice" data-activity="workshop-enrollment-lab" data-version="1.1.0" data-source="https://academic-labs.adumun.cl/activities/workshop-enrollment-lab/"><a class="skip-link" href="#main">Ir al contenido</a><header><nav><a href="../../">Academic Labs · ADÜMÜN</a><a href="../../explore/?topic=colecciones-java">Explorar prácticas por tema</a></nav></header><main id="main"><div class="eyebrow">Laboratorio híbrido · ejecución local</div><h1>Inscripciones a talleres — arrays y listas</h1><p>Crea RegistroTalleres desde cero. Comienza con Inscripcion[] y evoluciona a ArrayList; registra, busca y elimina, trata duplicados sin cerrar el programa.</p><section class="panel"><h2>Preparación</h2><p>JDK 21 e IDE o terminal; no requiere Maven ni JavaFX. Crea un proyecto autónomo. No reutilices una entrega de otro lab.</p><p>Lee <a href="https://academy.adumun.cl/handbook/java/collections/">Handbook de Academy</a> si necesitas reforzar conceptos. La ejecución se realiza en tu equipo, no en el navegador.</p><p class="source">Laboratorio autónomo de Academic Labs. Conserva tu proyecto, capturas y resultados; no incluyas credenciales ni datos personales.</p></section><section class="panel"><strong id="count" aria-live="polite">0 de 4 comprobaciones declaradas</strong><progress max="4" value="0" aria-label="Comprobaciones declaradas"></progress><nav class="jump" aria-label="Ir a un checkpoint"><a href="#paso-1">1. Primer objeto</a><a href="#paso-2">2. Array</a><a href="#paso-3">3. Lista dinámica</a><a href="#paso-4">4. Errores y pruebas</a></nav><p class="muted">Sigue las instrucciones de cada paso y registra tu evidencia. Descarga avances antes de recargar o cerrar esta página.</p></section><article data-item id="paso-1"><h2>1. Primer objeto</h2><p>Crea proyecto nuevo e instancia Inscripcion.</p><h3>Paso 1 · Iniciar el proyecto</h3>
+<ol>
+<li>Abre IntelliJ IDEA → <strong>New Project</strong> o <strong>File → New → Project</strong>.</li>
+<li>Selecciona <strong>Java</strong> en el panel izquierdo.</li>
+<li>Escribe <strong>RegistroTalleres</strong> como nombre, selecciona <strong>JDK 21</strong> y <strong>Build system: IntelliJ</strong>.</li>
+<li>Pulsa <strong>Create</strong>, espera que termine la indexación y localiza <code>src</code> en el panel Project.</li>
+<li>Clic derecho sobre <code>src</code> → <strong>New → Java Class</strong> → <code>Main</code>.</li>
+</ol>
+<p>Pega en <code>Main.java</code>:</p>
+<pre><code>public class Main {
+    public static void main(String[] args) {
+        System.out.println("Registro de talleres iniciado");
+    }
+}</code></pre>
+<p>Presiona el triángulo verde junto al método <code>main</code>.</p>
+<p><strong>Checkpoint A:</strong> la consola muestra <code>Registro de talleres iniciado</code>. Si no existe <code>src</code>, crea esa carpeta y márcala como <strong>Sources Root</strong>; si no corre, revisa JDK en <strong>File → Project Structure → Project</strong>.</p>
+<h3>Paso 2 · Crear el dato Inscripcion</h3>
+<ol>
+<li>Clic derecho en <code>src</code> → <strong>New → Java Class</strong> → <code>Inscripcion</code>.</li>
+<li>Reemplaza todo por:</li>
+</ol>
+<pre><code>public class Inscripcion {
+    private final String persona;
+    private final String taller;
+
+    public Inscripcion(String persona, String taller) {
+        this.persona = persona;
+        this.taller = taller;
+    }
+
+    public String getPersona() { return persona; }
+    public String getTaller() { return taller; }
+
+    public String resumen() { return persona + " → " + taller; }
+}</code></pre>
+<p><strong>Checkpoint B:</strong> existen <code>src/Main.java</code> y <code>src/Inscripcion.java</code>. <code>Inscripcion</code> representa una inscripción, no un conjunto de inscripciones. ¿Quién debería almacenar muchas? La etapa siguiente responderá eso.</p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-1-solution">Implementación y decisiones</label><textarea id="paso-1-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-1-proof">Checkpoint: resultado real</label><textarea id="paso-1-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article>
+<article data-item id="paso-2"><h2>2. Array</h2><p>Guarda varias inscripciones y demuestra el límite de longitud.</p><h3>Paso 1 · Sustituir Main</h3>
+<p>Abre <code>src/Main.java</code>, presiona Ctrl+A y escribe:</p>
+<pre><code>public class Main {
+    public static void main(String[] args) {
+        Inscripcion[] cupos = new Inscripcion[3];
+        cupos[0] = new Inscripcion("Ana", "Pintura");
+        cupos[1] = new Inscripcion("Pedro", "Música");
+        cupos[2] = new Inscripcion("Rosa", "Pintura");
+
+        for (int i = 0; i &lt; cupos.length; i++) {
+            System.out.println((i + 1) + ". " + cupos[i].resumen());
+        }
+    }
+}</code></pre>
+<p>Pulsa Run y revisa que aparecen <strong>tres líneas</strong>.</p>
+<p><strong>Checkpoint A:</strong> sabes por qué el array reserva 3 posiciones y por qué su índice inicial es cero.</p>
+<h3>Paso 2 · Descubrir un límite</h3>
+<ol>
+<li>Agrega temporalmente una cuarta línea: <code>cupos[3] = new Inscripcion("Luis", "Teatro");</code>.</li>
+<li>Ejecuta otra vez y lee el mensaje de error.</li>
+<li>Observa <code>ArrayIndexOutOfBoundsException</code>: la cuarta posición no existe porque el tamaño es fijo.</li>
+<li><strong>Elimina la línea de prueba</strong> para recuperar el programa funcional.</li>
+</ol>
+<p><strong>Checkpoint B:</strong> el programa vuelve a imprimir tres líneas. Escribe en tu evidencia: «un array tiene tamaño fijo; necesitaré otra estructura para altas variables».</p>
+<h3>Paso 3 · Discutir responsabilidad</h3>
+<p>El código de <code>Main</code> crea y administra directamente las posiciones. En la siguiente etapa crearemos un <code>RegistroTaller</code> que concentre esa responsabilidad y utilice una <code>List</code>. Así evitamos que <code>Main</code> haga todo.</p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-2-solution">Implementación y decisiones</label><textarea id="paso-2-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-2-proof">Checkpoint: resultado real</label><textarea id="paso-2-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article>
+<article data-item id="paso-3"><h2>3. Lista dinámica</h2><p>Evoluciona a List/ArrayList; registra, recorre, busca y elimina.</p><h3>Paso 1 · Crear la clase administradora</h3>
+<ol>
+<li>En <code>src</code>, clic derecho → <strong>New → Java Class</strong> → <code>RegistroTaller</code>.</li>
+<li>Pega el código:</li>
+</ol>
+<pre><code>import java.util.ArrayList;
+import java.util.List;
+
+public class RegistroTaller {
+    private final List&lt;Inscripcion&gt; inscripciones = new ArrayList&lt;&gt;();
+
+    public void agregar(Inscripcion nueva) {
+        inscripciones.add(nueva);
+    }
+
+    public Inscripcion buscar(String persona) {
+        for (Inscripcion i : inscripciones) {
+            if (i.getPersona().equalsIgnoreCase(persona)) return i;
+        }
+        return null;
+    }
+
+    public boolean eliminar(String persona) {
+        return inscripciones.removeIf(
+                i -&gt; i.getPersona().equalsIgnoreCase(persona));
+    }
+
+    public void mostrar() {
+        for (Inscripcion i : inscripciones) {
+            System.out.println(i.resumen());
+        }
+    }
+
+    public int cantidad() { return inscripciones.size(); }
+}</code></pre>
+<p><strong>Checkpoint A:</strong> identifica la declaración <code>List&lt;Inscripcion&gt;</code> y la creación <code>new ArrayList&lt;&gt;()</code>. La lista puede crecer sin definir cupos máximos de antemano.</p>
+<h3>Paso 2 · Reemplazar Main</h3>
+<p>Abre <code>Main.java</code> y reemplaza el contenido por:</p>
+<pre><code>public class Main {
+    public static void main(String[] args) {
+        RegistroTaller registro = new RegistroTaller();
+
+        registro.agregar(new Inscripcion("Ana", "Pintura"));
+        registro.agregar(new Inscripcion("Pedro", "Música"));
+        registro.agregar(new Inscripcion("Rosa", "Pintura"));
+        registro.agregar(new Inscripcion("Luis", "Teatro"));
+
+        registro.mostrar();
+        System.out.println("Total: " + registro.cantidad());
+        System.out.println("Buscar Pedro: " + registro.buscar("Pedro").resumen());
+
+        registro.eliminar("Rosa");
+        System.out.println("Total tras eliminar: " + registro.cantidad());
+    }
+}</code></pre>
+<p>Pulsa Run: el total inicial debe ser <strong>4</strong> y el posterior <strong>3</strong>.</p>
+<p><strong>Checkpoint B:</strong> la cuarta inscripción funciona sin cambiar una constante de tamaño. El método <code>buscar</code> devuelve <code>null</code> cuando no encuentra; no llames <code>.resumen()</code> sobre un <code>null</code> (causaría <code>NullPointerException</code>).</p>
+<h3>Paso 3 · Preguntas</h3>
+<p>¿Por qué <code>Main</code> dejó de manipular índices? ¿Qué responsabilidad tiene <code>RegistroTaller</code>? Explica la diferencia entre tipo <code>List</code> e implementación <code>ArrayList</code>.</p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-3-solution">Implementación y decisiones</label><textarea id="paso-3-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-3-proof">Checkpoint: resultado real</label><textarea id="paso-3-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article>
+<article data-item id="paso-4"><h2>4. Errores y pruebas</h2><p>Rechaza duplicados y registra evidencia de alta válida y fallo controlado.</p><h3>Paso 1 · Incorporar reglas al registro</h3>
+<p>Abre <code>RegistroTaller.java</code>. <strong>Reemplaza solamente el método <code>agregar(Inscripcion nueva)</code></strong> por:</p>
+<pre><code>public void agregar(Inscripcion nueva) {
+    if (nueva == null ||
+        nueva.getPersona() == null || nueva.getPersona().isBlank() ||
+        nueva.getTaller() == null || nueva.getTaller().isBlank()) {
+        throw new IllegalArgumentException("Persona y taller son obligatorios");
+    }
+    if (buscar(nueva.getPersona()) != null) {
+        throw new IllegalArgumentException("La persona ya está inscrita");
+    }
+    inscripciones.add(nueva);
+}</code></pre>
+<p>La regla del ejercicio es <strong>una inscripción por persona</strong>. Si quisieras permitir inscripciones en varios talleres, tendrías que redefinir esa regla; no la cambies durante esta prueba.</p>
+<p><strong>Checkpoint A:</strong> el resto de la clase permanece igual. <code>throw</code> comunica un dato inválido; no es equivalente a <code>System.out.println</code>.</p>
+<h3>Paso 2 · Probar el error sin cerrar el programa</h3>
+<p>En <code>Main.java</code>, <strong>después de agregar los cuatro registros y antes de imprimir el total</strong>, inserta:</p>
+<pre><code>try {
+    registro.agregar(new Inscripcion("Ana", "Teatro"));
+} catch (IllegalArgumentException error) {
+    System.out.println("Error controlado: " + error.getMessage());
+}</code></pre>
+<p>Ejecuta y verifica el mensaje <code>Error controlado: La persona ya está inscrita</code>. El resto del programa debe seguir y mostrar los totales <strong>4</strong> y <strong>3</strong>.</p>
+<h3>Paso 3 · Matriz de casos</h3>
+<div style="overflow-x:auto"><table><thead><tr><th>Caso</th><th>Acción</th><th>Resultado esperado</th></tr></thead><tbody>
+<tr><td>T01</td><td>Registrar Ana / Pintura</td><td>Se acepta</td></tr>
+<tr><td>T02</td><td>Registrar cuarta persona</td><td><code>ArrayList</code> crece a 4</td></tr>
+<tr><td>T03</td><td>Buscar Pedro</td><td>Devuelve Música</td></tr>
+<tr><td>T04</td><td>Eliminar Rosa</td><td>El total disminuye a 3</td></tr>
+<tr><td>T05</td><td>Agregar Ana de nuevo</td><td>Excepción capturada; total no aumenta</td></tr>
+<tr><td>T06</td><td>Agregar persona vacía</td><td>Excepción capturada; sin alta</td></tr>
+</tbody></table></div>
+<p>Para T06 utiliza otro bloque <code>try/catch</code> similar, con <code>new Inscripcion("", "Música")</code>.</p>
+<h3>Paso 4 · Evidencias</h3>
+<p>Entrega <code>Main.java</code>, <code>Inscripcion.java</code>, <code>RegistroTaller.java</code>, dos capturas de consola (antes/después) y tres líneas comparando arrays con listas.</p>
+<p><strong>Checkpoint final:</strong> ejecuta sin cerrarse por entradas inválidas, no duplica a Ana y puedes indicar dónde ocurre el <code>throw</code> y dónde ocurre el <code>catch</code>. Este ejercicio no requiere otros proyectos.</p><p><strong>Checkpoint:</strong> registra el resultado indicado antes de continuar.</p><div class="submission"><label for="paso-4-solution">Implementación y decisiones</label><textarea id="paso-4-solution" data-solution spellcheck="false" placeholder="Archivos modificados, código relevante o commit local y explicación."></textarea><label for="paso-4-proof">Checkpoint: resultado real</label><textarea id="paso-4-proof" data-proof placeholder="Caso ejecutado / esperado / observado / fallo y corrección."></textarea><label class="check"><input type="checkbox" data-confirm disabled> Comprobé este checkpoint en mi entorno.</label><p data-state class="muted" aria-live="polite">Registra tu solución y el resultado observado.</p></div></article><section class="panel"><h2>Conservar evidencia</h2><p>Descarga un TXT local y conserva los archivos del proyecto en tu repositorio. El hash comprueba integridad, no ejecución ni autoría. Si utilizas esta actividad en un curso, entrega la evidencia por el mecanismo indicado por tu docente.</p><div class="actions"><button type="button" class="primary" id="export">Descargar evidencia TXT</button><button type="button" id="clear">Limpiar registro</button></div><p id="status" aria-live="polite"></p></section></main></body></html>
